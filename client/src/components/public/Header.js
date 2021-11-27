@@ -13,11 +13,7 @@ function Header(props) {
           <div className="left">
             <a className="logo">
               <div>
-                <img
-                  src={logo}
-                  alt="logo"
-                  style={{ width: 40, height: 40 }}
-                ></img>
+                <img src={logo} alt="logo"></img>
               </div>
 
               <span className="name">Podo</span>

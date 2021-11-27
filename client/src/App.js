@@ -12,14 +12,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/mypage/:menu" element={<MyPage />} />
           <Route path="/create/:step" element={<Create />} />
           <Route path="/search" element={<Search />} />
           <Route path="/contents" element={<Contents />} />
           <Route path="/guide" element={<Guide />} />
-        </Routes>
+        </Routes> */}
+        <MyPage />
       </BrowserRouter>
     </>
   );

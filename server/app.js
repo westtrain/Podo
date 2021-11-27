@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const { sequelize } = require("./models");
 const config = require("./config/config");
 //require("express-async-errors");
-
+const mysql = require('mysql2');
 //const authRouter = require("./router/auth");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
@@ -37,6 +37,31 @@ app.get("/", (req, res) => {
 //app.use("/gathering", gatheringRouter);
 //app.use("/chat", chatRouter);
 //app.use("/notification", notificationRouter);
+
+const con = mysql.createConnection({
+  config[process.env.NODE_ENV || 'development']
+});
+
+con.connect((err) => {
+  if (err) {
+    con.end();
+  }
+});
+
+app.get('/status', authToken, (req, res) => {
+    db.query('use podo', (err) => {
+      if (err) {
+        return res.status(200).send({
+          isLogin: true,
+          isConnectedToDatabase: false
+        });
+      }
+      return res.status(200).send({
+        isLogin: true,
+        isConnectedToDatabase: true
+      });
+    });
+});
 
 app.use((req, res) => {
   res.status(400).json({ message: "Invalid request" });

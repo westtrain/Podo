@@ -13,7 +13,6 @@ import PodoMoney from "../image/PodoMoney.svg";
 
 function MyPage(props) {
   const { menu } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
-
   return (
     <>
       <Header />
@@ -39,7 +38,7 @@ function MyPage(props) {
             </div>
             <div className="middle">
               {/* 마이페이지에 들어가면 '나의 파티 관리'가 나오기 때문에 menu===undefined 즉, 주소가 podo/mypage일 때는 MyParty 컴포넌트를 반환한다 */}
-              {menu === undefined ? <MyParty /> : null}
+              {menu === undefined ? <MyPartyDetail /> : null}
               {menu === "login" ? <MyLogin /> : null}
               {menu === "payment" ? <MyPayment /> : null}
               {menu === "account" ? <MyAccount /> : null}

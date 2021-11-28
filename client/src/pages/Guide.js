@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../components/public/Header";
 
 function Guide(props) {
-  return <div></div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default Guide;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../components/public/Header";
 import MyParty from "../components/mypage/MyParty";
 import MyPartyDetail from "../components/mypage/MyPartyDetail";
@@ -24,15 +24,27 @@ function MyPage(props) {
               <div className="menu">
                 <div className="up">
                   <p>Podo 관리</p>
-                  <div>나의 파티 관리</div>
-                  <div>로그인 관리</div>
+                  <Link to="/mypage">
+                    <div>나의 파티 관리</div>
+                  </Link>
+                  <Link to="/mypage/login">
+                    <div>로그인 관리</div>
+                  </Link>
                 </div>
                 <div className="down">
                   <p>결제/정산 관리</p>
-                  <div>결제 수단 관리</div>
-                  <div>인출 계좌 관리</div>
-                  <div>Podo 정산일 관리</div>
-                  <div>결제/적립/인출 내역</div>
+                  <Link to="/mypage/payment">
+                    <div>결제 수단 관리</div>
+                  </Link>
+                  <Link to="/mypage/account">
+                    <div>인출 계좌 관리</div>
+                  </Link>
+                  <Link to="/mypage/settlement">
+                    <div>Podo 정산일 관리</div>
+                  </Link>
+                  <Link to="/mypage/statement">
+                    <div>결제/적립/인출 내역</div>
+                  </Link>
                 </div>
               </div>
             </div>

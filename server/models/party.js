@@ -8,12 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         through: "User_party",
         foreignKey: "Party_id",
       });
+      models.Party.belongsTo(models.OTT, {
+        foreignKey: "ott_id",
+        targetKey: "id",
+      });
     }
-    models.Party.belongsTo(models.OTT, {
-      foreignKey: "ott_id",
-      targetKey: "id",
-    });
-  }
   }
 
   Party.init(

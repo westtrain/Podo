@@ -297,7 +297,7 @@ $mypagecolor: #eeefff;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-bottom: 86px;
+                margin-bottom: 24px;
                 .nowlogininfo {
                   font-size: 14px;
                   color: #656565;
@@ -326,7 +326,7 @@ $mypagecolor: #eeefff;
                 .settlementbox {
                   width: 300px;
                   height: 44px;
-                  padding-left: 20px;
+                  padding: 0px 20px;
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
@@ -338,12 +338,46 @@ $mypagecolor: #eeefff;
                 }
               }
               .withdrawal {
+                margin-top: 62px;
                 font-size: 14px;
                 color: #656565;
                 border-bottom-color: #656565;
                 display: flex;
                 justify-content: flex-end;
                 cursor: pointer;
+              }
+              .settlemetntxt {
+                font-size: 14px;
+                line-height: 16px;
+
+                color: #656565;
+              }
+              .statementbox {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 30px;
+                .statement {
+                  width: 400px;
+                  display: flex;
+                  flex-direction: column;
+                  font-size: 13px;
+                  padding-bottom: 10px;
+                  margin-bottom: 10px;
+                  border-bottom: 1.85px solid #dadada;
+                  .bottombox {
+                    margin-top: 3px;
+                    display: flex;
+                    justify-content: space-between;
+                    .paymenttype {
+                      font-weight: bold;
+                      font-size: 15px;
+                    }
+                    .amount {
+                      padding-right: 15px;
+                    }
+                  }
+                }
               }
             }
           }

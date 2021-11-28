@@ -1,0 +1,144 @@
+$maincolor: #a5a9f8;
+$fontcolor: #222222;
+$mypagecolor: #eeefff;
+
+.create {
+  display: block;
+  max-width: 100vw;
+  padding-top: 96px;
+  height: 90%;
+
+  .createbody {
+    width: 100vw;
+    height: 54.5em;
+    background: linear-gradient(
+      180deg,
+      rgba(190, 193, 255, 0.64) 0%,
+      rgba(238, 239, 255, 0.64) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .partyguide {
+      width: 626px;
+      height: 800px;
+      background-color: #fff;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .stepline {
+        width: 80%;
+        height: 3px;
+        margin: 20px;
+        display: flex;
+        justify-content: flex-start;
+
+        .step1 {
+          width: 16.66%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+      }
+
+      .guideheader {
+        width: 80%;
+        height: auto;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .guideheadername {
+          font-size: 31px;
+          line-height: 36px;
+          font-weight: bold;
+          align-items: center;
+          color: $fontcolor;
+        }
+
+        .guideottname {
+          margin-top: 10px;
+          padding-left: 10px;
+          font-size: 12px;
+          background-color: $fontcolor;
+          color: #fff;
+          align-items: center;
+          border-radius: 5px;
+          height: 20px;
+          width: 100px;
+        }
+      }
+
+      .guidemiddle {
+        width: 80%;
+        height: auto;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .guidemiddleheader {
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 16px;
+          display: flex;
+          align-items: center;
+          color: $fontcolor;
+          margin: 50px 0 20px 0;
+        }
+
+        .guidemiddlebody {
+          margin-bottom: 20px;
+          width: 80%;
+          height: 53px;
+          background-color: #f6f6f6;
+          border-radius: 15px;
+          padding-left: 20px;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          color: $fontcolor;
+        }
+
+        .checkguide {
+          display: flex;
+          align-items: center;
+          margin-top: 30px;
+
+          span {
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .guidefooter {
+        width: 80%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 80px;
+
+        .guidefooterbtn {
+          width: 160px;
+          height: 56px;
+          background-color: $maincolor;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .nextbtn {
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

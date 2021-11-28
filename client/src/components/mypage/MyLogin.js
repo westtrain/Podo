@@ -4,10 +4,10 @@ function MyLogin(props) {
   return (
     <>
       <div className="middlemain">
-        <div className="adminlogin">
+        <div className="adminbox">
           <div className="wrapper">
             <div className="title">로그인 관리</div>
-            <hr className="loginline" />
+            <hr className="line" />
             <div className="logininfo">
               <div className="nowlogininfo">현재 연결된 소셜 로그인 계정</div>
               <div className="social">

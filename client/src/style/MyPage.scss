@@ -271,7 +271,7 @@ $mypagecolor: #eeefff;
               }
             }
           }
-          .adminlogin {
+          .adminbox {
             width: 100%;
             border-radius: 15px;
             background-color: #fff;
@@ -283,7 +283,7 @@ $mypagecolor: #eeefff;
                 font-weight: bold;
                 font-size: 16px;
               }
-              .loginline {
+              .line {
                 width: 100%;
                 margin-top: 20px;
                 margin-bottom: 33px;
@@ -321,6 +321,19 @@ $mypagecolor: #eeefff;
                   font-weight: bold;
                   font-size: 14px;
                   color: #4040cc;
+                  cursor: pointer;
+                }
+                .settlementbox {
+                  width: 300px;
+                  height: 44px;
+                  padding-left: 20px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background: #f6f6f6;
+                  border-radius: 10px;
+                  font-weight: bold;
+                  font-size: 14px;
                   cursor: pointer;
                 }
               }

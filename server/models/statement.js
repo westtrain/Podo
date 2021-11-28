@@ -28,12 +28,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-
     },
     {
       sequelize,
       modelName: "Statement",
       tableName: "Statement",
+      timestamps: true,
+      charset: "utf8",
+      collate: "utf8_general_ci",
     }
   );
 

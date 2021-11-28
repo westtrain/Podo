@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.Payment.belongsTo(models.User, {
         foreignKey: "user_id",
-        targetKey: "id"
+        targetKey: "id",
       });
     }
   }
@@ -21,15 +21,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       credit_expire_month: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       credit_expire_year: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       credit_birth: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       credit_password: {
@@ -45,15 +45,17 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       account_number: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
-
     },
     {
       sequelize,
       modelName: "Payment",
       tableName: "Payment",
+      timestamps: true,
+      charset: "utf8",
+      collate: "utf8_general_ci",
     }
   );
 

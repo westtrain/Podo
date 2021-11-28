@@ -232,6 +232,7 @@ $mypagecolor: #eeefff;
                   align-items: center;
                   .copyicon {
                     margin-left: 13px;
+                    cursor: pointer;
                   }
                 }
               }
@@ -267,6 +268,82 @@ $mypagecolor: #eeefff;
                     text-align: center;
                   }
                 }
+              }
+            }
+          }
+          .adminbox {
+            width: 100%;
+            border-radius: 15px;
+            background-color: #fff;
+            min-height: 280px;
+            margin-bottom: 20px;
+            .wrapper {
+              padding: 32px 45px;
+              .title {
+                font-weight: bold;
+                font-size: 16px;
+              }
+              .line {
+                width: 100%;
+                margin-top: 20px;
+                margin-bottom: 33px;
+                border-bottom-width: 2px;
+                border-top-style: none;
+                border-right-style: none;
+                border-left-style: none;
+                border-color: #dadada;
+              }
+              .logininfo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 86px;
+                .nowlogininfo {
+                  font-size: 14px;
+                  color: #656565;
+                }
+                .social {
+                  font-weight: bold;
+                  font-size: 18px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                }
+                .logoutbtn {
+                  width: 90px;
+                  height: 44px;
+                  margin-left: 20px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background: #f0f0ff;
+                  border-radius: 10px;
+                  font-weight: bold;
+                  font-size: 14px;
+                  color: #4040cc;
+                  cursor: pointer;
+                }
+                .settlementbox {
+                  width: 300px;
+                  height: 44px;
+                  padding-left: 20px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background: #f6f6f6;
+                  border-radius: 10px;
+                  font-weight: bold;
+                  font-size: 14px;
+                  cursor: pointer;
+                }
+              }
+              .withdrawal {
+                font-size: 14px;
+                color: #656565;
+                border-bottom-color: #656565;
+                display: flex;
+                justify-content: flex-end;
+                cursor: pointer;
               }
             }
           }

@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const { sequelize } = require("./models");
 const config = require("./config/config");
 //require("express-async-errors");
-const mysql = require('mysql2');
+const mysql = require("mysql2");
 //const authRouter = require("./router/auth");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
@@ -38,9 +38,8 @@ app.get("/", (req, res) => {
 //app.use("/chat", chatRouter);
 //app.use("/notification", notificationRouter);
 
-const con = mysql.createConnection({
-  config[process.env.NODE_ENV || 'development']
-});
+const con = mysql.createConnection(config[process.env.NODE_ENV || "development"]);
+// const con = mysql.createConnection(config[process.env.NODE_ENV || "local"]);
 
 con.connect((err) => {
   if (err) {
@@ -48,19 +47,23 @@ con.connect((err) => {
   }
 });
 
-app.get('/status', authToken, (req, res) => {
-    db.query('use podo', (err) => {
-      if (err) {
-        return res.status(200).send({
-          isLogin: true,
-          isConnectedToDatabase: false
-        });
-      }
+app.get("/status", (req, res) => {
+  con.query("use podo", (err) => {
+    if (err) {
       return res.status(200).send({
         isLogin: true,
-        isConnectedToDatabase: true
+        isConnectedToDatabase: false,
       });
+    }
+    return res.status(200).send({
+      isLogin: true,
+      isConnectedToDatabase: true,
     });
+  });
+});
+
+models.sequelize.sync({ force: false }).then(() => {
+  console.log("success models sync");
 });
 
 app.use((req, res) => {
@@ -74,7 +77,7 @@ const podoServer = app.listen(port, async () => {
   console.log(`🚀 Listening on PORT: ${port}`);
   try {
     await sequelize.authenticate();
-//    app.set("realTime", await realTimeUserStatus());
+    //    app.set("realTime", await realTimeUserStatus());
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);

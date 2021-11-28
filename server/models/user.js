@@ -8,12 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         through: "User_party",
         foreignKey: "user_id",
       });
-      models.User.belongsTo(models.Statement, {
+      models.User.hasMany(models.Statement, {
         foreignKey: "user_id",
         targetKey: "id",
         onDelete: "cascade",
       });
-      models.User.belongsTo(models.Payment, {
+      models.User.hasMany(models.Payment, {
         foreignKey: "user_id",
         targetKey: "id",
         onDelete: "cascade",

@@ -8,17 +8,19 @@ module.exports = (sequelize, DataTypes) => {
         through: "User_party",
         foreignKey: "user_id",
       });
-    models.User.belongsTo(models.Statement, {
+      models.User.belongsTo(models.Statement, {
         foreignKey: "user_id",
         targetKey: "id",
         onDelete: "cascade",
       });
-    models.User.belongsTo(models.Payment, {
+      models.User.belongsTo(models.Payment, {
         foreignKey: "user_id",
         targetKey: "id",
         onDelete: "cascade",
       });
+    }
   }
+
   User.init(
     {
       name: {

@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "OTT",
       tableName: "OTT",
+      timestamps: false,
+      charset: "utf8",
+      collate: "utf8_general_ci",
     }
   );
 

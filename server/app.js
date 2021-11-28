@@ -7,6 +7,7 @@ const { sequelize } = require("./models");
 const config = require("./config/config");
 //require("express-async-errors");
 const mysql = require("mysql2");
+const models = require("./models");
 //const authRouter = require("./router/auth");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
@@ -38,8 +39,8 @@ app.get("/", (req, res) => {
 //app.use("/chat", chatRouter);
 //app.use("/notification", notificationRouter);
 
-const con = mysql.createConnection(config[process.env.NODE_ENV || "development"]);
-// const con = mysql.createConnection(config[process.env.NODE_ENV || "local"]);
+// const con = mysql.createConnection(config[process.env.NODE_ENV || "development"]);
+const con = mysql.createConnection(config[process.env.NODE_ENV || "local"]);
 
 con.connect((err) => {
   if (err) {

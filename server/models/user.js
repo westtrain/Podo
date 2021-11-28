@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         through: "User_party",
         foreignKey: "user_id",
       });
-    }
     models.User.belongsTo(models.Statement, {
         foreignKey: "user_id",
         targetKey: "id",

@@ -13,12 +13,12 @@ function Header(props) {
           {/* Header-Left*/}
           <div className="left">
             <Link to="/">
-              <a className="logo">
+              <div className="logo">
                 <div>
                   <img src={logo} alt="logo"></img>
                 </div>
                 <span className="name">Podo</span>
-              </a>
+              </div>
             </Link>
           </div>
 

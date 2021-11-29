@@ -37,7 +37,7 @@ function ConfirmPayment(props) {
           </div>
         </div>
         <div className="guidefooter">
-          <Link to={"/cerate/6"}>
+          <Link to={"/create/6"}>
             <div className="guidefooterbtn">
               <div className="nextbtn">다음</div>
             </div>

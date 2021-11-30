@@ -1,0 +1,723 @@
+@import "./App.scss";
+
+.page {
+  display: flex;
+
+  .modalback {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: grid;
+    place-items: center;
+
+    .setcardmodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 490px;
+      height: 650px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+
+      .exit {
+        margin-top: 30px;
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .scmheader {
+        margin-top: 20px;
+        font-size: 21px;
+        color: $fontcolor;
+        font-weight: bold;
+      }
+
+      .scmhf {
+        margin-top: 30px;
+        width: 100%;
+        font-size: 14px;
+        color: #656565;
+      }
+
+      .sdmmf {
+        margin-top: 20px;
+        position: relative;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        width: 94%;
+        height: 60px;
+
+        div {
+          position: absolute;
+          font-size: 14px;
+          margin-left: 20px;
+          color: #656565;
+          font-weight: bold;
+        }
+
+        input {
+          font-size: 20px;
+          width: 100%;
+          padding-left: 20px;
+          height: 100%;
+          border: none;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+        }
+      }
+
+      .ssmmf {
+        margin-bottom: 180px;
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        width: 100%;
+        height: 60px;
+
+        div {
+          font-size: 14px;
+          margin-left: 20px;
+          margin-right: 20px;
+          color: #656565;
+          font-weight: bold;
+        }
+
+        input {
+          font-size: 14px;
+          width: 40%;
+          padding-left: 140px;
+          height: 100%;
+          border: none;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+        }
+
+        input:focus {
+          outline: none;
+        }
+      }
+
+      .ssmmf:focus {
+        outline: 2px solid #4040cc;
+      }
+
+      .sdmms {
+        width: 94%;
+        display: flex;
+        justify-content: space-between;
+
+        .sdmmsf {
+          margin-top: 20px;
+          position: relative;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+          width: 215px;
+          height: 60px;
+          div {
+            position: absolute;
+            font-size: 14px;
+            margin-left: 20px;
+            color: #656565;
+            font-weight: bold;
+          }
+
+          input {
+            font-size: 20px;
+            width: 100%;
+            padding-left: 20px;
+            height: 100%;
+            border: none;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+          }
+
+          input:focus {
+            outline: none;
+          }
+        }
+
+        .sdmmss {
+          margin-top: 20px;
+          position: relative;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+          width: 215px;
+          height: 60px;
+          div {
+            position: absolute;
+            font-size: 14px;
+            margin-left: 20px;
+            color: #656565;
+            font-weight: bold;
+          }
+
+          input {
+            font-size: 20px;
+            width: 100%;
+            padding-left: 20px;
+            height: 100%;
+            border: none;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+          }
+
+          input:focus {
+            outline: none;
+          }
+        }
+      }
+      .clearbtnwrap {
+        margin-top: 130px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .withdrawalmodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 490px;
+      height: 650px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+
+      .exit {
+        margin-top: 30px;
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .wdmheader {
+        font-size: 21px;
+        font-weight: bold;
+        color: $fontcolor;
+        margin-top: 20px;
+      }
+
+      .podomoney {
+        font-size: 16px;
+        font-weight: bold;
+        color: $fontcolor;
+        margin-top: 30px;
+      }
+
+      .wdmmf {
+        margin-top: 15px;
+        width: 90%;
+        height: 60px;
+        background-color: #f7f7f7;
+        border-radius: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 25px 0 25px;
+      }
+
+      .withdrawalaccount {
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: bold;
+        color: $fontcolor;
+      }
+
+      .wdmms {
+        cursor: pointer;
+        margin-top: 15px;
+        width: 100%;
+        height: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0ff;
+        border-radius: 10px;
+
+        .wdmmff {
+          font-size: 14px;
+          font-weight: bold;
+          color: #4040cc;
+        }
+        .wdmmfs {
+          font-size: 13px;
+          color: #4040cc;
+        }
+      }
+
+      .withdrawalguide {
+        margin-top: 40px;
+        font-size: 16px;
+        color: #656565;
+      }
+
+      .wdmpay {
+        margin-top: 15px;
+
+        .wdmpayw {
+          font-size: 13px;
+          color: #656565;
+        }
+      }
+
+      .clearbtnwrap {
+        margin-top: 70px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .accountmodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 490px;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+
+      .exit {
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .samheader {
+        margin-top: 20px;
+
+        .samhfirst {
+          font-size: 21px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+
+        .samhsecond {
+          margin-top: 10px;
+          font-size: 14px;
+          color: #656565;
+        }
+      }
+
+      .selectbank {
+        margin-top: 60px;
+        font-size: 14px;
+        color: #656565;
+      }
+
+      .sammf {
+        margin-top: 20px;
+        .sammff {
+          background-color: #f7f7f7;
+          height: 60px;
+          width: 95%;
+          border-radius: 15px;
+          border: none;
+          padding-left: 20px;
+          font-size: 18px;
+        }
+      }
+
+      .samms {
+        margin-top: 20px;
+        .sammff {
+          background-color: #f7f7f7;
+          height: 60px;
+          width: 95%;
+          border-radius: 15px;
+          border: none;
+          padding-left: 20px;
+          font-size: 18px;
+        }
+      }
+
+      .clearbtnwrap {
+        margin-top: 150px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .loginmodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 520px;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 30px 15px 35px;
+
+      .exit {
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .lmheader {
+        width: 70%;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+
+        .lmhfirst {
+          font-size: 28px;
+          font-weight: bold;
+        }
+
+        .lmhsecond {
+          font-size: 28px;
+          font-weight: bold;
+        }
+      }
+      .lmmiddle {
+        margin-top: 80px;
+        width: 100%;
+        height: 200px;
+      }
+
+      .forgotlogin {
+        margin-top: 80px;
+        margin-bottom: 30px;
+        font-size: 16px;
+        text-decoration-line: underline;
+        color: #656565;
+      }
+    }
+
+    .modalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 465px;
+      height: 755px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 30px 15px 35px;
+
+      .exit {
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .cpmheader {
+        margin: 20px 0 0 0;
+        width: 80%;
+        display: flex;
+
+        .cpmhfirst {
+          display: flex;
+
+          .cpmhff {
+            font-size: 18px;
+            font-weight: bold;
+            color: $fontcolor;
+          }
+
+          .cpmhfs {
+            font-size: 18px;
+            font-weight: bold;
+            color: #48d7d7;
+            margin-left: 15px;
+          }
+        }
+
+        .cpmhsecond {
+          font-size: 18px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+      }
+
+      .cpmmf {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        height: 65px;
+        background-color: #f6f6f6;
+        border-radius: 15px;
+        padding: 0 20px;
+
+        .cpmmff {
+          font-size: 18px;
+          font-weight: bold;
+          color: #888888;
+        }
+
+        .cpmmfs {
+          font-size: 18px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+      }
+
+      .cpmms {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        height: 65px;
+        background-color: #f6f6f6;
+        border-radius: 15px;
+        padding: 0 20px;
+
+        .cpmmff {
+          font-size: 18px;
+          font-weight: bold;
+          color: #888888;
+        }
+
+        .cpmmfs {
+          font-size: 18px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+      }
+
+      .cpmpay {
+        font-size: 18px;
+        font-weight: bold;
+        color: $fontcolor;
+        margin: 70px 0 20px 0;
+      }
+
+      .cpmpayf {
+        width: 90%;
+        padding: 0 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+        border-bottom: 1px solid #c4c4c4;
+
+        .cpmpayfh {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .cpmpayfhf {
+            font-size: 18px;
+            color: #888888;
+            font-weight: bold;
+          }
+
+          .cpmpayfhs {
+            margin: 1px 0 0 5px;
+            font-size: 12px;
+            color: #888888;
+          }
+        }
+
+        .cpmpayff {
+          font-size: 18px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+      }
+
+      .partysignbtn {
+        margin-top: 130px;
+        cursor: pointer;
+        width: 97%;
+        height: 50px;
+        background-color: $maincolor;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        border-radius: 15px;
+
+        .partysignbtnw {
+          font-size: 18px;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+
+      .jpmheader {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        width: 100%;
+
+        .jpmhfirst {
+          font-size: 31px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+        .jpmhsecond {
+          font-size: 31px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+      }
+
+      .jpmmf {
+        margin-top: 80px;
+        width: 100%;
+        height: 75px;
+        border: 1px solid #c6c6c6;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .jpmmff {
+          font-size: 16px;
+          font-weight: bold;
+          color: $fontcolor;
+          margin-left: 10px;
+        }
+
+        .jpmmfs {
+          cursor: pointer;
+          font-size: 15px;
+          color: #c6c6c6;
+          margin-right: 15px;
+
+          .righticon {
+            margin-left: 5px;
+          }
+        }
+      }
+
+      .jpmms {
+        margin-top: 20px;
+        width: 100%;
+        height: 75px;
+        border: 1px solid #c6c6c6;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .jpmmff {
+          font-size: 16px;
+          font-weight: bold;
+          color: $fontcolor;
+          margin-left: 10px;
+        }
+
+        .jpmmfs {
+          cursor: pointer;
+          font-size: 15px;
+          color: #c6c6c6;
+          margin-right: 15px;
+
+          .righticon {
+            margin-left: 5px;
+          }
+        }
+      }
+
+      .jpmpay {
+        margin-top: 20px;
+        font-size: 15px;
+        color: #c6c6c6;
+      }
+
+      .joinpartysign {
+        margin-top: 150px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        background-color: #fff;
+        border: none;
+        .joinpartysignbtn {
+          display: flex;
+          width: 160px;
+          height: 56px;
+          border-radius: 20px;
+          background-color: #4040cc;
+          justify-content: center;
+          align-items: center;
+
+          .joinpartysignbtnw {
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,242 @@
+$maincolor: #a5a9f8;
+$fontcolor: #222222;
+$mypagecolor: #eeefff;
+
+.search {
+  animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s; /* Firefox */
+  -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+  -o-animation: fadein 0.5s; /* Opera */
+  display: block;
+  max-width: 100vw;
+  padding-top: 96px;
+  height: 100%;
+
+  .searchbody {
+    margin-bottom: -25px;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(190, 193, 255, 0.64) 0%,
+      rgba(238, 239, 255, 0.64) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .searchleft {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin: 3.8em 5em 3.8em 0;
+
+      .selectott {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 20px;
+
+        .ottname {
+          margin-right: 10px;
+        }
+
+        .coolicon {
+          cursor: pointer;
+        }
+      }
+
+      .calendar {
+        width: 642px;
+        height: 492px;
+        background-color: #fff;
+        border-radius: 20px;
+        margin-top: 30px;
+        filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.1));
+      }
+
+      .searchleftdown {
+        margin: 45px 10px 20px 10px;
+        display: flex;
+        justify-content: space-between;
+
+        .guidesee {
+          cursor: pointer;
+          width: 280px;
+          height: 133px;
+          background-color: #fff;
+          border-radius: 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .createparty {
+          cursor: pointer;
+          width: 280px;
+          height: 133px;
+          background-color: #fff;
+          border-radius: 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .guideseeup {
+          width: 80%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .gsul {
+            font-size: 18px;
+            font-weight: bold;
+            color: $fontcolor;
+          }
+        }
+
+        .guideseedown {
+          margin-top: 10px;
+          display: flex;
+
+          width: 80%;
+          font-size: 13px;
+          color: #656565;
+        }
+      }
+    }
+
+    .searchright {
+      display: flex;
+      flex-direction: column;
+
+      .searchrightheader {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+        align-items: center;
+
+        .period {
+          cursor: pointer;
+          width: 92px;
+          height: 25px;
+          border-radius: 5px;
+          margin-right: 20px;
+          background-color: #fff;
+          border: none;
+        }
+
+        .people {
+          cursor: pointer;
+          width: 92px;
+          height: 25px;
+          border-radius: 5px;
+          background-color: #fff;
+          border: none;
+        }
+
+        .srhright {
+          cursor: pointer;
+          font-size: 14px;
+          color: #615b5b;
+        }
+      }
+
+      .searchparty {
+        display: flex;
+        flex-direction: column;
+        height: 45em;
+        margin-top: 20px;
+
+        .partyexp {
+          cursor: pointer;
+          width: 580px;
+          height: 128.5px;
+          background-color: #fff;
+          border-radius: 15px;
+          margin-bottom: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .partyexpup {
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+
+            .peus {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 21px;
+              font-weight: bold;
+              color: $fontcolor;
+
+              span {
+                font-size: 21px;
+                font-weight: bold;
+                color: #48d7d7;
+                margin-right: 10px;
+              }
+            }
+
+            .ottfee {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .won {
+                margin-right: 10px;
+                padding-top: 2px;
+              }
+            }
+          }
+
+          .partyexpdown {
+            width: 80%;
+            margin-top: 20px;
+            font-size: 14px;
+            line-height: 16px;
+            color: #656565;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-o-keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

@@ -6,8 +6,9 @@ const cookieParser = require("cookie-parser");
 const { sequelize } = require("./models");
 const config = require("./config/config");
 //require("express-async-errors");
-
-//const authRouter = require("./router/auth");
+const mysql = require("mysql2");
+const models = require("./models");
+const authRouter = require("./router/auth");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
 //const notificationRouter = require("./router/notification");
@@ -32,11 +33,39 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.send("Let's Podo!");
 });
-//app.use("/auth", authRouter);
+app.use("/auth", authRouter);
 //app.use("/user", userRouter);
 //app.use("/gathering", gatheringRouter);
 //app.use("/chat", chatRouter);
 //app.use("/notification", notificationRouter);
+
+// const con = mysql.createConnection(config[process.env.NODE_ENV || "development"]);
+const con = mysql.createConnection(config[process.env.NODE_ENV || "local"]);
+
+con.connect((err) => {
+  if (err) {
+    con.end();
+  }
+});
+
+app.get("/status", (req, res) => {
+  con.query("use podo", (err) => {
+    if (err) {
+      return res.status(200).send({
+        isLogin: true,
+        isConnectedToDatabase: false,
+      });
+    }
+    return res.status(200).send({
+      isLogin: true,
+      isConnectedToDatabase: true,
+    });
+  });
+});
+
+models.sequelize.sync({ force: false }).then(() => {
+  console.log("success models sync");
+});
 
 app.use((req, res) => {
   res.status(400).json({ message: "Invalid request" });
@@ -49,7 +78,7 @@ const podoServer = app.listen(port, async () => {
   console.log(`🚀 Listening on PORT: ${port}`);
   try {
     await sequelize.authenticate();
-//    app.set("realTime", await realTimeUserStatus());
+    //    app.set("realTime", await realTimeUserStatus());
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);

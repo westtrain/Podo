@@ -77,22 +77,8 @@ module.exports = {
         // authorization code를 이용해서 access token 요청
         `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}&code=${code}&client_secret=${process.env.KAKAO_CLIENT_SECRET}`
       );
-      // const result = await axios({
-      //   //token
-      //   method: "POST",
-      //   url: "https://kauth.kakao.com/oauth/token",
-      //   headers: {
-      //     "content-type": "application/x-www-form-urlencoded",
-      //   },
-      //   data: qs.stringify({
-      //     grant_type: "authorization_code", //특정 스트링
-      //     client_id: process.env.KAKAO_CLIENT_ID,
-      //     client_secret: process.env.KAKAO_CLIENT_SECRET,
-      //     redirect_uri: process.env.KAKAO_REDIRECT_URI,
-      //     code: code, //결과값을 반환했다. 안됐다.
-      //   }), //객체를 string 으로 변환
-      // });
-      console.log("===============Token Info================", result.data);
+
+      console.log("===============AccessToken Info================", result.data);
       const userInfo = await axios.get(
         // access token로 유저정보 요청
         "https://kapi.kakao.com/v2/user/me",
@@ -142,7 +128,7 @@ module.exports = {
         socialType: user[0].dataValues.socialType,
       });
 
-      console.log("==================token==================", token);
+      console.log("==================jwt==================", token);
 
       sendAccessToken(res, token);
 
@@ -153,9 +139,10 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+
   googleLogin: async (req, res) => {
     res.redirect(
-      `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${process.env.NAVER_REDIRECT_URI}/&state=naver`
+      `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&access_type=offline&response_type=code&state=state_parameter_passthrough_value&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&client_id=${process.env.GOOGLE_CLIENT_ID}`
     );
   },
 
@@ -166,12 +153,12 @@ module.exports = {
       console.log(code);
       const result = await axios.post(
         // authorization code를 이용해서 access token 요청
-        `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_CLIENT_SECRET}&redirect_uri=${process.env.NAVER_REDIRECT_URI}&code=${code}&state=naver`
+        `https://oauth2.googleapis.com/token?code=${code}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`
       );
-      console.log("===============Token Info================", result.data);
+      console.log("===============AccessToken Info================", result.data);
       const userInfo = await axios.get(
         // access token로 유저정보 요청
-        "https://openapi.naver.com/v1/nid/me",
+        `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${result.data.access_token}`,
         {
           headers: {
             Authorization: `Bearer ${result.data.access_token}`,
@@ -182,13 +169,13 @@ module.exports = {
       //받아온 유저정보로 findOrCreate
       const user = await User.findOrCreate({
         where: {
-          email: userInfo.data.response.email,
-          socialType: "naver",
+          email: userInfo.data.email,
+          socialType: "google",
         },
         defaults: {
-          email: userInfo.data.response.email, // 네이버에서 받아온 유저정보의 이메일
+          email: userInfo.data.email, // 네이버에서 받아온 유저정보의 이메일
           name: "abc", //추후 randomNameAPI 사용하여 name 발급
-          socialType: "naver",
+          socialType: "google",
           deposit: 0,
           money: 0,
         },
@@ -199,7 +186,7 @@ module.exports = {
         socialType: user[0].dataValues.socialType,
       });
 
-      console.log("==================token==================", token);
+      console.log("==================jwt==================", token);
 
       sendAccessToken(res, token);
 

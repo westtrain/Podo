@@ -8,6 +8,9 @@ const host = require("DATABASE_HOST");
 const port = require("DATABASE_PORT");
 */
 module.exports = {
+  port: {
+    port: process.env.PORT,
+  },
   local: {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,

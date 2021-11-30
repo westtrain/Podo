@@ -9,12 +9,13 @@ const config = require("./config/config");
 const mysql = require("mysql2");
 const models = require("./models");
 const authRouter = require("./router/auth");
+const ottRouter = require("./router/ott");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
 //const notificationRouter = require("./router/notification");
 //const chatRouter = require("./router/chat");
 const app = express();
-const port = 4000;
+const port = config[process.env.NODE_ENV || "port"].port;
 
 const corsOption = {
   origin: true,
@@ -34,34 +35,12 @@ app.get("/", (req, res) => {
   res.send("Let's Podo!");
 });
 app.use("/auth", authRouter);
+app.use("/ott", ottRouter);
+
 //app.use("/user", userRouter);
 //app.use("/gathering", gatheringRouter);
 //app.use("/chat", chatRouter);
 //app.use("/notification", notificationRouter);
-
-// const con = mysql.createConnection(config[process.env.NODE_ENV || "development"]);
-const con = mysql.createConnection(config[process.env.NODE_ENV || "local"]);
-
-con.connect((err) => {
-  if (err) {
-    con.end();
-  }
-});
-
-app.get("/status", (req, res) => {
-  con.query("use podo", (err) => {
-    if (err) {
-      return res.status(200).send({
-        isLogin: true,
-        isConnectedToDatabase: false,
-      });
-    }
-    return res.status(200).send({
-      isLogin: true,
-      isConnectedToDatabase: true,
-    });
-  });
-});
 
 models.sequelize.sync({ force: false }).then(() => {
   console.log("success models sync");

@@ -9,6 +9,7 @@ const config = require("./config/config");
 const mysql = require("mysql2");
 const models = require("./models");
 const authRouter = require("./router/auth");
+const ottRouter = require("./router/ott");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
 //const notificationRouter = require("./router/notification");
@@ -34,6 +35,8 @@ app.get("/", (req, res) => {
   res.send("Let's Podo!");
 });
 app.use("/auth", authRouter);
+app.use("/ott", ottRouter);
+
 //app.use("/user", userRouter);
 //app.use("/gathering", gatheringRouter);
 //app.use("/chat", chatRouter);

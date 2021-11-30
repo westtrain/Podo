@@ -16,7 +16,7 @@ module.exports = {
         secure: true,
         httpOnly: true,
         expires: new Date(Date.now() + 1000 * 60 * 60 * 48),
-        domain: ".keyplus.kr",
+        domain: ".podorang.com",
       })
       .json({ data: { accessToken }, message: "OK" });
   },

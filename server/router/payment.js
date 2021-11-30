@@ -4,11 +4,10 @@ const isAuth = require("../middleware/verifyToken");
 
 const router = express.Router();
 
-router.get("/user", isAuth, partyController.getUsersParty); // user가 가입한 모든 파티 리스트 조회
-router.get("/:id", partyController.getParty); // 파티 상세 정보 조회
-router.get("/", partyController.getAllParties); // 전체 파티 조회
-router.get("/filtered", partyController.getFilteredParties); // 날짜별 파티 조회
-router.post("/", isAuth, partyController.createParty); // 파티 만들기
+router.get("/", isAuth, partyController.getUsersPaymentInfo); // user 결제 정보 조회
+router.get("/list", isAuth, partyController.getPaymentPointWithdrawal); // 결제/적립/인출 내역 조회
+router.patch("/credit", isAuth, partyController.changeCard); // 카드 변경
+router.patch("/account", isAuth, partyController.getFilteredParties); // 인출계좌 변경
 router.patch("/ott", isAuth, partyController.updateOTTLoginInfo); // OTT 로그인 정보 변경
 router.patch("/memberNum", isAuth, partyController.changeMemberNum); // 파티 인원 수 변경
 router.patch("/join", isAuth, partyController.joinParty); // 파티 가입

@@ -1,0 +1,26 @@
+.guidepage {
+  display: block;
+  max-width: 100vw;
+  padding-top: 96px;
+  height: 90%;
+
+  animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s; /* Firefox */
+  -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+  -o-animation: fadein 0.5s; /* Opera */
+
+  .main {
+    width: 100vw;
+    height: fit-content;
+    padding: 35px 0 47px 0;
+    background: linear-gradient(
+      180deg,
+      rgba(190, 193, 255, 0.64) 0%,
+      rgba(238, 239, 255, 0.64) 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+  }
+}

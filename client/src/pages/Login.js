@@ -1,19 +1,25 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import naver from "../image/naver.png";
+import kakao from "../image/kakao.png";
+import google from "../image/google.png";
 
 const Login = (props) => {
   const onClickNaver = async () => {
     window.location.href = "http://localhost:4000/auth/naver";
   };
+  const onClickKakao = async () => {
+    window.location.href = "http://localhost:4000/auth/kakao";
+  };
+  const onClickGoogle = async () => {
+    window.location.href = "http://localhost:4000/auth/google";
+  };
 
   return (
     <>
       <a>
-        <img
-          height="100"
-          src="http://static.nid.naver.com/oauth/small_g_in.PNG"
-          onClick={onClickNaver}
-        />
+        <img src={naver} onClick={onClickNaver} />
+        <img src={kakao} onClick={onClickKakao} />
+        <img src={google} onClick={onClickGoogle} />
       </a>
     </>
   );

@@ -89,15 +89,14 @@ module.exports = {
         }
       );
       console.log("================userInfo================", userInfo.data);
-      //받아온 유저정보로 findOrCreate
+      // 유저가 이메일 제공에 동의했다면
       if (userInfo.data.kakao_account.email) {
         const user = await User.findOrCreate({
           where: {
-            // id: userInfo.data.id,
+            email: userInfo.data.email,
             socialType: "kakao",
           },
           defaults: {
-            // id: userInfo.data.id,
             email: userInfo.data.email, // 카카오에서 받아온 유저정보의 이메일
             name: "abc", //추후 randomNameAPI 사용하여 name 발급
             socialType: "kakao",
@@ -105,33 +104,42 @@ module.exports = {
             money: 0,
           },
         });
-        console.log(user[0]);
+
+        const token = generateAccessToken({
+          id: user[0].dataValues.id,
+          email: user[0].dataValues.email,
+          socialType: user[0].dataValues.socialType,
+        });
+
+        console.log("==================jwt==================", token);
+
+        sendAccessToken(res, token);
+      } else {
+        //동의하지 않았다면
+        const user = await User.findOrCreate({
+          where: {
+            email: userInfo.data.id,
+            socialType: "kakao",
+          },
+          defaults: {
+            email: userInfo.data.id, // 카카오에서 받아온 유저정보의 아이디
+            name: "abc", //추후 randomNameAPI 사용하여 name 발급
+            socialType: "kakao",
+            deposit: 0,
+            money: 0,
+          },
+        });
+
+        const token = generateAccessToken({
+          id: user[0].dataValues.id,
+          email: user[0].dataValues.email,
+          socialType: user[0].dataValues.socialType,
+        });
+
+        console.log("==================jwt==================", token);
+
+        sendAccessToken(res, token);
       }
-      const user = await User.findOrCreate({
-        where: {
-          // id: userInfo.data.id,
-          socialType: "kakao",
-        },
-        defaults: {
-          // id: userInfo.data.id,
-          email: "@", // 카카오에서 받아온 유저정보의 이메일
-          name: "abc", //추후 randomNameAPI 사용하여 name 발급
-          socialType: "kakao",
-          deposit: 0,
-          money: 0,
-        },
-      });
-
-      const token = generateAccessToken({
-        id: user[0].dataValues.id,
-        email: user[0].dataValues.email,
-        socialType: user[0].dataValues.socialType,
-      });
-
-      console.log("==================jwt==================", token);
-
-      sendAccessToken(res, token);
-
       // response.sendRedirect(request.getHeader("referer"));
       res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {

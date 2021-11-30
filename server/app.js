@@ -14,7 +14,7 @@ const authRouter = require("./router/auth");
 //const notificationRouter = require("./router/notification");
 //const chatRouter = require("./router/chat");
 const app = express();
-const port = 4000;
+const port = config[process.env.NODE_ENV || "port"].port;
 
 const corsOption = {
   origin: true,

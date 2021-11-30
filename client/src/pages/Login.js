@@ -5,7 +5,7 @@ import google from "../image/google.png";
 
 const Login = (props) => {
   const onClickNaver = async () => {
-    window.location.href = "http://localhost:4000/auth/naver";
+    window.location.href = "https://podorang.com/auth/naver";
   };
   const onClickKakao = async () => {
     window.location.href = "http://localhost:4000/auth/kakao";

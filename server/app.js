@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.send("Let's Podo!");
+  res.send("Podo!");
 });
 app.use("/auth", authRouter);
 app.use("/ott", ottRouter);

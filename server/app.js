@@ -8,7 +8,7 @@ const config = require("./config/config");
 //require("express-async-errors");
 const mysql = require("mysql2");
 const models = require("./models");
-//const authRouter = require("./router/auth");
+const authRouter = require("./router/auth");
 //const userRouter = require("./router/user");
 //const gatheringRouter = require("./router/gathering");
 //const notificationRouter = require("./router/notification");
@@ -33,7 +33,7 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.send("Let's Podo!");
 });
-//app.use("/auth", authRouter);
+app.use("/auth", authRouter);
 //app.use("/user", userRouter);
 //app.use("/gathering", gatheringRouter);
 //app.use("/chat", chatRouter);

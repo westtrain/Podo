@@ -14,9 +14,15 @@ input {
   padding-top: 96px;
   height: 90%;
 
+  animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s; /* Firefox */
+  -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+  -o-animation: fadein 0.5s; /* Opera */
+
   .createbody {
     width: 100vw;
-    height: 54.5em;
+    height: fit-content;
+    padding: 35px 0 35px 0;
     background: linear-gradient(
       180deg,
       rgba(190, 193, 255, 0.64) 0%,
@@ -25,6 +31,182 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .partyguidestep4 {
+      width: 626px;
+      height: fit-content;
+      padding: 58px 0 57px 0;
+      background-color: #fff;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .stepline {
+        width: 75%;
+        height: 3px;
+        margin: 20px;
+        display: flex;
+        justify-content: flex-start;
+
+        .step4 {
+          width: 66.64%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+      }
+      .guideheader {
+        width: 75%;
+        height: 122px;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .guideheadername {
+          font-size: 31px;
+          line-height: 36px;
+          font-weight: bold;
+          align-items: center;
+          color: $fontcolor;
+          margin-bottom: 50px;
+        }
+      }
+
+      .guidemiddle {
+        width: 75%;
+        height: fit-content;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .period {
+          width: 100%;
+          height: 85px;
+          border: 3px solid $bordercolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 34px;
+          padding-left: 30px;
+          padding-right: 30px;
+          font-size: 18px;
+          background-color: #fff;
+          outline: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .periodleft {
+            font-size: 18px;
+          }
+          .periodright {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+          }
+          img {
+            margin-left: 40px;
+          }
+        }
+
+        .calendal {
+          width: 100%;
+          height: 400px;
+        }
+
+        .setperiod {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          // align-items: center;
+          padding-left: 35px;
+          width: 85%;
+          height: 270px;
+
+          .setperiodheader {
+            padding-left: 20px;
+            font-size: 17;
+            font-weight: bold;
+            color: $fontcolor;
+          }
+
+          .setperiodmiddle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+
+            .setperiodmp {
+              font-size: 17px;
+              font-weight: bold;
+            }
+
+            .setperiodbar {
+              margin-top: 50px;
+              background-color: #c6c6c6;
+              border-radius: 1.5px;
+              width: 87%;
+              height: 5px;
+            }
+            .setperiodnum {
+              margin-left: 7px;
+              width: 89%;
+              margin-top: 10px;
+              display: flex;
+              justify-content: space-between;
+              div {
+                margin-right: 2px;
+                cursor: pointer;
+                font-size: 17px;
+                font-weight: bold;
+              }
+            }
+            .unit {
+              width: 93%;
+              margin-top: 5px;
+              display: flex;
+              justify-content: flex-end;
+              div {
+                font-size: 13px;
+                color: #c6c6c6;
+              }
+            }
+          }
+        }
+        .infoperiod {
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 18px;
+          color: #c6c6c6;
+        }
+      }
+
+      .guidefooter {
+        margin-top: 7px;
+        width: 75%;
+        display: flex;
+        justify-content: flex-end;
+
+        .guidefooterbtn {
+          width: 160px;
+          height: 56px;
+          background-color: $nextbtncolor;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          .nextbtn {
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+      }
+    }
 
     .partyguide {
       width: 626px;
@@ -58,11 +240,7 @@ input {
           height: 100%;
           background-color: #4a58cf;
         }
-        .step4 {
-          width: 66.64%;
-          height: 100%;
-          background-color: #4a58cf;
-        }
+
         .step5 {
           width: 83.3%;
           height: 100%;
@@ -220,40 +398,7 @@ input {
         select {
           all: none;
         }
-        .period {
-          width: 100%;
-          height: 85px;
-          border: 3px solid $bordercolor;
-          box-sizing: border-box;
-          border-radius: 10px;
-          margin-bottom: 34px;
-          padding-left: 30px;
-          padding-right: 30px;
-          font-size: 18px;
-          background-color: #fff;
-          outline: none;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          .periodleft {
-            font-size: 18px;
-          }
-          .periodright {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 18px;
-          }
-          img {
-            margin-left: 40px;
-          }
-        }
-        .infoperiod {
-          font-weight: 500;
-          font-size: 15px;
-          line-height: 18px;
-          color: #c6c6c6;
-        }
+
         .rulebox {
           width: 100%;
           height: 75px;
@@ -321,6 +466,39 @@ input {
           }
         }
       }
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-o-keyframes fadein {
+    from {
+      opacity: 0.1;
+    }
+    to {
+      opacity: 1;
     }
   }
 }

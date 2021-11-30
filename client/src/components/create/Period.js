@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../../image/arrow.png";
 
 function Period(props) {
+  const [showStartCalendar, setShowStartCalendar] = useState(false);
+  const [showSetPeriod, setShowSetPeriod] = useState(false);
+  const [showEndCalendar, setShowEndCalendar] = useState(false);
+  const [period, setPeriod] = useState(2);
+
+  const hadleStartCalendal = () => {
+    setShowStartCalendar(!showStartCalendar);
+  };
+
+  const hadleSetPeriod = () => {
+    setShowSetPeriod(!showSetPeriod);
+  };
+
+  const hadleEndCalendal = () => {
+    setShowEndCalendar(!showEndCalendar);
+  };
+
   return (
     <>
-      <div className="partyguide">
+      <div className="partyguidestep4">
         <div className="stepline">
           <div className="step4"></div>
         </div>
@@ -17,27 +34,56 @@ function Period(props) {
           </div>
         </div>
         <div className="guidemiddle">
-          <div className="period">
+          <div className="period" onClick={hadleStartCalendal}>
             <div className="periodleft">시작일</div>
             <div className="periodright">
               선택
               <img src={arrow} />
             </div>
           </div>
-          <div className="period">
+          {showStartCalendar ? <div className="calendal"></div> : null}
+          <div className="period" onClick={hadleSetPeriod}>
             <div className="periodleft">혜택 기간</div>
             <div className="periodright">
               선택
               <img src={arrow} />
             </div>
           </div>
-          <div className="period">
+          {showSetPeriod ? (
+            <div className="setperiod">
+              <div className="setperiodheader">
+                최소 2개월 이상의 파티만 만들 수 있어요.
+              </div>
+              <div className="setperiodmiddle">
+                <div className="setperiodmp">{period}개월</div>
+                <input type="range" className="setperiodbar" step="10"></input>
+                <div className="setperiodnum">
+                  <div>2</div>
+                  <div>&nbsp;&nbsp;3</div>
+                  <div>&nbsp;&nbsp;4</div>
+                  <div>&nbsp;5</div>
+                  <div>&nbsp;6</div>
+                  <div>&nbsp;&nbsp;7</div>
+                  <div>&nbsp;8</div>
+                  <div>&nbsp;9</div>
+                  <div>10</div>
+                  <div>11</div>
+                  <div>12</div>
+                </div>
+                <div className="unit">
+                  <div>(개월)</div>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          <div className="period" onClick={hadleEndCalendal}>
             <div className="periodleft">종료일</div>
             <div className="periodright">
               선택
               <img src={arrow} />
             </div>
           </div>
+          {showEndCalendar ? <div className="calendal"></div> : null}
           <div className="infoperiod">
             - 파티 시작 이후 파티 기간 수정은 불가합니다.
             <br />- 파티 종료일 전에 파티를 해산할 경우 위약금이 발생할 수

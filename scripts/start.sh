@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/colorboration/server
+cd /home/ubuntu/podo/server
 
 export DATABASE_USERNAME=$(aws ssm get-parameters --region ap-northeast-2 --names DATABASE_USER --query Parameters[0].Value | sed 's/"//g')
 export DATABASE_PASSWORD=$(aws ssm get-parameters --region ap-northeast-2 --names DATABASE_PASSWORD --query Parameters[0].Value | sed 's/"//g')

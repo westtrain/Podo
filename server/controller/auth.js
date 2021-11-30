@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const axios = require("axios");
 dotenv.config();
 
-const { generateAccessToken } = require("./tokenfunction/index");
+const { generateAccessToken } = require("./tokenFunction");
 
 module.exports = {
   naverLogin: async (req, res) => {

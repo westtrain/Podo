@@ -10,7 +10,6 @@ const mysql = require("mysql2");
 
 const models = require("./models");
 const authRouter = require("./router/auth");
-const ottRouter = require("./router/ott");
 const userRouter = require("./router/user");
 const partyRouter = require("./router/party");
 const paymentRouter = require("./router/payment");

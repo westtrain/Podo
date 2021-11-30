@@ -1,16 +1,16 @@
 const express = require("express");
-const partyController = require("../controller/party");
+const paymentController = require("../controller/payment");
 const isAuth = require("../middleware/verifyToken");
 
 const router = express.Router();
 
-router.get("/", isAuth, partyController.getUsersPaymentInfo); // user 결제 정보 조회
-router.get("/list", isAuth, partyController.getPaymentPointWithdrawal); // 결제/적립/인출 내역 조회
-router.patch("/credit", isAuth, partyController.changeCard); // 카드 변경
-router.patch("/account", isAuth, partyController.getFilteredParties); // 인출계좌 변경
-router.patch("/ott", isAuth, partyController.updateOTTLoginInfo); // OTT 로그인 정보 변경
-router.patch("/memberNum", isAuth, partyController.changeMemberNum); // 파티 인원 수 변경
-router.patch("/join", isAuth, partyController.joinParty); // 파티 가입
-router.delete("/", isAuth, partyController.leaveParty); // 파티 탈퇴
+router.get("/", isAuth, paymentController.getUsersPaymentInfo); // user 결제 정보 조회
+router.get("/list", isAuth, paymentController.getPaymentPointWithdrawal); // 결제/적립/인출 내역 조회
+router.patch("/credit", isAuth, paymentController.changeCard); // 카드 변경
+router.patch("/account", isAuth, paymentController.changeAccount); // 인출 계좌 변경
+router.patch("/ott", isAuth, paymentController.changeSettlement); // 정산일 변경
+router.patch("/memberNum", isAuth, paymentController.enrollCard); // 카드 정보 등록
+router.patch("/join", isAuth, paymentController.enrollAccount); // 인출 계좌 등록
+router.delete("/", isAuth, paymentController.enrollSettlement); // 정산일 변경
 
 module.exports = router;

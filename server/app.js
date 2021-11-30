@@ -39,30 +39,6 @@ app.use("/auth", authRouter);
 //app.use("/chat", chatRouter);
 //app.use("/notification", notificationRouter);
 
-// const con = mysql.createConnection(config[process.env.NODE_ENV || "development"]);
-const con = mysql.createConnection(config[process.env.NODE_ENV || "local"]);
-
-con.connect((err) => {
-  if (err) {
-    con.end();
-  }
-});
-
-app.get("/status", (req, res) => {
-  con.query("use podo", (err) => {
-    if (err) {
-      return res.status(200).send({
-        isLogin: true,
-        isConnectedToDatabase: false,
-      });
-    }
-    return res.status(200).send({
-      isLogin: true,
-      isConnectedToDatabase: true,
-    });
-  });
-});
-
 models.sequelize.sync({ force: false }).then(() => {
   console.log("success models sync");
 });

@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { Party } = require("../models");
 
 module.exports = {
   getUsersParty: async (req, res) => {

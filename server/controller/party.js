@@ -35,12 +35,23 @@ module.exports = {
   },
 
   getParty: async (req, res) => {
+    const partyId = req.params.id;
     try {
-      return res.status(404).json({ message: "failed" });
+      const partyInfo = await Party.findOne({
+        where: {
+          id: partyId,
+        },
+        raw: true,
+      });
+      if (!partyInfo) {
+        return res.status(404).json({ message: "failed" });
+      }
+      return res.status(200).json({ data: partyInfo });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+
   getAllParties: async (req, res) => {
     try {
       return res.status(404).json({ message: "failed" });

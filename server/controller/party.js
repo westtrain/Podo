@@ -54,11 +54,19 @@ module.exports = {
 
   getAllParties: async (req, res) => {
     try {
-      return res.status(404).json({ message: "failed" });
+      console.log("allPartiesInfo");
+      const allPartiesInfo = await Party.findAll({
+        raw: true,
+      });
+      if (!allPartiesInfo) {
+        return res.status(404).json({ message: "failed" });
+      }
+      return res.status(200).json({ data: allPartiesInfo });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+
   getFilteredParties: async (req, res) => {
     try {
       return res.status(404).json({ message: "failed" });

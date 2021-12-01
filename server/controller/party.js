@@ -1,17 +1,39 @@
-const { User } = require("../models");
+const db = require("../models");
+const { Party } = require("../models");
 
 module.exports = {
   getUsersParty: async (req, res) => {
+    const userId = req.userId;
+    const usersParties = [];
+    // console.log(userId);
     try {
-      const usersParties = await Parties.findAll({
+      const allUsersPartiesId = await db.sequelize.models.User_party.findAll({
+        attributes: ["party_id"],
+        where: {
+          user_id: userId,
+        },
         raw: true,
       });
+      for (let i = 0; i < allUsersPartiesId.length; i++) {
+        const usersParty = await Party.findOne({
+          where: {
+            id: allUsersPartiesId[i].party_id,
+          },
+          raw: true,
+        });
+        // console.log(usersParty);
+        usersParties[i] = usersParty;
+      }
+
+      if (!usersParties) {
+        return res.status(404).json({ message: "failed" });
+      }
       return res.status(200).json({ data: usersParties });
-      return res.status(404).json({ message: "failed" });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+
   getParty: async (req, res) => {
     try {
       return res.status(404).json({ message: "failed" });

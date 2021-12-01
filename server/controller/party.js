@@ -216,7 +216,6 @@ module.exports = {
     const { party_id } = req.body;
     try {
       // 2. party_id로 조회한다.
-      console.log(party_id);
       await Party.findOne({
         where: {
           id: party_id,
@@ -247,7 +246,39 @@ module.exports = {
   },
 
   leaveParty: async (req, res) => {
+    // 0. 쿠키를 통해 받아온 토큰으로 유저 아이디를 만든다.
+    const userId = req.userId;
+    // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
+    const { party_id } = req.body;
     try {
+      // 2. partyId로 조회한다.
+      await Party.findOne({
+        where: {
+          id: party_id,
+        },
+      }).then((data) => {
+        // 3. partyId로 조회가 실패하면 404를 반환한다.
+        if (!data) {
+          return res.status(404).json({ message: "failed" });
+        }
+        // 4. 기존의 멤버에 탈퇴하려는 맴버인 userId를 삭제하고 업데이트 시킨다.
+        let members = data.members;
+        // 5. 파티장은 삭제되면 안된다.
+        if (members.length !== 1) {
+          members = members.replace(`,${userId}`, "");
+          Party.update(
+            {
+              members: members,
+            },
+            {
+              where: {
+                id: party_id,
+              },
+            }
+          );
+        }
+      });
+      return res.status(200).json({ message: "Success" });
     } catch (error) {
       return res.status(500).json({ message: "Server Error" });
     }

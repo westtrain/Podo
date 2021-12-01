@@ -20,15 +20,16 @@ body {
     max-width: 1180px;
     width: 100%;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 20px;
 
     .left {
       display: flex;
+      margin-top: 10px;
       .logo {
         cursor: pointer;
         display: flex;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 40px;
 
         div {
           padding-bottom: 5px;

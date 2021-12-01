@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Payment.belongsTo(models.User, {
         foreignKey: "user_id",
         targetKey: "id",
+        onDelete: "cascade",
       });
     }
   }

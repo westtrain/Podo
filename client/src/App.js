@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import MyPage from "./pages/MyPage";
 import Create from "./pages/Create";
 import Search from "./pages/Search";
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Login />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/:menu" element={<MyPage />} />
           <Route path="/create" element={<Create />} />

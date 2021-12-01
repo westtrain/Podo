@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.Party.belongsToMany(models.User, {
         through: "User_party",
-        foreignKey: "Party_id",
+        foreignKey: "party_id",
       });
       models.Party.belongsTo(models.OTT, {
         foreignKey: "ott_id",
@@ -54,6 +54,9 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "Party",
       tableName: "Parties",
+      timestamps: true,
+      charset: "utf8",
+      collate: "utf8_general_ci",
     }
   );
 

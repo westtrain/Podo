@@ -154,11 +154,35 @@ module.exports = {
   },
 
   updateOTTLoginInfo: async (req, res) => {
+    // 0. 쿠키를 통해 받아온 토큰으로 유저 아이디를 만든다.
+    const userId = req.userId;
+    // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
+    const { party_id, ott_login_id, ott_login_password } = req.body;
     try {
+      // 2. partyId, userId로 조회해서 OTT 로그인 정보를 업데이트 시켜준다
+      console.log(userId);
+      const newOttLoginInfo = await Party.update(
+        {
+          ott_login_id: ott_login_id,
+          ott_login_password: ott_login_password,
+        },
+        {
+          where: {
+            id: party_id,
+            leader: userId,
+          },
+        }
+      );
+      // console.log(newOttLoginInfo);
+      if (!newOttLoginInfo) {
+        return res.status(404).json({ message: "failed" });
+      }
+      return res.status(200).json({ message: "Success" });
     } catch (error) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+
   changeMemberNum: async (req, res) => {
     try {
     } catch (error) {

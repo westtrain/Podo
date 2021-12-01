@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Payment.belongsTo(models.User, {
         foreignKey: "user_id",
         targetKey: "id",
+        onDelete: "cascade",
       });
     }
   }
@@ -18,35 +19,35 @@ module.exports = (sequelize, DataTypes) => {
       },
       credit_num: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       credit_expire_month: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       credit_expire_year: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       credit_birth: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       credit_password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       settlement_date: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       account_bank: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       account_number: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

@@ -30,19 +30,75 @@ $mypagecolor: #eeefff;
       flex-direction: column;
       justify-content: flex-start;
       margin: 3.8em 5em 3.8em 0;
-
-      .selectott {
+      .wrapper {
         display: flex;
-        justify-content: flex-start;
         align-items: center;
-        margin-left: 20px;
 
-        .ottname {
-          margin-right: 10px;
-        }
-
-        .coolicon {
+        .selectott {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-left: 20px;
           cursor: pointer;
+
+          .ottname {
+            margin-right: 10px;
+            cursor: pointer;
+          }
+
+          .coolicon {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .modalback {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        animation: fadeinott 0.1s;
+        -moz-animation: fadeinott 0.1s; /* Firefox */
+        -webkit-animation: fadeinott 0.1s; /* Safari and Chrome */
+        -o-animation: fadeinott 0.1s; /* Opera */
+
+        .filterWindow {
+          width: 200px;
+          height: fit-content;
+          margin-top: 30px;
+          position: relative;
+          left: 280px;
+          top: 170px;
+          ul {
+            list-style: none;
+            padding-left: 0;
+            li {
+              list-style: none;
+              height: 30px;
+              display: flex;
+              justify-content: flex-start;
+              padding-left: 20px;
+              margin-bottom: 20px;
+              cursor: pointer;
+              img {
+                height: 30px;
+              }
+            }
+          }
+        }
+        .dropdown {
+          position: absolute;
+          border-radius: 15px;
+          transition: all 0.2s;
+          transform-origin: top;
+          z-index: 2;
+          background-color: #fff;
+        }
+        .dropdown.hidden {
+          opacity: 0;
         }
       }
 
@@ -111,7 +167,10 @@ $mypagecolor: #eeefff;
     .searchright {
       display: flex;
       flex-direction: column;
-
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: auto;
+      height: 765px;
       .searchrightheader {
         width: 100%;
         display: flex;
@@ -154,7 +213,7 @@ $mypagecolor: #eeefff;
         .partyexp {
           cursor: pointer;
           width: 580px;
-          height: 128.5px;
+          min-height: 127px;
           background-color: #fff;
           border-radius: 15px;
           margin-bottom: 20px;
@@ -206,37 +265,36 @@ $mypagecolor: #eeefff;
       }
     }
   }
-
-  @keyframes fadein {
-    from {
-      opacity: 0.1;
-    }
-    to {
-      opacity: 1;
-    }
+}
+@keyframes fadeinott {
+  from {
+    opacity: 0;
   }
-  @-moz-keyframes fadein {
-    from {
-      opacity: 0.1;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
   }
-  @-webkit-keyframes fadein {
-    from {
-      opacity: 0.1;
-    }
-    to {
-      opacity: 1;
-    }
+}
+@-moz-keyframes fadeinott {
+  from {
+    opacity: 0;
   }
-  @-o-keyframes fadein {
-    from {
-      opacity: 0.1;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeinott {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+@-o-keyframes fadeinott {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

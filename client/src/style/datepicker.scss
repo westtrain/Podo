@@ -7,6 +7,9 @@
 .sunday {
   color: $datepicker__highlighted-color !important;
 }
+.notcurrentmonth {
+  color: $datepicker__muted-color !important;
+}
 
 .react-datepicker-wrapper {
   display: inline-block;
@@ -403,7 +406,7 @@
   height: 30px;
   //line-height: $datepicker__item-size;
   text-align: center;
-  font-weight: 500;
+  font-weight: 300;
   margin: 10px 20px;
   line-height: 40px;
   font-size: 20px;
@@ -451,6 +454,7 @@
 .react-datepicker__year-text {
   cursor: pointer;
   font-size: 20px;
+  font-weight: 300;
   &:hover {
     border-radius: $datepicker__border-radius;
     background-color: $datepicker__background-color;

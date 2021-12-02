@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../../image/arrow.png";
+import MiniCalendar from "./MiniCalendar";
 
 function Period(props) {
   const [showStartCalendar, setShowStartCalendar] = useState(false);
@@ -41,7 +42,11 @@ function Period(props) {
               <img src={arrow} />
             </div>
           </div>
-          {showStartCalendar ? <div className="calendal"></div> : null}
+          {showStartCalendar ? (
+            <div className="calendal">
+              <MiniCalendar />
+            </div>
+          ) : null}
           <div className="period" onClick={hadleSetPeriod}>
             <div className="periodleft">혜택 기간</div>
             <div className="periodright">

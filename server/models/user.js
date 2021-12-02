@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
       });
       models.User.hasMany(models.Statement, {
         foreignKey: "user_id",
-        targetKey: "id",
+        sourceKey: "id",
         onDelete: "cascade",
       });
       models.User.hasMany(models.Payment, {
         foreignKey: "user_id",
-        targetKey: "id",
+        sourceKey: "id",
         onDelete: "cascade",
       });
     }

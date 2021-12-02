@@ -24,7 +24,7 @@ function MyPage(props) {
               <div className="menu">
                 <div className="up">
                   <p>Podo 관리</p>
-                  <Link to="/mypage">
+                  <Link to="/mypage/">
                     <div>나의 파티 관리</div>
                   </Link>
                   <Link to="/mypage/login">
@@ -50,7 +50,8 @@ function MyPage(props) {
             </div>
             <div className="middle">
               {/* 마이페이지에 들어가면 '나의 파티 관리'가 나오기 때문에 menu===undefined 즉, 주소가 podo/mypage일 때는 MyParty 컴포넌트를 반환한다 */}
-              {menu === undefined ? <MyPartyDetail /> : null}
+              {menu === undefined ? <MyParty /> : null}
+              {menu === "party" ? <MyPartyDetail /> : null}
               {menu === "login" ? <MyLogin /> : null}
               {menu === "payment" ? <MyPayment /> : null}
               {menu === "account" ? <MyAccount /> : null}

@@ -60,10 +60,10 @@ $mypagecolor: #eeefff;
         left: 0;
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.4);
-        animation: fadeinott 0.1s;
-        -moz-animation: fadeinott 0.1s; /* Firefox */
-        -webkit-animation: fadeinott 0.1s; /* Safari and Chrome */
-        -o-animation: fadeinott 0.1s; /* Opera */
+        animation: fadeinott 0.5s;
+        -moz-animation: fadeinott 0.5s; /* Firefox */
+        -webkit-animation: fadeinott 0.5s; /* Safari and Chrome */
+        -o-animation: fadeinott 0.5s; /* Opera */
 
         .filterWindow {
           width: 200px;

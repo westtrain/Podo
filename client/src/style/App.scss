@@ -185,3 +185,150 @@ a {
     }
   }
 }
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .header {
+    height: fit-content;
+    .wrapper {
+      width: 100%;
+      flex-direction: column;
+      position: relative;
+
+      .middleleft {
+        width: 100%;
+        border-top: 1px solid #e2e2e2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .middle {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: 0;
+          li {
+            font-size: 16px;
+            margin: 0 1em;
+          }
+        }
+      }
+      .right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-right: 40px;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .faq {
+    width: 650px;
+
+    .faqheader {
+      font-size: 35px;
+    }
+
+    .faqmiddle {
+      .faqmquestion {
+        .faqmunit {
+          img {
+            margin-left: 37em;
+          }
+        }
+
+        .faqexp {
+          font-size: 15px;
+        }
+      }
+    }
+    .faqfooter {
+      height: 100px;
+      div {
+        font-size: 23px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: fit-content;
+    .wrapper {
+      width: 100%;
+      flex-direction: column;
+      position: relative;
+
+      .middleleft {
+        width: 100%;
+        border-top: 1px solid #e2e2e2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .middle {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: 0;
+          li {
+            font-size: 16px;
+            margin: 0 1em;
+          }
+        }
+      }
+      .right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-right: 40px;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .faq {
+    width: 400px;
+
+    .faqheader {
+      font-size: 35px;
+    }
+
+    .faqmiddle {
+      margin-top: 40px;
+      .faqmquestion {
+        .faqmunit {
+          div {
+            font-size: 15px;
+          }
+          img {
+            margin-left: 37em;
+          }
+        }
+
+        .faqexp {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .faqfooter {
+      height: 80px;
+      div {
+        font-size: 18px;
+      }
+    }
+  }
+}

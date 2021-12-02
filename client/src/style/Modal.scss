@@ -441,9 +441,33 @@
         }
       }
       .lmmiddle {
+        display: flex;
+        flex-direction: column;
         margin-top: 80px;
-        width: 100%;
+        width: 80%;
         height: 200px;
+
+        .socialloginBtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: fit-content;
+          background-color: #fff;
+          border-radius: 20px;
+          border: 1px solid #dfdfdf;
+          margin-bottom: 30px;
+
+          img {
+            width: 24px;
+            height: 24px;
+            margin: 5px 10px 5px 0;
+          }
+
+          div {
+            font-size: 16px;
+          }
+        }
       }
 
       .forgotlogin {
@@ -717,6 +741,81 @@
             color: #fff;
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    .modalback {
+      .loginmodalview {
+        width: 480px;
+        .lmheader {
+          .lmhfirst {
+            font-size: 23px;
+          }
+          .lmhsecond {
+            font-size: 23px;
+          }
+        }
+      }
+
+      .withdrawalmodalview {
+        justify-content: flex-start;
+        text-align: start;
+        width: 400px;
+      }
+
+      .modalview {
+        width: 400px;
+        height: 650px;
+        .partysignbtn {
+          margin-top: 70px;
+        }
+        .jpmheader {
+          .jpmhfirst {
+            font-size: 23px;
+          }
+          .jpmhsecond {
+            font-size: 23px;
+          }
+        }
+        .joinpartysign {
+          margin-top: 100px;
+        }
+      }
+
+      .setcardmodalview {
+        width: 400px;
+        height: 600px;
+        .scmhf {
+          font-size: 12px;
+        }
+
+        .ssmmf {
+          input {
+            padding: 1px 2px 1px 120px;
+          }
+          div {
+            margin: 0 10px;
+          }
+        }
+        .sdmms {
+          .sdmmsf {
+            width: 170px;
+          }
+          .sdmmss {
+            width: 170px;
+          }
+        }
+        .clearbtnwrap {
+          margin-top: 70px;
+        }
+      }
+      .accountmodalview {
+        width: 400px;
+        height: 550px;
       }
     }
   }

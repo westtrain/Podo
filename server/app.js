@@ -7,13 +7,15 @@ const { sequelize } = require("./models");
 const config = require("./config/config");
 //require("express-async-errors");
 const mysql = require("mysql2");
+
 const models = require("./models");
 const authRouter = require("./router/auth");
+const userRouter = require("./router/user");
+const partyRouter = require("./router/party");
+const paymentRouter = require("./router/payment");
+const statementRouter = require("./router/statement");
 const ottRouter = require("./router/ott");
-//const userRouter = require("./router/user");
-//const gatheringRouter = require("./router/gathering");
-//const notificationRouter = require("./router/notification");
-//const chatRouter = require("./router/chat");
+
 const app = express();
 const port = config[process.env.NODE_ENV || "port"].port;
 
@@ -34,13 +36,13 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.send("Let's Podo!");
 });
-app.use("/auth", authRouter);
-app.use("/ott", ottRouter);
 
-//app.use("/user", userRouter);
-//app.use("/gathering", gatheringRouter);
-//app.use("/chat", chatRouter);
-//app.use("/notification", notificationRouter);
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
+app.use("/party", partyRouter);
+app.use("/payment", paymentRouter);
+app.use("/statement", statementRouter);
+app.use("/ott", ottRouter);
 
 models.sequelize.sync({ force: false }).then(() => {
   console.log("success models sync");

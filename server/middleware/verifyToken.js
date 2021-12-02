@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const isAuth = (req, res, next) => {
-  console.log(req.headers.cookie.slice(4));
+  console.log(req.headers.cookie);
   const token = req.headers.cookie.slice(4);
 
   if (!token) {

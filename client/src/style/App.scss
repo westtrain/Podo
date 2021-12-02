@@ -19,17 +19,17 @@ body {
     display: flex;
     max-width: 1180px;
     width: 100%;
-    // align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 20px;
 
     .left {
       display: flex;
+      margin-top: 10px;
       .logo {
         cursor: pointer;
         display: flex;
         font-weight: bold;
-        font-size: 36px;
+        font-size: 40px;
 
         div {
           padding-bottom: 5px;
@@ -92,4 +92,100 @@ body {
 a {
   text-decoration: none;
   color: #222222;
+}
+
+.hide {
+  display: none;
+}
+
+.faq {
+  width: 780px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .faqheader {
+    font-size: 45px;
+    font-weight: bold;
+    margin-top: 50px;
+  }
+
+  .faqmiddle {
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .faqmquestion {
+      display: flex;
+      flex-direction: column;
+      // justify-content: center;
+
+      align-items: center;
+      cursor: pointer;
+      border-radius: 15px;
+      position: relative;
+      margin-top: 30px;
+      width: 100%;
+      // height: 80px;
+
+      overflow: hidden;
+      transform-origin: center top;
+      transition: all 0.3s ease-in 0s;
+      background-color: #f6f6f6;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      .faqmunit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        div {
+          margin-top: 26px;
+          font-size: 20px;
+          font-weight: bold;
+          color: $fontcolor;
+        }
+        img {
+          margin-top: 26px;
+          position: absolute;
+          margin-left: 40em;
+          transform: rotate(0deg);
+        }
+      }
+      .faqmunit:after {
+        img {
+          transform: rotate(180deg);
+          transition: transform 335ms ease 0s;
+        }
+      }
+
+      .faqexp {
+        margin: 30px 30px 0 30px;
+        font-size: 18px;
+        font-weight: 500;
+        color: $fontcolor;
+        div {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  .faqfooter {
+    cursor: pointer;
+    margin-top: 50px;
+    height: 120px;
+    width: 100%;
+    border-radius: 15px;
+    background-color: $maincolor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      font-size: 25px;
+      color: #fff;
+    }
+  }
 }

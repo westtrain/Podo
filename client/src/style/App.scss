@@ -193,10 +193,12 @@ a {
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .header {
     height: fit-content;
+    padding: 0;
     .wrapper {
       width: 100%;
       flex-direction: column;
       position: relative;
+      padding-top: 0;
 
       .middleleft {
         width: 100%;
@@ -227,7 +229,7 @@ a {
         top: 0;
         right: 0;
         margin-right: 40px;
-        margin-top: 10px;
+        margin-top: 20px;
       }
     }
   }
@@ -264,10 +266,12 @@ a {
 @media screen and (max-width: 768px) {
   .header {
     height: fit-content;
+    padding: 0;
     .wrapper {
       width: 100%;
       flex-direction: column;
       position: relative;
+      padding-top: 0;
 
       .middleleft {
         width: 100%;
@@ -298,7 +302,7 @@ a {
         top: 0;
         right: 0;
         margin-right: 40px;
-        margin-top: 10px;
+        margin-top: 20px;
       }
     }
   }

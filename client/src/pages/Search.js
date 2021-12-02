@@ -1,45 +1,28 @@
 import React, { useState } from "react";
 import Header from "../components/public/Header";
 import Party from "../components/search/Party";
-import DatePicker, { registerLocale } from "react-datepicker";
-import getYear from "date-fns/getYear";
-import getMonth from "date-fns/getMonth";
-import { ko } from "date-fns/esm/locale";
+import Calendar from "../components/search/Calendar";
 import "../style/Search.scss";
 import "../style/datepicker.scss";
-import netflixname from "../image/NetflixName.png";
+import netflix from "../image/NetflixName.png";
+import watcha from "../image/WatchaName.png";
+import wave from "../image/WaveName.svg";
+import tving from "../image/TvingName.svg";
+import disney from "../image/DisneyName.svg";
+import prime from "../image/PrimeName.svg";
+import laftel from "../image/LaftelName.svg";
+import apple from "../image/AppleName.svg";
+import office from "../image/Office365Name.png";
 import coolicon from "../image/coolicon.png";
 import airplane from "../image/airplane.png";
 import create_party from "../image/create_party.png";
-import arrow_left from "../image/arrow_left.png";
-import arrow_right from "../image/arrow_right.png";
 
 function Search(props) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [date, setDate] = useState(new Date());
-  const [months, setMonths] = useState([
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  const getDayName = (date) => {
-    return date.toLocaleDateString("ko-KR", { weekday: "long" }).substr(0, 1);
-  };
-  // 날짜 비교시 년 월 일까지만 비교하게끔
-  const createDate = (date) => {
-    return new Date(
-      new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
-    );
+  const handledropdown = () => {
+    console.log("event");
+    setShowDropdown(!showDropdown);
   };
 
   return (
@@ -48,55 +31,50 @@ function Search(props) {
       <div className="search">
         <div className="searchbody">
           <div className="searchleft">
-            <div className="selectott">
-              <img src={netflixname} alt="ottname" className="ottname"></img>
-              <img src={coolicon} className="coolicon"></img>
+            <div className="wrapper">
+              <div className="selectott" onClick={handledropdown}>
+                <img src={netflix} alt="ottname" className="ottname"></img>
+                <img src={coolicon} className="coolicon"></img>
+              </div>
             </div>
-            <div className="calendar">
-              <DatePicker
-                selected={startDate}
-                minDate={date}
-                onChange={(date) => setStartDate(date)}
-                inline
-                useWeekdaysShort={true}
-                shouldCloseOnSelect={false}
-                useWeekdaysShort={true}
-                renderCustomHeader={({
-                  date,
-                  prevMonthButtonDisabled,
-                  nextMonthButtonDisabled,
-                  decreaseMonth,
-                  increaseMonth,
-                }) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      margin: "30px 100px 30px 100px",
-                    }}
-                  >
-                    <div
-                      className="btn_month btn_month-prev"
-                      onClick={decreaseMonth}
-                      disabled={prevMonthButtonDisabled}
-                    >
-                      <img src={arrow_left} />
-                    </div>
-                    <div className="month-day">
-                      {getYear(date) + "년  "}
-                      {months[getMonth(date)]}
-                    </div>
 
-                    <div
-                      className="btn_month btn_month-next"
-                      onClick={increaseMonth}
-                      disabled={nextMonthButtonDisabled}
-                    >
-                      <img src={arrow_right} />
-                    </div>
-                  </div>
-                )}
-              />
+            {showDropdown ? (
+              <div className="modalback" onClick={handledropdown}>
+                <div className="filterWindow dropdown" onClick={handledropdown}>
+                  <ul>
+                    <li>
+                      <img src={netflix} alt="netflix" />
+                    </li>
+                    <li>
+                      <img src={watcha} alt="watcha" />
+                    </li>
+                    <li>
+                      <img src={wave} alt="wave" />
+                    </li>
+                    <li>
+                      <img src={tving} alt="tving" />
+                    </li>
+                    <li>
+                      <img src={disney} alt="disney" />
+                    </li>
+                    <li>
+                      <img src={prime} alt="prime" />
+                    </li>
+                    <li>
+                      <img src={laftel} alt="laftel" />
+                    </li>
+                    <li>
+                      <img src={apple} alt="apple" />
+                    </li>
+                    <li>
+                      <img src={office} alt="office" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            ) : null}
+            <div className="calendar">
+              <Calendar />
             </div>
             <div className="searchleftdown">
               <div className="guidesee">

@@ -1,7 +1,8 @@
 import React from "react";
 import PartyCard from "./PartyCard";
 import "../../style/MyPage.scss";
-import pngwing from "../../image/user.png";
+import pngwing from "../../image/userCircle.svg";
+//import pngwing from "../../image/user.svg";
 
 function MyParty(props) {
   return (

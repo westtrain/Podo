@@ -13,6 +13,7 @@ const authRouter = require("./router/auth");
 const userRouter = require("./router/user");
 const partyRouter = require("./router/party");
 const paymentRouter = require("./router/payment");
+const statementRouter = require("./router/statement");
 const ottRouter = require("./router/ott");
 
 const app = express();
@@ -40,6 +41,7 @@ app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/party", partyRouter);
 app.use("/payment", paymentRouter);
+app.use("/statement", statementRouter);
 app.use("/ott", ottRouter);
 
 models.sequelize.sync({ force: false }).then(() => {

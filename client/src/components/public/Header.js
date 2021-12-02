@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../style/App.scss";
 import logo from "../../image/Podo_logo.svg";
-import pngwing from "../../image/user.png";
+import pngwing from "../../image/user.svg";
 
 function Header(props) {
   return (

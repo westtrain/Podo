@@ -229,3 +229,31 @@
 .details__content-link:hover {
   color: var(--color-menu-hover);
 }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .banner {
+    span {
+      margin-right: 0;
+      font-size: 45px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banner {
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 80px;
+      font-size: 30px;
+    }
+  }
+}

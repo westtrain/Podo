@@ -129,20 +129,23 @@ module.exports = {
         ott_login_password &&
         members &&
         members_num &&
-        leader &&
         start_date &&
         end_date
       ) {
         // 2. 각 변수에 담기 값을 알맞는 필드에 넣고 업데이트한다.
         await Party.create({
-          ott_id: ott_id,
-          ott_login_id: ott_login_id,
-          ott_login_password: ott_login_password,
-          members: members,
-          members_num: members_num,
-          leader: leader,
-          start_date: start_date,
-          end_date: end_date,
+          ott_id,
+          ott_login_id,
+          ott_login_password,
+          members,
+          members_num,
+          leader: userId,
+          start_date,
+          end_date,
+        }).then((data) => {
+        db.sequelize.models.User_party.create({
+            party_id: data.id,
+            user_id: userId,
         });
       } else {
         return res.status(422).json({ message: "insufficient parameters supplied" });
@@ -227,6 +230,9 @@ module.exports = {
         }
         // 4. 기존의 멤버에 새로운 맴버인 userId를 추가하고 업데이트 시킨다.
         let members = data.members;
+        if(members.length === data.numbers_num){
+            return res.status(422).json({ meessage:"Party already full" });
+        }
         members += `,${userId}`;
         Party.update(
           {

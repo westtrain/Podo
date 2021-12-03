@@ -8,10 +8,10 @@ const Login = (props) => {
     window.location.href = "https://podorang.com/auth/naver";
   };
   const onClickKakao = async () => {
-    window.location.href = "http://localhost:4000/auth/kakao";
+    window.location.href = "https://podorang.com/auth/kakao";
   };
   const onClickGoogle = async () => {
-    window.location.href = "http://localhost:4000/auth/google";
+    window.location.href = "https://podorang.com/auth/google";
   };
 
   return (

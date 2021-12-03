@@ -29,6 +29,13 @@ $mypagecolor: #eeefff;
       max-width: 1500px;
       display: flex;
 
+      .mobilemenu {
+        display: none;
+      }
+      .mobilemenulist {
+        display: none;
+      }
+
       .left {
         margin-right: 20px;
         max-width: 280px;
@@ -76,6 +83,10 @@ $mypagecolor: #eeefff;
 
         .middlemain {
           width: 100%;
+
+          .mobilemoney {
+            display: none;
+          }
 
           .profile {
             width: 100%;
@@ -477,6 +488,315 @@ $mypagecolor: #eeefff;
     }
     to {
       opacity: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mypage {
+    .body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .main {
+        margin-top: 110px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+        .mobilemenu {
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          z-index: 100;
+          position: fixed;
+          margin-top: 127px;
+          top: 0;
+          height: 50px;
+          border-top: 1px solid #e2e2e2;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+
+          background-color: #fff;
+
+          .mobilemypage {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            position: absolute;
+          }
+        }
+
+        .mobilemenulist {
+          border-top: 1px solid #e2e2e2;
+          margin-top: -485px;
+          width: 100%;
+          background-color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          z-index: 100;
+          position: fixed;
+          .up {
+            width: 100%;
+            text-align: center;
+            p {
+              font-weight: bold;
+            }
+            div {
+              margin-bottom: 5px;
+            }
+          }
+          .down {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            p {
+              font-weight: bold;
+            }
+            div {
+              margin-bottom: 5px;
+            }
+          }
+        }
+
+        .left {
+          display: none;
+        }
+
+        .middle {
+          margin: 0;
+          width: 460px;
+          .middlemain {
+            width: 100%;
+
+            .adminbox {
+              margin-top: -370px;
+              min-height: 200px;
+              .wrapper {
+                padding: 27px 30px;
+                .line {
+                  margin-bottom: 15px;
+                }
+                .logininfo {
+                  margin-bottom: 15px;
+                }
+                .withdrawal {
+                  margin-top: 20px;
+                }
+              }
+            }
+            .mobilemoney {
+              margin-top: 20px;
+              width: 100%;
+              height: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .mup {
+                background-color: #fff;
+                padding: 0 0 0 20px;
+                border-radius: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .mmoney {
+                  border-bottom: 1px solid #c4c4c4;
+
+                  display: flex;
+                  align-items: center;
+                  img {
+                    margin-right: 120px;
+                    width: 20px;
+                    height: 20px;
+                  }
+                }
+
+                .mwithdrawal {
+                  font-size: 15px;
+                  height: 40px;
+                  border-radius: 10px;
+                  background-color: $maincolor;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  text-align: center;
+                  color: $fontcolor;
+                  cursor: pointer;
+                  margin: 10px;
+                  width: 90px;
+                }
+              }
+            }
+
+            .party {
+              margin-top: 20px;
+              grid-template-columns: repeat(3, 143px);
+              .ott {
+                margin: 0;
+                width: 140px;
+                height: 140px;
+                .ottbtn {
+                  width: 50px;
+                  height: 50px;
+                }
+              }
+            }
+          }
+        }
+        .right {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .mypage {
+    .body {
+      display: flex;
+      // align-items: flex-start;
+      .main {
+        margin-top: 110px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+        .mobilemenu {
+          display: flex;
+          flex-direction: column;
+          cursor: pointer;
+          z-index: 100;
+          position: fixed;
+          margin-top: 127px;
+          top: 0;
+          height: 50px;
+          border-top: 1px solid #e2e2e2;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+
+          background-color: #fff;
+
+          .mobilemypage {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            position: absolute;
+          }
+        }
+
+        .mobilemenulist {
+          border-top: 1px solid #e2e2e2;
+          margin-top: -485px;
+          width: 100%;
+          background-color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          z-index: 100;
+          position: fixed;
+          .up {
+            width: 100%;
+            text-align: center;
+            p {
+              font-weight: bold;
+            }
+            div {
+              margin-bottom: 5px;
+            }
+          }
+          .down {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            p {
+              font-weight: bold;
+            }
+            div {
+              margin-bottom: 5px;
+            }
+          }
+        }
+
+        .left {
+          display: none;
+        }
+
+        .middle {
+          .middlemain {
+            .adminbox {
+              margin-top: -370px;
+            }
+            .mobilemoney {
+              margin-top: 20px;
+              width: 540px;
+              height: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .mup {
+                background-color: #fff;
+                padding: 0 0 0 20px;
+                border-radius: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .mmoney {
+                  border-bottom: 1px solid #c4c4c4;
+
+                  display: flex;
+                  align-items: center;
+                  img {
+                    margin-right: 120px;
+                    width: 20px;
+                    height: 20px;
+                  }
+                }
+
+                .mwithdrawal {
+                  font-size: 15px;
+                  height: 40px;
+                  border-radius: 10px;
+                  background-color: $maincolor;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  text-align: center;
+                  color: $fontcolor;
+                  cursor: pointer;
+                  margin: 10px;
+                  width: 90px;
+                }
+              }
+            }
+
+            .party {
+              margin-top: 20px;
+            }
+          }
+        }
+        .right {
+          display: none;
+        }
+      }
     }
   }
 }

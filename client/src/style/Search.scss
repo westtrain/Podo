@@ -298,3 +298,78 @@ $mypagecolor: #eeefff;
     opacity: 1;
   }
 }
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .search {
+    .searchbody {
+      display: flex;
+      flex-direction: column;
+
+      .searchleft {
+        width: 600px;
+
+        margin: 3.8em 0 2em 0;
+        .searchleftdown {
+          display: none;
+        }
+        .calendar {
+          width: 600px;
+        }
+      }
+      .searchright {
+        .searchrightheader {
+          width: 20em;
+          position: absolute;
+          top: 0;
+          margin: 165px 0 0 240px;
+        }
+
+        .searchparty {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    .searchbody {
+      display: flex;
+      flex-direction: column;
+
+      .searchleft {
+        width: 480px;
+        margin: 3.8em 0 2em 0;
+
+        .wrapper {
+          .selectott {
+            margin-left: 10px;
+          }
+        }
+        .searchleftdown {
+          display: none;
+        }
+        .calendar {
+          width: 480px;
+          height: 450px;
+        }
+      }
+      .searchright {
+        .searchrightheader {
+          width: 19em;
+          position: absolute;
+          top: 0;
+          margin: 165px 0 0 170px;
+        }
+
+        .searchparty {
+          margin: 0;
+          .partyexp {
+            width: 480px;
+          }
+        }
+      }
+    }
+  }
+}

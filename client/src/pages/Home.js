@@ -7,6 +7,7 @@ function Home(props) {
     <>
       <Header />
       <div className="banner">
+        m
         <div className="wrapper">
           <span>
             넷플릭스 한달 요금으로

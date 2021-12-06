@@ -4,32 +4,32 @@ import axios from "axios";
 const Login = (props) => {
   const onClickOTT = async () => {
     axios
-      .get("https://server.podorang.com/ott", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/ott`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log("ERROR", err);
       });
   };
   const onClickUser = async () => {
     axios
-      .get("https://server.podorang.com/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/user`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log("ERROR", err);
       });
   };
   const onClickParty = async () => {
     axios
-      .get("https://server.podorang.com/party", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/party`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log("ERROR", err);
       });
   };
 

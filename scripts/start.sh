@@ -24,4 +24,9 @@ export KAKAO_REDIRECT_URI=$(aws ssm get-parameters --region ap-northeast-2 --nam
 
 export CLIENT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names CLIENT_URI --query Parameters[0].Value | sed 's/"//g')
 
+export FINANCE_CLIENT_ID=$(aws ssm get-parameters --region ap-northeast-2 --names FINANCE_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
+export FINANCE_CLIENT_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --names FINANCE_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
+export FINANCE_REDIRECT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names FINANCE_REDIRECT_URI --query Parameters[0].Value | sed 's/"//g')
+
+
 authbind --deep pm2 start app.js

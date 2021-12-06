@@ -15,7 +15,7 @@ export GOOGLE_CLIENT_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --n
 export GOOGLE_REDIRECT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names GOOGLE_REDIRECT_URI --query Parameters[0].Value | sed 's/"//g')
 
 export NAVER_CLIENT_ID=$(aws ssm get-parameters --region ap-northeast-2 --names NAVER_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
-export NAVER_CLIENTSECRET=$(aws ssm get-parameters --region ap-northeast-2 --names NAVER_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
+export NAVER_CLIENT_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --names NAVER_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
 export NAVER_REDIRECT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names NAVER_REDIRECT_URI --query Parameters[0].Value | sed 's/"//g')
 
 export KAKAO_CLIENT_ID=$(aws ssm get-parameters --region ap-northeast-2 --names KAKAO_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')

@@ -199,6 +199,7 @@ a {
       flex-direction: column;
       position: relative;
       padding-top: 0;
+      padding-bottom: 0;
 
       .middleleft {
         width: 100%;
@@ -272,6 +273,7 @@ a {
       flex-direction: column;
       position: relative;
       padding-top: 0;
+      padding-bottom: 0;
 
       .middleleft {
         width: 100%;
@@ -292,7 +294,7 @@ a {
           justify-content: space-between;
           padding: 0;
           li {
-            font-size: 16px;
+            font-size: 13px;
             margin: 0 1em;
           }
         }

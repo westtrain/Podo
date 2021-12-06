@@ -512,7 +512,7 @@ $mypagecolor: #eeefff;
           cursor: pointer;
           z-index: 100;
           position: fixed;
-          margin-top: 127px;
+          margin-top: 117px;
           top: 0;
           height: 50px;
           border-top: 1px solid #e2e2e2;
@@ -533,7 +533,7 @@ $mypagecolor: #eeefff;
 
         .mobilemenulist {
           border-top: 1px solid #e2e2e2;
-          margin-top: -485px;
+          margin-top: -505px;
           width: 100%;
           background-color: #fff;
           display: flex;
@@ -571,7 +571,7 @@ $mypagecolor: #eeefff;
 
         .middle {
           margin: 0;
-          width: 460px;
+          width: 90%;
           .middlemain {
             width: 100%;
 
@@ -602,7 +602,7 @@ $mypagecolor: #eeefff;
                 background-color: #fff;
                 padding: 0 0 0 20px;
                 border-radius: 15px;
-                font-size: 18px;
+                font-size: 13px;
                 font-weight: bold;
                 width: 100%;
                 height: 100%;
@@ -615,7 +615,7 @@ $mypagecolor: #eeefff;
                   display: flex;
                   align-items: center;
                   img {
-                    margin-right: 120px;
+                    margin-right: 100px;
                     width: 20px;
                     height: 20px;
                   }
@@ -640,10 +640,10 @@ $mypagecolor: #eeefff;
 
             .party {
               margin-top: 20px;
-              grid-template-columns: repeat(3, 143px);
+              grid-template-columns: repeat(3, 33.33%);
               .ott {
                 margin: 0;
-                width: 140px;
+                width: 83%;
                 height: 140px;
                 .ottbtn {
                   width: 50px;

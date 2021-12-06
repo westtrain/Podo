@@ -243,17 +243,14 @@
   .banner {
     .wrapper {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
 
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 80px;
-      font-size: 30px;
+      margin-right: 2em;
+      font-size: 26px;
     }
   }
 }

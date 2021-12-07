@@ -1,9 +1,11 @@
 const { Payment } = require("../models");
+const { financeAuthorization, financeCallback } = require("./financeFunction");
 
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {
     const user_id = req.userId;
     try {
+      // 특정 유저에 해당하는 Payment 내역 조회
       const paymentInfo = await Payment.findAll({
         where: { user_id },
         raw: true,
@@ -17,6 +19,7 @@ module.exports = {
     }
   },
   changeCard: async (req, res) => {
+    // req 변수 선언 할당
     const user_id = req.userId;
     const { credit_num, credit_expire_month, credit_expire_year, credit_birth, credit_password } =
       req.body;
@@ -30,7 +33,7 @@ module.exports = {
         credit_birth &&
         credit_password
       ) {
-        //토스 API로 카드 확인
+        //아임포트로 카드 확인
         await Payment.update(
           { credit_num, credit_expire_month, credit_expire_year, credit_birth, credit_password },
           { where: { user_id } }
@@ -46,8 +49,9 @@ module.exports = {
     const user_id = req.userId;
     const { account_bank, account_number } = req.body;
     try {
+      financeAuthorization();
       if (user_id && account_bank && account_number) {
-        //금융결제원 수취조회 API
+        //아임포트로 수취조회 API
         await Payment.update({ account_bank, account_number }, { where: { user_id } });
         return res.status(200).json({ message: "Success" });
       }
@@ -61,7 +65,7 @@ module.exports = {
     const { settlement_date } = req.body;
     try {
       if (user_id && settlement_date) {
-        // 토스 API로 정기결제일 변경
+        // 아임포트로 정기결제일 변경
         await Payment.update({ settlement_date }, { where: { user_id } });
         return res.status(200).json({ message: "Success" });
       }
@@ -88,7 +92,8 @@ module.exports = {
         where: { user_id },
         raw: true,
       });
-      //토스 API로 카드 확인
+      //아임포트로 카드 확인
+      //카드 등록에 필요한 정보 모두 있다면 DB에 관련 정보 등록
       if (
         user_id &&
         credit_num &&
@@ -122,7 +127,7 @@ module.exports = {
     }
   },
   enrollAccount: async (req, res) => {
-    // 금융결제원 수취조회 API
+    // 아임포트로 수취조회 API
     const user_id = req.body.userId;
     const {
       credit_num,
@@ -139,6 +144,7 @@ module.exports = {
         where: { user_id },
         raw: true,
       });
+      //계좌 등록에 필요한 정보 모두 있다면 DB에 관련 정보 등록
       if (user_id && account_bank && account_number) {
         if (!paymentInfo) {
           await Payment.create({
@@ -161,7 +167,7 @@ module.exports = {
     }
   },
   enrollSettlement: async (req, res) => {
-    //토스 정산일 등록 API
+    //아임포트로 정산일 등록 API
     const user_id = req.body.userId;
     const {
       credit_num,
@@ -178,6 +184,7 @@ module.exports = {
         where: { user_id },
         raw: true,
       });
+      //정산일 등록에 필요한 정보 모두 있다면 DB에 관련 정보 등록
       if (user_id && settlement_date) {
         if (!paymentInfo) {
           await Payment.create({

@@ -214,11 +214,10 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          sendAccessToken(res, token);
         })
         .then((token) => {
           console.log("================jwt================", token);
-          // sendAccessToken(res, token);
+          sendAccessToken(res, token);
           // response.sendRedirect(request.getHeader("referer"));
           res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
@@ -228,24 +227,3 @@ module.exports = {
     }
   },
 };
-
-//         .then((user) => {
-//           const token = generateAccessToken({
-//             id: user[0].dataValues.id,
-//             email: user[0].dataValues.email,
-//             socialType: user[0].dataValues.socialType,
-//           });
-//           return token;
-//         })
-//         .then((token) => {
-//           console.log("================jwt================", token);
-//           sendAccessToken(res, token);
-//           // response.sendRedirect(request.getHeader("referer"));
-//           res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
-//         });
-//     } catch (error) {
-//       console.log("error");
-//       res.sendStatus(500);
-//     }
-//   },
-// };

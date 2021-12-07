@@ -1,5 +1,4 @@
 const { Payment } = require("../models");
-const { financeAuthorization, financeCallback } = require("./importFunction");
 
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {

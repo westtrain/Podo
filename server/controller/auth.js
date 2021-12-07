@@ -214,10 +214,10 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
+          sendAccessToken(res, token);
         })
         .then((token) => {
           console.log("================jwt================", token);
-          sendAccessToken(res, token);
           // response.sendRedirect(request.getHeader("referer"));
           res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });

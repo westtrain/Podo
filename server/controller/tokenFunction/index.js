@@ -15,6 +15,6 @@ module.exports = {
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 48),
       domain: process.env.CLIENT_URI,
-    });
+    }).json({ data: { accessToken }, message: "OK" });
   },
 };

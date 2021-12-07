@@ -64,14 +64,9 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          return token;
-        })
-        .then((token) => {
-          console.log("================jwt================", token);
           sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
-          // response.sendRedirect(request.getHeader("referer"));
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
+      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);
@@ -148,14 +143,9 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          return token;
-        })
-        .then((token) => {
-          console.log("================jwt================", token);
           sendAccessToken(res, token);
-          // response.sendRedirect(request.getHeader("referer"));
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
+      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);
@@ -215,12 +205,8 @@ module.exports = {
             socialType: user[0].dataValues.socialType,
           });
           sendAccessToken(res, token);
-        })
-        .then((token) => {
-          console.log("================jwt================", token);
-          // response.sendRedirect(request.getHeader("referer"));
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
+      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);

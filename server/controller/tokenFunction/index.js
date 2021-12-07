@@ -9,7 +9,7 @@ module.exports = {
     return token;
   },
   sendAccessToken: (res, accessToken) => {
-    res.status(200).cookie("jwt", accessToken, {
+    return res.status(200).cookie("jwt", accessToken, {
       sameSite: "None",
       secure: true,
       httpOnly: true,
@@ -17,9 +17,4 @@ module.exports = {
       domain: process.env.CLIENT_URI,
     });
   },
-
-  //   checkToken: async (req, res) => {
-  //     const token = generateAccessToken({ id: 1 });
-  //     return sendAccessToken(res, token);
-  //   },
 };

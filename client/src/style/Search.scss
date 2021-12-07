@@ -339,7 +339,7 @@ $mypagecolor: #eeefff;
       flex-direction: column;
 
       .searchleft {
-        width: 480px;
+        width: 430px;
         margin: 3.8em 0 2em 0;
 
         .wrapper {
@@ -351,16 +351,16 @@ $mypagecolor: #eeefff;
           display: none;
         }
         .calendar {
-          width: 480px;
-          height: 450px;
+          width: 430px;
+          height: 430px;
         }
       }
       .searchright {
         .searchrightheader {
-          width: 19em;
+          width: 18em;
           position: absolute;
           top: 0;
-          margin: 165px 0 0 170px;
+          margin: 165px 0 0 180px;
         }
 
         .searchparty {

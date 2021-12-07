@@ -14,7 +14,7 @@ module.exports = {
       secure: true,
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 48),
-      domain: "http://localhost:3000",
+      domain: process.env.CLIENT_URI,
     });
   },
 

@@ -1,5 +1,6 @@
 const express = require("express");
 const paymentController = require("../controller/payment");
+const accountController = require("../controller/importFunction/account");
 const isAuth = require("../middleware/verifyToken");
 
 const router = express.Router();
@@ -11,5 +12,6 @@ router.patch("/settlement", isAuth, paymentController.changeSettlement); // 정�
 router.post("/credit", isAuth, paymentController.enrollCard); // 카드 정보 등록
 router.post("/account", isAuth, paymentController.enrollAccount); // 인출 계좌 등록
 router.post("/settlement", isAuth, paymentController.enrollSettlement); // 정산일 등록
+router.get("/checkAccount", accountController.checkAccount); // user 결제 정보 조회
 
 module.exports = router;

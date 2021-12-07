@@ -9,12 +9,11 @@ module.exports = {
     return token;
   },
   sendAccessToken: (res, accessToken) => {
-    return res.status(200).cookie("jwt", accessToken, {
+    res.status(200).cookie("jwt", accessToken, {
       sameSite: "None",
       secure: true,
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 48),
-      domain: process.env.CLIENT_URI,
-    }).json({ data: { accessToken }, message: "OK" });
+    });
   },
 };

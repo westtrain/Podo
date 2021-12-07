@@ -20,7 +20,7 @@ const app = express();
 const port = config[process.env.NODE_ENV || "port"].port;
 
 const corsOption = {
-  origin: config[process.env.NODE_ENV].CLINET_URI,
+  origin: ["https://podorang.com"],
   optionsSuccessStatus: 200,
   credentials: true,
 };

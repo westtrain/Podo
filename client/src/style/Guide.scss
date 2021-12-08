@@ -24,3 +24,12 @@
     flex-flow: wrap;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .guidepage {
+    .main {
+      height: 79vh;
+      align-items: flex-start;
+    }
+  }
+}

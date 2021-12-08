@@ -7,7 +7,7 @@ import Create from "./pages/Create";
 import Search from "./pages/Search";
 import Contents from "./pages/Contents";
 import Guide from "./pages/Guide";
-import Test from "./test";
+import Api from "./api/index";
 import "./App.css";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/contents" element={<Contents />} />
           <Route path="/guide" element={<Guide />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/api" element={<Api />} />
         </Routes>
       </BrowserRouter>
     </>

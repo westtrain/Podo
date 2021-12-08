@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
+import { getUser } from "../API/userAPI";
 
 const initialState = null;
 
@@ -28,35 +29,39 @@ const userSlice = createSlice({
   // 위의 user/logOut처럼 액션 타입과 상응하는 리듀서가 정의되어 있지 않지만
   //
   extraReducers: (builder) => {
-    builder
-      .addCase(signUp.fulfilled, () => {})
-      .addCase(logIn.fulfilled, (state, action) => {
-        state = action.payload;
-        return state;
-      })
-      .addCase(fakeLogIn.fulfilled, (state, action) => {
-        state = action.payload;
-        return state;
-      })
-      .addCase(socialLogIn.fulfilled, (state, action) => {
-        state = action.payload;
-        return state;
-      })
-      .addCase(logOut.fulfilled, (state) => {
-        state = null;
-        return state;
-      })
-      .addCase(updateUserInfo.fulfilled, (state, action) => {
-        state = action.payload;
-        return state;
-      })
-      .addCase(deleteUser.fulfilled, (state) => {
-        state = null;
-        return state;
-      })
-      .addDefaultCase((state) => {
-        return state;
-      });
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      state = action.payload;
+      return state;
+    });
+    // .addCase(signUp.fulfilled, () => {})
+    // .addCase(logIn.fulfilled, (state, action) => {
+    //   state = action.payload;
+    //   return state;
+    // })
+
+    // .addCase(fakeLogIn.fulfilled, (state, action) => {
+    //   state = action.payload;
+    //   return state;
+    // })
+    // .addCase(socialLogIn.fulfilled, (state, action) => {
+    //   state = action.payload;
+    //   return state;
+    // })
+    // .addCase(logOut.fulfilled, (state) => {
+    //   state = null;
+    //   return state;
+    // })
+    // .addCase(updateUserInfo.fulfilled, (state, action) => {
+    //   state = action.payload;
+    //   return state;
+    // })
+    // .addCase(deleteUser.fulfilled, (state) => {
+    //   state = null;
+    //   return state;
+    // })
+    // .addDefaultCase((state) => {
+    //   return state;
+    // });
   },
 });
 

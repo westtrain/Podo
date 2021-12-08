@@ -8,6 +8,7 @@ import Search from "./pages/Search";
 import Contents from "./pages/Contents";
 import Guide from "./pages/Guide";
 import Api from "./api/index";
+import LoginCallBack from "./components/public/LoginCallBack";
 import "./App.css";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/contents" element={<Contents />} />
           <Route path="/guide" element={<Guide />} />
           <Route path="/api" element={<Api />} />
+          <Route path="/logincallback" element={<LoginCallBack />} />
         </Routes>
       </BrowserRouter>
     </>

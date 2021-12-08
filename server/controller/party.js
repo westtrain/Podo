@@ -35,7 +35,7 @@ module.exports = {
   },
 
   getParty: async (req, res) => {
-    const partyId = req.params.id;
+    const partyId = req.params.party_id;
     try {
       const partyInfo = await Party.findOne({
         where: {

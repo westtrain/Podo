@@ -64,9 +64,13 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
+          console.log("================JWT===================", token);
+          return token;
+        })
+        .then((token) => {
           sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
+          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
-      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);
@@ -138,14 +142,19 @@ module.exports = {
           }
         })
         .then((user) => {
+          //jwt 토큰 생성
           const token = generateAccessToken({
             id: user[0].dataValues.id,
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          sendAccessToken(res, token);
+          console.log("================JWT===================", token);
+          return token;
+        })
+        .then((token) => {
+          sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
+          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
-      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);
@@ -199,14 +208,19 @@ module.exports = {
           });
         })
         .then((user) => {
+          //jwt 토큰 생성
           const token = generateAccessToken({
             id: user[0].dataValues.id,
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          sendAccessToken(res, token);
+          console.log("================JWT===================", token);
+          return token;
+        })
+        .then((token) => {
+          sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
+          res.redirect(`${process.env.CLIENT_URI}api`); //가입완료 후 화면
         });
-      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);

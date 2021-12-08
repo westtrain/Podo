@@ -18,6 +18,7 @@ module.exports = {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+  
   changeCard: async (req, res) => {
     // req 변수 선언 할당
     const user_id = req.userId;
@@ -58,9 +59,11 @@ module.exports = {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+  
   changeAccount: async (req, res) => {
     const user_id = req.userId;
     const { account_bank, account_number } = req.body;
+    
     generateImportToken()
       .then((token) => checkAccountName(account_bank, account_number, token))
       .then((data) => {
@@ -82,6 +85,7 @@ module.exports = {
         }
       });
   },
+  
   changeSettlement: async (req, res) => {
     const user_id = req.userId;
     const { settlement_date } = req.body;
@@ -160,7 +164,9 @@ module.exports = {
   },
   enrollAccount: async (req, res) => {
     // 아임포트로 수취조회 API
+
     const user_id = req.userId;
+
     const {
       credit_num,
       credit_expire_month,
@@ -171,6 +177,7 @@ module.exports = {
       account_bank,
       account_number,
     } = req.body;
+
 
     generateImportToken()
       .then((token) => checkAccountName(account_bank, account_number, token))

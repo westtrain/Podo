@@ -44,11 +44,13 @@ module.exports = {
   },
   deleteUser: async (req, res) => {
     try {
+      //해당 아이디를 가진 유저 조회
       const userInfo = await User.findOne({
         attributes: ["id", "name", "email", "socialType", "money", "deposit"],
         where: { id: req.userId },
         raw: true,
       });
+      //해당 유저가 있다면 데이터 삭제
       if (userInfo) {
         await User.destroy({ where: { id: req.userId } });
         return res.status(200).json({ message: "Success" });

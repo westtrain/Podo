@@ -14,12 +14,6 @@ module.exports = {
       secure: true,
       httpOnly: true,
       expires: new Date(Date.now() + 1000 * 60 * 60 * 48),
-      domain: "http://localhost:3000",
     });
   },
-
-  //   checkToken: async (req, res) => {
-  //     const token = generateAccessToken({ id: 1 });
-  //     return sendAccessToken(res, token);
-  //   },
 };

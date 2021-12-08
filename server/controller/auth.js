@@ -8,23 +8,25 @@ const { generateName, getRandomNumber, nameArray, validate } = require("./nameFu
 
 module.exports = {
   naverLogin: async (req, res) => {
+    // 유저가 버튼 클릭시 클라이언트는 서버에 이 controller로 요청
+    // 서버는 authorization code 받기 위해 naver에 redirect
     res.redirect(
       `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVER_CLIENT_ID}&redirect_uri=${process.env.NAVER_REDIRECT_URI}/&state=naver`
     );
   },
 
   naverCallback: async (req, res) => {
-    const code = req.query.code;
+    const code = req.query.code; //get Authorization Code
 
     try {
       console.log(code);
       const result = await axios.post(
-        // authorization code를 이용해서 access token 요청
+        // authorization code를 이용해서 서버가 Naver에 access token, refresh token 요청
         `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_CLIENT_SECRET}&redirect_uri=${process.env.NAVER_REDIRECT_URI}&code=${code}&state=naver`
       );
       console.log("===============Token Info================", result.data);
       const userInfo = await axios.get(
-        // access token로 유저정보 요청
+        // access token으로 유저정보 요청
         "https://openapi.naver.com/v1/nid/me",
         {
           headers: {
@@ -34,9 +36,10 @@ module.exports = {
       );
       console.log("================userInfo================", userInfo.data);
       //받아온 유저정보로 findOrCreate
-      let name = generateName();
+      let name = generateName(); //이름 생성
       nameArray()
         .then((arr) => {
+          // 중복 검사 & 중복시 이름 재생성
           while (!validate(arr, name)) {
             name = generateName();
           }
@@ -55,19 +58,15 @@ module.exports = {
           });
         })
         .then((user) => {
+          //jwt 토큰 생성
           const token = generateAccessToken({
             id: user[0].dataValues.id,
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          return token;
-        })
-        .then((token) => {
-          console.log("================jwt================", token);
-          sendAccessToken(res, token);
-          // response.sendRedirect(request.getHeader("referer"));
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
+          sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
         });
+      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);
@@ -144,14 +143,9 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          return token;
-        })
-        .then((token) => {
-          console.log("================jwt================", token);
           sendAccessToken(res, token);
-          // response.sendRedirect(request.getHeader("referer"));
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
+      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);
@@ -210,14 +204,9 @@ module.exports = {
             email: user[0].dataValues.email,
             socialType: user[0].dataValues.socialType,
           });
-          return token;
-        })
-        .then((token) => {
-          console.log("================jwt================", token);
           sendAccessToken(res, token);
-          // response.sendRedirect(request.getHeader("referer"));
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
         });
+      res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
     } catch (error) {
       console.log("error");
       res.sendStatus(500);

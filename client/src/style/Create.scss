@@ -514,28 +514,54 @@ input {
   .create {
     padding-top: 131px;
     .createbody {
+      height: 76vh;
       .partyguidestep4 {
-        width: 440px;
+        width: 370px;
         height: fit-content;
-        padding: 20px 0 20px 0;
+        padding: 10px 0 10px 0;
 
         .guideheader {
-          height: 100px;
+          height: 80px;
+
+          .guideheadername {
+            font-size: 25px;
+          }
         }
 
         .guidemiddle {
-          margin-top: 2em;
+          margin-top: 0.5em;
+
+          .period {
+            height: 57px;
+            margin-bottom: 25px;
+          }
         }
         .guidefooter {
-          margin-top: 11px;
+          margin-top: 6px;
         }
       }
 
       .partyguide {
-        width: 440px;
+        width: 370px;
         height: fit-content;
-        padding: 20px 0 20px 0;
+        padding: 10px 0 10px 0;
+
+        .guideheader {
+          height: 80px;
+
+          .guideheadername {
+            font-size: 25px;
+          }
+        }
         .guidemiddle {
+          height: 300px;
+          .guidemiddlebody {
+            width: 95%;
+            padding-left: 10px;
+            margin-bottom: 25px;
+            font-size: 10px;
+          }
+
           .checkguide {
             margin-top: 0;
           }

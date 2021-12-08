@@ -1,7 +1,8 @@
 // import React from "react";
 import Auth from "./auth";
-// import User from "./user";
+import User from "./user";
 import Party from "./party";
+import Statement from "./statement";
 import OTT from "./ott";
 
 function API() {
@@ -9,10 +10,12 @@ function API() {
     <>
       <h3>Auth</h3>
       <Auth />
-
-      {/* <User /> */}
+      <h3>User</h3>
+      <User />
       <h3>Party</h3>
       <Party />
+      <h3>Statement</h3>
+      <Statement />
       <h3>OTT</h3>
       <OTT />
     </>

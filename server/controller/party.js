@@ -143,11 +143,10 @@ module.exports = {
           start_date,
           end_date,
         }).then((data) => {
-          // 3. 조인테이블에 유저아이디와 파티를 넣어준다.
-          const userIdsArr = data.split(",");
+          // 3. 조인테이블에 유저아이디(파티장)와 파티를 넣어준다.
           db.sequelize.models.User_party.create({
             party_id: data.id,
-            user_id: userIdsArr,
+            user_id: userId,
           });
         });
       } else {
@@ -247,6 +246,11 @@ module.exports = {
             },
           }
         );
+        // 5. 새 유저와 파티관계를 조인테이블에 넣어준다
+        db.sequelize.models.User_party.create({
+          party_id: party_id,
+          user_id: userId,
+        });
       });
       return res.status(200).json({ message: "Success" });
     } catch (error) {

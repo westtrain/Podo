@@ -231,7 +231,6 @@ module.exports = {
         //배열 형태에서 비어있음을 표현하기 위해서는 length 사용해야 함.
         return res.status(422).json({ message: "already joined this party" });
       }
-      console.log(isMember);
 
       // 3. party_id로 조회한다.
       await Party.findOne({

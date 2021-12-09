@@ -168,8 +168,8 @@ module.exports = {
       console.log(userId);
       const newOttLoginInfo = await Party.update(
         {
-          ott_login_id: ott_login_id,
-          ott_login_password: ott_login_password,
+          ott_login_id,
+          ott_login_password,
         },
         {
           where: {
@@ -196,7 +196,7 @@ module.exports = {
     try {
       // 2. partyId, userId로 조회해서 OTT 로그인 정보를 업데이트 시켜준다
       await Party.update(
-        { members_num: members_num },
+        { members_num },
         {
           where: {
             id: party_id,
@@ -238,7 +238,7 @@ module.exports = {
         members += `,${userId}`;
         Party.update(
           {
-            members: members,
+            members,
           },
           {
             where: {
@@ -281,7 +281,7 @@ module.exports = {
           members = members.replace(`,${userId}`, "");
           Party.update(
             {
-              members: members,
+              members,
             },
             {
               where: {
@@ -289,6 +289,12 @@ module.exports = {
               },
             }
           );
+          Model.destroy({
+            where: {
+              party_id: party_id,
+              user_id: userId,
+            },
+          });
         }
       });
       return res.status(200).json({ message: "Success" });

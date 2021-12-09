@@ -1,37 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getParty, getAllParty, getUsersParty } from "./api/partyAPI";
-const initialState = [];
+//import { getParty, getAllParty, getUsersParty } from "./api/partyAPI";
+const initialState = {
+  party: {},
+  ceateParty: {
+    oot_id: -1,
+    oot_login_id: "",
+    oot_login_password: "",
+    members: "",
+    members_num: 3,
+    leader: -1,
+    start_date: null,
+    end_date: null,
+  },
+};
 
 const partySlice = createSlice({
-  name: "likes",
+  name: "party",
   initialState,
   reducers: {
-    logOutMyParty(state) {
-      state = [];
+    setPartyMembersNum: (state, action) => {
+      state.ceateParty.members_num = action.payload;
       return state;
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getParty.fulfilled, (state, action) => {
-        state = action.payload;
-        return state;
-      })
-      .addCase(getAllParty.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.push(action.payload);
-        }
-      })
-      .addCase(getUsersParty.fulfilled, (state, action) => {
-        state = state.filter((cur) => cur.id !== action.payload);
-        return state;
-      })
-
-      .addDefaultCase((state) => {
-        return state;
-      });
-  },
 });
 
-export const { logOutMyParty } = partySlice.actions;
+export const { setPartyMembersNum } = partySlice.actions;
 export default partySlice.reducer;

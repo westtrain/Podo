@@ -29,21 +29,6 @@ const payment = (props) => {
       });
   };
 
-  const changeAccount = async () => {
-    api
-      .patch(
-        `/account`,
-        { account_bank: "081", account_number: "90691012846907" },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log("RESPONSE", res.data);
-      })
-      .catch((err) => {
-        console.log("ERROR", err);
-      });
-  };
-
   const changeSettlement = async () => {
     api
       .patch(`/settlement`, { withCredentials: true })
@@ -66,7 +51,7 @@ const payment = (props) => {
       });
   };
 
-  const enrollAccount = async () => {
+  const updateAccount = async () => {
     api
       .post(
         `/account`,
@@ -105,10 +90,9 @@ const payment = (props) => {
     <>
       <button onClick={getUsersPaymentInfo}>getUsersPaymentInfo</button>
       <button onClick={changeCard}>changeCard</button>
-      <button onClick={changeAccount}>changeAccount</button>
       <button onClick={changeSettlement}>changeSettlement</button>
       <button onClick={enrollCard}>enrollCard</button>
-      <button onClick={enrollAccount}>enrollAccount</button>
+      <button onClick={updateAccount}>updateAccount</button>
       <button onClick={enrollSettlement}>enrollSettlement</button>
     </>
   );

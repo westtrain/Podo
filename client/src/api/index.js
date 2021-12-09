@@ -1,10 +1,9 @@
-// import React from "react";
 import Auth from "./auth";
 import User from "./user";
 import Party from "./party";
+import Payment from "./payment";
 import Statement from "./statement";
 import OTT from "./ott";
-import Payment from "./payment";
 function API() {
   return (
     <>

@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}`,
+  baseURL: `${process.env.REACT_APP_API_URL}/party`,
   withCredentials: true,
 });
 
-const Party = (props) => {
+const party = (props) => {
   const getUsersParty = async () => {
     //isAuth 거치기 떄문에 따로 params, query 등 불필요
     api
@@ -61,12 +61,12 @@ const Party = (props) => {
       .post(
         `/`,
         {
-          ott_id: 1,
+          ott_id: 3,
           ott_login_id: "dnfjk123!@$",
           ott_login_password: "1283njskd@#$%",
-          members: "25",
+          members: "1",
           members_num: 4,
-          leader: 3,
+          leader: 1,
           start_date: "2021-12-05",
           end_date: "2022-12-04",
         },
@@ -116,7 +116,7 @@ const Party = (props) => {
 
   const joinParty = async () => {
     api
-      .patch(`/join`, { party_id: 10 }, { withCredentials: true })
+      .patch(`/join`, { party_id: 6 }, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -158,4 +158,4 @@ const Party = (props) => {
   );
 };
 
-export default Party;
+export default party;

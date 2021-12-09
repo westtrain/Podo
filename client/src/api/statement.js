@@ -2,13 +2,13 @@ import React from "react";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: `${process.env.REACT_APP_API_URL}/statement`,
   withCredentials: true,
 });
-const OTT = (props) => {
+const Statement = (props) => {
   const getPaymentPointWithdrawal = async () => {
     api
-      .get(`/statement`, { withCredentials: true })
+      .get(`/`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -25,4 +25,4 @@ const OTT = (props) => {
   );
 };
 
-export default OTT;
+export default Statement;

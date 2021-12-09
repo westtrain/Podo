@@ -143,11 +143,10 @@ module.exports = {
           start_date,
           end_date,
         }).then((data) => {
-          // 3. 조인테이블에 유저아이디와 파티를 넣어준다.
-          const userIdsArr = data.split(",");
+          // 3. 조인테이블에 유저아이디(파티장)와 파티를 넣어준다.
           db.sequelize.models.User_party.create({
             party_id: data.id,
-            user_id: userIdsArr,
+            user_id: userId,
           });
         });
       } else {
@@ -169,8 +168,8 @@ module.exports = {
       console.log(userId);
       const newOttLoginInfo = await Party.update(
         {
-          ott_login_id: ott_login_id,
-          ott_login_password: ott_login_password,
+          ott_login_id,
+          ott_login_password,
         },
         {
           where: {
@@ -197,7 +196,7 @@ module.exports = {
     try {
       // 2. partyId, userId로 조회해서 OTT 로그인 정보를 업데이트 시켜준다
       await Party.update(
-        { members_num: members_num },
+        { members_num },
         {
           where: {
             id: party_id,
@@ -221,17 +220,30 @@ module.exports = {
     // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
     const { party_id } = req.body;
     try {
-      // 2. party_id로 조회한다.
+      // 2. 유저가 이 파티에 맴버로 있는지 확인
+      const isMember = await db.sequelize.models.User_party.findAll({
+        where: {
+          party_id: party_id,
+          user_id: userId,
+        },
+      }); //where 빠졌었음. await 넣어야 promise형태가 아닌 배열 형태의 결과값 나옴
+      if (isMember.length !== 0) {
+        //배열 형태에서 비어있음을 표현하기 위해서는 length 사용해야 함.
+        return res.status(422).json({ message: "already joined this party" });
+      }
+      console.log(isMember);
+
+      // 3. party_id로 조회한다.
       await Party.findOne({
         where: {
           id: party_id,
         },
       }).then((data) => {
-        // 3. party_id로 조회가 실패하면 404를 반환한다.
+        // 4. party_id로 조회가 실패하면 404를 반환한다.
         if (!data) {
           return res.status(404).json({ message: "failed" });
         }
-        // 4. 기존의 멤버에 새로운 맴버인 userId를 추가하고 업데이트 시킨다.
+        // 5. 기존의 멤버에 새로운 맴버인 userId를 추가하고 업데이트 시킨다.
         let members = data.members;
         if (members.length === data.numbers_num) {
           return res.status(422).json({ meessage: "Party already full" });
@@ -239,7 +251,7 @@ module.exports = {
         members += `,${userId}`;
         Party.update(
           {
-            members: members,
+            members,
           },
           {
             where: {
@@ -247,6 +259,11 @@ module.exports = {
             },
           }
         );
+        // 6. 새 유저와 파티관계를 조인테이블에 넣어준다
+        db.sequelize.models.User_party.create({
+          party_id: party_id,
+          user_id: userId,
+        });
       });
       return res.status(200).json({ message: "Success" });
     } catch (error) {
@@ -277,7 +294,7 @@ module.exports = {
           members = members.replace(`,${userId}`, "");
           Party.update(
             {
-              members: members,
+              members,
             },
             {
               where: {
@@ -285,6 +302,12 @@ module.exports = {
               },
             }
           );
+          db.sequelize.models.User_party.destroy({
+            where: {
+              party_id: party_id,
+              user_id: userId,
+            },
+          });
         }
       });
       return res.status(200).json({ message: "Success" });

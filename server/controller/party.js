@@ -220,17 +220,25 @@ module.exports = {
     // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
     const { party_id } = req.body;
     try {
-      // 2. party_id로 조회한다.
+      // 2. 유저가 이 파티에 맴버로 있는지 확인
+      const isMember = db.sequelize.models.User_party.findAll({
+        party_id: party_id,
+        user_id: userId,
+      });
+      if (isMember) {
+        return res.status(422).json({ meessage: "already joined this party" });
+      }
+      // 3. party_id로 조회한다.
       await Party.findOne({
         where: {
           id: party_id,
         },
       }).then((data) => {
-        // 3. party_id로 조회가 실패하면 404를 반환한다.
+        // 4. party_id로 조회가 실패하면 404를 반환한다.
         if (!data) {
           return res.status(404).json({ message: "failed" });
         }
-        // 4. 기존의 멤버에 새로운 맴버인 userId를 추가하고 업데이트 시킨다.
+        // 5. 기존의 멤버에 새로운 맴버인 userId를 추가하고 업데이트 시킨다.
         let members = data.members;
         if (members.length === data.numbers_num) {
           return res.status(422).json({ meessage: "Party already full" });
@@ -246,7 +254,7 @@ module.exports = {
             },
           }
         );
-        // 5. 새 유저와 파티관계를 조인테이블에 넣어준다
+        // 6. 새 유저와 파티관계를 조인테이블에 넣어준다
         db.sequelize.models.User_party.create({
           party_id: party_id,
           user_id: userId,

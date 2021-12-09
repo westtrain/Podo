@@ -1,15 +1,16 @@
 import React from "react";
 import axios from "axios";
-//Filtered까지 함
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: `${process.env.REACT_APP_API_URL}`,
   withCredentials: true,
 });
+
 const Party = (props) => {
   const getUsersParty = async () => {
     //isAuth 거치기 떄문에 따로 params, query 등 불필요
     api
-      .get(`/party`, { withCredentials: true })
+      .get("/", { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -20,7 +21,7 @@ const Party = (props) => {
 
   const getParty = async () => {
     api
-      .get(`/party/3`, {
+      .get(`/3`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -33,7 +34,7 @@ const Party = (props) => {
 
   const getAllParties = async () => {
     api
-      .get(`/party`, { withCredentials: true })
+      .get(`/`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -44,7 +45,7 @@ const Party = (props) => {
 
   const getFilteredParties = async () => {
     api
-      .get(`/party/filtered?ott_id=1&date=2021-01-10`, {
+      .get(`/filtered?ott_id=1&date=2021-01-10`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -54,10 +55,11 @@ const Party = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const createParty = async () => {
     api
       .post(
-        `/party`,
+        `/`,
         {
           ott_id: 1,
           ott_login_id: "dnfjk123!@$",
@@ -77,10 +79,11 @@ const Party = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const updateOTTLoginInfo = async () => {
     api
       .patch(
-        `/party/ott`,
+        `/ott`,
         {
           party_id: 7,
           ott_login_id: "ott_login",
@@ -95,10 +98,11 @@ const Party = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const changeMemberNum = async () => {
     api
       .patch(
-        `/party/memberNum`,
+        `/memberNum`,
         { party_id: 7, members_num: 5 },
         { withCredentials: true }
       )
@@ -109,9 +113,10 @@ const Party = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const joinParty = async () => {
     api
-      .patch(`/party/join`, { party_id: 10 }, { withCredentials: true })
+      .patch(`/join`, { party_id: 10 }, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -119,9 +124,10 @@ const Party = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const leaveParty = async () => {
     api
-      .delete(`/party`, {
+      .delete(`/`, {
         data: { party_id: 10 },
         withCredentials: true,
       })

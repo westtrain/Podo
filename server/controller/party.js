@@ -289,7 +289,7 @@ module.exports = {
               },
             }
           );
-          Model.destroy({
+          db.sequelize.models.User_party.destroy({
             where: {
               party_id: party_id,
               user_id: userId,

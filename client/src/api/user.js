@@ -2,13 +2,13 @@ import React from "react";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: `${process.env.REACT_APP_API_URL}/user`,
   withCredentials: true,
 });
 const User = (props) => {
   const getUser = async () => {
     api
-      .get(`/user`, { withCredentials: true })
+      .get(`/`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -16,9 +16,11 @@ const User = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const updateMoney = async () => {
+    // 유저가 포도머니 1000원 인출시
     api
-      .patch(`/user/money`, { withCredentials: true })
+      .patch(`/money?withdraw=1000`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })
@@ -26,9 +28,10 @@ const User = (props) => {
         console.log("ERROR", err);
       });
   };
+
   const deleteUser = async () => {
     api
-      .delete(`/user?withdraw=1000`, { withCredentials: true })
+      .delete(`/`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", res.data);
       })

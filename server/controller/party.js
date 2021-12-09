@@ -221,13 +221,17 @@ module.exports = {
     const { party_id } = req.body;
     try {
       // 2. 유저가 이 파티에 맴버로 있는지 확인
-      const isMember = db.sequelize.models.User_party.findAll({
-        party_id: party_id,
-        user_id: userId,
-      });
-      if (isMember) {
-        return res.status(422).json({ meessage: "already joined this party" });
+      const isMember = await db.sequelize.models.User_party.findAll({
+        where: {
+          party_id: party_id,
+          user_id: userId,
+        },
+      }); //where 빠졌었음. await 넣어야 promise형태가 아닌 배열 형태의 결과값 나옴
+      if (isMember.length !== 0) {
+        //배열 형태에서 비어있음을 표현하기 위해서는 length 사용해야 함.
+        return res.status(422).json({ message: "already joined this party" });
       }
+
       // 3. party_id로 조회한다.
       await Party.findOne({
         where: {

@@ -11,10 +11,10 @@ const payment = (props) => {
     api
       .get(`/`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -22,10 +22,10 @@ const payment = (props) => {
     api
       .patch(`/credit`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -33,10 +33,10 @@ const payment = (props) => {
     api
       .patch(`/settlement`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -44,10 +44,10 @@ const payment = (props) => {
     api
       .post(`/credit`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -68,10 +68,10 @@ const payment = (props) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -79,10 +79,10 @@ const payment = (props) => {
     api
       .post(`/settlement`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 

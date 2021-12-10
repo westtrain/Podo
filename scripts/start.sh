@@ -23,10 +23,11 @@ export KAKAO_CLIENT_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --na
 export KAKAO_REDIRECT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names KAKAO_REDIRECT_URI --query Parameters[0].Value | sed 's/"//g')
 
 export CLIENT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names CLIENT_URI --query Parameters[0].Value | sed 's/"//g')
+export CLIENT_LOGIN_CALLBACK=$(aws ssm get-parameters --region ap-northeast-2 --names CLIENT_LOGIN_CALLBACK --query Parameters[0].Value | sed 's/"//g')
 
-export FINANCE_CLIENT_ID=$(aws ssm get-parameters --region ap-northeast-2 --names FINANCE_CLIENT_ID --query Parameters[0].Value | sed 's/"//g')
-export FINANCE_CLIENT_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --names FINANCE_CLIENT_SECRET --query Parameters[0].Value | sed 's/"//g')
-export FINANCE_REDIRECT_URI=$(aws ssm get-parameters --region ap-northeast-2 --names FINANCE_REDIRECT_URI --query Parameters[0].Value | sed 's/"//g')
 
+export IMPORT_CUSTOMER_UI=$(aws ssm get-parameters --region ap-northeast-2 --names IMPORT_CUSTOMER_UI --query Parameters[0].Value | sed 's/"//g')
+export IMPORT_API_KEY=$(aws ssm get-parameters --region ap-northeast-2 --names IMPORT_API_KEY --query Parameters[0].Value | sed 's/"//g')
+export IMPORT_API_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --names IMPORT_API_SECRET --query Parameters[0].Value | sed 's/"//g')
 
 authbind --deep pm2 start app.js

@@ -13,7 +13,7 @@ function SelectOtt() {
   return (
     <>
       <div className="selectsection">
-        <div className="selectheader">어떤 파티를 만드시겟어요?</div>
+        <div className="selectheader">어떤 파티를 만드시겠어요?</div>
         <div className="selectott">
           <div className="netflix">
             <img src={netflix} alt="netflix"></img>
@@ -41,6 +41,9 @@ function SelectOtt() {
           </div>
           <div className="office">
             <img src={office} alt="office"></img>
+          </div>
+          <div className="laftel">
+            <img src={laftel} alt="laftel"></img>
           </div>
         </div>
       </div>

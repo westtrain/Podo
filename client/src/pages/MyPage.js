@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Header from "../components/public/Header";
 import MyParty from "../components/mypage/MyParty";
 import MyPartyDetail from "../components/mypage/MyPartyDetail";
@@ -12,6 +13,7 @@ import "../style/MyPage.scss";
 import PodoMoney from "../image/PodoMoney.svg";
 
 function MyPage(props) {
+  const userState = useSelector((state) => state.user);
   const { menu } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
   const [showMenu, setShowMenu] = useState(false);
 

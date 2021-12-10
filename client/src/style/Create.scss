@@ -42,24 +42,25 @@ input {
       .selectheader {
         font-size: 36px;
         color: #fff;
-        margin: 16px 0;
+        margin: 50px 0;
         font-weight: bold;
       }
 
       .selectott {
         display: grid;
-        grid-template-columns: repeat(3, 250px);
+        grid-template-columns: repeat(5, 202px);
+        margin: 4em 0 11.5em 0;
 
         .netflix {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #232020;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px;
+          margin: 11px;
 
           img {
             width: 100px;
@@ -71,89 +72,89 @@ input {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #fdbada;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px;
+          margin: 11px;
         }
         .wave {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #a1d1fd;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px;
+          margin: 11px;
         }
         .tving {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #ff86a3;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px;
+          margin: 11px;
         }
         .disney {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #97a5ed;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px;
+          margin: 11px;
         }
         .amazon {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #4d6dac;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px;
+          margin: 11px;
         }
         .laftel {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #ccc8ff;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px 25px 0 25px;
+          margin: 11px;
         }
         .apple {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #fff;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px 25px 0 25px;
+          margin: 11px;
         }
         .office {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 200px;
-          width: 200px;
+          height: 180px;
+          width: 180px;
           background-color: #ffaa8f;
           border-radius: 10px;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          margin: 25px 25px 0 25px;
+          margin: 11px;
         }
       }
     }
@@ -636,6 +637,133 @@ input {
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .create {
     padding-top: 131px;
+    .createbody {
+      .selectsection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .selectheader {
+          font-size: 36px;
+          color: #fff;
+          margin: 50px 0;
+          font-weight: bold;
+        }
+
+        .selectott {
+          display: grid;
+          grid-template-columns: repeat(3, 202px);
+          margin: 4em 0 11.5em 0;
+
+          .netflix {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #232020;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+
+            img {
+              width: 100px;
+              height: 100px;
+            }
+          }
+
+          .watcha {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #fdbada;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #a1d1fd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .tving {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #ff86a3;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .disney {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #97a5ed;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .amazon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #4d6dac;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .laftel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #ccc8ff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .apple {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .office {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #ffaa8f;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -644,6 +772,131 @@ input {
     padding-top: 131px;
     .createbody {
       height: 76vh;
+      .selectsection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .selectheader {
+          font-size: 36px;
+          color: #fff;
+          margin: 50px 0;
+          font-weight: bold;
+        }
+
+        .selectott {
+          display: grid;
+          grid-template-columns: repeat(2, 202px);
+          margin: 4em 0 11.5em 0;
+
+          .netflix {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #232020;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+
+            img {
+              width: 100px;
+              height: 100px;
+            }
+          }
+
+          .watcha {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #fdbada;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #a1d1fd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .tving {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #ff86a3;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .disney {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #97a5ed;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .amazon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #4d6dac;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .laftel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #ccc8ff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .apple {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+          .office {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            width: 180px;
+            background-color: #ffaa8f;
+            border-radius: 10px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin: 11px;
+          }
+        }
+      }
       .partyguidestep4 {
         width: 370px;
         height: fit-content;

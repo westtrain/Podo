@@ -269,7 +269,8 @@ module.exports = {
         //해당 유저가 있다면 422 에러
         if (alreadyJoinedArr.length !== 0) {
           return res.status(422).json({
-            message: "You already created or joined the party that shares the same kind of OTT",
+            message:
+              "You have already created or joined the party that shares the same kind of OTT",
           });
         }
       }

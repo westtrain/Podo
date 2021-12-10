@@ -9,50 +9,53 @@ function FAQ(props) {
   const [height2, setHeight2] = useState(80);
   const [height3, setHeight3] = useState(80);
   const [height4, setHeight4] = useState(80);
-  const [changeImg, setChangeImg] = useState(false);
+  const [changeImg1, setChangeImg1] = useState(false);
+  const [changeImg2, setChangeImg2] = useState(false);
+  const [changeImg3, setChangeImg3] = useState(false);
+  const [changeImg4, setChangeImg4] = useState(false);
 
   const handleFAQ1 = () => {
     if (height1 === 80) {
       setHeight1(270);
 
-      setChangeImg(true);
+      setChangeImg1(true);
     } else {
       setHeight1(80);
 
-      setChangeImg(false);
+      setChangeImg1(false);
     }
   };
   const handleFAQ2 = () => {
     if (height2 === 80) {
       setHeight2(290);
 
-      setChangeImg(true);
+      setChangeImg2(true);
     } else {
       setHeight2(80);
 
-      setChangeImg(false);
+      setChangeImg2(false);
     }
   };
   const handleFAQ3 = () => {
     if (height3 === 80) {
       setHeight3(200);
 
-      setChangeImg(true);
+      setChangeImg3(true);
     } else {
       setHeight3(80);
 
-      setChangeImg(false);
+      setChangeImg3(false);
     }
   };
   const handleFAQ4 = () => {
     if (height4 === 80) {
       setHeight4(200);
 
-      setChangeImg(true);
+      setChangeImg4(true);
     } else {
       setHeight4(80);
 
-      setChangeImg(false);
+      setChangeImg4(false);
     }
   };
 
@@ -68,7 +71,7 @@ function FAQ(props) {
           >
             <div className="faqmunit">
               <div>나의 구독 서비스를 공유하고 싶어요. (파티만들기)</div>
-              {!changeImg ? (
+              {!changeImg1 ? (
                 <img src={down_icon} alt="down"></img>
               ) : (
                 <img src={up_icon} alt="up"></img>
@@ -102,7 +105,7 @@ function FAQ(props) {
           >
             <div className="faqmunit">
               <div>다른 사람의 구독 서비스를 공유받고 싶어요. (파티찾기)</div>
-              {!changeImg ? (
+              {!changeImg2 ? (
                 <img src={down_icon} alt="down"></img>
               ) : (
                 <img src={up_icon} alt="up"></img>
@@ -137,7 +140,7 @@ function FAQ(props) {
           >
             <div className="faqmunit">
               <div>'포도 머니'가 무엇언가요?</div>
-              {!changeImg ? (
+              {!changeImg3 ? (
                 <img src={down_icon} alt="down"></img>
               ) : (
                 <img src={up_icon} alt="up"></img>
@@ -162,7 +165,7 @@ function FAQ(props) {
           >
             <div className="faqmunit">
               <div>'포도 정산일'이 무엇인가요?</div>
-              {!changeImg ? (
+              {!changeImg4 ? (
                 <img src={down_icon} alt="down"></img>
               ) : (
                 <img src={up_icon} alt="up"></img>

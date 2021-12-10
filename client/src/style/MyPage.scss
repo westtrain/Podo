@@ -519,8 +519,6 @@ $mypagecolor: #eeefff;
           width: 100%;
           justify-content: center;
           align-items: center;
-          display: flex;
-
           background-color: #fff;
 
           .mobilemypage {
@@ -533,7 +531,8 @@ $mypagecolor: #eeefff;
 
         .mobilemenulist {
           border-top: 1px solid #e2e2e2;
-          margin-top: -505px;
+          top: 0;
+          margin-top: 167px;
           width: 100%;
           background-color: #fff;
           display: flex;
@@ -576,7 +575,7 @@ $mypagecolor: #eeefff;
             width: 100%;
 
             .adminbox {
-              margin-top: -370px;
+              margin-top: -320px;
               min-height: 200px;
               .wrapper {
                 padding: 27px 30px;

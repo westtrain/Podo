@@ -310,15 +310,16 @@ a {
   }
 
   .faq {
-    width: 400px;
+    width: 370px;
 
     .faqheader {
-      font-size: 35px;
+      font-size: 30px;
     }
 
     .faqmiddle {
-      margin-top: 40px;
+      margin-top: 10px;
       .faqmquestion {
+        margin-top: 10px;
         .faqmunit {
           div {
             font-size: 15px;
@@ -335,7 +336,8 @@ a {
     }
 
     .faqfooter {
-      height: 80px;
+      margin-top: 20px;
+      height: 60px;
       div {
         font-size: 18px;
       }

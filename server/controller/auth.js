@@ -69,7 +69,7 @@ module.exports = {
         })
         .then((token) => {
           sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
+          res.redirect(`${process.env.CLIENT_LOGIN_CALLBACK}`); //가입완료 후 화면
         });
     } catch (error) {
       console.log("error");
@@ -153,7 +153,7 @@ module.exports = {
         })
         .then((token) => {
           sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
+          res.redirect(`${process.env.CLIENT_LOGIN_CALLBACK}`); //가입완료 후 화면
         });
     } catch (error) {
       console.log("error");
@@ -219,7 +219,7 @@ module.exports = {
         })
         .then((token) => {
           sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
-          res.redirect(`${process.env.CLIENT_URI}`); //가입완료 후 화면
+          res.redirect(`${process.env.CLIENT_LOGIN_CALLBACK}`); //가입완료 후 화면
         });
     } catch (error) {
       console.log("error");

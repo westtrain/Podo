@@ -18,17 +18,12 @@ module.exports = {
       return res.status(500).json({ message: "Server Error" });
     }
   },
-  
+
   changeCard: async (req, res) => {
     // req 변수 선언 할당
     const user_id = req.userId;
-    const {
-      credit_num,
-      credit_expire_month,
-      credit_expire_year,
-      credit_birth,
-      credit_password,
-    } = req.body;
+    const { credit_num, credit_expire_month, credit_expire_year, credit_birth, credit_password } =
+      req.body;
 
     try {
       if (
@@ -41,51 +36,17 @@ module.exports = {
       ) {
         //아임포트로 카드 확인
         await Payment.update(
-          {
-            credit_num,
-            credit_expire_month,
-            credit_expire_year,
-            credit_birth,
-            credit_password,
-          },
+          { credit_num, credit_expire_month, credit_expire_year, credit_birth, credit_password },
           { where: { user_id } }
         );
         return res.status(200).json({ message: "Success" });
       }
-      return res
-        .status(422)
-        .json({ message: "Insufficient parameters supplied" });
+      return res.status(422).json({ message: "Insufficient parameters supplied" });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
-  
-  changeAccount: async (req, res) => {
-    const user_id = req.userId;
-    const { account_bank, account_number } = req.body;
-    
-    generateImportToken()
-      .then((token) => checkAccountName(account_bank, account_number, token))
-      .then((data) => {
-        console.log(data);
-        try {
-          if (user_id && account_bank && account_number) {
-            //아임포트로 수취조회 API
-            Payment.update(
-              { account_bank, account_number },
-              { where: { user_id } }
-            );
-            return res.status(200).json({ data });
-          }
-          return res
-            .status(422)
-            .json({ message: "Insufficient parameters supplied" });
-        } catch (err) {
-          return res.status(500).json({ message: "Server Error" });
-        }
-      });
-  },
-  
+
   changeSettlement: async (req, res) => {
     const user_id = req.userId;
     const { settlement_date } = req.body;
@@ -95,9 +56,7 @@ module.exports = {
         await Payment.update({ settlement_date }, { where: { user_id } });
         return res.status(200).json({ message: "Success" });
       }
-      return res
-        .status(422)
-        .json({ message: "Insufficient parameters supplied" });
+      return res.status(422).json({ message: "Insufficient parameters supplied" });
     } catch (error) {
       return res.status(500).json({ message: "Server Error" });
     }
@@ -155,16 +114,12 @@ module.exports = {
         );
         return res.status(200).json({ message: "Success" });
       }
-      return res
-        .status(422)
-        .json({ message: "Insufficient parameters supplied" });
+      return res.status(422).json({ message: "Insufficient parameters supplied" });
     } catch (error) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
-  enrollAccount: async (req, res) => {
-    // 아임포트로 수취조회 API
-
+  updateAccount: async (req, res) => {
     const user_id = req.userId;
 
     const {
@@ -177,39 +132,39 @@ module.exports = {
       account_bank,
       account_number,
     } = req.body;
+    console.log(account_bank, account_number);
 
-
-    generateImportToken()
-      .then((token) => checkAccountName(account_bank, account_number, token))
+    generateImportToken() // 아임포트 토큰 발행
+      .then((token) => checkAccountName(account_bank, account_number, token)) // 예금주 실명 조회
       .then((data) => {
         console.log(data); //예금주 실명
         try {
-          const paymentInfo = Payment.findOne({
+          Payment.findOne({
             where: { user_id },
             raw: true,
-          });
-
-          //계좌 등록에 필요한 정보 모두 있다면 DB에 관련 정보 등록
-          if (user_id && account_bank && account_number) {
-            if (!paymentInfo) {
-              Payment.create({
-                user_id,
-                credit_num,
-                credit_expire_month,
-                credit_expire_year,
-                credit_birth,
-                credit_password,
-                settlement_date,
-                account_bank,
-                account_number,
-              });
+          }).then((paymentInfo) => {
+            console.log(paymentInfo);
+            if (user_id && account_bank && account_number) {
+              //등록한 적이 없다면 create
+              if (!paymentInfo) {
+                Payment.create({
+                  user_id,
+                  credit_num,
+                  credit_expire_month,
+                  credit_expire_year,
+                  credit_birth,
+                  credit_password,
+                  settlement_date,
+                  account_bank,
+                  account_number,
+                });
+              } else {
+                //등록한 적이 있다면 update
+                Payment.update({ account_bank, account_number }, { where: { user_id } });
+              }
             }
-            Payment.update(
-              { account_bank, account_number },
-              { where: { user_id } }
-            );
-          }
-          return res.status(200).json({ data });
+            return res.status(200).json({ data });
+          });
         } catch (error) {
           return res.status(500).json({ message: "Server Error" });
         }

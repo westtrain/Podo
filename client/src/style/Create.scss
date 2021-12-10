@@ -388,6 +388,9 @@ input {
               color: #7e7fdf;
             }
           }
+          img {
+            cursor: pointer;
+          }
         }
         .infomember {
           margin-bottom: 150px;
@@ -436,6 +439,7 @@ input {
             align-items: center;
             font-size: 15px;
             color: #c6c6c6;
+            cursor: pointer;
             .arrow {
               margin-left: 10px;
               font-weight: bold;

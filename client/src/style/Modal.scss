@@ -27,10 +27,13 @@
 
       .exit {
         margin-top: 30px;
-        cursor: pointer;
+        //cursor: pointer;
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .scmheader {

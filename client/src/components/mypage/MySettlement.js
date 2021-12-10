@@ -1,6 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showSettlementModal } from "../../redux/reducers/modalSlice";
+import SetSettlementModal from "../modal/SetSettlementModal";
 
 function MySettlement(props) {
+  const dispatch = useDispatch();
+  const settlementModalState = useSelector(
+    (state) => state.modal.settlementModal
+  );
   return (
     <>
       <div className="middlemain">
@@ -13,7 +20,13 @@ function MySettlement(props) {
                 매월
                 <div>25 일</div>
               </div>
-              <div className="logoutbtn">변경하기</div>
+              <div
+                className="logoutbtn"
+                onClick={() => dispatch(showSettlementModal(true))}
+              >
+                변경하기
+              </div>
+              {settlementModalState ? <SetSettlementModal /> : null}
             </div>
             <div className="settlemetntxt">
               Podo에서 파티 요금의 적립과 결제가 기준 날짜를 정산일이라고

@@ -89,11 +89,25 @@
   .landingpage {
     margin-left: 2em;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     width: 90%;
-    height: 780px;
+    height: 880px;
+    // 이미지 초기값
+    .landingexpimg {
+      position: relative;
+      left: 0;
+      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s linear;
+      opacity: 0;
+    }
+
+    .fade-in {
+      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s linear;
+      left: 0px;
+      opacity: 1;
+    }
+
     .landingexp {
       .landingexpheader {
         font-size: 64px;

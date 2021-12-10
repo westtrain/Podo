@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/public/Header";
 import FAQ from "../components/public/FAQ";
 import "../style/Home.scss";
@@ -8,7 +8,31 @@ import landingimg3 from "../image/landingimg3.png";
 import landingimg4 from "../image/landingimg4.png";
 import landingimg5 from "../image/landingimg5.png";
 
-function Home(props) {
+const Home = (props) => {
+  useEffect(() => {
+    //viewport에 들어올 경우 class변경
+    const targets = document.querySelectorAll(".landingexpimg");
+    //threshold 0.5만큼 보였을 경우 실행
+    const options = { root: null, threshold: 0.5, rootMargin: "0px" };
+    const observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach((entry) => {
+        const container = entry.target;
+        //class변경
+        if (entry.isIntersecting) {
+          container.classList.remove("landingexpimg");
+          container.classList.add("fade-in");
+        } else {
+          container.classList.remove("fade-in");
+          container.classList.add("landingexpimg");
+        }
+      });
+    }, options);
+
+    targets.forEach((target) => {
+      observer.observe(target);
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -34,12 +58,12 @@ function Home(props) {
               저렴한 파티 가격을 비교해보세요.
             </div>
           </div>
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg1} alt="landingimg1"></img>
           </div>
         </div>
         <div className="landingpage">
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg2} alt="landingimg2"></img>
           </div>
           <div className="landingexp">
@@ -66,12 +90,12 @@ function Home(props) {
               파티원을 모집해 보세요.
             </div>
           </div>
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg3} alt="landingimg3"></img>
           </div>
         </div>
         <div className="landingpage">
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg4} alt="landingimg4"></img>
           </div>
           <div className="landingexp">
@@ -103,6 +127,6 @@ function Home(props) {
       </div>
     </>
   );
-}
+};
 
 export default Home;

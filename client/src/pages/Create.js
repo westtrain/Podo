@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Header from "../components/public/Header";
+import SelectOtt from "../components/create/SelectOtt";
 import LeaderGuide from "../components/create/LeaderGuide";
 import OttInfo from "../components/create/OttInfo";
 import NumOfMembers from "../components/create/NumOfMembers";
@@ -18,7 +19,7 @@ function Create(props) {
       {/* 여기부터 헤더 아래 */}
       <div className="create">
         <div className="createbody">
-          {step === undefined ? <LeaderGuide /> : null}
+          {step === undefined ? <SelectOtt /> : null}
           {step === "1" ? <LeaderGuide /> : null}
           {step === "2" ? <OttInfo /> : null}
           {step === "3" ? <NumOfMembers /> : null}

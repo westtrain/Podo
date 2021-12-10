@@ -88,7 +88,11 @@ function Period(props) {
               <img src={arrow} />
             </div>
           </div>
-          {showEndCalendar ? <div className="calendal"></div> : null}
+          {showEndCalendar ? (
+            <div className="calendal">
+              <MiniCalendar />
+            </div>
+          ) : null}
           <div className="infoperiod">
             - 파티 시작 이후 파티 기간 수정은 불가합니다.
             <br />- 파티 종료일 전에 파티를 해산할 경우 위약금이 발생할 수

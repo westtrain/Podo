@@ -9,7 +9,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import axiosConfig from "./utils/axiosConfig";
 
-axiosConfig();
+//axiosConfig();
 const persistor = persistStore(store);
 
 ReactDOM.render(

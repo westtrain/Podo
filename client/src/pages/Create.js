@@ -12,7 +12,6 @@ import "../style/Create.scss";
 
 function Create(props) {
   const { step } = useParams(); // URL params로 받은 파티 만들기 스텝
-  console.log(step);
   return (
     <>
       <Header />

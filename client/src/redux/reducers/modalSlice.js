@@ -8,6 +8,7 @@ const initialState = {
   cardModal: false,
   settlementModal: false,
   withdrawModal: false,
+  selectPlanModal: false,
 };
 
 const modalSlice = createSlice({
@@ -38,6 +39,10 @@ const modalSlice = createSlice({
       state.withdrawModal = action.payload;
       return state;
     },
+    showSelectPlanModal: (state, action) => {
+      state.selectPlanModal = action.payload;
+      return state;
+    },
   },
 });
 
@@ -49,5 +54,6 @@ export const {
   showCardModal,
   showSettlementModal,
   showWithdrawModal,
+  showSelectPlanModal,
 } = actions;
 export default reducer;

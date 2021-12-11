@@ -21,7 +21,6 @@ function Search(props) {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handledropdown = () => {
-    console.log("event");
     setShowDropdown(!showDropdown);
   };
 

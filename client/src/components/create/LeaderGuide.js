@@ -1,12 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle as checkedIcon } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle as uncheckedIcon } from "@fortawesome/free-regular-svg-icons";
 
 function LeaderGuide(props) {
+  const navigate = useNavigate();
+  const [checked, setChecked] = useState(false);
+  const onclickCkeck = () => {
+    setChecked(!checked);
+  };
+  const onClickNext = () => {
+    if (checked) {
+      navigate("/create/2");
+    } else {
+      Swal.fire(
+        "You unchecked!",
+        "파티장 가이드 확인 여부를 체크해주세요.",
+        "error"
+      );
+    }
+  };
   return (
     <>
-      <div className="partyguide">
+      <div className="partyguide page1">
         <div className="stepline">
           <div className="step1"></div>
         </div>
@@ -34,16 +52,29 @@ function LeaderGuide(props) {
             이용에 불편을 끼칠 수 있어요.
           </div>
           <div className="checkguide">
-            <FontAwesomeIcon icon={faCheckCircle} size="1x" />
-            <span>위 파티장 가이드를 모두 확인 했습니다.</span>
+            {checked ? (
+              <FontAwesomeIcon
+                icon={checkedIcon}
+                size="1x"
+                onClick={onclickCkeck}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={uncheckedIcon}
+                size="1x"
+                onClick={onclickCkeck}
+              />
+            )}
+
+            <span onClick={onclickCkeck}>
+              위 파티장 가이드를 모두 확인했습니다.
+            </span>
           </div>
         </div>
         <div className="guidefooter">
-          <Link to={"/create/2"}>
-            <div className="guidefooterbtn">
-              <div className="nextbtn">다음</div>
-            </div>
-          </Link>
+          <div className="guidefooterbtn" onClick={onClickNext}>
+            <div className="nextbtn">다음</div>
+          </div>
         </div>
       </div>
     </>

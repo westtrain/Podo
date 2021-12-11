@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setStartDate as setStartDateState } from "../../redux/reducers/partySlice";
 import DatePicker, { registerLocale } from "react-datepicker";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
@@ -6,7 +8,11 @@ import { ko } from "date-fns/esm/locale";
 import arrow_left from "../../image/arrow_left.png";
 import arrow_right from "../../image/arrow_right.png";
 
-function Calendar(props) {
+function MiniCalendar(props) {
+  const dispatch = useDispatch();
+  const startDateState = useSelector(
+    (state) => state.party.ceateParty.start_date
+  );
   const [startDate, setStartDate] = useState(new Date());
   const [today, setToday] = useState(new Date());
   const [month, setMonth] = useState(new Date().getMonth());
@@ -27,13 +33,23 @@ function Calendar(props) {
     "11월",
     "12월",
   ]);
+  const onClickDate = (date) => {
+    dispatch(setStartDateState(date));
+    console.log(startDateState);
+  };
+
+  useEffect(() => {
+    dispatch(setStartDateState(null));
+  }, []);
 
   return (
     <>
       <DatePicker
         selected={startDate}
         minDate={today}
-        onChange={(date) => setStartDate(date)}
+        onChange={(date) => {
+          onClickDate(date);
+        }}
         inline
         useWeekdaysShort={true}
         shouldCloseOnSelect={false}
@@ -94,4 +110,4 @@ function Calendar(props) {
   );
 }
 
-export default Calendar;
+export default MiniCalendar;

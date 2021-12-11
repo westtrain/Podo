@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getPartyId } from "../../redux/API/partyAPI";
+import { setOttId } from "../../redux/reducers/partySlice";
+import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
+import SelectPlanModal from "../modal/SelectPlanModal";
 import netflix from "../../image/netflix.png";
 import watcha from "../../image/watcha.png";
 import wavve from "../../image/wavve.png";
@@ -11,12 +17,27 @@ import office from "../../image/office.png";
 import nintendo from "../../image/nintendo.png";
 
 function SelectOtt() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const planModalState = useSelector((state) => state.modal.selectPlanModal);
+  const onClickOtt = (ottName) => {
+    const ottId = getPartyId(ottName);
+    dispatch(setOttId(ottId));
+    //navigate("/create/1");
+    dispatch(showSelectPlanModal(true));
+  };
+
+  useEffect(() => {
+    dispatch(setOttId(0));
+  }, []);
+
   return (
     <>
       <div className="selectsection">
         <div className="selectheader">어떤 파티를 만드시겠어요?</div>
+        {planModalState ? <SelectPlanModal /> : null}
         <div className="selectott">
-          <div className="netflixsection">
+          <div className="netflixsection" onClick={() => onClickOtt("netflix")}>
             <div className="netflix">
               <img src={netflix} alt="netflix"></img>
             </div>
@@ -25,7 +46,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="watchasection">
+          <div className="watchasection" onClick={() => onClickOtt("watcha")}>
             <div className="watcha">
               <img src={watcha} alt="watcha"></img>
             </div>
@@ -34,7 +55,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="wavvesection">
+          <div className="wavvesection" onClick={() => onClickOtt("wavve")}>
             <div className="wavve">
               <img src={wavve} alt="wavve"></img>
             </div>
@@ -43,7 +64,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="applesection">
+          <div className="applesection" onClick={() => onClickOtt("apple")}>
             <div className="apple">
               <img src={apple} alt="apple"></img>
             </div>
@@ -52,7 +73,10 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="nintendosection">
+          <div
+            className="nintendosection"
+            onClick={() => onClickOtt("nintendo")}
+          >
             <div className="nintendo">
               <img src={nintendo} alt="nintendo"></img>
             </div>
@@ -61,7 +85,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="tvingsection">
+          <div className="tvingsection" onClick={() => onClickOtt("tving")}>
             <div className="tving">
               <img src={tving} alt="tving"></img>
             </div>
@@ -70,7 +94,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="disneysection">
+          <div className="disneysection" onClick={() => onClickOtt("disney")}>
             <div className="disney">
               <img src={disney} alt="disney"></img>
             </div>
@@ -79,7 +103,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="laftelsection">
+          <div className="laftelsection" onClick={() => onClickOtt("laftel")}>
             <div className="laftel">
               <img src={laftel} alt="laftel"></img>
             </div>
@@ -88,7 +112,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="officesection">
+          <div className="officesection" onClick={() => onClickOtt("office")}>
             <div className="office">
               <img src={office} alt="office"></img>
             </div>
@@ -97,7 +121,7 @@ function SelectOtt() {
               <span>매달 세이브!~11,425원</span>
             </div>
           </div>
-          <div className="amazonsection">
+          <div className="amazonsection" onClick={() => onClickOtt("prime")}>
             <div className="amazon">
               <img src={amazon} alt="amazon"></img>
             </div>

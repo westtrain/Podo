@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPartyMembersNum } from "../../redux/reducers/partySlice";
+import { setMembersNum } from "../../redux/reducers/partySlice";
 import plus from "../../image/+.png";
 
 function NumOfMembers(props) {
@@ -12,10 +12,10 @@ function NumOfMembers(props) {
   // Plus/Minus 버튼 이벤트
   const onclickVariation = (e) => {
     if (e.target.name === "plus" && membersNumState < 3) {
-      dispatch(setPartyMembersNum(membersNumState + 1));
+      dispatch(setMembersNum(membersNumState + 1));
     }
     if (e.target.name === "minus" && membersNumState !== 1) {
-      dispatch(setPartyMembersNum(membersNumState - 1));
+      dispatch(setMembersNum(membersNumState - 1));
     }
   };
   return (

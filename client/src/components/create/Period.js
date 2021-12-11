@@ -21,6 +21,10 @@ function Period(props) {
     setShowEndCalendar(!showEndCalendar);
   };
 
+  const onClickDate = (some) => {
+    console.log("??", some);
+  };
+
   return (
     <>
       <div className="partyguidestep4">

@@ -6,7 +6,7 @@ import "../style/Search.scss";
 import "../style/datepicker.scss";
 import netflix from "../image/NetflixName.png";
 import watcha from "../image/WatchaName.png";
-import wave from "../image/WaveName.svg";
+import wavve from "../image/WavveName.svg";
 import tving from "../image/TvingName.svg";
 import disney from "../image/DisneyName.svg";
 import prime from "../image/PrimeName.svg";
@@ -49,7 +49,7 @@ function Search(props) {
                       <img src={watcha} alt="watcha" />
                     </li>
                     <li>
-                      <img src={wave} alt="wave" />
+                      <img src={wavve} alt="wavve" />
                     </li>
                     <li>
                       <img src={tving} alt="tving" />

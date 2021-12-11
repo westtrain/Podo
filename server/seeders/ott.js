@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      "ott",
+      "OTT",
       [
         { id: 1, name: "넷플릭스", price: 12000 },
         { id: 2, name: "왓챠", price: 10000 },

@@ -8,6 +8,7 @@ function LoginCallBack(props) {
   const dispatch = useDispatch();
 
   useEffect(async () => {
+    console.log("고고");
     await dispatch(getUser());
     navigate("/");
   }, []);

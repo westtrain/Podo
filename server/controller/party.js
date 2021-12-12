@@ -1,5 +1,8 @@
 const db = require("../models");
 const { Party } = require("../models");
+const moment = require("moment");
+const sequelize = require("sequelize");
+const Op = sequelize.Op;
 
 module.exports = {
   getUsersParty: async (req, res) => {
@@ -34,7 +37,6 @@ module.exports = {
 
   getParty: async (req, res) => {
     const party_id = req.params.id;
-    console.log(party_id);
     try {
       const partyInfo = await Party.findOne({
         where: { id: party_id },
@@ -51,12 +53,22 @@ module.exports = {
 
   getAllParties: async (req, res) => {
     try {
-      console.log("allPartiesInfo");
-      const allPartiesInfo = await Party.findAll({
+      const date = moment().format("YYYY-MM-DD");
+      console.log(date.toString());
+      const ott_id = req.params.ott_id;
+      let allPartiesInfo = await Party.findAll({
+        where: { start_date: { [Op.gt]: date }, ott_id },
         raw: true,
       });
+      allPartiesInfo = allPartiesInfo.map((party) => {
+        const joinedNumber = party.members.split(",").length;
+        if (joinedNumber < party.members_num) {
+          return party;
+        }
+      });
+      console.log(allPartiesInfo);
       if (!allPartiesInfo) {
-        return res.status(404).json({ message: "failed" });
+        return res.status(404).json({ message: "The party you want does not exist." });
       }
       return res.status(200).json({ data: allPartiesInfo });
     } catch (err) {
@@ -67,36 +79,24 @@ module.exports = {
   getFilteredParties: async (req, res) => {
     // 0. 쿼리에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
     const ott_id = req.query.ott_id;
-    const filteredPartiesByDate = [];
-    let date = null;
-
-    if (req.query.date) {
-      date = req.query.date;
-    }
-
+    const start_date = req.query.start_date;
     try {
       // 1. ottId로 조회해서 filteredPartiesByOttId에 담는다
-      const filteredPartiesByOttId = await Party.findAll({
-        where: { ott_id },
+      let filteredParties = await Party.findAll({
+        where: { ott_id, start_date },
         raw: true,
       });
-      // 2. 특정 날짜가 있다면 날짜와 같은 정보만 담는다.
-      if (date) {
-        for (let party of filteredPartiesByOttId) {
-          if (party.start_date === date) {
-            filteredPartiesByDate.push(party);
-          }
+      filteredParties = filteredParties.map((party) => {
+        const joinedNumber = party.members.split(",").length;
+        if (joinedNumber < party.members_num) {
+          return party;
         }
-        if (!filteredPartiesByDate) {
-          return res.status(404).json({ message: "failed" });
-        }
-        return res.status(200).json({ data: filteredPartiesByDate });
+      });
+      if (!filteredParties) {
+        return res.status(404).json({ message: "The party you want does not exist." });
       }
+      return res.status(200).json({ data: filteredParties });
       // 3. 특정 날짜가 없다면 원래 아이디로 조회한 내역만 보낸다.
-      if (!filteredPartiesByOttId) {
-        return res.status(404).json({ message: "failed" });
-      }
-      return res.status(200).json({ data: filteredPartiesByOttId });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
@@ -142,7 +142,7 @@ module.exports = {
           if (alreadyJoinedArr.length !== 0) {
             return res
               .status(422)
-              .json({ message: "You already created or joined the same party" });
+              .json({ message: "You have already created or joined the same party" });
           }
         }
 

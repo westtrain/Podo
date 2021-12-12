@@ -5,13 +5,26 @@ module.exports = {
   getUser: async (req, res) => {
     // 유저 상세 정보 조회
     const userInfo = await User.findOne({
-      attributes: ["id", "name", "email", "socialType", "money", "deposit"],
+      attributes: ["id", "name", "email", "socialType", "money", "deposit", "image"],
       where: { id: req.userId },
       raw: true,
     });
     try {
       if (userInfo) {
         return res.status(200).json({ data: userInfo });
+      }
+      return res.status(401).json({ message: "Unauthorized request" });
+    } catch (err) {
+      return res.status(500).json({ message: "Server Error" });
+    }
+  },
+
+  updateProfileImage: async (req, res) => {
+    // params로 받은 id로 이미지를 업데이트 한다.
+    const userImage = await User.update({ image: req.params.id }, { where: { id: req.userId } });
+    try {
+      if (userImage) {
+        return res.status(200).json({ message: "Sucess to change image" });
       }
       return res.status(401).json({ message: "Unauthorized request" });
     } catch (err) {

@@ -43,7 +43,7 @@ const party = (props) => {
 
   const getFilteredParties = async () => {
     api
-      .get(`/filtered?ott_id=7&start_date=2021-12-20`, {
+      .get(`/filtered/7?start_date=2021-12-20`, {
         withCredentials: true,
       })
       .then((res) => {

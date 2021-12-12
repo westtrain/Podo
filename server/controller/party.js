@@ -36,10 +36,10 @@ module.exports = {
   },
 
   getParty: async (req, res) => {
-    const party_id = req.params.id;
+    // params로 받은 id에 해당하는 파티를 조회한다.
     try {
       const partyInfo = await Party.findOne({
-        where: { id: party_id },
+        where: { id: req.params.id },
         raw: true,
       });
       if (!partyInfo) {
@@ -53,23 +53,29 @@ module.exports = {
 
   getAllParties: async (req, res) => {
     try {
+      //moment 라이브러리를 사용해서 당일 날짜를 date라는 변수에 할당한다.
       const date = moment().format("YYYY-MM-DD");
-      console.log(date.toString());
-      const ott_id = req.params.ott_id;
+      const ott_id = req.params.id;
+
+      // 1,2차 필터링: 익일 이후의 날짜에 시작하고, ott아이디가 동일 파티를 조회한다.
       let allPartiesInfo = await Party.findAll({
         where: { start_date: { [Op.gt]: date }, ott_id },
         raw: true,
       });
+      // 3차 필터링: 정원이 차지 않은 파티를 조회한다.
       allPartiesInfo = allPartiesInfo.map((party) => {
         const joinedNumber = party.members.split(",").length;
         if (joinedNumber < party.members_num) {
           return party;
         }
       });
-      console.log(allPartiesInfo);
+
+      // 조건에 충족하는 파티가 없다면
       if (!allPartiesInfo) {
         return res.status(404).json({ message: "The party you want does not exist." });
       }
+
+      //조건에 충족하는 파티가 있다면
       return res.status(200).json({ data: allPartiesInfo });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
@@ -78,25 +84,27 @@ module.exports = {
 
   getFilteredParties: async (req, res) => {
     // 0. 쿼리에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
-    const ott_id = req.query.ott_id;
+    const ott_id = req.params.id;
     const start_date = req.query.start_date;
     try {
-      // 1. ottId로 조회해서 filteredPartiesByOttId에 담는다
+      // 1,2차 필터링: params와 query로 받은 ott_id와 start_date에 맞는 파티를 조회한다.
       let filteredParties = await Party.findAll({
         where: { ott_id, start_date },
         raw: true,
       });
+      //3차 필터링: 정원이 차지 않은 파티를 조회한다.
       filteredParties = filteredParties.map((party) => {
         const joinedNumber = party.members.split(",").length;
         if (joinedNumber < party.members_num) {
           return party;
         }
       });
+      //조건에 충족하는 파티가 없다면
       if (!filteredParties) {
         return res.status(404).json({ message: "The party you want does not exist." });
       }
+      //조건에 충족하는 파티가 있다면
       return res.status(200).json({ data: filteredParties });
-      // 3. 특정 날짜가 없다면 원래 아이디로 조회한 내역만 보낸다.
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }

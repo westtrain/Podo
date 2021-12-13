@@ -17,6 +17,17 @@ const User = (props) => {
       });
   };
 
+  const updateProfileImage = async () => {
+    api
+      .patch(`/image/3`, { withCredentials: true })
+      .then((res) => {
+        console.log("RESPONSE", JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log("ERROR", JSON.stringify(err.response.data.message));
+      });
+  };
+
   const updateMoney = async () => {
     // 유저가 포도머니 1000원 인출시
     api
@@ -42,6 +53,7 @@ const User = (props) => {
   return (
     <>
       <button onClick={getUser}>getUser</button>
+      <button onClick={updateProfileImage}>updateProfileImage</button>
       <button onClick={updateMoney}>updateMoney</button>
       <button onClick={deleteUser}>deleteUser</button>
     </>

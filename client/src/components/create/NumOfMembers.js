@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPartyMembersNum } from "../../redux/reducers/partySlice";
+import { setMembersNum } from "../../redux/reducers/partySlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 function NumOfMembers(props) {
   const dispatch = useDispatch();
@@ -12,16 +15,13 @@ function NumOfMembers(props) {
     (state) => state.party.ceateParty.members_num
   );
   // Plus/Minus 버튼 이벤트
-  const onclickVariationminus = () => {
-    if (membersNumState !== 1) {
-      dispatch(setPartyMembersNum(membersNumState - 1));
-    }
+
+  const onClickMinus = () => {
+    if (membersNumState !== 1) dispatch(setMembersNum(membersNumState - 1));  
   };
 
-  const onclickVariationplus = () => {
-    if (membersNumState < 3) {
-      dispatch(setPartyMembersNum(membersNumState + 1));
-    }
+  const onClickPlus = () => {
+    if (membersNumState < 3) dispatch(setMembersNum(membersNumState + 1));    
   };
   return (
     <>

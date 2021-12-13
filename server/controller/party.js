@@ -1,5 +1,8 @@
 const db = require("../models");
 const { Party } = require("../models");
+const moment = require("moment");
+const sequelize = require("sequelize");
+const Op = sequelize.Op;
 
 module.exports = {
   getUsersParty: async (req, res) => {
@@ -33,11 +36,10 @@ module.exports = {
   },
 
   getParty: async (req, res) => {
-    const party_id = req.params.id;
-    console.log(party_id);
+    // params로 받은 id에 해당하는 파티를 조회한다.
     try {
       const partyInfo = await Party.findOne({
-        where: { id: party_id },
+        where: { id: req.params.id },
         raw: true,
       });
       if (!partyInfo) {
@@ -51,13 +53,29 @@ module.exports = {
 
   getAllParties: async (req, res) => {
     try {
-      console.log("allPartiesInfo");
-      const allPartiesInfo = await Party.findAll({
+      //moment 라이브러리를 사용해서 당일 날짜를 date라는 변수에 할당한다.
+      const date = moment().format("YYYY-MM-DD");
+      const ott_id = req.params.id;
+
+      // 1,2차 필터링: 익일 이후의 날짜에 시작하고, ott아이디가 동일 파티를 조회한다.
+      let allPartiesInfo = await Party.findAll({
+        where: { start_date: { [Op.gt]: date }, ott_id },
         raw: true,
       });
+      // 3차 필터링: 정원이 차지 않은 파티를 조회한다.
+      allPartiesInfo = allPartiesInfo.map((party) => {
+        const joinedNumber = party.members.split(",").length;
+        if (joinedNumber < party.members_num) {
+          return party;
+        }
+      });
+
+      // 조건에 충족하는 파티가 없다면
       if (!allPartiesInfo) {
-        return res.status(404).json({ message: "failed" });
+        return res.status(404).json({ message: "The party you want does not exist." });
       }
+
+      //조건에 충족하는 파티가 있다면
       return res.status(200).json({ data: allPartiesInfo });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
@@ -66,37 +84,27 @@ module.exports = {
 
   getFilteredParties: async (req, res) => {
     // 0. 쿼리에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
-    const ott_id = req.query.ott_id;
-    const filteredPartiesByDate = [];
-    let date = null;
-
-    if (req.query.date) {
-      date = req.query.date;
-    }
-
+    const ott_id = req.params.id;
+    const start_date = req.query.start_date;
     try {
-      // 1. ottId로 조회해서 filteredPartiesByOttId에 담는다
-      const filteredPartiesByOttId = await Party.findAll({
-        where: { ott_id },
+      // 1,2차 필터링: params와 query로 받은 ott_id와 start_date에 맞는 파티를 조회한다.
+      let filteredParties = await Party.findAll({
+        where: { ott_id, start_date },
         raw: true,
       });
-      // 2. 특정 날짜가 있다면 날짜와 같은 정보만 담는다.
-      if (date) {
-        for (let party of filteredPartiesByOttId) {
-          if (party.start_date === date) {
-            filteredPartiesByDate.push(party);
-          }
+      //3차 필터링: 정원이 차지 않은 파티를 조회한다.
+      filteredParties = filteredParties.map((party) => {
+        const joinedNumber = party.members.split(",").length;
+        if (joinedNumber < party.members_num) {
+          return party;
         }
-        if (!filteredPartiesByDate) {
-          return res.status(404).json({ message: "failed" });
-        }
-        return res.status(200).json({ data: filteredPartiesByDate });
+      });
+      //조건에 충족하는 파티가 없다면
+      if (!filteredParties) {
+        return res.status(404).json({ message: "The party you want does not exist." });
       }
-      // 3. 특정 날짜가 없다면 원래 아이디로 조회한 내역만 보낸다.
-      if (!filteredPartiesByOttId) {
-        return res.status(404).json({ message: "failed" });
-      }
-      return res.status(200).json({ data: filteredPartiesByOttId });
+      //조건에 충족하는 파티가 있다면
+      return res.status(200).json({ data: filteredParties });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
@@ -142,7 +150,7 @@ module.exports = {
           if (alreadyJoinedArr.length !== 0) {
             return res
               .status(422)
-              .json({ message: "You already created or joined the same party" });
+              .json({ message: "You have already created or joined the same party" });
           }
         }
 

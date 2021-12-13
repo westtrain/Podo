@@ -218,8 +218,11 @@ module.exports = {
           return token;
         })
         .then((token) => {
+          console.log("1");
           sendAccessToken(res, token); //쿠키에 토큰 담아서 클라이언트에 전송
+          console.log("2");
           res.redirect(`${process.env.CLIENT_LOGIN_CALLBACK}`); //가입완료 후 화면
+          console.log("3");
         });
     } catch (error) {
       console.log("error");

@@ -29,6 +29,12 @@ function OttInfo(props) {
           />
         </div>
         <div className="guidefooter">
+          <Link to={"/create/1"}>
+            <div className="backbtn">
+              <div className="backicon">&#60;</div> 뒤로가기
+            </div>
+          </Link>
+
           <Link to={"/create/3"}>
             <div className="guidefooterbtn">
               <div className="nextbtn">다음</div>

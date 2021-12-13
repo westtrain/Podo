@@ -547,6 +547,7 @@ input {
         justify-content: flex-start;
 
         .period {
+          cursor: pointer;
           width: 100%;
           height: 85px;
           border: 3px solid $bordercolor;
@@ -569,9 +570,9 @@ input {
             justify-content: space-between;
             align-items: center;
             font-size: 18px;
-          }
-          img {
-            margin-left: 40px;
+            .arrow {
+              margin-left: 40px;
+            }
           }
         }
 
@@ -651,7 +652,21 @@ input {
         margin-top: 7px;
         width: 75%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+
+        .backbtn {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #c6c6c6;
+          .backicon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #c6c6c6;
+          }
+        }
 
         .guidefooterbtn {
           width: 160px;
@@ -787,6 +802,7 @@ input {
         }
 
         .checkguide {
+          cursor: pointer;
           display: flex;
           align-items: center;
           margin-top: 30px;
@@ -851,7 +867,7 @@ input {
               color: #7e7fdf;
             }
           }
-          img {
+          .updown {
             cursor: pointer;
           }
         }
@@ -879,6 +895,10 @@ input {
           display: flex;
           justify-content: flex-start;
           align-items: center;
+
+          .check {
+            margin: 0 15px 0 15px;
+          }
           .paymentleft {
             padding-left: 20px;
           }
@@ -915,7 +935,21 @@ input {
       .guidefooter {
         width: 75%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+
+        .backbtn {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #c6c6c6;
+          .backicon {
+            font-size: 20px;
+            margin-right: 10px;
+            color: #c6c6c6;
+          }
+        }
 
         .guidefooterbtn {
           width: 160px;

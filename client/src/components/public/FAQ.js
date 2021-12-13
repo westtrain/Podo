@@ -3,6 +3,9 @@ import "../../style/App.scss";
 import down_icon from "../../image/down_icon.png";
 import up_icon from "../../image/up_icon.png";
 import ReactDatePicker from "react-datepicker";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 function FAQ(props) {
   const [height1, setHeight1] = useState(80);
@@ -70,11 +73,17 @@ function FAQ(props) {
             style={{ height: height1 }}
           >
             <div className="faqmunit">
-              <div>나의 구독 서비스를 공유하고 싶어요. (파티만들기)</div>
+              <div className="faqmh">
+                나의 구독 서비스를 공유하고 싶어요. (파티만들기)
+              </div>
               {!changeImg1 ? (
-                <img src={down_icon} alt="down"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleDown} size="2x" />
+                </div>
               ) : (
-                <img src={up_icon} alt="up"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleUp} size="2x" />
+                </div>
               )}
               {/* <img src={down_icon} alt="down"></img> */}
             </div>
@@ -104,11 +113,17 @@ function FAQ(props) {
             style={{ height: height2 }}
           >
             <div className="faqmunit">
-              <div>다른 사람의 구독 서비스를 공유받고 싶어요. (파티찾기)</div>
+              <div className="faqmh">
+                다른 사람의 구독 서비스를 공유받고 싶어요. (파티찾기)
+              </div>
               {!changeImg2 ? (
-                <img src={down_icon} alt="down"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleDown} size="2x" />
+                </div>
               ) : (
-                <img src={up_icon} alt="up"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleUp} size="2x" />
+                </div>
               )}
             </div>
 
@@ -139,11 +154,15 @@ function FAQ(props) {
             style={{ height: height3 }}
           >
             <div className="faqmunit">
-              <div>'포도 머니'가 무엇언가요?</div>
+              <div className="faqmh">'포도 머니'가 무엇언가요?</div>
               {!changeImg3 ? (
-                <img src={down_icon} alt="down"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleDown} size="2x" />
+                </div>
               ) : (
-                <img src={up_icon} alt="up"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleUp} size="2x" />
+                </div>
               )}
             </div>
 
@@ -164,11 +183,15 @@ function FAQ(props) {
             style={{ height: height4 }}
           >
             <div className="faqmunit">
-              <div>'포도 정산일'이 무엇인가요?</div>
+              <div className="faqmh">'포도 정산일'이 무엇인가요?</div>
               {!changeImg4 ? (
-                <img src={down_icon} alt="down"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleDown} size="2x" />
+                </div>
               ) : (
-                <img src={up_icon} alt="up"></img>
+                <div className="faqmhicon">
+                  <FontAwesomeIcon icon={faAngleUp} size="2x" />
+                </div>
               )}
             </div>
 

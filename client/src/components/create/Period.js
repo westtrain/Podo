@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import arrow from "../../image/arrow.png";
 import MiniCalendar from "./MiniCalendar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 function Period(props) {
   const [showStartCalendar, setShowStartCalendar] = useState(false);
@@ -43,7 +45,9 @@ function Period(props) {
             <div className="periodleft">시작일</div>
             <div className="periodright">
               선택
-              <img src={arrow} />
+              <div className="arrow">
+                <FontAwesomeIcon icon={faChevronDown} size="1x" />
+              </div>
             </div>
           </div>
           {showStartCalendar ? (
@@ -55,7 +59,9 @@ function Period(props) {
             <div className="periodleft">혜택 기간</div>
             <div className="periodright">
               선택
-              <img src={arrow} />
+              <div className="arrow">
+                <FontAwesomeIcon icon={faChevronDown} size="1x" />
+              </div>
             </div>
           </div>
           {showSetPeriod ? (
@@ -89,7 +95,9 @@ function Period(props) {
             <div className="periodleft">종료일</div>
             <div className="periodright">
               선택
-              <img src={arrow} />
+              <div className="arrow">
+                <FontAwesomeIcon icon={faChevronDown} size="1x" />
+              </div>
             </div>
           </div>
           {showEndCalendar ? (
@@ -104,6 +112,11 @@ function Period(props) {
           </div>
         </div>
         <div className="guidefooter">
+          <Link to={"/create/3"}>
+            <div className="backbtn">
+              <div className="backicon">&#60;</div> 뒤로가기
+            </div>
+          </Link>
           <Link to={"/create/5"}>
             <div className="guidefooterbtn">
               <div className="nextbtn">다음</div>

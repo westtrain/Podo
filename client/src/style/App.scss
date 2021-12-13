@@ -140,13 +140,13 @@ a {
         align-items: center;
         justify-content: center;
 
-        div {
+        .faqmh {
           margin-top: 26px;
           font-size: 20px;
           font-weight: bold;
           color: $fontcolor;
         }
-        img {
+        .faqmhicon {
           margin-top: 26px;
           position: absolute;
           margin-left: 40em;
@@ -321,10 +321,10 @@ a {
       .faqmquestion {
         margin-top: 10px;
         .faqmunit {
-          div {
+          .faqmh {
             font-size: 15px;
           }
-          img {
+          .faqmhicon {
             margin-left: 37em;
           }
         }

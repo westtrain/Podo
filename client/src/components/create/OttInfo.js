@@ -96,9 +96,17 @@ function OttInfo(props) {
           )}
         </div>
         <div className="guidefooter">
-          <div className="guidefooterbtn" onClick={onClickNext}>
+
+          <Link to={"/create/1"}>
+            <div className="backbtn">
+              <div className="backicon">&#60;</div> 뒤로가기
+            </div>
+          </Link>
+
+         <div className="guidefooterbtn" onClick={onClickNext}>
             <div className="nextbtn">다음</div>
           </div>
+
         </div>
       </div>
     </>

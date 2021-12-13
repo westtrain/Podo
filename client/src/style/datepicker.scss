@@ -118,7 +118,7 @@
     border-top-right-radius: 20px;
   }
   .month-day {
-    margin: 0 20px;
+    margin: -7px 20px 0 20px;
   }
 }
 
@@ -419,7 +419,7 @@
   height: 40px;
   //line-height: $datepicker__item-size;
   text-align: center;
-  margin: 2% 3%;
+  margin: 1% 3%;
   line-height: 40px;
 }
 

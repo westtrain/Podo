@@ -1,9 +1,12 @@
 import React from "react";
 import PartyCard from "./PartyCard";
 import "../../style/MyPage.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStickyNote } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineCopy } from "react-icons/ai";
+import { FaRegEye } from "react-icons/fa";
 import netflix from "../../image/netflix.png";
-import copy_icon from "../../image/copy_icon.png";
-import hide_icon from "../../image/hide_icon.png";
 import member_icon from "../../image/member_icon.png";
 
 function MyPartyDetail(props) {
@@ -30,15 +33,21 @@ function MyPartyDetail(props) {
               <div className="logintitle">아이디</div>
               <div className="logindata">
                 kimcoding@gmail.com
-                <img src={copy_icon} alt="copy" className="copyicon" />
+                <div className="copyicon">
+                  <AiOutlineCopy style={{ color: "#222222" }} size="20px" />
+                </div>
               </div>
             </div>
             <div className="loginbox">
               <div className="logintitle">비밀번호</div>
               <div className="logindata">
                 ********
-                <img src={hide_icon} alt="copy" className="copyicon" />
-                <img src={copy_icon} alt="copy" className="copyicon" />
+                <div className="copyicon">
+                  <FaRegEye style={{ color: "#222222" }} size="20px" />
+                </div>
+                <div className="copyicon">
+                  <AiOutlineCopy style={{ color: "#222222" }} size="20px" />
+                </div>
               </div>
             </div>
           </div>

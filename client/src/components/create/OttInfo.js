@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setOttLoginId, setOttLoginPw } from "../../redux/reducers/partySlice";
 import Swal from "sweetalert2";
@@ -96,17 +96,15 @@ function OttInfo(props) {
           )}
         </div>
         <div className="guidefooter">
-
           <Link to={"/create/1"}>
             <div className="backbtn">
               <div className="backicon">&#60;</div> 뒤로가기
             </div>
           </Link>
 
-         <div className="guidefooterbtn" onClick={onClickNext}>
+          <div className="guidefooterbtn" onClick={onClickNext}>
             <div className="nextbtn">다음</div>
           </div>
-
         </div>
       </div>
     </>

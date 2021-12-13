@@ -1,5 +1,7 @@
 import React from "react";
-import won from "../../image/won.png";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWonSign } from "@fortawesome/free-solid-svg-icons";
 
 function Party() {
   return (
@@ -10,7 +12,14 @@ function Party() {
           파티 지금 시작
         </div>
         <div className="ottfee">
-          <img src={won} alt="won" className="won"></img>월 5,575원
+          <div className="won">
+            <FontAwesomeIcon
+              icon={faWonSign}
+              style={{ color: "#c6c6c6" }}
+              size="1x"
+            />
+          </div>
+          월 5,575원
         </div>
       </div>
       <div className="partyexpdown">오늘 ~ 2022.01.23 까지</div>

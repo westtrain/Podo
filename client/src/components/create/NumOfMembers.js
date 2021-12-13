@@ -6,9 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-
-
-
 function NumOfMembers(props) {
   const dispatch = useDispatch();
   const membersNumState = useSelector(
@@ -17,11 +14,11 @@ function NumOfMembers(props) {
   // Plus/Minus 버튼 이벤트
 
   const onClickMinus = () => {
-    if (membersNumState !== 1) dispatch(setMembersNum(membersNumState - 1));  
+    if (membersNumState !== 1) dispatch(setMembersNum(membersNumState - 1));
   };
 
   const onClickPlus = () => {
-    if (membersNumState < 3) dispatch(setMembersNum(membersNumState + 1));    
+    if (membersNumState < 3) dispatch(setMembersNum(membersNumState + 1));
   };
   return (
     <>
@@ -38,7 +35,7 @@ function NumOfMembers(props) {
         </div>
         <div className="guidemiddle">
           <div className="memberbox">
-            <div className="updown" onClick={onclickVariationminus}>
+            <div className="updown" onClick={onClickMinus}>
               <FontAwesomeIcon icon={faMinus} size="2x" />
             </div>
 
@@ -46,7 +43,7 @@ function NumOfMembers(props) {
               {membersNumState}명
               <div className="payinfo">3명 모집 시 매달 최대 11,425원 적립</div>
             </div>
-            <div className="updown" onClick={onclickVariationplus}>
+            <div className="updown" onClick={onClickPlus}>
               <FontAwesomeIcon icon={faPlus} size="2x" />
             </div>
           </div>

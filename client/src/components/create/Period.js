@@ -1,30 +1,53 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import arrow from "../../image/arrow.png";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setEndDate,
+  setPeriod as setPeriodState,
+} from "../../redux/reducers/partySlice";
+import { dateToString } from "../../utils/dateFunction";
 import MiniCalendar from "./MiniCalendar";
+import Swal from "sweetalert2";
+import arrow from "../../image/arrow.png";
 
 function Period(props) {
-  const [showStartCalendar, setShowStartCalendar] = useState(false);
-  const [showSetPeriod, setShowSetPeriod] = useState(false);
-  const [showEndCalendar, setShowEndCalendar] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date());
+  const [startDateToString, setStartDateToString] = useState("");
+  const [endDateToString, setEndDateToString] = useState("");
   const [period, setPeriod] = useState(2);
+  const [showStartCalendar, setShowStartCalendar] = useState(false);
+  const [showPeriod, setShowPeriod] = useState(false);
 
-  const hadleStartCalendal = () => {
-    setShowStartCalendar(!showStartCalendar);
+  //혜택기간 range input
+  const onChangeInput = (e) => {
+    const value = Number(e.target.value);
+    setPeriod(value);
+    dispatch(setPeriodState(value));
+    let endDate = new Date(
+      startDate.setMonth(startDate.getMonth() + Number(value))
+    );
+    endDate = new Date(endDate.setDate(startDate.getDate() + Number(value)));
+    dispatch(setEndDate(endDate));
+    setEndDateToString(dateToString(endDate));
+    startDate.setMonth(startDate.getMonth() - Number(value)); //위의 setMonth로 month가 직접 변화가 되어 startDate를 원래대로 돌려준다.
   };
 
-  const hadleSetPeriod = () => {
-    setShowSetPeriod(!showSetPeriod);
+  const onClickNext = () => {
+    if (startDateToString === "") {
+      Swal.fire("You unchecked!", "파티 기간을 모두 설정해주세요.", "error");
+    } else if (endDateToString === "") {
+      const endDate = new Date(
+        startDate.setMonth(startDate.getMonth() + period)
+      );
+      dispatch(setEndDate(endDate));
+      navigate("/create/5");
+    } else {
+      navigate("/create/5");
+    }
   };
-
-  const hadleEndCalendal = () => {
-    setShowEndCalendar(!showEndCalendar);
-  };
-
-  const onClickDate = (some) => {
-    console.log("??", some);
-  };
-
+  useEffect(() => {}, [endDateToString]);
   return (
     <>
       <div className="partyguidestep4">
@@ -39,33 +62,74 @@ function Period(props) {
           </div>
         </div>
         <div className="guidemiddle">
-          <div className="period" onClick={hadleStartCalendal}>
+          <div
+            className="period"
+            onClick={() => {
+              setShowStartCalendar(!showStartCalendar);
+              if (showPeriod) setShowPeriod(false);
+            }}
+          >
             <div className="periodleft">시작일</div>
             <div className="periodright">
-              선택
+              {startDateToString === "" ? "선택" : startDateToString}
               <img src={arrow} />
             </div>
           </div>
           {showStartCalendar ? (
             <div className="calendal">
-              <MiniCalendar />
+              <MiniCalendar
+                setStartDate={setStartDate}
+                setStartDateToString={setStartDateToString}
+              />
             </div>
           ) : null}
-          <div className="period" onClick={hadleSetPeriod}>
+          <div
+            className="period"
+            onClick={() => {
+              if (startDateToString === "") {
+                Swal.fire("You unchecked!", "시작일을 선택해주세요.", "error");
+              } else {
+                setShowPeriod(!showPeriod);
+                if (showStartCalendar) setShowStartCalendar(false);
+              }
+            }}
+          >
             <div className="periodleft">혜택 기간</div>
             <div className="periodright">
-              선택
+              {endDateToString === "" ? "선택" : `${period}개월`}
               <img src={arrow} />
             </div>
           </div>
-          {showSetPeriod ? (
+          {showPeriod ? (
             <div className="setperiod">
               <div className="setperiodheader">
                 최소 2개월 이상의 파티만 만들 수 있어요.
               </div>
               <div className="setperiodmiddle">
                 <div className="setperiodmp">{period}개월</div>
-                <input type="range" className="setperiodbar" step="10"></input>
+                <input
+                  type="range"
+                  className="setperiodbar"
+                  min="2"
+                  max="12"
+                  step="1"
+                  list="tickmarks"
+                  value={period}
+                  onInput={onChangeInput}
+                />
+                <datalist id="tickmarks">
+                  <option value="2"></option>
+                  <option value="3"></option>
+                  <option value="4"></option>
+                  <option value="5"></option>
+                  <option value="6"></option>
+                  <option value="7"></option>
+                  <option value="8"></option>
+                  <option value="9"></option>
+                  <option value="10"></option>
+                  <option value="11"></option>
+                  <option value="12"></option>
+                </datalist>
                 <div className="setperiodnum">
                   <div>2</div>
                   <div>&nbsp;&nbsp;3</div>
@@ -85,30 +149,14 @@ function Period(props) {
               </div>
             </div>
           ) : null}
-          <div className="period" onClick={hadleEndCalendal}>
-            <div className="periodleft">종료일</div>
-            <div className="periodright">
-              선택
-              <img src={arrow} />
-            </div>
-          </div>
-          {showEndCalendar ? (
-            <div className="calendal">
-              <MiniCalendar />
-            </div>
-          ) : null}
-          <div className="infoperiod">
-            - 파티 시작 이후 파티 기간 수정은 불가합니다.
-            <br />- 파티 종료일 전에 파티를 해산할 경우 위약금이 발생할 수
-            있습니다.
+          <div className="periodText">
+            <div className="periodright"></div>
           </div>
         </div>
-        <div className="guidefooter">
-          <Link to={"/create/5"}>
-            <div className="guidefooterbtn">
-              <div className="nextbtn">다음</div>
-            </div>
-          </Link>
+        <div className="guidefooter" onClick={onClickNext}>
+          <div className="guidefooterbtn">
+            <div className="nextbtn">다음</div>
+          </div>
         </div>
       </div>
     </>

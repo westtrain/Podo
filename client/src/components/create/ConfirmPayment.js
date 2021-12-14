@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,6 +14,11 @@ function ConfirmPayment(props) {
   const settlementModalState = useSelector(
     (state) => state.modal.settlementModal
   );
+  const paymentState = useSelector((state) => state.payment);
+
+  useEffect(() => {
+    console.log(paymentState);
+  }, []);
   return (
     <>
       <div className="partyguide">

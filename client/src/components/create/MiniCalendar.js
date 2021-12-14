@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setStartDate as setStartDateState } from "../../redux/reducers/partySlice";
-import DatePicker, { registerLocale } from "react-datepicker";
+import { dateToString } from "../../utils/dateFunction";
+import DatePicker from "react-datepicker";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
-import { ko } from "date-fns/esm/locale";
 import arrow_left from "../../image/arrow_left.png";
 import arrow_right from "../../image/arrow_right.png";
 
@@ -19,27 +19,16 @@ function MiniCalendar(props) {
   const handleMonthChange = (date) => {
     setMonth(date.getMonth());
   };
-  const [months, setMonths] = useState([
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "5월",
-    "6월",
-    "7월",
-    "8월",
-    "9월",
-    "10월",
-    "11월",
-    "12월",
-  ]);
-  const onClickDate = (date) => {
-    dispatch(setStartDateState(date));
-    console.log(startDateState);
-  };
 
+  const onClickDate = async (date) => {
+    console.log(date);
+    setStartDate(date);
+    props.setStartDate(date);
+    props.setStartDateToString(dateToString(date));
+    dispatch(setStartDateState(date));
+  };
   useEffect(() => {
-    dispatch(setStartDateState(null));
+    dispatch(setStartDateState(new Date()));
   }, []);
 
   return (
@@ -88,7 +77,7 @@ function MiniCalendar(props) {
             </div>
             <div className="month-day">
               {getYear(date) + "년  "}
-              {months[getMonth(date)]}
+              {getMonth(date) + 1}월
             </div>
 
             <div
@@ -109,5 +98,4 @@ function MiniCalendar(props) {
     </>
   );
 }
-
 export default MiniCalendar;

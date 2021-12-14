@@ -1,7 +1,7 @@
 const { Party } = require("../models");
 const moment = require("moment");
 
-const cancelParty = async (schedule) => {
+const cancelParty = async () => {
   const start_date = moment().format("YYYY-MM-DD");
 
   // 시작일이 당일인 파티 조회

@@ -3,8 +3,9 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
 import { ko } from "date-fns/esm/locale";
-import arrow_left from "../../image/arrow_left.png";
-import arrow_right from "../../image/arrow_right.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 function Calendar(props) {
   const [startDate, setStartDate] = useState(new Date());
@@ -68,7 +69,13 @@ function Calendar(props) {
                 cursor: "pointer",
               }}
             >
-              <img src={arrow_left} />
+              <div className="left-icon">
+                <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  style={{ color: "#a5a9f8" }}
+                  size="1x"
+                />
+              </div>
             </div>
             <div className="month-day">
               {getYear(date) + "년  "}
@@ -85,7 +92,13 @@ function Calendar(props) {
                 cursor: "pointer",
               }}
             >
-              <img src={arrow_right} />
+              <div className="right-icon">
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  style={{ color: "#a5a9f8" }}
+                  size="1x"
+                />
+              </div>
             </div>
           </div>
         )}

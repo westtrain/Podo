@@ -62,6 +62,11 @@ function ConfirmPayment(props) {
           </div>
         </div>
         <div className="guidefooter">
+          <Link to={"/create/5"}>
+            <div className="backbtn">
+              <div className="backicon">&#60;</div> 뒤로가기
+            </div>
+          </Link>
           <Link to={"/create/6"}>
             <div className="guidefooterbtn">
               <div className="nextbtn">다음</div>

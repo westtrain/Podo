@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle as checkedIcon } from "@fortawesome/free-solid-svg-icons";
@@ -72,9 +72,18 @@ function LeaderGuide(props) {
           </div>
         </div>
         <div className="guidefooter">
+
+          <Link to={"/create"}>
+            <div className="backbtn">
+              <div className="backicon">&#60;</div> 뒤로가기
+            </div>
+          </Link>
+         
+
           <div className="guidefooterbtn" onClick={onClickNext}>
             <div className="nextbtn">다음</div>
           </div>
+
         </div>
       </div>
     </>

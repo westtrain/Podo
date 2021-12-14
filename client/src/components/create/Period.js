@@ -8,7 +8,8 @@ import {
 import { dateToString } from "../../utils/dateFunction";
 import MiniCalendar from "./MiniCalendar";
 import Swal from "sweetalert2";
-import arrow from "../../image/arrow.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 function Period(props) {
   const dispatch = useDispatch();
@@ -72,7 +73,9 @@ function Period(props) {
             <div className="periodleft">시작일</div>
             <div className="periodright">
               {startDateToString === "" ? "선택" : startDateToString}
-              <img src={arrow} />
+              <div className="arrow">
+                <FontAwesomeIcon icon={faChevronDown} size="1x" />
+              </div>
             </div>
           </div>
           {showStartCalendar ? (
@@ -97,7 +100,9 @@ function Period(props) {
             <div className="periodleft">혜택 기간</div>
             <div className="periodright">
               {endDateToString === "" ? "선택" : `${period}개월`}
-              <img src={arrow} />
+              <div className="arrow">
+                <FontAwesomeIcon icon={faChevronDown} size="1x" />
+              </div>
             </div>
           </div>
           {showPeriod ? (
@@ -149,14 +154,35 @@ function Period(props) {
               </div>
             </div>
           ) : null}
-          <div className="periodText">
-            <div className="periodright"></div>
+          <div className="period" onClick={hadleEndCalendal}>
+            <div className="periodleft">종료일</div>
+            <div className="periodright">
+              선택
+              <div className="arrow">
+                <FontAwesomeIcon icon={faChevronDown} size="1x" />
+              </div>
+            </div>
+          </div>
+          {showEndCalendar ? (
+            <div className="calendal">
+              <MiniCalendar />
+            </div>
+          ) : null}
+          <div className="infoperiod">
+            - 파티 시작 이후 파티 기간 수정은 불가합니다.
+            <br />- 파티 종료일 전에 파티를 해산할 경우 위약금이 발생할 수
+            있습니다.
           </div>
         </div>
-        <div className="guidefooter" onClick={onClickNext}>
-          <div className="guidefooterbtn">
-            <div className="nextbtn">다음</div>
-          </div>
+        <div className="guidefooter">
+          <Link to={"/create/3"}>
+            <div className="backbtn">
+              <div className="backicon">&#60;</div> 뒤로가기
+            </div>
+          </Link>
+            <div className="guidefooterbtn"onClick={onClickNext}>
+              <div className="nextbtn">다음</div>
+            </div>
         </div>
       </div>
     </>

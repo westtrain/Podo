@@ -5,7 +5,7 @@ import {
   setEndDate,
   setPeriod as setPeriodState,
 } from "../../redux/reducers/partySlice";
-import { dateToString } from "../../utils/dateFunction";
+import { dateToString, dateToStringDash } from "../../utils/dateFunction";
 import MiniCalendar from "./MiniCalendar";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,25 +26,19 @@ function Period(props) {
     const value = Number(e.target.value);
     setPeriod(value);
     dispatch(setPeriodState(value));
-    let endDate = new Date(
-      startDate.setMonth(startDate.getMonth() + Number(value))
-    );
-    endDate = new Date(endDate.setDate(startDate.getDate() + Number(value)));
-    dispatch(setEndDate(endDate));
-    setEndDateToString(dateToString(endDate));
-    startDate.setMonth(startDate.getMonth() - Number(value)); //위의 setMonth로 month가 직접 변화가 되어 startDate를 원래대로 돌려준다.
   };
 
   const onClickNext = () => {
     if (startDateToString === "") {
       Swal.fire("You unchecked!", "파티 기간을 모두 설정해주세요.", "error");
-    } else if (endDateToString === "") {
-      const endDate = new Date(
-        startDate.setMonth(startDate.getMonth() + period)
-      );
-      dispatch(setEndDate(endDate));
-      navigate("/create/5");
     } else {
+      let endDate = new Date(
+        startDate.setMonth(startDate.getMonth() + Number(period))
+      );
+      endDate = new Date(endDate.setDate(startDate.getDate() - 1));
+      dispatch(setEndDate(dateToStringDash(endDate)));
+      setEndDateToString(dateToString(endDate));
+      startDate.setMonth(startDate.getMonth() - Number(period)); //위의 setMonth로 month가 직접 변화가 되어 startDate를 원래대로 돌려준다.
       navigate("/create/5");
     }
   };

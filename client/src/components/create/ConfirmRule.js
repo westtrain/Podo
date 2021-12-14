@@ -9,6 +9,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 function ConfirmRule(props) {
   const startDate = useSelector((state) => state.party.ceateParty.start_date);
   const endDate = useSelector((state) => state.party.ceateParty.end_date);
+  const period = useSelector((state) => state.party.period);
 
   return (
     <>
@@ -42,8 +43,8 @@ function ConfirmRule(props) {
                 style={{ color: "#4040cc" }}
               />
             </div>
-             파티 기간은 {dateToStringPoint(startDate)} ~{" "}
-            {dateToStringPoint(endDate)} 약 10개월입니다.
+            파티 기간은 {dateToStringPoint(startDate)} ~{" "}
+            {dateToStringPoint(endDate)} {period}개월입니다.
           </div>
           <div className="rulebox">
             <div className="check">

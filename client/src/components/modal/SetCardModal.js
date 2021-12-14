@@ -1,12 +1,48 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useSelect, useDispatch } from "react-redux";
 import { showCardModal } from "../../redux/reducers/modalSlice";
+import { autoHypen, onlyNumber } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
+import Swal from "sweetalert2";
 import "../../style/Modal.scss";
 import exit from "../../image/exit.png";
 
 function SetCardModal(props) {
+  const [creditNumber, setCreditNumnber] = useState("");
+  const [expireMM, setExpireMM] = useState("");
+  const [expireYY, setExpireYY] = useState("");
+  const [birth, setBirth] = useState("");
+  const [creditPassword, setCreditPassword] = useState("");
+  const [warning, setWarning] = useState("");
   const dispatch = useDispatch();
+
+  const onChangeCardNum = (e) => {
+    setCreditNumnber(autoHypen(e.target.value));
+  };
+  const onChangeMM = (e) => {
+    setExpireMM(onlyNumber(e.target.value));
+  };
+  const onChangeYY = (e) => {
+    setExpireYY(onlyNumber(e.target.value));
+  };
+  const onChangeBirth = (e) => {
+    setBirth(onlyNumber(e.target.value));
+  };
+  const onChangePassword = (e) => {
+    setCreditPassword(onlyNumber(e.target.value));
+  };
+  const onClickSubmit = () => {
+    if (
+      creditNumber === "" ||
+      expireMM === "" ||
+      expireYY === "" ||
+      birth === "" ||
+      creditPassword === ""
+    ) {
+      setWarning("카드 정보를 모두 입력해주세요.");
+    } else {
+    }
+  };
   return (
     <>
       <div className="page">
@@ -34,33 +70,37 @@ function SetCardModal(props) {
 
               <div className="sdmmf">
                 <div>카드 번호 (16자리)</div>
-                <input></input>
+                <input value={creditNumber} onChange={onChangeCardNum} />
               </div>
 
               <div className="sdmms">
                 <div className="sdmmsf">
                   <div>유효기간(MM)</div>
-                  <input></input>
+                  <input maxLength="2" value={expireMM} onChange={onChangeMM} />
                 </div>
                 <div className="sdmmss">
                   <div>유효기간(YY)</div>
-                  <input></input>
+                  <input maxLength="2" value={expireYY} onChange={onChangeYY} />
                 </div>
               </div>
 
               <div className="sdmms">
                 <div className="sdmmsf">
                   <div>생년월일(6자리)</div>
-                  <input></input>
+                  <input maxLength="6" value={birth} onChange={onChangeBirth} />
                 </div>
                 <div className="sdmmss">
                   <div>비밀번호(앞2자)</div>
-                  <input></input>
+                  <input
+                    maxLength="2"
+                    value={creditPassword}
+                    onChange={onChangePassword}
+                  />
                 </div>
               </div>
-
+              {warning}
               <div className="clearbtnwrap">
-                <button className="clearbtn">
+                <button className="clearbtn" onClick={onClickSubmit}>
                   <div className="clearbtnw">완료</div>
                 </button>
               </div>

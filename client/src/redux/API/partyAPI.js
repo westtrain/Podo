@@ -17,23 +17,24 @@ export const getPartyId = (ottName) => {
   return ottList[ottName];
 };
 
-export const getFilteredParties = createAsyncThunk(
-  "party/getFilteredParties",
+export const getFilteredParties = (id, date) =>
+  createAsyncThunk(
+    "party/getFilteredParties",
 
-  async (_, { dispatch, rejectWithValue }) => {
-    try {
-      const party = await axios.get(
-        `${process.env.REACT_APP_API_URL}/party?ott_id=${id}&date=${date}`,
-        {
-          withCredentials: true,
-        }
-      );
-      return party.data.data;
-    } catch (err) {
-      return rejectWithValue(err);
+    async (_, { dispatch, rejectWithValue }) => {
+      try {
+        const party = await axios.get(
+          `${process.env.REACT_APP_API_URL}/party?ott_id=${id}&date=${date}`,
+          {
+            withCredentials: true,
+          }
+        );
+        return party.data.data;
+      } catch (err) {
+        return rejectWithValue(err);
+      }
     }
-  }
-);
+  );
 
 export const getAllParties = createAsyncThunk(
   "party/getAllParties",

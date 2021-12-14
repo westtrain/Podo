@@ -617,35 +617,23 @@ input {
         .periodText {
           width: 100%;
           height: 85px;
-          border: 3px solid rgba(0, 0, 0, 0);
           box-sizing: border-box;
-          border-radius: 10px;
-          margin-bottom: 34px;
-          padding-left: 30px;
+          margin-bottom: 70px;
           padding-right: 30px;
-          font-size: 18px;
           background-color: #fff;
           outline: none;
           display: flex;
           justify-content: center;
           align-items: center;
-          .periodleft {
-            font-size: 18px;
-          }
-          .periodright {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 18px;
-          }
-          img {
-            margin-left: 40px;
-          }
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 20px;
+          color: #aaaaaa;
         }
 
         .calendal {
           width: 100%;
-          height: 480px;
+          height: fit-content;
         }
 
         .setperiod {
@@ -706,12 +694,6 @@ input {
               }
             }
           }
-        }
-        .infoperiod {
-          font-weight: 500;
-          font-size: 15px;
-          line-height: 18px;
-          color: #c6c6c6;
         }
       }
 

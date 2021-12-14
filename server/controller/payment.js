@@ -141,40 +141,32 @@ module.exports = {
   },
 
   updateSettlement: async (req, res) => {
-    //아임포트로 정산일 등록 API
-    const user_id = req.body.userId;
-    console.log("======??", req.body);
-    const {
-      credit_num,
-      credit_expire_month,
-      credit_expire_year,
-      credit_birth,
-      credit_password,
-      settlement_date,
-      account_bank,
-      account_number,
-    } = req.body;
+    const user_id = req.userId;
+    const { credit_num, customer_uid, cardname, settlement_date, account_bank, account_number } =
+      req.body;
+
     try {
-      const paymentInfo = await Payment.findOne({
+      Payment.findOne({
         where: { user_id },
         raw: true,
-      });
-      //정산일 등록에 필요한 정보 모두 있다면 DB에 관련 정보 등록
-      if (user_id && settlement_date) {
-        if (!paymentInfo) {
-          await Payment.create({
-            user_id,
-            credit_num,
-            customer_uid: null,
-            card_name: null,
-            settlement_date,
-            account_bank,
-            account_number,
-          });
+      }).then((paymentInfo) => {
+        //정산일 등록에 필요한 정보 모두 있다면 DB에 관련 정보 등록
+        if (user_id && settlement_date) {
+          if (!paymentInfo) {
+            Payment.create({
+              user_id,
+              customer_uid,
+              credit_num,
+              cardname,
+              settlement_date,
+              account_bank,
+              account_number,
+            });
+          }
+          Payment.update({ settlement_date }, { where: { user_id } });
         }
-        await Payment.update({ settlement_date }, { where: { user_id } });
-        return res.status(200).json({ message: "Success" });
-      }
+      });
+      return res.status(200).json({ message: "Success" });
     } catch (error) {
       return res.status(500).json({ message: "Server Error" });
     }

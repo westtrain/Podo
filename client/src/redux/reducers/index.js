@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // local storage에 저장
 import userReducer from "./userSlice";
+import paymentSlice from "./paymentSlice";
 import partyReducer from "./partySlice";
 import modalReducer from "./modalSlice";
 import loadingReducer from "./loadingSlice";
@@ -19,6 +20,7 @@ export const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
     user: userReducer,
+    payment: paymentSlice,
     party: partyReducer,
     modal: modalReducer,
     loading: loadingReducer,

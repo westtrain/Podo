@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { dateToStringPoint } from "../../utils/dateFunction";
 import check from "../../image/check.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function ConfirmRule(props) {
+  const startDate = useSelector((state) => state.party.ceateParty.start_date);
+  const endDate = useSelector((state) => state.party.ceateParty.end_date);
+
   return (
     <>
       <div className="partyguide">
@@ -37,7 +42,8 @@ function ConfirmRule(props) {
                 style={{ color: "#4040cc" }}
               />
             </div>
-            파티 기간은 2021.11.15~2022.9.14 약 10개월입니다.
+             파티 기간은 {dateToStringPoint(startDate)} ~{" "}
+            {dateToStringPoint(endDate)} 약 10개월입니다.
           </div>
           <div className="rulebox">
             <div className="check">

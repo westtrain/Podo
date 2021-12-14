@@ -9,9 +9,10 @@ const initialState = {
     members: "",
     members_num: 3,
     leader: -1,
-    start_date: null,
+    start_date: new Date(),
     end_date: null,
   },
+  period: 0,
 };
 
 const partySlice = createSlice({
@@ -38,6 +39,14 @@ const partySlice = createSlice({
       state.ceateParty.start_date = action.payload;
       return state;
     },
+    setEndDate: (state, action) => {
+      state.ceateParty.end_date = action.payload;
+      return state;
+    },
+    setPeriod: (state, action) => {
+      state.period = action.payload;
+      return state;
+    },
   },
 });
 
@@ -47,5 +56,7 @@ export const {
   setOttLoginId,
   setOttLoginPw,
   setStartDate,
+  setEndDate,
+  setPeriod,
 } = partySlice.actions;
 export default partySlice.reducer;

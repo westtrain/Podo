@@ -18,29 +18,7 @@ const payment = (props) => {
       });
   };
 
-  const changeCard = async () => {
-    api
-      .patch(`/credit`, { withCredentials: true })
-      .then((res) => {
-        console.log("RESPONSE", JSON.stringify(res.data));
-      })
-      .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
-      });
-  };
-
-  const changeSettlement = async () => {
-    api
-      .patch(`/settlement`, { withCredentials: true })
-      .then((res) => {
-        console.log("RESPONSE", JSON.stringify(res.data));
-      })
-      .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
-      });
-  };
-
-  const enrollCard = async () => {
+  const updateCard = async () => {
     api
       .post(`/credit`, { withCredentials: true })
       .then((res) => {
@@ -75,17 +53,15 @@ const payment = (props) => {
       });
   };
 
-  const enrollSettlement = async () => {
+  const updateSettlement = async () => {
     api
       .post(
         `/settlement`,
         {
+          customer_uid: null,
           credit_num: null,
-          credit_expire_month: null,
-          credit_expire_year: null,
-          credit_birth: null,
-          credit_password: null,
-          settlement_date: "16",
+          cardname: null,
+          settlement_date: "15",
           account_bank: null,
           account_number: null,
         },
@@ -102,11 +78,9 @@ const payment = (props) => {
   return (
     <>
       <button onClick={getUsersPaymentInfo}>getUsersPaymentInfo</button>
-      <button onClick={changeCard}>changeCard</button>
-      <button onClick={changeSettlement}>changeSettlement</button>
-      <button onClick={enrollCard}>enrollCard</button>
+      <button onClick={updateCard}>updateCard</button>
       <button onClick={updateAccount}>updateAccount</button>
-      <button onClick={enrollSettlement}>enrollSettlement</button>
+      <button onClick={updateSettlement}>updateSettlement</button>
     </>
   );
 };

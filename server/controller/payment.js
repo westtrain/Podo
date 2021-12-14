@@ -141,10 +141,10 @@ module.exports = {
   },
 
   updateSettlement: async (req, res) => {
-    //아임포트로 정산일 등록 API
     const user_id = req.userId;
     const { credit_num, customer_uid, cardname, settlement_date, account_bank, account_number } =
       req.body;
+
     try {
       Payment.findOne({
         where: { user_id },

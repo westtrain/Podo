@@ -14,6 +14,7 @@ import loadingReducer from "./loadingSlice";
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["payment", "party", "modal"],
 };
 
 export const persistedReducer = persistReducer(

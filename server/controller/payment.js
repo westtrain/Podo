@@ -143,6 +143,7 @@ module.exports = {
   updateSettlement: async (req, res) => {
     //아임포트로 정산일 등록 API
     const user_id = req.body.userId;
+    console.log("======??", req.body);
     const {
       credit_num,
       credit_expire_month,

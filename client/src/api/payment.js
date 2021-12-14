@@ -77,7 +77,20 @@ const payment = (props) => {
 
   const enrollSettlement = async () => {
     api
-      .post(`/settlement`, { withCredentials: true })
+      .post(
+        `/settlement`,
+        {
+          credit_num: null,
+          credit_expire_month: null,
+          credit_expire_year: null,
+          credit_birth: null,
+          credit_password: null,
+          settlement_date: "16",
+          account_bank: null,
+          account_number: null,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })

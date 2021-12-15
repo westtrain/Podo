@@ -32,7 +32,7 @@ const party = (props) => {
 
   const getAllParties = async () => {
     api
-      .get(`/all/7`, { withCredentials: true })
+      .get(`/all/1`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })

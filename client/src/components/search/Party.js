@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWonSign } from "@fortawesome/free-solid-svg-icons";
 
-function Party() {
+function Party(props) {
   return (
     <div className="partyexp">
       <div className="partyexpup">

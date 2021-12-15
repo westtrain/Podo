@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getOttId, getOttName, getAllParties } from "../redux/API/partyAPI";
 import Header from "../components/public/Header";
 import Party from "../components/search/Party";
 import Calendar from "../components/search/Calendar";
@@ -20,8 +22,16 @@ import office from "../image/Office365Name.png";
 
 function Search(props) {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [ottName, setOttName] = useState(netflix);
+  const [selectedOtt, setSelectedOtt] = useState(netflix);
+  const [ottId, setOttId] = useState(1);
+  const [period, setPeriod] = useState("");
+  const [people, setPeople] = useState("");
+  const dispatch = useDispatch();
+  const partiesState = useSelector((state) => state.party.parties);
 
+  useEffect(async () => {
+    dispatch(getAllParties({ id: ottId }));
+  }, [period, selectedOtt, people]);
   return (
     <>
       <Header />
@@ -33,7 +43,7 @@ function Search(props) {
                 className="selectott"
                 onClick={() => setShowDropdown(!showDropdown)}
               >
-                <img src={ottName} alt="ottname" className="ottname"></img>
+                <img src={selectedOtt} alt="ottname" className="ottname"></img>
                 <IoIosArrowDropdown size="25px" />
               </div>
             </div>
@@ -54,7 +64,8 @@ function Search(props) {
                         alt="netflix"
                         height="30px"
                         onClick={() => {
-                          setOttName(netflix);
+                          setOttId(1);
+                          setSelectedOtt(netflix);
                         }}
                       />
                     </li>
@@ -64,7 +75,8 @@ function Search(props) {
                         alt="watcha"
                         height="45px"
                         onClick={() => {
-                          setOttName(watcha);
+                          setOttId(2);
+                          setSelectedOtt(watcha);
                         }}
                       />
                     </li>
@@ -73,7 +85,8 @@ function Search(props) {
                         src={wavve}
                         alt="wavve"
                         onClick={() => {
-                          setOttName(wavve);
+                          setOttId(3);
+                          setSelectedOtt(wavve);
                         }}
                       />
                     </li>
@@ -83,7 +96,8 @@ function Search(props) {
                         alt="tving"
                         height="25px"
                         onClick={() => {
-                          setOttName(tving);
+                          setOttId(4);
+                          setSelectedOtt(tving);
                         }}
                       />
                     </li>
@@ -92,7 +106,8 @@ function Search(props) {
                         src={disney}
                         alt="disney"
                         onClick={() => {
-                          setOttName(disney);
+                          setOttId(5);
+                          setSelectedOtt(disney);
                         }}
                       />
                     </li>
@@ -101,7 +116,8 @@ function Search(props) {
                         src={prime}
                         alt="prime"
                         onClick={() => {
-                          setOttName(prime);
+                          setOttId(6);
+                          setSelectedOtt(prime);
                         }}
                       />
                     </li>
@@ -110,7 +126,8 @@ function Search(props) {
                         src={laftel}
                         alt="laftel"
                         onClick={() => {
-                          setOttName(laftel);
+                          setOttId(7);
+                          setSelectedOtt(laftel);
                         }}
                       />
                     </li>
@@ -119,7 +136,8 @@ function Search(props) {
                         src={apple}
                         alt="apple"
                         onClick={() => {
-                          setOttName(apple);
+                          setOttId(8);
+                          setSelectedOtt(apple);
                         }}
                       />
                     </li>
@@ -128,7 +146,8 @@ function Search(props) {
                         src={office}
                         alt="office"
                         onClick={() => {
-                          setOttName(office);
+                          setOttId(9);
+                          setSelectedOtt(office);
                         }}
                       />
                     </li>
@@ -195,11 +214,9 @@ function Search(props) {
               <div className="srhright">전체파티 조회</div>
             </div>
             <div className="searchparty">
-              <Party />
-              <Party />
-              <Party />
-              <Party />
-              <Party />
+              {partiesState.map((party) => (
+                <Party party={party} />
+              ))}
             </div>
           </div>
         </div>

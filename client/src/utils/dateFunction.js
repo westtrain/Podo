@@ -9,6 +9,7 @@ export const dateToString = (date) => {
   return null;
 };
 export const dateToStringPoint = (strDate) => {
+  console.log(strDate);
   if (strDate !== "") {
     return strDate.split("-").join(".");
   }

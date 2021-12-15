@@ -5,8 +5,12 @@ import {
   showCardModal,
   showSettlementModal,
 } from "../../redux/reducers/modalSlice";
+import { getUsersPaymentInfo } from "../../redux/API/paymentAPI";
+import { createParty } from "../../redux/API/partyAPI";
+import { getUser } from "../../redux/API/userAPI";
 import SetCardModal from "../modal/SetCardModal";
 import SetSettlementModal from "../modal/SetSettlementModal";
+import Swal from "sweetalert2";
 
 function ConfirmPayment(props) {
   const dispatch = useDispatch();
@@ -15,11 +19,52 @@ function ConfirmPayment(props) {
     (state) => state.modal.settlementModal
   );
   const paymentState = useSelector((state) => state.payment);
+  const createPartyState = useSelector((state) => state.party.ceateParty);
   const userState = useSelector((state) => state.user);
+  const errorState = useSelector((state) => state.error);
 
+  const onClickCreate = () => {
+    console.log("???");
+    if (!paymentState.card_name || paymentState.settlement_date == "") {
+      Swal.fire(
+        "Unsuccess!",
+        "결제 카드와 정산일을 모두 등록해주세요.",
+        "error"
+      );
+    } else if (
+      createPartyState.ott_id === 0 ||
+      createPartyState.ott_login_id === "" ||
+      createPartyState.ott_login_id === "" ||
+      (createPartyState.start_date === "") | (createPartyState.end_date === "")
+    ) {
+      Swal.fire(
+        "Unsuccess!",
+        `파티 정보가 누락되었습니다.
+        파티 만들기를 다시 진행하세요.`,
+        "error"
+      );
+    } else {
+      dispatch(
+        createParty({
+          createPartyState: createPartyState,
+        })
+      );
+      if (errorState === null) {
+        Swal.fire("Success!", "파티가 만들어졌어요!", "success");
+      }
+    }
+  };
   useEffect(() => {
-    console.log(paymentState);
-  }, []);
+    dispatch(getUsersPaymentInfo());
+    dispatch(getUser());
+    if (errorState) {
+      Swal.fire(
+        "Unsuccess!",
+        "이미 사용 중인 OTT의 파티는 생성이 불가해요! ",
+        "error"
+      );
+    }
+  }, [errorState]);
   return (
     <>
       <div className="partyguide">
@@ -76,11 +121,9 @@ function ConfirmPayment(props) {
               <div className="backicon">&#60;</div> 뒤로가기
             </div>
           </Link>
-          <Link to={"/create/6"}>
-            <div className="guidefooterbtn">
-              <div className="nextbtn">다음</div>
-            </div>
-          </Link>
+          <div className="guidefooterbtn" onClick={() => onClickCreate()}>
+            <div className="nextbtn">파티 생성</div>
+          </div>
         </div>
       </div>
     </>

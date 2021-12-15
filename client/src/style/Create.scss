@@ -10,9 +10,9 @@ input {
 
 .create {
   display: block;
-  max-width: 100vw;
+  // max-width: 100vw;
   padding-top: 96px;
-  height: 90%;
+  height: 100%;
 
   animation: fadein 0.5s;
   -moz-animation: fadein 0.5s; /* Firefox */
@@ -1216,9 +1216,11 @@ input {
 
 @media screen and (max-width: 768px) {
   .create {
-    padding-top: 131px;
+    padding-top: 100px;
+    height: 100%;
     .createbody {
-      height: 76vh;
+      height: 100%;
+      padding-bottom: 13.5em;
       .selectsection {
         display: flex;
         flex-direction: column;
@@ -1226,121 +1228,253 @@ input {
         align-items: center;
 
         .selectheader {
-          font-size: 36px;
+          font-size: 25px;
           color: #fff;
-          margin: 50px 0;
+          margin: 30px 0;
           font-weight: bold;
         }
 
         .selectott {
           display: grid;
-          grid-template-columns: repeat(2, 202px);
-          margin: 4em 0 11.5em 0;
+          grid-template-columns: repeat(4, 95px);
+          margin: 2em 0 11.6em 0;
 
-          .netflix {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #232020;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+          .netflixsection {
+            .netflix {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #232020;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
 
-            img {
-              width: 100px;
-              height: 100px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .netflixexp {
+              display: none;
             }
           }
+          .netflixsection:hover .netflix {
+            transform: translateY(0);
+          }
+          .watchasection {
+            .watcha {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #fdbada;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .watchaexp {
+              display: none;
+            }
+          }
+          .watchasection:hover .watcha {
+            transform: translateY(0);
+          }
 
-          .watcha {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #fdbada;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+          .wavvesection {
+            .wavve {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #a1d1fd;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .wavveexp {
+              display: none;
+            }
           }
-          .wave {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #a1d1fd;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+          .wavvesection:hover .wavve {
+            transform: translateY(0);
           }
-          .tving {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #ff86a3;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+
+          .tvingsection {
+            .tving {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #ff86a3;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .tvingexp {
+              display: none;
+            }
           }
-          .disney {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #97a5ed;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+          .tvingsection:hover .tving {
+            transform: translateY(0);
           }
-          .amazon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #4d6dac;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+
+          .disneysection {
+            .disney {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #97a5ed;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .disneyexp {
+              display: none;
+            }
           }
-          .laftel {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #ccc8ff;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+          .disneysection:hover .disney {
+            transform: translateY(0);
           }
-          .apple {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+
+          .amazonsection {
+            .amazon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #4d6dac;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .amazonexp {
+              display: none;
+            }
           }
-          .office {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 180px;
-            background-color: #ffaa8f;
-            border-radius: 10px;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            margin: 11px;
+          .amazonsection:hover .amazon {
+            transform: translateY(0);
+          }
+
+          .laftelsection {
+            .laftel {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #ccc8ff;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .laftelexp {
+              display: none;
+            }
+          }
+          .laftelsection:hover .laftel {
+            transform: translateY(0);
+          }
+
+          .applesection {
+            .apple {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #fff;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .appleexp {
+              display: none;
+            }
+          }
+          .applesection:hover .apple {
+            transform: translateY(0);
+          }
+          .officesection {
+            .office {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #ffaa8f;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .officeexp {
+              display: none;
+            }
+          }
+          .officesection:hover .office {
+            transform: translateY(0);
+          }
+          .nintendosection {
+            .nintendo {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 70px;
+              width: 70px;
+              background-color: #ff9c9c;
+              border-radius: 10px;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              margin: 20px 11px 11px 11px;
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+            .nintendoexp {
+              display: none;
+            }
+          }
+          .nintendosection:hover .nintendo {
+            transform: translateY(0);
           }
         }
       }

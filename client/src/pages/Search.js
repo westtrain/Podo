@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOttId, getOttName, getAllParties } from "../redux/API/partyAPI";
 import Header from "../components/public/Header";
 import Party from "../components/search/Party";
+import Warning from "../components/search/Warning";
 import Calendar from "../components/search/Calendar";
 import "../style/Search.scss";
 import "../style/datepicker.scss";
@@ -19,6 +20,7 @@ import prime from "../image/PrimeName.svg";
 import laftel from "../image/LaftelName.svg";
 import apple from "../image/AppleName.svg";
 import office from "../image/Office365Name.png";
+import nintendo from "../image/NintendoName.png";
 
 function Search(props) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -148,6 +150,15 @@ function Search(props) {
                         onClick={() => {
                           setOttId(9);
                           setSelectedOtt(office);
+                        }}
+                      />
+                    </li>
+                    <li>
+                      <img
+                        src={nintendo}
+                        alt="nintendo"
+                        onClick={() => {
+                          setOttName(nintendo);
                         }}
                       />
                     </li>

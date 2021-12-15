@@ -54,9 +54,9 @@ function Calendar(props) {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              margin: "30px 100px 30px 100px",
+              margin: "30px 100px",
               fontWeight: "300",
-              fontSize: "30px",
+              // fontSize: "30px",
             }}
           >
             <div

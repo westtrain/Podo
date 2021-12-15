@@ -325,8 +325,13 @@
           }
         }
       }
+      .warning {
+        color: rgb(255, 124, 124);
+        height: 30px;
+        margin: 20px;
+      }
       .clearbtnwrap {
-        margin-top: 130px;
+        margin-top: 90px;
         display: flex;
         justify-content: flex-end;
         width: 100%;

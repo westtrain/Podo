@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../components/public/Header";
 import FAQ from "../components/public/FAQ";
 import "../style/Home.scss";
+import logo from "../image/Podo_logo.svg";
 import landingimg1 from "../image/landingimg1.png";
 import landingimg2 from "../image/landingimg2.png";
 import landingimg3 from "../image/landingimg3.png";
@@ -124,7 +125,34 @@ const Home = (props) => {
           </div>
         </div>
         <FAQ />
-        <div className="footer"></div>
+        <div className="footer">
+          <div className="footerup">
+            <div className="logo">
+              <div>
+                <img src={logo} alt="logo"></img>
+              </div>
+              <span className="name">Podo</span>
+            </div>
+
+            <div className="service">
+              <div className="footerhead">서비스 소개</div>
+              <div className="line"></div>
+              <div className="list">Repository</div>
+              <div className="list">WIKI</div>
+            </div>
+            <div className="member">
+              <div className="footerhead">Team Members</div>
+              <div className="line"></div>
+              <div className="list">김보라</div>
+              <div className="list">김태우</div>
+              <div className="list">이원구</div>
+              <div className="list">하승윤</div>
+            </div>
+          </div>
+          {/* <div className="footerdown">
+            <div>Copyright</div>
+          </div> */}
+        </div>
       </div>
     </>
   );

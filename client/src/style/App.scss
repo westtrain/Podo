@@ -245,8 +245,8 @@ a {
     .faqmiddle {
       .faqmquestion {
         .faqmunit {
-          img {
-            margin-left: 37em;
+          .faqmhicon {
+            margin-left: 36em;
           }
         }
 
@@ -345,10 +345,11 @@ a {
         margin-top: 10px;
         .faqmunit {
           .faqmh {
-            font-size: 15px;
+            margin-right: 10px;
+            font-size: 13px;
           }
           .faqmhicon {
-            margin-left: 37em;
+            margin-left: 20em;
           }
         }
 

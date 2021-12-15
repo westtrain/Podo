@@ -127,7 +127,8 @@ function SetCardModal(props) {
                   />
                 </div>
               </div>
-              {warning}
+              <div className="warning">{warning}</div>
+
               <div className="clearbtnwrap">
                 <button className="clearbtn" onClick={onClickSubmit}>
                   <div className="clearbtnw">완료</div>

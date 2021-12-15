@@ -14,6 +14,7 @@ module.exports = {
         { id: 7, name: "라프텔", price: 14900 },
         { id: 8, name: "애플", price: 6500 },
         { id: 9, name: "오피스 365", price: 11300 },
+        { id: 10, name: "닌텐도", price: 4900 },
       ],
       {}
     );

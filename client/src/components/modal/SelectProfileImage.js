@@ -24,7 +24,6 @@ function SelectProfileImage() {
   const [selectedImgId, setSelectedImgId] = useState(0);
 
   const onClickImage = (e) => {
-    console.log(e.target.id);
     setSelectedImg(e.target.src);
     setSelectedImgId(e.target.id);
   };

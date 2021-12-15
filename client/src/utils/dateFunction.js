@@ -9,9 +9,14 @@ export const dateToString = (date) => {
   return null;
 };
 export const dateToStringPoint = (strDate) => {
-  console.log(strDate);
   if (strDate !== "") {
     return strDate.split("-").join(".");
+  }
+  return null;
+};
+export const getMonthString = (strDate) => {
+  if (strDate !== "") {
+    return strDate.split("-")[1];
   }
   return null;
 };
@@ -21,6 +26,13 @@ export const dateToStringDash = (date) => {
   }
   return null;
 };
+
+export const getDday = (startDate) => {
+  let diff = Math.abs(new Date(startDate).getTime() - new Date().getTime());
+  diff = Math.ceil(diff / (1000 * 3600 * 24)) - 1;
+  return diff;
+};
+
 export const autoHypen = (value) => {
   let v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
   let matches = v.match(/\d{4,16}/g);
@@ -38,4 +50,11 @@ export const autoHypen = (value) => {
 
 export const onlyNumber = (value) => {
   return value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+};
+
+export const refinePrice = (price) => {
+  let refinedPrice = Math.floor(price);
+  refinedPrice = Math.ceil(refinedPrice / 10) * 10;
+  refinedPrice = refinedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return refinedPrice;
 };

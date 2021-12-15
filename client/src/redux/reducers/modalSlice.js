@@ -4,6 +4,7 @@ import { getUser } from "../API/userAPI";
 const initialState = {
   loginModal: false,
   joinPartyModal: false,
+  confirmPaymentModal: false,
   accountModal: false,
   cardModal: false,
   settlementModal: false,
@@ -22,6 +23,10 @@ const modalSlice = createSlice({
     },
     showJoinPartyModal: (state, action) => {
       state.joinPartyModal = action.payload;
+      return state;
+    },
+    showConfirmPaymentModal: (state, action) => {
+      state.confirmPaymentModal = action.payload;
       return state;
     },
     showAccountModal: (state, action) => {
@@ -55,6 +60,7 @@ const { actions, reducer } = modalSlice;
 export const {
   showLoginModal,
   showJoinPartyModal,
+  showConfirmPaymentModal,
   showAccountModal,
   showCardModal,
   showSettlementModal,

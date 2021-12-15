@@ -12,7 +12,6 @@ export const getUsersPaymentInfo = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const paymentInfo = await (await api.get(`/`)).data.data[0];
-      console.log(paymentInfo);
       return paymentInfo;
     } catch (err) {
       console.log(err);

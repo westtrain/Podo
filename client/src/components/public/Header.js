@@ -1,52 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllOtt } from "../../redux/API/ottAPI";
 import { getUser } from "../../redux/API/userAPI";
 import { Link } from "react-router-dom";
 import { showLoginModal } from "../../redux/reducers/modalSlice";
 import LoginModal from "../modal/LoginModal";
 import "../../style/App.scss";
+import { profileImage } from "../../utils/profileImage";
 import logo from "../../image/Podo_logo.svg";
-import profile0 from "../../image/profile0.svg";
-import profile1 from "../../image/profile1.svg";
-import profile2 from "../../image/profile2.svg";
-import profile3 from "../../image/profile3.svg";
-import profile4 from "../../image/profile4.svg";
-import profile5 from "../../image/profile5.svg";
-import profile6 from "../../image/profile6.svg";
-import profile7 from "../../image/profile7.svg";
-import profile8 from "../../image/profile8.svg";
-import profile9 from "../../image/profile9.svg";
-import profile10 from "../../image/profile10.svg";
-import profile11 from "../../image/profile11.svg";
 
 function Header(props) {
   const dispatch = useDispatch();
   const loginModalState = useSelector((state) => state.modal.loginModal);
   const isLogin = useSelector((state) => state.user !== null);
   const userState = useSelector((state) => state.user);
-  const [profileImg, setProfileImg] = useState(profile0);
+  const [profileImg, setProfileImg] = useState(profileImage[userState.image]);
   const selectProfileModalState = useSelector(
     (state) => state.modal.selectProfileImageModal
   );
-  // const getUserImage = async () => {
-  //   if (userState.image === 0) setProfileImg(profile0);
-  //   if (userState.image === 1) setProfileImg(profile1);
-  //   if (userState.image === 2) setProfileImg(profile2);
-  //   if (userState.image === 3) setProfileImg(profile3);
-  //   if (userState.image === 4) setProfileImg(profile4);
-  //   if (userState.image === 5) setProfileImg(profile5);
-  //   if (userState.image === 6) setProfileImg(profile6);
-  //   if (userState.image === 7) setProfileImg(profile7);
-  //   if (userState.image === 8) setProfileImg(profile8);
-  //   if (userState.image === 9) setProfileImg(profile9);
-  //   if (userState.image === 10) setProfileImg(profile10);
-  //   if (userState.image === 11) setProfileImg(profile11);
-  // };
 
-  // useEffect(async () => {
-  //   await dispatch(getUser());
-  //   await getUserImage();
-  // }, [profileImg, userState.image, selectProfileModalState]);
+  useEffect(
+    async () => {
+      await dispatch(getUser());
+      setProfileImg(profileImage[userState.image]);
+    },
+    [userState.image],
+    selectProfileModalState
+  );
 
   return (
     <>

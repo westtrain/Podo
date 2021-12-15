@@ -24,7 +24,6 @@ function ConfirmPayment(props) {
   const errorState = useSelector((state) => state.error);
 
   const onClickCreate = () => {
-    console.log("???");
     if (!paymentState.card_name || paymentState.settlement_date == "") {
       Swal.fire(
         "Unsuccess!",
@@ -104,7 +103,7 @@ function ConfirmPayment(props) {
               className="paymentright"
               onClick={() => dispatch(showSettlementModal(true))}
             >
-              변경하기
+              {paymentState.settlement_date ? "변경하기" : "등록하기"}
               <div className="arrow"> &#62;</div>
             </div>
             {settlementModalState ? <SetSettlementModal /> : null}

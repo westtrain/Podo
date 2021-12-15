@@ -98,12 +98,12 @@
     .landingexpimg {
       position: relative;
       left: 0;
-      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s linear;
+      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1s linear;
       opacity: 0;
     }
 
     .fade-in {
-      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1.5s linear;
+      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1s linear;
       left: 0px;
       opacity: 1;
     }

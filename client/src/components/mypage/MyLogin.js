@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../../redux/API/userAPI";
 import { logOut } from "../../redux/reducers/userSlice";
 
 function MyLogin(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userState = useSelector((state) => state.user);
   return (
     <>
       <div className="middlemain">
@@ -16,7 +18,7 @@ function MyLogin(props) {
             <div className="logininfo">
               <div className="nowlogininfo">현재 연결된 소셜 로그인 계정</div>
               <div className="social">
-                Google
+                {userState.socialType}
                 <div
                   className="logoutbtn"
                   onClick={() => {
@@ -28,7 +30,16 @@ function MyLogin(props) {
                 </div>
               </div>
             </div>
-            <div className="withdrawal">탈퇴하기</div>
+            <div
+              className="withdrawal"
+              onClick={() => {
+                deleteUser();
+                dispatch(logOut());
+                return navigate("/");
+              }}
+            >
+              탈퇴하기
+            </div>
           </div>
         </div>
       </div>

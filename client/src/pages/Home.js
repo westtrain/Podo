@@ -36,6 +36,7 @@ const Home = (props) => {
   return (
     <>
       <Header />
+
       <div className="banner">
         <div className="wrapper">
           <span>

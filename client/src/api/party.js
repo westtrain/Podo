@@ -32,7 +32,7 @@ const party = (props) => {
 
   const getAllParties = async () => {
     api
-      .get(`/all/7`, { withCredentials: true })
+      .get(`/all/1`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
@@ -65,7 +65,8 @@ const party = (props) => {
           members: "1",
           members_num: 4,
           leader: 1,
-          start_date: "2021-12-05",
+          period: 4,
+          start_date: "2021-12-24",
           end_date: "2022-12-19",
         },
         { withCredentials: true }

@@ -70,12 +70,6 @@ module.exports = {
         }
       });
 
-      // 조건에 충족하는 파티가 없다면
-      if (!allPartiesInfo) {
-        return res.status(404).json({ message: "The party you want does not exist." });
-      }
-
-      //조건에 충족하는 파티가 있다면
       return res.status(200).json({ data: allPartiesInfo });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
@@ -114,15 +108,23 @@ module.exports = {
     // 0. 쿠키를 통해 받아온 토큰으로 유저 아이디를 만든다.
     const user_id = req.userId;
     // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
-    const { ott_id, ott_login_id, ott_login_password, members, members_num, start_date, end_date } =
-      req.body;
+    const {
+      ott_id,
+      ott_login_id,
+      ott_login_password,
+      members,
+      period,
+      members_num,
+      start_date,
+      end_date,
+    } = req.body;
     try {
       if (
         ott_id &&
         ott_login_id &&
         ott_login_password &&
-        members &&
         members_num &&
+        period &&
         start_date &&
         end_date
       ) {
@@ -130,7 +132,7 @@ module.exports = {
 
         // 1차 필터링: Party 테이블에서 create하려는 ott를 공유하고 있는 파티 조회
         const ottParty = await Party.findAll({ where: { ott_id } });
-
+        console.log(ottParty);
         // 2차 필터링: 1개 이상 있다면 map을 사용하여 각 파티에 '현재 create하려는 유저'가 있는지 확인
         if (ottParty.length !== 0) {
           //alreadyJoined는 실행되지 않은 Promise로 Promise.all을 사용하지 않으면 alreadyJoinedArr는 Promise 배열이 나오게 됨.
@@ -159,9 +161,10 @@ module.exports = {
           ott_id,
           ott_login_id,
           ott_login_password,
-          members,
+          members: `${user_id}`,
           members_num,
           leader: user_id,
+          period,
           start_date,
           end_date,
         }).then((data) => {

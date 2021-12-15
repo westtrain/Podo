@@ -8,6 +8,9 @@ function MySettlement(props) {
   const settlementModalState = useSelector(
     (state) => state.modal.settlementModal
   );
+  const settlementDateState = useSelector(
+    (state) => state.payment.settlement_date
+  );
   return (
     <>
       <div className="middlemain">
@@ -18,7 +21,7 @@ function MySettlement(props) {
             <div className="logininfo">
               <div className="settlementbox">
                 매월
-                <div>25 일</div>
+                <div>{settlementDateState} 일</div>
               </div>
               <div
                 className="logoutbtn"

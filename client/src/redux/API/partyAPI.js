@@ -16,3 +16,4 @@ const ottList = {
 export const getPartyId = (ottName) => {
   return ottList[ottName];
 };
+

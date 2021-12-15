@@ -21,19 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      credit_expire_month: {
+      customer_uid: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      credit_expire_year: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      credit_birth: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      credit_password: {
+      card_name: {
         type: DataTypes.STRING,
         allowNull: true,
       },

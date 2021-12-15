@@ -1,12 +1,22 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { showSettlementModal } from "../../redux/reducers/modalSlice";
+import { updateSettlement } from "../../redux/API/paymentAPI";
+import { setSettlementDate } from "../../redux/reducers/paymentSlice";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import exit from "../../image/exit.png";
-
 function SetSettlementModal(props) {
   const dispatch = useDispatch();
+  const paymentState = useSelector((state) => state.payment);
+
+  const onChangeInput = (e) => {
+    dispatch(setSettlementDate(e.target.value));
+  };
+  const onClickSubmit = () => {
+    console.log(paymentState);
+    dispatch(updateSettlement({ state: paymentState }));
+  };
   return (
     <>
       <div className="page">
@@ -33,12 +43,15 @@ function SetSettlementModal(props) {
 
               <div className="ssmmf">
                 <div>매월</div>
-                <input placeholder="1 ~ 28일 중 입력하세요"></input>
+                <input
+                  placeholder="1 ~ 28일 중 입력하세요"
+                  onChange={onChangeInput}
+                />
                 <div>일</div>
               </div>
 
               <div className="clearbtnwrap">
-                <button className="clearbtn">
+                <button className="clearbtn" onClick={() => onClickSubmit()}>
                   <div className="clearbtnw">완료</div>
                 </button>
               </div>

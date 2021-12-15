@@ -24,6 +24,7 @@ import profile11 from "../../image/profile11.svg";
 function MyParty(props) {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
+  const userPartyState = useSelector((state) => state.party.usersParty);
   const [profileImg, setProfileImg] = useState(profile0);
   const selectProfileModalState = useSelector(
     (state) => state.modal.selectProfileImageModal
@@ -74,10 +75,9 @@ function MyParty(props) {
         </div>
       </div>
       <div className="party">
-        <PartyCard />
-        <PartyCard />
-        <PartyCard />
-        <PartyCard />
+        {userPartyState.map((party, i) => (
+          <PartyCard key={i} party={party} />
+        ))}
       </div>
     </div>
   );

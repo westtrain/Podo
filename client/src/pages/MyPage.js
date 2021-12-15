@@ -22,6 +22,9 @@ function MyPage(props) {
   const { menu } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
   const [showMenu, setShowMenu] = useState(false);
 
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
   return (
     <>
       <Header />

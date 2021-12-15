@@ -62,12 +62,12 @@ const party = (props) => {
           ott_id: 3,
           ott_login_id: "dnfjk123!@$",
           ott_login_password: "1283njskd@#$%",
-          members: "1",
+          members: "4",
           members_num: 4,
-          leader: 1,
-          period: 4,
-          start_date: "2021-12-24",
-          end_date: "2022-12-19",
+          leader: 3,
+          period: 3,
+          start_date: "2021-12-17",
+          end_date: "2022-10-16",
         },
         { withCredentials: true }
       )

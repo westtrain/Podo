@@ -1,18 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import { getParty, getAllParty, getUsersParty } from "./api/partyAPI";
+import { createParty, getAllParties } from "../API/partyAPI";
 const initialState = {
-  party: {},
+  parties: [],
   ceateParty: {
     ott_id: 0,
     ott_login_id: "",
     ott_login_password: "",
-    members: "",
     members_num: 3,
-    leader: -1,
-    start_date: new Date(),
-    end_date: null,
+    start_date: "",
+    end_date: "",
   },
   period: 0,
+  searchParty: {
+    ott_id: 1,
+  },
 };
 
 const partySlice = createSlice({
@@ -47,6 +48,21 @@ const partySlice = createSlice({
       state.period = action.payload;
       return state;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(createParty.fulfilled, (action) => {
+      console.log("파티 생성 성공");
+    });
+    builder.addCase(createParty.rejected, (action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(getAllParties.fulfilled, (state, action) => {
+      state.parties = action.payload;
+      return state;
+    });
+    builder.addCase(getAllParties.rejected, (action) => {
+      console.log(action.payload);
+    });
   },
 });
 

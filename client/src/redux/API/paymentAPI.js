@@ -28,8 +28,12 @@ export const updateSettlement = createAsyncThunk(
       console.log("ff", state);
       const res = await api.post(`/settlement`, state);
       //console.log("RESPONSE", JSON.stringify(res.data));
-      await Promise.all([dispatch(getUsersPaymentInfo())]);
+      await Promise.all([
+        dispatch(isNotError()),
+        dispatch(getUsersPaymentInfo()),
+      ]);
     } catch (err) {
+      await Promise.all([dispatch(isError(err))]);
       return rejectWithValue(err);
     }
   }

@@ -275,6 +275,22 @@ a {
       padding-top: 0;
       padding-bottom: 0;
 
+      .left {
+        .logo {
+          font-size: 20px;
+          div {
+            width: 30px;
+          }
+          img {
+            width: 20px;
+            height: 30px;
+          }
+          span {
+            margin-left: 0;
+          }
+        }
+      }
+
       .middleleft {
         width: 100%;
         border-top: 1px solid #e2e2e2;
@@ -303,8 +319,15 @@ a {
         position: absolute;
         top: 0;
         right: 0;
-        margin-right: 40px;
-        margin-top: 20px;
+        margin-right: 27px;
+        margin-top: 12px;
+        .login {
+          font-size: 13px;
+        }
+        .user {
+          width: 27px;
+          height: 27px;
+        }
       }
     }
   }

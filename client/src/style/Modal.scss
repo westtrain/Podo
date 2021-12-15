@@ -14,6 +14,75 @@
     display: grid;
     place-items: center;
 
+    .selectprofilemodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 350px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+      .exit {
+        margin-top: 10px;
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .spimheader {
+        .spimhfirst {
+          margin: 20px 0 60px 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .spipmhff {
+            font-size: 20px;
+            font-weight: bold;
+            color: $fontcolor;
+          }
+        }
+        .spimain {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 20px;
+          img {
+            width: 100px;
+            height: 100px;
+          }
+        }
+      }
+      .selectimg {
+        img {
+          margin: 8px;
+        }
+      }
+
+      .partysignbtn {
+        margin-top: 30px;
+        cursor: pointer;
+        width: 97%;
+        height: 50px;
+        background-color: #4040cc;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        border-radius: 15px;
+
+        .partysignbtnw {
+          font-size: 18px;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+
     .selectratemodalview {
       background-color: #fff;
       border-radius: 20px;
@@ -281,6 +350,7 @@
     }
 
     .withdrawalmodalview {
+      z-index: 100;
       background-color: #fff;
       border-radius: 20px;
       width: 490px;
@@ -293,10 +363,13 @@
 
       .exit {
         margin-top: 30px;
-        cursor: pointer;
+
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .wdmheader {
@@ -395,6 +468,7 @@
     }
 
     .accountmodalview {
+      z-index: 999;
       background-color: #fff;
       border-radius: 20px;
       width: 490px;
@@ -828,13 +902,17 @@
 @media screen and (max-width: 768px) {
   .page {
     .modalback {
+      .selectprofilemodalview {
+        width: 330px;
+        padding: 10px 25px 15px 15px;
+      }
       .selectratemodalview {
-        width: 360px;
+        width: 330px;
         padding: 10px 25px 15px 15px;
       }
 
       .loginmodalview {
-        width: 360px;
+        width: 330px;
         padding: 20px 25px 15px 25px;
         .lmheader {
           .lmhfirst {
@@ -849,12 +927,12 @@
       .withdrawalmodalview {
         justify-content: flex-start;
         text-align: start;
-        width: 340px;
+        width: 330px;
         padding: 10px 25px 15px 15px;
       }
 
       .modalview {
-        width: 360px;
+        width: 330px;
         height: 650px;
         padding: 10px 25px 15px 15px;
         .partysignbtn {
@@ -874,11 +952,11 @@
       }
 
       .setcardmodalview {
-        width: 360px;
+        width: 330px;
         height: 600px;
         padding: 10px 25px 15px 15px;
         .scmhf {
-          font-size: 12px;
+          font-size: 10px;
         }
 
         .ssmmf {
@@ -891,10 +969,10 @@
         }
         .sdmms {
           .sdmmsf {
-            width: 150px;
+            width: 140px;
           }
           .sdmmss {
-            width: 150px;
+            width: 140px;
           }
         }
         .clearbtnwrap {

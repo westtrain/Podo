@@ -20,6 +20,7 @@ module.exports = {
   },
 
   updateProfileImage: async (req, res) => {
+    console.log(req.params);
     // params로 받은 id로 이미지를 업데이트 한다.
     const userImage = await User.update({ image: req.params.id }, { where: { id: req.userId } });
     try {

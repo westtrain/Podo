@@ -21,11 +21,7 @@ function SetSettlementModal(props) {
     if (paymentState.settlementDat !== "") {
       dispatch(updateSettlement({ state: paymentState }));
       if (errorState === null) {
-        Swal.fire(
-          "Success!",
-          "결제 카드가 정상적으로 등록되었습니다.",
-          "success"
-        );
+        Swal.fire("Success!", "정산일이 정상적으로 등록되었습니다.", "success");
       }
     }
   };

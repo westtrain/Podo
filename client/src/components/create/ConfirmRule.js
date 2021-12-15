@@ -9,7 +9,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 function ConfirmRule(props) {
   const startDate = useSelector((state) => state.party.ceateParty.start_date);
   const endDate = useSelector((state) => state.party.ceateParty.end_date);
-  const period = useSelector((state) => state.party.period);
+  const period = useSelector((state) => state.party.ceateParty.period);
 
   return (
     <>

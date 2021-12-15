@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 //import { logOut } from "../reducers/userSlice";
 import axios from "axios";
 import { showLoginModal } from "../reducers/modalSlice";
+import { getUsersParty } from "./partyAPI";
+import { getUsersPaymentInfo } from "./paymentAPI";
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/user`,
@@ -16,8 +18,11 @@ export const getUser = createAsyncThunk(
       const user = await api.get(`/`, {
         withCredentials: true,
       });
-      await Promise.all([dispatch(showLoginModal(false))]);
-      console.log(user.data.data);
+      await Promise.all([
+        dispatch(showLoginModal(false)),
+        dispatch(getUsersParty()),
+        dispatch(getUsersPaymentInfo()),
+      ]);
       return user.data.data;
     } catch (err) {
       return rejectWithValue(err);

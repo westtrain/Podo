@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createParty, getAllParties } from "../API/partyAPI";
+import {
+  createParty,
+  getAllParties,
+  getFilteredParties,
+  joinParty,
+  getUsersParty,
+} from "../API/partyAPI";
 const initialState = {
   parties: [],
   ceateParty: {
@@ -9,11 +15,9 @@ const initialState = {
     members_num: 3,
     start_date: "",
     end_date: "",
+    period: 0,
   },
-  period: 0,
-  searchParty: {
-    ott_id: 1,
-  },
+  usersParty: [],
 };
 
 const partySlice = createSlice({
@@ -45,7 +49,11 @@ const partySlice = createSlice({
       return state;
     },
     setPeriod: (state, action) => {
-      state.period = action.payload;
+      state.ceateParty.period = action.payload;
+      return state;
+    },
+    setFilteredParties: (state, action) => {
+      state.parties = action.payload;
       return state;
     },
   },
@@ -63,6 +71,26 @@ const partySlice = createSlice({
     builder.addCase(getAllParties.rejected, (action) => {
       console.log(action.payload);
     });
+    builder.addCase(getFilteredParties.fulfilled, (state, action) => {
+      state.parties = action.payload;
+      return state;
+    });
+    builder.addCase(getFilteredParties.rejected, (action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(joinParty.fulfilled, (action) => {
+      console.log("파티 가입 성공");
+    });
+    builder.addCase(joinParty.rejected, (action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(getUsersParty.fulfilled, (state, action) => {
+      state.usersParty = action.payload;
+      return state;
+    });
+    builder.addCase(getUsersParty.rejected, (action) => {
+      console.log(action.payload);
+    });
   },
 });
 
@@ -74,5 +102,6 @@ export const {
   setStartDate,
   setEndDate,
   setPeriod,
+  setFilteredParties,
 } = partySlice.actions;
 export default partySlice.reducer;

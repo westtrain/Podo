@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOttId, getOttName, getAllParties } from "../redux/API/partyAPI";
+import { setFilteredParties } from "../redux/reducers/partySlice";
+import {
+  getAllParties,
+  getFilteredParties,
+  getFilterParties,
+} from "../redux/API/partyAPI";
+import { dateToStringDash } from "../utils/dateFunction";
 import Header from "../components/public/Header";
 import Party from "../components/search/Party";
 import Calendar from "../components/search/Calendar";
@@ -24,14 +31,31 @@ function Search(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOtt, setSelectedOtt] = useState(netflix);
   const [ottId, setOttId] = useState(1);
-  const [period, setPeriod] = useState("");
-  const [people, setPeople] = useState("");
+  const [period, setPeriod] = useState(0);
+  const [numOfMember, setNumOfMember] = useState(0);
+  const [startDate, setStartDate] = useState(dateToStringDash(new Date()));
   const dispatch = useDispatch();
   const partiesState = useSelector((state) => state.party.parties);
 
-  useEffect(async () => {
-    dispatch(getAllParties({ id: ottId }));
-  }, [period, selectedOtt, people]);
+  useEffect(() => {
+    async function asyncFunc() {
+      if (startDate !== "") {
+        console.log(startDate, ottId);
+        await dispatch(getFilteredParties({ id: ottId, date: startDate }));
+      } else {
+        await dispatch(getAllParties({ id: ottId }));
+      }
+      if (period || numOfMember) {
+        const filteredPaties = getFilterParties(
+          partiesState,
+          period,
+          numOfMember
+        );
+        dispatch(setFilteredParties(filteredPaties));
+      }
+    }
+    asyncFunc();
+  }, [period, selectedOtt, numOfMember, startDate]);
   return (
     <>
       <Header />
@@ -156,66 +180,99 @@ function Search(props) {
               </div>
             ) : null}
             <div className="calendar">
-              <Calendar />
+              <Calendar setStartDate={setStartDate} />
             </div>
             <div className="searchleftdown">
-              <div className="guidesee">
-                <div className="guideseeup">
-                  <div className="gsul">가이드보기</div>
-                  <div className="gsur">
-                    <FontAwesomeIcon
-                      icon={faPaperPlane}
-                      style={{ color: "#a5a9f8" }}
-                      size="1x"
-                    />
+              <Link to="/guide">
+                <div className="guidesee">
+                  <div className="guideseeup">
+                    <div className="gsul">가이드보기</div>
+                    <div className="gsur">
+                      <FontAwesomeIcon
+                        icon={faPaperPlane}
+                        style={{ color: "#a5a9f8" }}
+                        size="1x"
+                      />
+                    </div>
+                  </div>
+                  <div className="guideseedown">
+                    <div>
+                      파티 가입에 관한 자세한 정보를
+                      <br />
+                      확인해 보세요.
+                    </div>
                   </div>
                 </div>
-                <div className="guideseedown">
-                  <div>
-                    파티 가입에 관한 자세한 정보를
+              </Link>
+              <Link to="/create">
+                <div className="createparty">
+                  <div className="guideseeup">
+                    <div className="gsul">파티 만들기</div>
+                    <div className="gsur">
+                      <FontAwesomeIcon
+                        icon={faPlusSquare}
+                        style={{ color: "#a5a9f8" }}
+                        size="1x"
+                      />
+                    </div>
+                  </div>
+                  <div className="guideseedown">
+                    내가 원하는 조건의
                     <br />
-                    확인해 보세요.
+                    파티를 직접 만들어 보세요.
                   </div>
                 </div>
-              </div>
-              <div className="createparty">
-                <div className="guideseeup">
-                  <div className="gsul">파티 만들기</div>
-                  <div className="gsur">
-                    <FontAwesomeIcon
-                      icon={faPlusSquare}
-                      style={{ color: "#a5a9f8" }}
-                      size="1x"
-                    />
-                  </div>
-                </div>
-                <div className="guideseedown">
-                  내가 원하는 조건의
-                  <br />
-                  파티를 직접 만들어 보세요.
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="searchright">
             <div className="searchrightheader">
               <div className="srhleft">
-                <select className="period">
-                  <option key="period" value="period">
-                    파티 기간
-                  </option>
+                <select
+                  className="period"
+                  value={period}
+                  onChange={(e) => {
+                    setPeriod(Number(e.target.value));
+                  }}
+                >
+                  <option value="0">파티 기간</option>
+                  <option value="2">2개월</option>
+                  <option value="3">3개월</option>
+                  <option value="4">4개월</option>
+                  <option value="5">5개월</option>
+                  <option value="6">6개월</option>
+                  <option value="7">7개월</option>
+                  <option value="8">8개월</option>
+                  <option value="9">9개월</option>
+                  <option value="10">10개월</option>
+                  <option value="11">11개월</option>
+                  <option value="12">12개월</option>
                 </select>
-                <select className="people">
-                  <option key="people" value="people">
-                    파티 인원
-                  </option>
+                <select
+                  className="people"
+                  onChange={(e) => {
+                    setNumOfMember(Number(e.target.value));
+                  }}
+                >
+                  <option value="0">파티 인원</option>
+                  <option value="2">2명</option>
+                  <option value="3">3명</option>
+                  <option value="4">4명</option>
                 </select>
               </div>
-              <div className="srhright">전체파티 조회</div>
+              <div
+                className="srhright"
+                onClick={() => {
+                  setPeriod(0);
+                  setNumOfMember(0);
+                }}
+              >
+                전체파티 조회
+              </div>
             </div>
             <div className="searchparty">
-              {partiesState.map((party) => (
-                <Party party={party} />
+              {partiesState.map((party, i) => (
+                <Party key={i} party={party} />
               ))}
             </div>
           </div>

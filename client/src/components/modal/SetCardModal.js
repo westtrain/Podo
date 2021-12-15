@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useSelect, useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { showCardModal } from "../../redux/reducers/modalSlice";
+import { updateCard } from "../../redux/API/paymentAPI";
 import { autoHypen, onlyNumber } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import Swal from "sweetalert2";
@@ -8,13 +9,15 @@ import "../../style/Modal.scss";
 import exit from "../../image/exit.png";
 
 function SetCardModal(props) {
+  const dispatch = useDispatch();
+  const paymentState = useSelector((state) => state.payment);
+  const errorState = useSelector((state) => state.error);
   const [creditNumber, setCreditNumnber] = useState("");
   const [expireMM, setExpireMM] = useState("");
   const [expireYY, setExpireYY] = useState("");
   const [birth, setBirth] = useState("");
   const [creditPassword, setCreditPassword] = useState("");
   const [warning, setWarning] = useState("");
-  const dispatch = useDispatch();
 
   const onChangeCardNum = (e) => {
     setCreditNumnber(autoHypen(e.target.value));
@@ -41,8 +44,34 @@ function SetCardModal(props) {
     ) {
       setWarning("카드 정보를 모두 입력해주세요.");
     } else {
+      let creditInfo = {
+        credit_num: creditNumber,
+        credit_expire_month: expireMM,
+        credit_expire_year: expireYY,
+        credit_birth: birth,
+        credit_password: creditPassword,
+        settlement_date: null,
+        account_bank: null,
+        account_number: null,
+      };
+      creditInfo = Object.assign({}, paymentState, creditInfo);
+      dispatch(updateCard({ state: creditInfo }));
+      if (warning === "") {
+        Swal.fire(
+          "Success!",
+          "결제 카드가 정상적으로 등록되었습니다.",
+          "success"
+        );
+      }
     }
   };
+  useEffect(() => {
+    if (errorState) {
+      setWarning("유효하지 않은 카드 정보입니다.");
+    } else if (errorState === null) {
+      setWarning("");
+    }
+  }, [errorState]);
   return (
     <>
       <div className="page">

@@ -15,6 +15,7 @@ function ConfirmPayment(props) {
     (state) => state.modal.settlementModal
   );
   const paymentState = useSelector((state) => state.payment);
+  const userState = useSelector((state) => state.user);
 
   useEffect(() => {
     console.log(paymentState);
@@ -34,18 +35,26 @@ function ConfirmPayment(props) {
         </div>
         <div className="guidemiddle">
           <div className="paymentbox">
-            국민KB카드 ****8888
+            {paymentState.card_name
+              ? `${paymentState.card_name} ${paymentState.credit_num.slice(
+                  0,
+                  4
+                )}************`
+              : "결제 카드를 등록해 주세요."}
             <div
               className="paymentright"
               onClick={() => dispatch(showCardModal(true))}
             >
-              변경하기
+              {paymentState.card_name ? "변경하기" : "등록하기"}
               <div className="arrow"> &#62;</div>
             </div>
           </div>
           {cardModalState ? <SetCardModal /> : null}
           <div className="paymentbox">
-            신난보라돌이님의 정산일 : 매달 3일
+            {paymentState.settlement_date
+              ? `${userState.name}님의 정산일 : 매달 ${paymentState.settlement_date}일`
+              : "정산일을 등록해주세요."}
+
             <div
               className="paymentright"
               onClick={() => dispatch(showSettlementModal(true))}

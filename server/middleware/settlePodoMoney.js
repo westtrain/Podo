@@ -43,7 +43,8 @@ const settlePodoMoney = async () => {
       Party.findOne({ where: { id: party_id } }).then((party) => {
         const leader = party.leader;
 
-        OTT.findOne({ attributes: ["price"], where: { id: party.ott_id } }).then((data) => {
+        OTT.findOne({ attributes: ["name", "price"], where: { id: party.ott_id } }).then((data) => {
+          const name = data.name;
           const price = data.price;
           const joinedMemberNum = party.members.split(",").length;
           const collect = parseInt((price * (joinedMemberNum - 1)) / joinedMemberNum); // 적립될 포도머니 금액
@@ -54,12 +55,12 @@ const settlePodoMoney = async () => {
 
             //유저의 기존 포도머니에 collect 더해서 업데이트
             User.update({ money }, { where: { id: leader } });
-            // Statement 적립
+            // Statement 적립 내역 업데이트
             Statement.create(
               {
                 user_id: leader,
-                ott: party.ott_id,
-                type: "적립",
+                ott: name,
+                type: "point",
                 amount: collect,
               },
               { where: { user_id: leader } }

@@ -74,7 +74,7 @@ const party = (props) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 

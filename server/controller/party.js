@@ -1,6 +1,6 @@
 const db = require("../models");
 const { Party } = require("../models");
-const moment = require("moment");
+const dayjs = require("dayjs");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 
@@ -53,8 +53,8 @@ module.exports = {
 
   getAllParties: async (req, res) => {
     try {
-      //moment 라이브러리를 사용해서 당일 날짜를 date라는 변수에 할당한다.
-      const date = moment().format("YYYY-MM-DD");
+      //dayjs 라이브러리를 사용해서 당일 날짜를 date라는 변수에 할당한다.
+      const date = dayjs().format("YYYY-MM-DD");
       const ott_id = req.params.id;
 
       // 1,2차 필터링: 익일 이후의 날짜에 시작하고, ott아이디가 동일 파티를 조회한다.

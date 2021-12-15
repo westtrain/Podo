@@ -1,5 +1,6 @@
 const schedule = require("node-schedule");
 const { settlePodoMoney } = require("./settlePodoMoney");
+const { cancelParty } = require("./cancelParty");
 
 module.exports = {
   settleMonthly: (s) => {

@@ -26,4 +26,4 @@ const cancelParty = async () => {
   );
 };
 
-module.exports = cancelParty;
+module.exports = { cancelParty };

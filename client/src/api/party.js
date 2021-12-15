@@ -37,7 +37,7 @@ const party = (props) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 
@@ -59,7 +59,7 @@ const party = (props) => {
       .post(
         `/`,
         {
-          ott_id: 1,
+          ott_id: 3,
           ott_login_id: "dnfjk123!@$",
           ott_login_password: "1283njskd@#$%",
           members: "1",

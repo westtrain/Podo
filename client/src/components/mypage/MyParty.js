@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/API/userAPI";
 import { showSelectProfileImageModal } from "../../redux/reducers/modalSlice";
@@ -76,7 +77,9 @@ function MyParty(props) {
       </div>
       <div className="party">
         {userPartyState.map((party, i) => (
-          <PartyCard key={i} party={party} />
+          <Link to={`/mypage/party/${party.id}`}>
+            <PartyCard key={i} party={party} />
+          </Link>
         ))}
       </div>
     </div>

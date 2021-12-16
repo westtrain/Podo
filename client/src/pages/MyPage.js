@@ -19,9 +19,9 @@ function MyPage(props) {
   const dispatch = useDispatch();
   const withdrawModalstate = useSelector((state) => state.modal.withdrawModal);
   const userState = useSelector((state) => state.user);
-  const { menu } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
+  const { menu, id } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
   const [showMenu, setShowMenu] = useState(false);
-
+  console.log(id);
   useEffect(() => {
     dispatch(getUser());
   }, []);
@@ -138,7 +138,7 @@ function MyPage(props) {
             <div className="middle">
               {/* 마이페이지에 들어가면 '나의 파티 관리'가 나오기 때문에 menu===undefined 즉, 주소가 podo/mypage일 때는 MyParty 컴포넌트를 반환한다 */}
               {menu === undefined ? <MyParty /> : null}
-              {menu === "party" ? <MyPartyDetail /> : null}
+              {menu === "party" ? <MyPartyDetail id={id} /> : null}
               {menu === "login" ? <MyLogin /> : null}
               {menu === "payment" ? <MyPayment /> : null}
               {menu === "account" ? <MyAccount /> : null}

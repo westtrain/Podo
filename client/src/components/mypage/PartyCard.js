@@ -22,31 +22,29 @@ function PartyCard(props) {
 
   return (
     <>
-      <Link to="/mypage/party">
-        <div className="ott">
-          <div className="ottbtn">
-            <img src={netflix} alt="netflix" className="ottlogo"></img>
-          </div>
-          <div className="ottname">{ottName}</div>
-          {d_day > 0 ? (
-            <>
-              {" "}
-              <div className="ottstart">{d_day}일 후 시작</div>
-              <div className="ottstate" style={{ backgroundColor: "#F0E04A" }}>
-                예정
-              </div>
-            </>
-          ) : (
-            <>
-              {" "}
-              <div className="ottstart">D - {d_dayOfEndDate}</div>
-              <div className="ottstate" style={{ backgroundColor: "#66E197" }}>
-                사용중
-              </div>
-            </>
-          )}
+      <div className="ott">
+        <div className="ottbtn">
+          <img src={netflix} alt="netflix" className="ottlogo"></img>
         </div>
-      </Link>
+        <div className="ottname">{ottName}</div>
+        {d_day > 0 ? (
+          <>
+            {" "}
+            <div className="ottstart">{d_day}일 후 시작</div>
+            <div className="ottstate" style={{ backgroundColor: "#F0E04A" }}>
+              예정
+            </div>
+          </>
+        ) : (
+          <>
+            {" "}
+            <div className="ottstart">D - {d_dayOfEndDate}</div>
+            <div className="ottstate" style={{ backgroundColor: "#66E197" }}>
+              사용중
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 }

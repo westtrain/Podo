@@ -7,26 +7,6 @@ const api = axios.create({
   withCredentials: true,
 });
 
-const ottList = {
-  netflix: 1,
-  watcha: 2,
-  wavve: 3,
-  tving: 4,
-  disney: 5,
-  prime: 6,
-  laftel: 7,
-  apple: 8,
-  office: 9,
-  nintendo: 10,
-};
-export const getOttId = (ottName) => {
-  return ottList[ottName];
-};
-
-export const getOttName = (ottId) => {
-  return Object.keys(ottList).find((ottName) => ottList[ottName] === ottId);
-};
-
 export const createParty = createAsyncThunk(
   "party/createParty",
   async ({ createPartyState }, { dispatch, rejectWithValue }) => {

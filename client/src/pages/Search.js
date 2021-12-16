@@ -158,7 +158,8 @@ function Search(props) {
                         src={nintendo}
                         alt="nintendo"
                         onClick={() => {
-                          setOttName(nintendo);
+                          setOttId(10);
+                          setSelectedOtt(nintendo);
                         }}
                       />
                     </li>

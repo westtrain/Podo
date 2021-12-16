@@ -96,6 +96,25 @@ export const ottList = {
   nintendo: 10,
 };
 
+export const ottKoreanList = {
+  넷플릭스: 1,
+  왓챠: 2,
+  웨이브: 3,
+  티빙: 4,
+  "디즈니 플러스": 5,
+  "프라임 비디오": 6,
+  라프텔: 7,
+  "애플 TV": 8,
+  "오피스 365": 9,
+  닌텐도: 10,
+};
+
 export const getOttNameById = (ottId) => {
   return Object.keys(ottList).find((ottName) => ottList[ottName] === ottId);
+};
+
+export const getOttKoreanNameById = (ottId) => {
+  return Object.keys(ottKoreanList).find(
+    (ottName) => ottKoreanList[ottName] === ottId
+  );
 };

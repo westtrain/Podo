@@ -20,13 +20,12 @@ function SelectOtt() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const planModalState = useSelector((state) => state.modal.selectPlanModal);
-  const onClickOtt = (ottName) => {
+  const onClickOtt = async (ottName) => {
     const ottId = ottList[ottName];
     dispatch(setOttId(ottId));
     //navigate("/create/1");
     dispatch(showSelectPlanModal(true));
   };
-
   useEffect(() => {
     dispatch(setOttId(0));
   }, []);

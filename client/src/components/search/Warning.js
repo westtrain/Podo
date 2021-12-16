@@ -6,8 +6,8 @@ function Warning() {
     <>
       <div className="noparty">
         <img src={profile5} alt="profile5"></img>
-        <div>오늘부터 시작하는 파티가 없어요</div>
-        <div>시작 날짜를 선택해 다시 검색해보세요!</div>
+        <div>조건에 맞는 파티가 없어요</div>
+        <div>시작일을 선택해 다시 검색해보세요!</div>
       </div>
     </>
   );

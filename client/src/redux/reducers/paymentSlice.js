@@ -4,6 +4,7 @@ import {
   getUsersPaymentInfo,
   updateSettlement,
   updateCard,
+  updateAccount,
 } from "../API/paymentAPI";
 import { isNotError } from "./errorSlice";
 
@@ -41,6 +42,8 @@ const paymentSlice = createSlice({
     });
     builder.addCase(updateCard.fulfilled, () => {});
     builder.addCase(updateCard.rejected, (action) => {});
+    builder.addCase(updateAccount.fulfilled, () => {});
+    builder.addCase(updateAccount.rejected, (action) => {});
     // .addCase(signUp.fulfilled, () => {})
     // .addCase(logIn.fulfilled, (state, action) => {
     //   state = action.payload;

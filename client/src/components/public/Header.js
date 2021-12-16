@@ -14,17 +14,23 @@ function Header(props) {
   const loginModalState = useSelector((state) => state.modal.loginModal);
   const isLogin = useSelector((state) => state.user !== null);
   const userState = useSelector((state) => state.user);
-  const [profileImg, setProfileImg] = useState(profileImage[userState.image]);
+
+  const [profileImg, setProfileImg] = useState(
+    profileImage[userState ? userState.image : 0]
+  );
+
   const selectProfileModalState = useSelector(
     (state) => state.modal.selectProfileImageModal
   );
 
   useEffect(
     async () => {
-      await dispatch(getUser());
-      setProfileImg(profileImage[userState.image]);
+      if (isLogin) {
+        await dispatch(getUser());
+        setProfileImg(profileImage[userState.image]);
+      }
     },
-    [userState.image],
+    [userState ? userState.image : null],
     selectProfileModalState
   );
 

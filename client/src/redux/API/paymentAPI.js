@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isError, isNotError } from "../reducers/errorSlice";
+import { showAccountModal } from "../reducers/modalSlice";
 import axios from "axios";
 
 const api = axios.create({
@@ -46,6 +47,24 @@ export const updateCard = createAsyncThunk(
       await Promise.all([
         dispatch(isNotError()),
         dispatch(getUsersPaymentInfo()),
+      ]);
+    } catch (err) {
+      await Promise.all([dispatch(isError(err))]);
+
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const updateAccount = createAsyncThunk(
+  "payment/updateAccount",
+  async ({ state }, { dispatch, rejectWithValue }) => {
+    try {
+      await api.post(`/account`, state);
+      await Promise.all([
+        dispatch(isNotError()),
+        dispatch(getUsersPaymentInfo()),
+        dispatch(showAccountModal(false)),
       ]);
     } catch (err) {
       await Promise.all([dispatch(isError(err))]);

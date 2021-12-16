@@ -283,9 +283,11 @@ function Search(props) {
               </div>
             </div>
             <div className="searchparty">
-              {partiesState.map((party, i) => (
-                <Party key={i} party={party} />
-              ))}
+              {partiesState.length === 0 ? (
+                <Warning />
+              ) : (
+                partiesState.map((party, i) => <Party key={i} party={party} />)
+              )}
             </div>
           </div>
         </div>

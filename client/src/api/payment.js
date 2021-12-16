@@ -11,43 +11,21 @@ const payment = (props) => {
     api
       .get(`/`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
-  const changeCard = async () => {
-    api
-      .patch(`/credit`, { withCredentials: true })
-      .then((res) => {
-        console.log("RESPONSE", res.data);
-      })
-      .catch((err) => {
-        console.log("ERROR", err);
-      });
-  };
-
-  const changeSettlement = async () => {
-    api
-      .patch(`/settlement`, { withCredentials: true })
-      .then((res) => {
-        console.log("RESPONSE", res.data);
-      })
-      .catch((err) => {
-        console.log("ERROR", err);
-      });
-  };
-
-  const enrollCard = async () => {
+  const updateCard = async () => {
     api
       .post(`/credit`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -68,32 +46,41 @@ const payment = (props) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
-  const enrollSettlement = async () => {
+  const updateSettlement = async () => {
     api
-      .post(`/settlement`, { withCredentials: true })
+      .post(
+        `/settlement`,
+        {
+          customer_uid: null,
+          credit_num: null,
+          cardname: null,
+          settlement_date: "15",
+          account_bank: null,
+          account_number: null,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
   return (
     <>
       <button onClick={getUsersPaymentInfo}>getUsersPaymentInfo</button>
-      <button onClick={changeCard}>changeCard</button>
-      <button onClick={changeSettlement}>changeSettlement</button>
-      <button onClick={enrollCard}>enrollCard</button>
+      <button onClick={updateCard}>updateCard</button>
       <button onClick={updateAccount}>updateAccount</button>
-      <button onClick={enrollSettlement}>enrollSettlement</button>
+      <button onClick={updateSettlement}>updateSettlement</button>
     </>
   );
 };

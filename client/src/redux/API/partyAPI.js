@@ -1,37 +1,79 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { logOutForce } from "../userSlice";
-import { logOutMyLikes } from "../likesSlice";
-import { logOutMyReviews } from "../reviewsSlice";
-import { setExpireDate } from "../expireDateReducer";
-import exceptionAxios from "axios";
+import { isError, isNotError } from "../reducers/errorSlice";
+import axios from "axios";
 
-export const getParty = createAsyncThunk(
-  "party/getParty",
-  async (_, { dispatch, rejectWithValue }) => {
+const api = axios.create({
+  baseURL: `${process.env.REACT_APP_API_URL}/party`,
+  withCredentials: true,
+});
+
+export const createParty = createAsyncThunk(
+  "party/createParty",
+  async ({ createPartyState }, { dispatch, rejectWithValue }) => {
+    await Promise.all([dispatch(isNotError())]);
     try {
-      const party = await exceptionAxios.get(`party/${data}`);
-      return party.data.data;
+      console.log(createPartyState);
+      await api.post(`/`, createPartyState);
+      await Promise.all([dispatch(isNotError())]);
     } catch (err) {
-      dispatch(logOutForce());
-      dispatch(logOutMyLikes());
-      dispatch(logOutMyReviews());
-      dispatch(setExpireDate(null));
+      await Promise.all([dispatch(isError(err))]);
       return rejectWithValue(err);
     }
   }
 );
 
-export const getAllParty = createAsyncThunk(
-  "party/getAllParty",
-  async (_, { dispatch, rejectWithValue }) => {
+export const getAllParties = createAsyncThunk(
+  "party/getAllParties",
+  async ({ id }, { dispatch, rejectWithValue }) => {
     try {
-      const party = await exceptionAxios.get("party");
-      return party.data.data;
+      const parties = await api.get(`/all/${id}`);
+      await Promise.all([dispatch(isNotError())]);
+      return parties.data.data;
     } catch (err) {
-      dispatch(logOutForce());
-      dispatch(logOutMyLikes());
-      dispatch(logOutMyReviews());
-      dispatch(setExpireDate(null));
+      await Promise.all([dispatch(isError(err))]);
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const getFilteredParties = createAsyncThunk(
+  "party/getFilteredParties",
+  async ({ id, date }, { dispatch, rejectWithValue }) => {
+    try {
+      const parties = await api.get(`/filtered/${id}?start_date=${date}`);
+      await Promise.all([dispatch(isNotError())]);
+      return parties.data.data;
+    } catch (err) {
+      await Promise.all([dispatch(isError(err))]);
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const getFilterParties = (parties, period, numOfMember) => {
+  let filteredParties = parties;
+  console.log(filteredParties, period, numOfMember);
+  if (period) {
+    filteredParties = filteredParties.filter(
+      (party) => party.period === period
+    );
+  }
+  if (numOfMember) {
+    filteredParties = filteredParties.filter(
+      (party) => party.members_num === numOfMember
+    );
+  }
+  return filteredParties;
+};
+
+export const joinParty = createAsyncThunk(
+  "party/joinParty",
+  async ({ partyId }, { dispatch, rejectWithValue }) => {
+    try {
+      const parties = await api.patch(`/join`, { party_id: partyId });
+      await Promise.all([dispatch(isNotError())]);
+    } catch (err) {
+      await Promise.all([dispatch(isError(err))]);
       return rejectWithValue(err);
     }
   }
@@ -41,13 +83,11 @@ export const getUsersParty = createAsyncThunk(
   "party/getUsersParty",
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      const usersParty = await exceptionAxios.get("party/user");
-      return usersParty.data.data;
+      const parties = await api.get(`/user`);
+      await Promise.all([dispatch(isNotError())]);
+      return parties.data.data;
     } catch (err) {
-      dispatch(logOutForce());
-      dispatch(logOutMyLikes());
-      dispatch(logOutMyReviews());
-      dispatch(setExpireDate(null));
+      await Promise.all([dispatch(isError(err))]);
       return rejectWithValue(err);
     }
   }

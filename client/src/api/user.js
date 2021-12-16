@@ -10,10 +10,21 @@ const User = (props) => {
     api
       .get(`/`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
+      });
+  };
+
+  const updateProfileImage = async () => {
+    api
+      .patch(`/image/3`, { withCredentials: true })
+      .then((res) => {
+        console.log("RESPONSE", JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -22,10 +33,10 @@ const User = (props) => {
     api
       .patch(`/money?withdraw=1000`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -33,15 +44,16 @@ const User = (props) => {
     api
       .delete(`/`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
   return (
     <>
       <button onClick={getUser}>getUser</button>
+      <button onClick={updateProfileImage}>updateProfileImage</button>
       <button onClick={updateMoney}>updateMoney</button>
       <button onClick={deleteUser}>deleteUser</button>
     </>

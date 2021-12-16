@@ -140,13 +140,13 @@ a {
         align-items: center;
         justify-content: center;
 
-        div {
+        .faqmh {
           margin-top: 26px;
           font-size: 20px;
           font-weight: bold;
           color: $fontcolor;
         }
-        img {
+        .faqmhicon {
           margin-top: 26px;
           position: absolute;
           margin-left: 40em;
@@ -245,8 +245,8 @@ a {
     .faqmiddle {
       .faqmquestion {
         .faqmunit {
-          img {
-            margin-left: 37em;
+          .faqmhicon {
+            margin-left: 36em;
           }
         }
 
@@ -274,6 +274,22 @@ a {
       position: relative;
       padding-top: 0;
       padding-bottom: 0;
+
+      .left {
+        .logo {
+          font-size: 20px;
+          div {
+            width: 30px;
+          }
+          img {
+            width: 20px;
+            height: 30px;
+          }
+          span {
+            margin-left: 0;
+          }
+        }
+      }
 
       .middleleft {
         width: 100%;
@@ -303,8 +319,15 @@ a {
         position: absolute;
         top: 0;
         right: 0;
-        margin-right: 40px;
-        margin-top: 20px;
+        margin-right: 27px;
+        margin-top: 12px;
+        .login {
+          font-size: 13px;
+        }
+        .user {
+          width: 27px;
+          height: 27px;
+        }
       }
     }
   }
@@ -321,11 +344,12 @@ a {
       .faqmquestion {
         margin-top: 10px;
         .faqmunit {
-          div {
-            font-size: 15px;
+          .faqmh {
+            margin-right: 10px;
+            font-size: 13px;
           }
-          img {
-            margin-left: 37em;
+          .faqmhicon {
+            margin-left: 20em;
           }
         }
 
@@ -343,4 +367,19 @@ a {
       }
     }
   }
+}
+/* 스크롤바 설정*/
+::-webkit-scrollbar {
+  width: 0px;
+}
+/* 스크롤바 뒷 배경 설정*/
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+/* 스크롤바 막대 설정*/
+::-webkit-scrollbar-thumb {
+  height: 17%;
+  background-color: rgb(172, 140, 245);
+  /* 스크롤바 둥글게 설정    */
+  border-radius: 10px;
 }

@@ -11,10 +11,10 @@ const OTT = (props) => {
     api
       .get("/", { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 

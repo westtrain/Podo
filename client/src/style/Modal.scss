@@ -14,6 +14,150 @@
     display: grid;
     place-items: center;
 
+    .selectprofilemodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 350px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+      .exit {
+        margin-top: 10px;
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .spimheader {
+        .spimhfirst {
+          margin: 20px 0 60px 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .spipmhff {
+            font-size: 20px;
+            font-weight: bold;
+            color: $fontcolor;
+          }
+        }
+        .spimain {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 20px;
+          img {
+            width: 100px;
+            height: 100px;
+          }
+        }
+      }
+      .selectimg {
+        img {
+          margin: 8px;
+        }
+      }
+
+      .partysignbtn {
+        margin-top: 30px;
+        cursor: pointer;
+        width: 97%;
+        height: 50px;
+        background-color: #4040cc;
+        border: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        border-radius: 15px;
+
+        .partysignbtnw {
+          font-size: 18px;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+
+    .selectratemodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 490px;
+      height: 650px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+
+      .exit {
+        margin-top: 30px;
+        cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .srmheader {
+        margin-top: 20px;
+        font-size: 21px;
+        color: $fontcolor;
+        font-weight: bold;
+      }
+
+      .srmmiddle {
+        margin: 80px 0;
+        width: 100%;
+        border-radius: 20px;
+        border: 2px solid #b3c1ef;
+
+        .srmmup {
+          display: flex;
+          margin: 20px 20px;
+
+          .srmmuexp {
+            font-size: 18px;
+            font-weight: bold;
+            color: #b3c1ef;
+          }
+        }
+        .srmmdown {
+          margin: 20px 20px;
+          div {
+            font-size: 14px;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .clearbtnwrap {
+        margin-top: 130px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
     .setcardmodalview {
       background-color: #fff;
       border-radius: 20px;
@@ -181,8 +325,13 @@
           }
         }
       }
+      .warning {
+        color: rgb(255, 124, 124);
+        height: 30px;
+        margin: 20px;
+      }
       .clearbtnwrap {
-        margin-top: 130px;
+        margin-top: 90px;
         display: flex;
         justify-content: flex-end;
         width: 100%;
@@ -206,6 +355,7 @@
     }
 
     .withdrawalmodalview {
+      z-index: 100;
       background-color: #fff;
       border-radius: 20px;
       width: 490px;
@@ -218,10 +368,13 @@
 
       .exit {
         margin-top: 30px;
-        cursor: pointer;
+
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .wdmheader {
@@ -320,6 +473,7 @@
     }
 
     .accountmodalview {
+      z-index: 999;
       background-color: #fff;
       border-radius: 20px;
       width: 490px;
@@ -361,14 +515,33 @@
 
       .sammf {
         margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         .sammff {
           background-color: #f7f7f7;
-          height: 60px;
+          height: 45px;
           width: 95%;
           border-radius: 15px;
           border: none;
-          padding-left: 20px;
+          padding: 15px 0 0 20px;
           font-size: 18px;
+        }
+        .choosebank {
+          border-radius: 15px;
+          margin-top: 80px;
+          background-color: #fff;
+          position: absolute;
+          display: grid;
+          grid-template-columns: repeat(4, 110px);
+          width: 450px;
+          padding: 10px;
+          box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.25);
+          div {
+            font-weight: 500;
+            cursor: pointer;
+            margin: 3px 0 5px 15px;
+          }
         }
       }
 
@@ -376,11 +549,11 @@
         margin-top: 20px;
         .sammff {
           background-color: #f7f7f7;
-          height: 60px;
+          height: 50px;
           width: 95%;
           border-radius: 15px;
           border: none;
-          padding-left: 20px;
+          padding: 10px 0 0 20px;
           font-size: 18px;
         }
       }
@@ -451,6 +624,7 @@
         height: 200px;
 
         .socialloginBtn {
+          cursor: pointer;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -728,7 +902,7 @@
         display: flex;
         justify-content: flex-end;
         width: 100%;
-        background-color: #fff;
+
         border: none;
         .joinpartysignbtn {
           display: flex;
@@ -738,7 +912,7 @@
           background-color: #4040cc;
           justify-content: center;
           align-items: center;
-
+          border: none;
           .joinpartysignbtnw {
             font-size: 18px;
             color: #fff;
@@ -752,8 +926,18 @@
 @media screen and (max-width: 768px) {
   .page {
     .modalback {
+      .selectprofilemodalview {
+        width: 330px;
+        padding: 10px 25px 15px 15px;
+      }
+      .selectratemodalview {
+        width: 330px;
+        padding: 10px 25px 15px 15px;
+      }
+
       .loginmodalview {
-        width: 480px;
+        width: 330px;
+        padding: 20px 25px 15px 25px;
         .lmheader {
           .lmhfirst {
             font-size: 23px;
@@ -767,12 +951,14 @@
       .withdrawalmodalview {
         justify-content: flex-start;
         text-align: start;
-        width: 400px;
+        width: 330px;
+        padding: 10px 25px 15px 15px;
       }
 
       .modalview {
-        width: 400px;
+        width: 330px;
         height: 650px;
+        padding: 10px 25px 15px 15px;
         .partysignbtn {
           margin-top: 70px;
         }
@@ -790,10 +976,11 @@
       }
 
       .setcardmodalview {
-        width: 400px;
+        width: 330px;
         height: 600px;
+        padding: 10px 25px 15px 15px;
         .scmhf {
-          font-size: 12px;
+          font-size: 10px;
         }
 
         .ssmmf {
@@ -806,10 +993,10 @@
         }
         .sdmms {
           .sdmmsf {
-            width: 170px;
+            width: 140px;
           }
           .sdmmss {
-            width: 170px;
+            width: 140px;
           }
         }
         .clearbtnwrap {
@@ -817,8 +1004,15 @@
         }
       }
       .accountmodalview {
-        width: 400px;
+        width: 360px;
         height: 550px;
+        padding: 10px 25px 15px 15px;
+        .sammf {
+          .choosebank {
+            width: 350px;
+            grid-template-columns: repeat(3, 110px);
+          }
+        }
       }
     }
   }

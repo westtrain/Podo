@@ -7,7 +7,9 @@ import "./index.css";
 import store from "./redux/configureStore";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import axiosConfig from "./utils/axiosConfig";
 
+//axiosConfig();
 const persistor = persistStore(store);
 
 ReactDOM.render(

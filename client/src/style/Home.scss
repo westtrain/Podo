@@ -89,11 +89,25 @@
   .landingpage {
     margin-left: 2em;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     width: 90%;
-    height: 780px;
+    height: 880px;
+    // 이미지 초기값
+    .landingexpimg {
+      position: relative;
+      left: 0;
+      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1s linear;
+      opacity: 0;
+    }
+
+    .fade-in {
+      transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1s linear;
+      left: 0px;
+      opacity: 1;
+    }
+
     .landingexp {
       .landingexpheader {
         font-size: 64px;
@@ -133,6 +147,86 @@
     height: 300px;
     width: 100%;
     background-color: $maincolor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .footerup {
+      margin: 50px;
+      width: 90%;
+      height: 80%;
+      display: flex;
+      justify-content: space-between;
+
+      .logo {
+        display: flex;
+        align-content: center;
+        margin-left: 10%;
+
+        div {
+          img {
+            width: 50px;
+            height: 55px;
+          }
+        }
+        span {
+          margin: 5px 0 0 10px;
+          color: #fff;
+          font-weight: bold;
+          font-size: 50px;
+        }
+      }
+
+      .service {
+        margin: 10px 0 0 10%;
+        .footerhead {
+          color: #fff;
+          font-size: 20px;
+          font-weight: bold;
+        }
+        .line {
+          margin: 5px 0;
+          height: 2px;
+          width: 60px;
+          background-color: #fff;
+        }
+        .list {
+          cursor: pointer;
+          margin-top: 3px;
+          color: #fff;
+          font-size: 18px;
+          transition: transform 0.4s;
+        }
+        .list:hover {
+          transform: translateX(13px);
+        }
+      }
+      .member {
+        margin: 10px 15% 0 0;
+        .footerhead {
+          color: #fff;
+          font-size: 20px;
+          font-weight: bold;
+        }
+        .line {
+          margin: 5px 0;
+          height: 2px;
+          width: 100px;
+          background-color: #fff;
+        }
+        .list {
+          cursor: pointer;
+          margin-top: 3px;
+          color: #fff;
+          font-size: 18px;
+          transition: transform 0.4s;
+        }
+
+        .list:hover {
+          transform: translateX(13px);
+        }
+      }
+    }
   }
 }
 
@@ -296,6 +390,24 @@
       font-size: 45px;
     }
   }
+  .homemiddle {
+    .landingpage {
+      display: flex;
+      flex-direction: column;
+
+      .landingexp {
+        .landingexpheader {
+          font-size: 40px;
+        }
+        .landingexpmiddle {
+          font-size: 25px;
+        }
+      }
+    }
+    .footer {
+      height: 200px;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -310,6 +422,139 @@
       align-items: center;
       margin-right: 0;
       font-size: 26px;
+    }
+  }
+
+  .homemiddle {
+    margin-top: -200px;
+    .landingpage {
+      display: flex;
+      flex-direction: column;
+      height: 550px;
+      margin: 0;
+
+      .landingexp {
+        .landingexpheader {
+          font-size: 26px;
+        }
+        .landingexpmiddle {
+          font-size: 18px;
+        }
+      }
+
+      .landingexpimg {
+        width: 380px;
+        img {
+          width: 100%;
+        }
+      }
+      .fade-in {
+        width: 380px;
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .landingpagefooter {
+      height: 550px;
+      .landingexpimg {
+        width: 380px;
+        img {
+          width: 100%;
+        }
+      }
+
+      .fade-in {
+        width: 380px;
+        img {
+          width: 100%;
+        }
+      }
+      .landingexp {
+        .landingexpfooter {
+          font-size: 26px;
+        }
+      }
+    }
+    .footer {
+      margin-top: 5em;
+      height: 130px;
+    }
+    .footer {
+      margin-top: 5em;
+      height: 150px;
+
+      .footerup {
+        margin: 30px;
+        width: 90%;
+        height: 80%;
+        display: flex;
+        justify-content: space-between;
+
+        .logo {
+          margin-left: 0;
+          div {
+            img {
+              width: 30px;
+              height: 35px;
+            }
+          }
+          span {
+            font-size: 30px;
+          }
+        }
+
+        .service {
+          margin-left: 0;
+          .footerhead {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+          }
+          .line {
+            margin: 5px 0;
+            height: 2px;
+            width: 40px;
+            background-color: #fff;
+          }
+          .list {
+            cursor: pointer;
+            margin-top: 3px;
+            color: #fff;
+            font-size: 11px;
+            transition: transform 0.4s;
+          }
+          .list:hover {
+            transform: translateX(0);
+          }
+        }
+        .member {
+          margin-right: 0;
+          .footerhead {
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+          }
+          .line {
+            margin: 5px 0;
+            height: 2px;
+            width: 70px;
+            background-color: #fff;
+          }
+          .list {
+            cursor: pointer;
+            margin-top: 3px;
+            color: #fff;
+            font-size: 11px;
+            transition: transform 0.4s;
+          }
+
+          .list:hover {
+            transform: translateX(0);
+          }
+        }
+      }
     }
   }
 }

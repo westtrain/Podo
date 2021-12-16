@@ -15,6 +15,7 @@ const partyRouter = require("./router/party");
 const paymentRouter = require("./router/payment");
 const statementRouter = require("./router/statement");
 const ottRouter = require("./router/ott");
+const { settleMonthly } = require("./middleware");
 
 const app = express();
 const port = config[process.env.NODE_ENV || "port"].port;
@@ -55,6 +56,13 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   res.status(500).json({ message: `Something went wrong: ${err}` });
 });
+
+const scheduleData = {
+  dayOfWeek: [0, 1, 2, 3, 4, 5, 6],
+  hour: 00,
+  minute: 00,
+};
+settleMonthly(scheduleData);
 
 const podoServer = app.listen(port, async () => {
   console.log(`🚀 Listening on PORT: ${port}`);

@@ -10,49 +10,47 @@ const party = (props) => {
   const getUsersParty = async () => {
     //isAuth 거치기 떄문에 따로 params, query 등 불필요
     api
-      .get("/", { withCredentials: true })
+      .get("/user", { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
   const getParty = async () => {
     api
-      .get(`/3`, {
-        withCredentials: true,
-      })
+      .get(`/1`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
   const getAllParties = async () => {
     api
-      .get(`/`, { withCredentials: true })
+      .get(`/all/1`, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 
   const getFilteredParties = async () => {
     api
-      .get(`/filtered?ott_id=1&date=2021-01-10`, {
+      .get(`/filtered/7?start_date=2021-12-20`, {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -64,19 +62,20 @@ const party = (props) => {
           ott_id: 3,
           ott_login_id: "dnfjk123!@$",
           ott_login_password: "1283njskd@#$%",
-          members: "1",
+          members: "4",
           members_num: 4,
-          leader: 1,
-          start_date: "2021-12-05",
-          end_date: "2022-12-04",
+          leader: 3,
+          period: 3,
+          start_date: "2021-12-17",
+          end_date: "2022-10-16",
         },
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("RESPONSE", res);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 
@@ -92,10 +91,10 @@ const party = (props) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
@@ -107,35 +106,35 @@ const party = (props) => {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
   const joinParty = async () => {
     api
-      .patch(`/join`, { party_id: 6 }, { withCredentials: true })
+      .patch(`/join`, { party_id: 1 }, { withCredentials: true })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 
   const leaveParty = async () => {
     api
       .delete(`/`, {
-        data: { party_id: 10 },
+        data: { party_id: 2 },
         withCredentials: true,
       })
       .then((res) => {
-        console.log("RESPONSE", res.data);
+        console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", err);
+        console.log("ERROR", JSON.stringify(err.response.data.message));
       });
   };
 

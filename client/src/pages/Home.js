@@ -1,17 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/public/Header";
 import FAQ from "../components/public/FAQ";
 import "../style/Home.scss";
+import logo from "../image/Podo_logo.svg";
 import landingimg1 from "../image/landingimg1.png";
 import landingimg2 from "../image/landingimg2.png";
 import landingimg3 from "../image/landingimg3.png";
 import landingimg4 from "../image/landingimg4.png";
 import landingimg5 from "../image/landingimg5.png";
 
-function Home(props) {
+const Home = (props) => {
+  useEffect(() => {
+    //viewport에 들어올 경우 class변경
+    const targets = document.querySelectorAll(".landingexpimg");
+    //threshold 0.5만큼 보였을 경우 실행
+    const options = { root: null, threshold: 0.5, rootMargin: "0px" };
+    const observer = new IntersectionObserver(function (entries, observer) {
+      entries.forEach((entry) => {
+        const container = entry.target;
+        //class변경
+        if (entry.isIntersecting) {
+          container.classList.remove("landingexpimg");
+          container.classList.add("fade-in");
+        } else {
+          container.classList.remove("fade-in");
+          container.classList.add("landingexpimg");
+        }
+      });
+    }, options);
+
+    targets.forEach((target) => {
+      observer.observe(target);
+    });
+  }, []);
+
   return (
     <>
       <Header />
+
       <div className="banner">
         <div className="wrapper">
           <span>
@@ -34,12 +60,12 @@ function Home(props) {
               저렴한 파티 가격을 비교해보세요.
             </div>
           </div>
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg1} alt="landingimg1"></img>
           </div>
         </div>
         <div className="landingpage">
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg2} alt="landingimg2"></img>
           </div>
           <div className="landingexp">
@@ -66,12 +92,12 @@ function Home(props) {
               파티원을 모집해 보세요.
             </div>
           </div>
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg3} alt="landingimg3"></img>
           </div>
         </div>
         <div className="landingpage">
-          <div className="landingexpimg">
+          <div id="image" className="landingexpimg">
             <img src={landingimg4} alt="landingimg4"></img>
           </div>
           <div className="landingexp">
@@ -99,10 +125,37 @@ function Home(props) {
           </div>
         </div>
         <FAQ />
-        <div className="footer"></div>
+        <div className="footer">
+          <div className="footerup">
+            <div className="logo">
+              <div>
+                <img src={logo} alt="logo"></img>
+              </div>
+              <span className="name">Podo</span>
+            </div>
+
+            <div className="service">
+              <div className="footerhead">서비스 소개</div>
+              <div className="line"></div>
+              <div className="list">Repository</div>
+              <div className="list">WIKI</div>
+            </div>
+            <div className="member">
+              <div className="footerhead">Team Members</div>
+              <div className="line"></div>
+              <div className="list">김보라</div>
+              <div className="list">김태우</div>
+              <div className="list">이원구</div>
+              <div className="list">하승윤</div>
+            </div>
+          </div>
+          {/* <div className="footerdown">
+            <div>Copyright</div>
+          </div> */}
+        </div>
       </div>
     </>
   );
-}
+};
 
 export default Home;

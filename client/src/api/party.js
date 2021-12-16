@@ -59,13 +59,13 @@ const party = (props) => {
       .post(
         `/`,
         {
-          ott_id: 1,
+          ott_id: 8,
           ott_login_id: "dnfjk123!@$",
           ott_login_password: "1283njskd@#$%",
           members: "1",
           members_num: 4,
           leader: 1,
-          start_date: "2021-12-05",
+          start_date: "2021-12-16",
           end_date: "2022-12-19",
         },
         { withCredentials: true }

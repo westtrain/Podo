@@ -1,6 +1,11 @@
-const { Payment, Party } = require("../models");
+const { Payment, Party, OTT } = require("../models");
 const { generateImportToken, checkAccountName } = require("./importFunction/account");
 const { createSubscription } = require("./importFunction/subscription");
+const moment = require("moment");
+const date = moment().format("YYYY-MM-DD");
+const sequelize = require("sequelize");
+const user = require("./user");
+const Op = sequelize.Op;
 
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {
@@ -10,7 +15,6 @@ module.exports = {
         where: { user_id },
         raw: true,
       });
-      console.log(paymentInfo);
       if (paymentInfo) {
         return res.status(200).json({ data: paymentInfo });
       }

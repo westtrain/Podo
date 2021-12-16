@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getAllOtt } from "../API/ottAPI";
 import { isError, isNotError } from "../reducers/errorSlice";
 import axios from "axios";
 
@@ -41,7 +42,7 @@ export const getFilteredParties = createAsyncThunk(
   async ({ id, date }, { dispatch, rejectWithValue }) => {
     try {
       const parties = await api.get(`/filtered/${id}?start_date=${date}`);
-      await Promise.all([dispatch(isNotError())]);
+      await Promise.all([dispatch(isNotError()), dispatch(getAllOtt())]);
       return parties.data.data;
     } catch (err) {
       await Promise.all([dispatch(isError(err))]);

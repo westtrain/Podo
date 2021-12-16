@@ -22,9 +22,7 @@ function Party(props) {
   const priceOfParty = refinePrice(
     ottState.filter((p) => p.id === party.ott_id)[0].price / party.members_num
   );
-  useEffect(() => {
-    dispatch(getAllOtt());
-  }, []);
+
   return (
     <>
       <div
@@ -34,7 +32,7 @@ function Party(props) {
         <div className="partyexpup">
           <div className="peus">
             <span className="peusp">{party.period}개월</span>
-            파티 지금 시작
+            {party.members_num}인 파티 지금 시작
           </div>
           <div className="ottfee">
             <div className="won">

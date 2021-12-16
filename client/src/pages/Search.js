@@ -35,7 +35,9 @@ function Search(props) {
   const [ottId, setOttId] = useState(1);
   const [period, setPeriod] = useState(0);
   const [numOfMember, setNumOfMember] = useState(0);
-  const [startDate, setStartDate] = useState(dateToStringDash(new Date()));
+  const [startDate, setStartDate] = useState(
+    dateToStringDash(new Date().setDate(new Date().getDate() + 1))
+  );
   const dispatch = useDispatch();
   const partiesState = useSelector((state) => state.party.parties);
 

@@ -22,9 +22,7 @@ function Party(props) {
   const priceOfParty = refinePrice(
     ottState.filter((p) => p.id === party.ott_id)[0].price / party.members_num
   );
-  useEffect(() => {
-    dispatch(getAllOtt());
-  }, []);
+
   return (
     <>
       <div

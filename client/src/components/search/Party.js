@@ -34,7 +34,7 @@ function Party(props) {
         <div className="partyexpup">
           <div className="peus">
             <span className="peusp">{party.period}개월</span>
-            파티 지금 시작
+            {party.members_num}인 파티 지금 시작
           </div>
           <div className="ottfee">
             <div className="won">

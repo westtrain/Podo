@@ -11,7 +11,7 @@ import MyLogin from "../components/mypage/MyLogin";
 import MyPayment from "../components/mypage/MyPayment";
 import MyAccount from "../components/mypage/MyAccount";
 import MySettlement from "../components/mypage/MySettlement";
-import MyStateMent from "../components/mypage/MyStateMent";
+import MyStatement from "../components/mypage/MyStatement";
 import "../style/MyPage.scss";
 import PodoMoney from "../image/PodoMoney.svg";
 
@@ -143,7 +143,7 @@ function MyPage(props) {
               {menu === "payment" ? <MyPayment /> : null}
               {menu === "account" ? <MyAccount /> : null}
               {menu === "settlement" ? <MySettlement /> : null}
-              {menu === "statement" ? <MyStateMent /> : null}
+              {menu === "statement" ? <MyStatement /> : null}
             </div>
             <div className="right">
               <div className="up">

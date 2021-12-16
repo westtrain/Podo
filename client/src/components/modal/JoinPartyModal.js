@@ -39,7 +39,8 @@ function JoinPartyModal(props) {
                     </div>
                   </div>
                   <div className="cpmhsecond">
-                    {ottName} 서비스를 이용해 보세요.
+                    {party.members_num}명과 함께 {ottName} 서비스를 이용해
+                    보세요.
                   </div>
                 </div>
               </div>

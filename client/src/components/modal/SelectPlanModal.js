@@ -1,6 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getOttKoreanNameById,
+  dateToStringPoint,
+} from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
 import "../../style/Modal.scss";
@@ -14,6 +18,9 @@ function SelectPlanModal() {
     dispatch(showSelectPlanModal(false));
     navigate("/create/1");
   };
+  const ottId = useSelector((state) => state.party.ceateParty.ott_id);
+  console.log(ottId);
+
   return (
     <>
       <div className="page">
@@ -37,7 +44,7 @@ function SelectPlanModal() {
                   <div className="srmmuimg">
                     <img src={check_icon} alt="check"></img>
                   </div>
-                  <div className="srmmuexp">넷플릭스 프리미엄</div>
+                  <div className="srmmuexp">{getOttKoreanNameById(ottId)}</div>
                 </div>
                 <div className="srmmdown">
                   <div>&middot; 파티원은 최대 3명 모집할 수 있어요</div>

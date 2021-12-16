@@ -3,14 +3,16 @@ const { Statement } = require("../models");
 module.exports = {
   getPaymentPointWithdrawal: async (req, res) => {
     // 모든 내역를 조회해서 클라이언트로 보내준다.
-    const userId = req.query.user_id;
+    const userId = req.userId;
     try {
+      console.log(userId);
       const statementInfo = await Statement.findAll({
         where: {
           user_id: userId,
         },
         raw: true,
       });
+      console.log(statementInfo);
       if (statementInfo) {
         return res.status(200).json({ data: statementInfo });
       }

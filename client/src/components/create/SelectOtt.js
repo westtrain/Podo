@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOttId } from "../../redux/API/partyAPI";
+import { ottList } from "../../utils/dateFunction";
 import { setOttId } from "../../redux/reducers/partySlice";
 import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
 import SelectPlanModal from "../modal/SelectPlanModal";
@@ -21,7 +21,7 @@ function SelectOtt() {
   const navigate = useNavigate();
   const planModalState = useSelector((state) => state.modal.selectPlanModal);
   const onClickOtt = (ottName) => {
-    const ottId = getOttId(ottName);
+    const ottId = ottList[ottName];
     dispatch(setOttId(ottId));
     //navigate("/create/1");
     dispatch(showSelectPlanModal(true));

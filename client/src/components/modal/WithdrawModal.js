@@ -4,6 +4,7 @@ import {
   showWithdrawModal,
   showAccountModal,
 } from "../../redux/reducers/modalSlice";
+import { bankList } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import exit from "../../image/exit.png";
@@ -12,6 +13,7 @@ import PodoMoney from "../../image/PodoMoney.svg";
 function WithdrawModal(props) {
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
+  const paymentState = useSelector((state) => state.payment);
 
   return (
     <>
@@ -42,10 +44,18 @@ function WithdrawModal(props) {
                   dispatch(showWithdrawModal(false));
                 }}
               >
-                <div className="wdmmff">+ 계좌 등록하기</div>
-                <div className="wdmmfs">
-                  본인 명의의 계좌만 등록할 수 있어요.
-                </div>
+                {paymentState.account_bank ? (
+                  `${bankList[paymentState.account_bank]} ${
+                    paymentState.account_number
+                  } (변경)`
+                ) : (
+                  <>
+                    <div className="wdmmff">+ 계좌 등록하기</div>
+                    <div className="wdmmfs">
+                      본인 명의의 계좌만 등록할 수 있어요.
+                    </div>
+                  </>
+                )}
               </div>
               <div className="withdrawalguide">인출 신청 안내</div>
               <div className="wdmpay">

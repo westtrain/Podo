@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getDday, getOttKoreanNameById } from "../../utils/dateFunction";
 import netflix from "../../image/netflix.png";
 import watcha from "../../image/watcha.png";

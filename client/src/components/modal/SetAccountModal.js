@@ -17,6 +17,7 @@ function SetAccountModal(props) {
   const [accountNum, setAccountNum] = useState("");
   const [warning, setWarning] = useState("");
   const paymentState = useSelector((state) => state.payment);
+  const errorState = useSelector((state) => state.error);
 
   const onChangeAccountNum = (e) => {
     setAccountNum(onlyNumber(e.target.value));
@@ -36,14 +37,23 @@ function SetAccountModal(props) {
           state: paymentInfo,
         })
       );
+      if (errorState) {
+        Swal.fire(
+          "Input!",
+          "유효한 계좌정보가 아닙니다. 다시 입력해주세요!",
+          "error"
+        );
+      }
+      Swal.fire("Success!", "계좌 정보가 등록되었습니다.", "success");
     }
   };
 
   const bankElements = () => {
     const result = [];
-    Object.keys(bankList).map((bankCode) => {
+    Object.keys(bankList).map((bankCode, i) => {
       result.push(
         <div
+          key={i}
           className="bank"
           onClick={() => {
             setShowDropdown(!showDropdown);

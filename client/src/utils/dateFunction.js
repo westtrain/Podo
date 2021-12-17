@@ -128,3 +128,9 @@ export const getOttKoreanNameById = (ottId) => {
     (ottName) => ottKoreanList[ottName] === ottId
   );
 };
+
+export const passwordToStar = (pw) => {
+  let result = "";
+  for (let i = 0; i < pw.length; i++) result += "*";
+  return result;
+};

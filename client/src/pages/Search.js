@@ -59,7 +59,7 @@ function Search(props) {
     const result = [];
     ottLogoList.map((ott, i) => {
       result.push(
-        <li>
+        <li key={i}>
           <img
             src={ott}
             alt="ott"

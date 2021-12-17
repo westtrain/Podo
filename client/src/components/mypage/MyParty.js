@@ -6,6 +6,9 @@ import { showSelectProfileImageModal } from "../../redux/reducers/modalSlice";
 import SelectProfileImage from "../../components/modal/SelectProfileImage";
 import PartyCard from "./PartyCard";
 import "../../style/MyPage.scss";
+import { IoSettingsOutline } from "react-icons/io5";
+import { AiOutlineSetting } from "react-icons/ai";
+
 import PodoMoney from "../../image/PodoMoney.svg";
 import profile0 from "../../image/profile0.svg";
 import profile1 from "../../image/profile1.svg";
@@ -63,6 +66,14 @@ function MyParty(props) {
             dispatch(showSelectProfileImageModal(true));
           }}
         ></img>
+        <div
+          className="settingprofile"
+          onClick={() => {
+            dispatch(showSelectProfileImageModal(true));
+          }}
+        >
+          <IoSettingsOutline style={{ color: "#222222" }} />
+        </div>
         <div className="username">{userState.name}</div>
       </div>
       <div className="mobilemoney">

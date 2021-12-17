@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { dateToStringPoint } from "../../utils/dateFunction";
-import check from "../../image/check.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function ConfirmRule(props) {
   const startDate = useSelector((state) => state.party.ceateParty.start_date);
@@ -70,7 +70,10 @@ function ConfirmRule(props) {
         <div className="guidefooter">
           <Link to={"/create/4"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
           <Link to={"/create/6"}>

@@ -9,7 +9,7 @@ import {
 } from "../../redux/reducers/modalSlice";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 
 function JoinPartyModal(props) {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function JoinPartyModal(props) {
             <div className="modalview">
               <div className="exit">
                 <div onClick={() => dispatch(showJoinPartyModal(false))}>
-                  <img src={exit}></img>
+                  <BsXLg />
                 </div>
               </div>
               <div className="cpmheader">

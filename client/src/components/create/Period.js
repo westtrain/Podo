@@ -10,6 +10,7 @@ import MiniCalendar from "./MiniCalendar";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function Period(props) {
   const dispatch = useDispatch();
@@ -157,7 +158,10 @@ function Period(props) {
         <div className="guidefooter">
           <Link to={"/create/3"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
           <div className="guidefooterbtn" onClick={onClickNext}>

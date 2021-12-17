@@ -7,6 +7,7 @@ import getYear from "date-fns/getYear";
 import getMonth from "date-fns/getMonth";
 import arrow_left from "../../image/arrow_left.png";
 import arrow_right from "../../image/arrow_right.png";
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 
 function MiniCalendar(props) {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ function MiniCalendar(props) {
                 cursor: "pointer",
               }}
             >
-              <img src={arrow_left} />
+              <BsChevronCompactLeft style={{ color: "#a5a9f8" }} />
             </div>
             <div className="month-day">
               {getYear(date) + "년  "}
@@ -87,7 +88,7 @@ function MiniCalendar(props) {
                 cursor: "pointer",
               }}
             >
-              <img src={arrow_right} />
+              <BsChevronCompactRight style={{ color: "#a5a9f8" }} />
             </div>
           </div>
         )}

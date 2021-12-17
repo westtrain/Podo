@@ -5,6 +5,7 @@ import { setMembersNum } from "../../redux/reducers/partySlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function NumOfMembers(props) {
   const dispatch = useDispatch();
@@ -54,7 +55,10 @@ function NumOfMembers(props) {
         <div className="guidefooter">
           <Link to={"/create/2"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
           <Link to={"/create/4"}>

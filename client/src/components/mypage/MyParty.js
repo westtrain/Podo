@@ -33,24 +33,27 @@ function MyParty(props) {
   const selectProfileModalState = useSelector(
     (state) => state.modal.selectProfileImageModal
   );
-  const getUserImage = async () => {
-    if (userState.image === 0) setProfileImg(profile0);
-    if (userState.image === 1) setProfileImg(profile1);
-    if (userState.image === 2) setProfileImg(profile2);
-    if (userState.image === 3) setProfileImg(profile3);
-    if (userState.image === 4) setProfileImg(profile4);
-    if (userState.image === 5) setProfileImg(profile5);
-    if (userState.image === 6) setProfileImg(profile6);
-    if (userState.image === 7) setProfileImg(profile7);
-    if (userState.image === 8) setProfileImg(profile8);
-    if (userState.image === 9) setProfileImg(profile9);
-    if (userState.image === 10) setProfileImg(profile10);
-    if (userState.image === 11) setProfileImg(profile11);
+  const profileImgList = [
+    profile0,
+    profile1,
+    profile2,
+    profile3,
+    profile4,
+    profile5,
+    profile6,
+    profile7,
+    profile8,
+    profile9,
+    profile10,
+    profile11,
+  ];
+  const getUserImage = (imgID) => {
+    setProfileImg(profileImgList[imgID]);
   };
 
-  useEffect(async () => {
-    await dispatch(getUser());
-    await getUserImage();
+  useEffect(() => {
+    dispatch(getUser());
+    getUserImage(userState.image);
   }, [profileImg, userState.image, selectProfileModalState]);
 
   return (
@@ -88,7 +91,7 @@ function MyParty(props) {
       </div>
       <div className="party">
         {userPartyState.map((party, i) => (
-          <Link to={`/mypage/party/${party.id}`}>
+          <Link key={i} to={`/mypage/party/${party.id}`}>
             <PartyCard key={i} party={party} />
           </Link>
         ))}

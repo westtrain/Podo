@@ -26,7 +26,6 @@ function Header(props) {
   useEffect(
     async () => {
       if (isLogin) {
-        await dispatch(getUser());
         setProfileImg(profileImage[userState.image]);
       }
     },

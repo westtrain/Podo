@@ -12,6 +12,7 @@ import Header from "../components/public/Header";
 import Party from "../components/search/Party";
 import Warning from "../components/search/Warning";
 import Calendar from "../components/search/Calendar";
+import Loading from "../components/public/Loading";
 import "../style/Search.scss";
 import "../style/datepicker.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,6 +41,39 @@ function Search(props) {
   );
   const dispatch = useDispatch();
   const partiesState = useSelector((state) => state.party.parties);
+  const loadingState = useSelector((state) => state.loading);
+  const ottLogoList = [
+    netflix,
+    watcha,
+    wavve,
+    tving,
+    disney,
+    prime,
+    laftel,
+    apple,
+    office,
+    nintendo,
+  ];
+
+  const getOttReaderList = () => {
+    const result = [];
+    ottLogoList.map((ott, i) => {
+      result.push(
+        <li key={i}>
+          <img
+            src={ott}
+            alt="ott"
+            height="30px"
+            onClick={() => {
+              setOttId(i + 1);
+              setSelectedOtt(ott);
+            }}
+          />
+        </li>
+      );
+    });
+    return result;
+  };
 
   useEffect(() => {
     async function asyncFunc() {
@@ -85,111 +119,7 @@ function Search(props) {
                   className="filterWindow dropdown"
                   onClick={() => setShowDropdown(!showDropdown)}
                 >
-                  <ul>
-                    <li>
-                      <img
-                        src={netflix}
-                        alt="netflix"
-                        height="30px"
-                        onClick={() => {
-                          setOttId(1);
-                          setSelectedOtt(netflix);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={watcha}
-                        alt="watcha"
-                        height="45px"
-                        onClick={() => {
-                          setOttId(2);
-                          setSelectedOtt(watcha);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={wavve}
-                        alt="wavve"
-                        onClick={() => {
-                          setOttId(3);
-                          setSelectedOtt(wavve);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={tving}
-                        alt="tving"
-                        height="25px"
-                        onClick={() => {
-                          setOttId(4);
-                          setSelectedOtt(tving);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={disney}
-                        alt="disney"
-                        onClick={() => {
-                          setOttId(5);
-                          setSelectedOtt(disney);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={prime}
-                        alt="prime"
-                        onClick={() => {
-                          setOttId(6);
-                          setSelectedOtt(prime);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={laftel}
-                        alt="laftel"
-                        onClick={() => {
-                          setOttId(7);
-                          setSelectedOtt(laftel);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={apple}
-                        alt="apple"
-                        onClick={() => {
-                          setOttId(8);
-                          setSelectedOtt(apple);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={office}
-                        alt="office"
-                        onClick={() => {
-                          setOttId(9);
-                          setSelectedOtt(office);
-                        }}
-                      />
-                    </li>
-                    <li>
-                      <img
-                        src={nintendo}
-                        alt="nintendo"
-                        onClick={() => {
-                          setOttId(10);
-                          setSelectedOtt(nintendo);
-                        }}
-                      />
-                    </li>
-                  </ul>
+                  <ul>{getOttReaderList()}</ul>
                 </div>
               </div>
             ) : null}

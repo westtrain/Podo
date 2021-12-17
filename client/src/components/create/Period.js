@@ -17,7 +17,7 @@ function Period(props) {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
   const [startDateToString, setStartDateToString] = useState("");
-  const [endDateToString, setEndDateToString] = useState("");
+  const [isSetperiod, setIsSetPeriod] = useState(false);
   const [period, setPeriod] = useState(2);
   const [showStartCalendar, setShowStartCalendar] = useState(false);
   const [showPeriod, setShowPeriod] = useState(false);
@@ -26,6 +26,7 @@ function Period(props) {
   const onChangeInput = (e) => {
     const value = Number(e.target.value);
     setPeriod(value);
+    setIsSetPeriod(true);
     dispatch(setPeriodState(value));
   };
 
@@ -38,12 +39,11 @@ function Period(props) {
       );
       endDate = new Date(endDate.setDate(startDate.getDate() - 1));
       dispatch(setEndDate(dateToStringDash(endDate)));
-      setEndDateToString(dateToString(endDate));
       startDate.setMonth(startDate.getMonth() - Number(period)); //위의 setMonth로 month가 직접 변화가 되어 startDate를 원래대로 돌려준다.
       navigate("/create/5");
     }
   };
-  useEffect(() => {}, [endDateToString]);
+
   return (
     <>
       <div className="partyguidestep4">
@@ -78,6 +78,8 @@ function Period(props) {
               <MiniCalendar
                 setStartDate={setStartDate}
                 setStartDateToString={setStartDateToString}
+                setShowStartCalendar={setShowStartCalendar}
+                setShowPeriod={setShowPeriod}
               />
             </div>
           ) : null}
@@ -94,7 +96,7 @@ function Period(props) {
           >
             <div className="periodleft">혜택 기간</div>
             <div className="periodright">
-              {endDateToString === "" ? "선택" : `${period}개월`}
+              {isSetperiod === "" ? "선택" : `${period}개월`}
               <div className="arrow">
                 <FontAwesomeIcon icon={faChevronDown} size="1x" />
               </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { showCardModal } from "../../redux/reducers/modalSlice";
 import { updateCard } from "../../redux/API/paymentAPI";
@@ -19,21 +19,6 @@ function SetCardModal(props) {
   const [creditPassword, setCreditPassword] = useState("");
   const [warning, setWarning] = useState("");
 
-  const onChangeCardNum = (e) => {
-    setCreditNumnber(autoHypen(e.target.value));
-  };
-  const onChangeMM = (e) => {
-    setExpireMM(onlyNumber(e.target.value));
-  };
-  const onChangeYY = (e) => {
-    setExpireYY(onlyNumber(e.target.value));
-  };
-  const onChangeBirth = (e) => {
-    setBirth(onlyNumber(e.target.value));
-  };
-  const onChangePassword = (e) => {
-    setCreditPassword(onlyNumber(e.target.value));
-  };
   const onClickSubmit = () => {
     if (
       creditNumber === "" ||
@@ -96,31 +81,56 @@ function SetCardModal(props) {
 
               <div className="sdmmf">
                 <div>카드 번호 (16자리)</div>
-                <input value={creditNumber} onChange={onChangeCardNum} />
+                <input
+                  value={creditNumber}
+                  onChange={(e) => {
+                    setCreditNumnber(autoHypen(onlyNumber(e.target.value)));
+                  }}
+                />
               </div>
 
               <div className="sdmms">
                 <div className="sdmmsf">
                   <div>유효기간(MM)</div>
-                  <input maxLength="2" value={expireMM} onChange={onChangeMM} />
+                  <input
+                    value={expireMM}
+                    maxLength="2"
+                    onChange={(e) => {
+                      setExpireMM(onlyNumber(e.target.value));
+                    }}
+                  />
                 </div>
                 <div className="sdmmss">
                   <div>유효기간(YY)</div>
-                  <input maxLength="2" value={expireYY} onChange={onChangeYY} />
+                  <input
+                    value={expireYY}
+                    maxLength="2"
+                    onChange={(e) => {
+                      setExpireYY(onlyNumber(e.target.value));
+                    }}
+                  />
                 </div>
               </div>
 
               <div className="sdmms">
                 <div className="sdmmsf">
                   <div>생년월일(6자리)</div>
-                  <input maxLength="6" value={birth} onChange={onChangeBirth} />
+                  <input
+                    value={birth}
+                    maxLength="6"
+                    onChange={(e) => {
+                      setBirth(onlyNumber(e.target.value));
+                    }}
+                  />
                 </div>
                 <div className="sdmmss">
                   <div>비밀번호(앞2자)</div>
                   <input
-                    maxLength="2"
                     value={creditPassword}
-                    onChange={onChangePassword}
+                    maxLength="2"
+                    onChange={(e) => {
+                      setCreditPassword(onlyNumber(e.target.value));
+                    }}
                   />
                 </div>
               </div>

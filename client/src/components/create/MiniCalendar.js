@@ -24,6 +24,8 @@ function MiniCalendar(props) {
     props.setStartDate(date);
     props.setStartDateToString(dateToString(date));
     dispatch(setStartDateState(dateToStringDash(date)));
+    props.setShowStartCalendar(false);
+    props.setShowPeriod(true);
   };
   useEffect(() => {
     dispatch(setStartDateState(dateToStringDash(new Date())));

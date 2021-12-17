@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../redux/API/userAPI";
 import { showWithdrawModal } from "../redux/reducers/modalSlice";
 import WithdrawModal from "../components/modal/WithdrawModal";
+import SetAccountModal from "../components/modal/SetAccountModal";
 import Header from "../components/public/Header";
 import MyParty from "../components/mypage/MyParty";
 import MyPartyDetail from "../components/mypage/MyPartyDetail";
@@ -20,6 +21,7 @@ import { AiOutlineDown } from "react-icons/ai";
 function MyPage(props) {
   const dispatch = useDispatch();
   const withdrawModalstate = useSelector((state) => state.modal.withdrawModal);
+  const accountModalState = useSelector((state) => state.modal.accountModal);
   const userState = useSelector((state) => state.user);
   const { menu, id } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
   const [showMenu, setShowMenu] = useState(false);
@@ -171,6 +173,7 @@ function MyPage(props) {
                   인출하기
                 </div>
                 {withdrawModalstate ? <WithdrawModal /> : null}
+                {accountModalState ? <SetAccountModal /> : null}
               </div>
               <div className="down">Podo 정산일 미리보기</div>
             </div>

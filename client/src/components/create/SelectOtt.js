@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ottList } from "../../utils/dateFunction";
+import { getAllOtt } from "../../redux/API/ottAPI";
 import { setOttId } from "../../redux/reducers/partySlice";
 import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
 import SelectPlanModal from "../modal/SelectPlanModal";
@@ -28,6 +29,7 @@ function SelectOtt() {
   };
   useEffect(() => {
     dispatch(setOttId(0));
+    dispatch(getAllOtt());
   }, []);
 
   return (

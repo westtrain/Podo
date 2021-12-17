@@ -52,9 +52,19 @@ export const onlyNumber = (value) => {
   return value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
 };
 
-export const refinePrice = (price) => {
-  let refinedPrice = Math.floor(price);
+export const refinePrice = (price, members_num) => {
+  let refinedPrice = price / members_num;
+  refinedPrice = Math.floor(refinedPrice);
   refinedPrice = Math.ceil(refinedPrice / 10) * 10;
+  refinedPrice = refinedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return refinedPrice;
+};
+
+export const getSavePrice = (price, members_num) => {
+  let refinedPrice = price / members_num;
+  refinedPrice = Math.floor(refinedPrice);
+  refinedPrice = Math.ceil(refinedPrice / 10) * 10;
+  refinedPrice *= members_num - 1;
   refinedPrice = refinedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return refinedPrice;
 };
@@ -117,4 +127,10 @@ export const getOttKoreanNameById = (ottId) => {
   return Object.keys(ottKoreanList).find(
     (ottName) => ottKoreanList[ottName] === ottId
   );
+};
+
+export const passwordToStar = (pw) => {
+  let result = "";
+  for (let i = 0; i < pw.length; i++) result += "*";
+  return result;
 };

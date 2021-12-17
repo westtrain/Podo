@@ -46,7 +46,10 @@ function ConfirmPayment(props) {
     } else {
       dispatch(
         createParty({
-          createPartyState: createPartyState,
+          createPartyState: Object.assign({}, createPartyState, {
+            // 파티장 + 파티인원
+            members_num: createPartyState.members_num + 1,
+          }),
         })
       );
       if (errorState === null) {

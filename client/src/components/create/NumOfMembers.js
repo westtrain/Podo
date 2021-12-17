@@ -49,6 +49,7 @@ function NumOfMembers(props) {
           </div>
           <div className="infomember">
             - 파티 운영을 위해서는 최소 1명 이상의 파티원이 필요해요.
+            <br />- 파티장 본인을 제외한 파티원 인원을 선택해주세요!
           </div>
         </div>
         <div className="guidefooter">

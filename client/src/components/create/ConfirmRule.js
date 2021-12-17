@@ -64,7 +64,7 @@ function ConfirmRule(props) {
                 style={{ color: "#4040cc" }}
               />
             </div>
-            파티장 귀책시, 최대 20,790원의 위약금이 부과될 수 있습니다.
+            파티장 귀책시, 위약금이 부과될 수 있습니다.
           </div>
         </div>
         <div className="guidefooter">

@@ -6,8 +6,8 @@ import "../../style/MyPage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStickyNote } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { AiOutlineCopy } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
+import { AiOutlineCopy } from "react-icons/ai";
 import netflix from "../../image/netflix.png";
 import member_icon from "../../image/member_icon.png";
 

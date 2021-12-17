@@ -61,6 +61,7 @@ const partySlice = createSlice({
     builder.addCase(createParty.fulfilled, (action) => {
       console.log("파티 생성 성공");
     });
+    builder.addCase(createParty.pending, () => {});
     builder.addCase(createParty.rejected, (action) => {
       console.log(action.payload);
     });

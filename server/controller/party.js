@@ -108,16 +108,8 @@ module.exports = {
     // 0. 쿠키를 통해 받아온 토큰으로 유저 아이디를 만든다.
     const user_id = req.userId;
     // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
-    const {
-      ott_id,
-      ott_login_id,
-      ott_login_password,
-      members,
-      period,
-      members_num,
-      start_date,
-      end_date,
-    } = req.body;
+    const { ott_id, ott_login_id, ott_login_password, period, members_num, start_date, end_date } =
+      req.body;
     try {
       if (
         ott_id &&
@@ -128,14 +120,14 @@ module.exports = {
         start_date &&
         end_date
       ) {
-        // 같은 ott종류의 이미 create나 join한 파티가 있다면 create 방지. ex) 넷플 파티에 이미 create/join 했는데 또 넷플 파티 만들려고 하는 경우
+        /* Edge Case: 같은 ott종류의 이미 create나 join한 파티가 있다면 create 방지. 
+        ex) 넷플 파티에 이미 create/join 했는데 또 넷플 파티 만들려고 하는 경우 */
 
         // 1차 필터링: Party 테이블에서 create하려는 ott를 공유하고 있는 파티 조회
         const ottParty = await Party.findAll({ where: { ott_id } });
         console.log(ottParty);
         // 2차 필터링: 1개 이상 있다면 map을 사용하여 각 파티에 '현재 create하려는 유저'가 있는지 확인
         if (ottParty.length !== 0) {
-          //alreadyJoined는 실행되지 않은 Promise로 Promise.all을 사용하지 않으면 alreadyJoinedArr는 Promise 배열이 나오게 됨.
           let alreadyJoinedArr = await Promise.all(
             ottParty.map((party) => {
               const alreadyJoined = db.sequelize.models.User_party.findAll({
@@ -144,9 +136,7 @@ module.exports = {
               return alreadyJoined;
             })
           );
-          // map과 Promise.all 사용으로 인해 비어있어도 2차원배열('[[]]')로 나오기 때문에 flat 사용
           alreadyJoinedArr = alreadyJoinedArr.flat();
-          console.log(alreadyJoinedArr);
 
           //해당 유저가 있다면 422 에러
           if (alreadyJoinedArr.length !== 0) {
@@ -160,7 +150,7 @@ module.exports = {
         await Party.create({
           ott_id,
           ott_login_id,
-          ott_login_password,
+          ott_login_password: encryptedPW,
           members: `${user_id}`,
           members_num,
           leader: user_id,
@@ -264,7 +254,6 @@ module.exports = {
 
       // 2차 필터링: 1개 이상 있다면 map을 사용하여 각 파티에 '현재 create하려는 유저'가 있는지 확인
       if (ottParty.length !== 0) {
-        //alreadyJoined는 실행되지 않은 Promise로 Promise.all을 사용하지 않으면 alreadyJoinedArr는 Promise 배열이 나오게 됨.
         let alreadyJoinedArr = await Promise.all(
           ottParty.map((party) => {
             const alreadyJoined = db.sequelize.models.User_party.findAll({
@@ -273,7 +262,6 @@ module.exports = {
             return alreadyJoined;
           })
         );
-        // map과 Promise.all 사용으로 인해 비어있어도 2차원배열('[[]]')로 나오기 때문에 flat 사용
         alreadyJoinedArr = alreadyJoinedArr.flat();
         console.log(alreadyJoinedArr);
 

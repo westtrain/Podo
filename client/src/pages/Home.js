@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../components/public/Header";
 import FAQ from "../components/public/FAQ";
 import "../style/Home.scss";
+import ScrollTop from "../components/public/ScrollTop";
 import logo from "../image/Podo_logo.svg";
 import landingimg1 from "../image/landingimg1.png";
 import landingimg2 from "../image/landingimg2.png";
@@ -37,7 +38,7 @@ const Home = (props) => {
   return (
     <>
       <Header />
-
+      <ScrollTop />
       <div className="banner">
         <div className="wrapper">
           <span>

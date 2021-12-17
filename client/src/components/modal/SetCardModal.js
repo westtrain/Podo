@@ -6,7 +6,7 @@ import { autoHypen, onlyNumber } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import Swal from "sweetalert2";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 
 function SetCardModal(props) {
   const dispatch = useDispatch();
@@ -82,10 +82,7 @@ function SetCardModal(props) {
             <div className="setcardmodalview">
               <div className="exit">
                 <div>
-                  <img
-                    src={exit}
-                    onClick={() => dispatch(showCardModal(false))}
-                  ></img>
+                  <BsXLg onClick={() => dispatch(showCardModal(false))} />
                 </div>
               </div>
               <div className="scmheader">결제 카드를 등록해 주세요.</div>

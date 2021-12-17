@@ -8,8 +8,8 @@ import {
 import OutsideClickHandler from "react-outside-click-handler";
 import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
-import check_icon from "../../image/check_icon.png";
+import { BsXLg, BsDot } from "react-icons/bs";
+import { AiOutlineCheck } from "react-icons/ai";
 
 function SelectPlanModal() {
   const dispatch = useDispatch();
@@ -31,10 +31,7 @@ function SelectPlanModal() {
             <div className="selectratemodalview">
               <div className="exit">
                 <div>
-                  <img
-                    src={exit}
-                    onClick={() => dispatch(showSelectPlanModal(false))}
-                  ></img>
+                  <BsXLg onClick={() => dispatch(showSelectPlanModal(false))} />
                 </div>
               </div>
               <div className="srmheader">요금제 선택</div>
@@ -42,13 +39,17 @@ function SelectPlanModal() {
               <div className="srmmiddle">
                 <div className="srmmup">
                   <div className="srmmuimg">
-                    <img src={check_icon} alt="check"></img>
+                    <AiOutlineCheck style={{ color: "#4040cc" }} size="20px" />
                   </div>
                   <div className="srmmuexp">{getOttKoreanNameById(ottId)}</div>
                 </div>
                 <div className="srmmdown">
-                  <div>&middot; 파티원은 최대 3명 모집할 수 있어요</div>
-                  <div>&middot; 최대 인원 모집 시 매달 11,425원 세이브!</div>
+                  <div>
+                    <BsDot /> 파티원은 최대 3명 모집할 수 있어요
+                  </div>
+                  <div>
+                    <BsDot /> 최대 인원 모집 시 매달 11,425원 세이브!
+                  </div>
                 </div>
               </div>
 

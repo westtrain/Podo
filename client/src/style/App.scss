@@ -2,8 +2,52 @@ $maincolor: #a5a9f8;
 $fontcolor: #222222;
 
 body {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
   margin: 0;
 }
+.wrap {
+  position: relative;
+  padding: 30px;
+  font-size: 18px;
+  line-height: 1.6;
+  background: lightgray;
+
+  .topbtn {
+    position: fixed;
+    opacity: 0;
+    bottom: 40px;
+    right: 40px;
+    z-index: -10;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 100%;
+    background-color: transparent;
+    color: #222222;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -0.06em;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in;
+  }
+
+  .topbtn.active {
+    z-index: 10;
+    opacity: 1;
+  }
+  .topbtn:hover,
+  .topbtn:focus,
+  .topbtn:active {
+    outline: 0 none;
+  }
+}
+
 .header {
   background-color: #fff;
   position: fixed;

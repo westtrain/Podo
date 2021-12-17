@@ -6,8 +6,7 @@ import { onlyNumber, bankList } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import Swal from "sweetalert2";
-import exit from "../../image/exit.png";
-import right from "../../image/right.png";
+import { BsXLg } from "react-icons/bs";
 
 function SetAccountModal(props) {
   const dispatch = useDispatch();
@@ -65,10 +64,7 @@ function SetAccountModal(props) {
           <div className="accountmodalview">
             <div className="exit">
               <div>
-                <img
-                  src={exit}
-                  onClick={() => dispatch(showAccountModal(false))}
-                ></img>
+                <BsXLg onClick={() => dispatch(showAccountModal(false))} />
               </div>
             </div>
             <div className="samheader">
@@ -89,7 +85,7 @@ function SetAccountModal(props) {
                 {selectBank}
               </div>
               {showDropdown ? (
-                <div className="selectbank">{bankElements()}</div>
+                <div className="choosebank">{bankElements()}</div>
               ) : null}
             </div>
             <div className="samms">

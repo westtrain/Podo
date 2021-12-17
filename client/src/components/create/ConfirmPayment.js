@@ -11,6 +11,7 @@ import { getUser } from "../../redux/API/userAPI";
 import SetCardModal from "../modal/SetCardModal";
 import SetSettlementModal from "../modal/SetSettlementModal";
 import Swal from "sweetalert2";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function ConfirmPayment(props) {
   const dispatch = useDispatch();
@@ -117,7 +118,10 @@ function ConfirmPayment(props) {
         <div className="guidefooter">
           <Link to={"/create/5"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
           <div className="guidefooterbtn" onClick={() => onClickCreate()}>

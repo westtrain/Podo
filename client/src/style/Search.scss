@@ -2,6 +2,13 @@ $maincolor: #a5a9f8;
 $fontcolor: #222222;
 $mypagecolor: #eeefff;
 
+body {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 .search {
   animation: fadein 0.5s;
   -moz-animation: fadein 0.5s; /* Firefox */

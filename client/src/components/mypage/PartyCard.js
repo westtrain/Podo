@@ -17,7 +17,7 @@ import nintendo from "../../image/nintendo.png";
 function PartyCard(props) {
   const dispatch = useDispatch();
   const party = props.party;
-  // const ottName = useSelector((state) => state.ott)[party.ott_id - 1].name;
+  const ottName = useSelector((state) => state.ott)[party.ott_id - 1].name;
   const d_day = getDday(party.start_date);
   const d_dayOfEndDate = getDday(party.end_date);
 
@@ -30,8 +30,7 @@ function PartyCard(props) {
         <div className="ottbtn">
           <img src={netflix} alt="netflix" className="ottlogo"></img>
         </div>
-        {/* <div className="ottname">{ottName}</div> */}
-        <div className="ottname">NETFLIX</div>
+        <div className="ottname">{ottName}</div>
         {d_day > 0 ? (
           <>
             {" "}

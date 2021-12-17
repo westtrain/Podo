@@ -8,6 +8,7 @@ import {
 import PartyCard from "./PartyCard";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "../../style/MyPage.scss";
+import { AiOutlineCopy } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { AiOutlineCopy } from "react-icons/ai";

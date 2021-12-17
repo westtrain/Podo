@@ -15,6 +15,8 @@ import MySettlement from "../components/mypage/MySettlement";
 import MyStatement from "../components/mypage/MyStatement";
 import "../style/MyPage.scss";
 import PodoMoney from "../image/PodoMoney.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineDown } from "react-icons/ai";
 
 function MyPage(props) {
   const dispatch = useDispatch();
@@ -35,13 +37,21 @@ function MyPage(props) {
         <div className="body">
           <div className="main">
             <div className="mobilemenu">
+              <div className="menuicon">
+                <GiHamburgerMenu size="20px" />
+              </div>
               <div
                 className="mobilemypage"
                 onClick={() => {
                   setShowMenu(!showMenu);
                 }}
               >
-                마이페이지
+                <div className="mypagehicon">
+                  마이페이지
+                  <div className="downicon">
+                    <AiOutlineDown />
+                  </div>
+                </div>
               </div>
             </div>
             {showMenu ? (

@@ -3,12 +3,11 @@ const XLSX = require("xlsx");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const workbook = XLSX.readFile(__dirname + "/../public/parties.xlsx");
-    const worksheet = workbook.Sheets["Sheet1"];
+    const workbook = XLSX.readFile(__dirname + "/../public/podo.xlsx");
+    const worksheet = workbook.Sheets["Parties"];
 
     const data = [];
-    // 행의갯수만큼 반복 , 열의갯수만큼 알파벳추가
-    for (let i = 1; i <= 63; i++) {
+    for (let i = 1; i <= 338; i++) {
       const obj = {
         ott_id: `${worksheet["A" + i].w}`,
         ott_login_id: `${worksheet["B" + i].w}`,

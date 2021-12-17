@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getDday, getOttKoreanNameById } from "../../utils/dateFunction";
+import { AiFillCrown } from "react-icons/ai";
 import netflix from "../../image/netflix.png";
 import watcha from "../../image/watcha.png";
 import wavve from "../../image/wavve.png";
@@ -34,6 +35,9 @@ function PartyCard(props) {
   return (
     <>
       <div className="ott">
+        <div>
+          <AiFillCrown style={{ color: "#FFD159" }} size="22px" />
+        </div>
         <div className="ottbtn">
           <img
             src={ottLogoList[party.ott_id - 1]}

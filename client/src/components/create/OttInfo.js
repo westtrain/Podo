@@ -5,6 +5,8 @@ import { setOttLoginId, setOttLoginPw } from "../../redux/reducers/partySlice";
 import { emailValidation } from "../../utils/validation";
 import { getOttKoreanNameById } from "../../utils/dateFunction";
 import Swal from "sweetalert2";
+import { FcLock } from "react-icons/fc";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function OttInfo(props) {
   const dispatch = useDispatch();
@@ -62,7 +64,7 @@ function OttInfo(props) {
   }, []);
   return (
     <>
-      <div className="partyguide">
+      <div className="step2partyguide">
         <div className="stepline">
           <div className="step2"></div>
         </div>
@@ -71,6 +73,15 @@ function OttInfo(props) {
             {getOttKoreanNameById(ottId)}의
             <br />
             로그인 정보를 입력해 주세요.
+          </div>
+        </div>
+        <div className="guidehm">
+          <div>파티장의 로그인 정보는 파티원과 공유됩니다.</div>
+          <div>
+            <div>
+              <FcLock size="18px" />
+            </div>
+            공유 가능한 안전한 비밀번호를 사용해 주세요.
           </div>
         </div>
         <div className="guidemiddle">
@@ -109,7 +120,10 @@ function OttInfo(props) {
         <div className="guidefooter">
           <Link to={"/create/1"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
 

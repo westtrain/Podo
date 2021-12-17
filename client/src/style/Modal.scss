@@ -1,5 +1,12 @@
 @import "./App.scss";
 
+body {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 .page {
   display: flex;
 
@@ -14,6 +21,141 @@
     display: grid;
     place-items: center;
 
+    .chargeinfomodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 370px;
+      height: 315px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      // align-items: center;
+      padding: 20px 40px 15px 40px;
+      .exit {
+        margin-top: 10px;
+
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
+      }
+
+      .pimheader {
+        margin-top: 30px;
+        font-size: 21px;
+        font-weight: bold;
+        color: $fontcolor;
+      }
+
+      .pimmiddle {
+        margin-top: 40px;
+        .pimmf {
+          display: flex;
+          align-items: center;
+          margin-top: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #656565;
+          span {
+            color: #f24e4e;
+          }
+          img {
+            margin: 0 0 0 5px;
+            width: 18px;
+          }
+        }
+      }
+      .clearbtnwrap {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .penaltyinfomodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 370px;
+      height: 315px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      // align-items: center;
+      padding: 20px 40px 15px 40px;
+      .exit {
+        margin-top: 10px;
+
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
+      }
+
+      .pimheader {
+        margin-top: 30px;
+        font-size: 21px;
+        font-weight: bold;
+        color: $fontcolor;
+      }
+
+      .pimmiddle {
+        margin-top: 20px;
+        .pimmf {
+          margin-top: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #656565;
+          span {
+            margin: 0 -3px 0 4px;
+            color: #f24e4e;
+          }
+        }
+      }
+      .clearbtnwrap {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
     .selectprofilemodalview {
       background-color: #fff;
       border-radius: 20px;
@@ -26,10 +168,13 @@
       padding: 20px 50px 15px 45px;
       .exit {
         margin-top: 10px;
-        cursor: pointer;
+
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
       .spimheader {
         .spimhfirst {
@@ -87,7 +232,7 @@
       background-color: #fff;
       border-radius: 20px;
       width: 490px;
-      height: 650px;
+      height: 500px;
       display: flex;
       flex-direction: column;
       //   justify-content: center;
@@ -96,10 +241,14 @@
 
       .exit {
         margin-top: 30px;
-        cursor: pointer;
+
         width: 97%;
         display: flex;
+
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .srmheader {
@@ -110,7 +259,7 @@
       }
 
       .srmmiddle {
-        margin: 80px 0;
+        margin: 35px 0;
         width: 100%;
         border-radius: 20px;
         border: 2px solid #b3c1ef;
@@ -118,6 +267,12 @@
         .srmmup {
           display: flex;
           margin: 20px 20px;
+          align-items: center;
+          .srmmuimg {
+            display: flex;
+            align-items: center;
+            margin-right: 3px;
+          }
 
           .srmmuexp {
             font-size: 18px;
@@ -128,6 +283,8 @@
         .srmmdown {
           margin: 20px 20px;
           div {
+            display: flex;
+            align-items: center;
             font-size: 14px;
             font-weight: bold;
           }
@@ -135,7 +292,7 @@
       }
 
       .clearbtnwrap {
-        margin-top: 130px;
+        margin-top: 90px;
         display: flex;
         justify-content: flex-end;
         width: 100%;
@@ -214,14 +371,19 @@
           font-size: 20px;
           width: 100%;
           padding-left: 20px;
+
           height: 100%;
           border: none;
           background-color: #f7f7f7;
           border-radius: 10px;
         }
+        input:focus {
+          outline: 2px solid #4040cc;
+        }
       }
 
       .ssmmf {
+        position: relative;
         margin-bottom: 180px;
         margin-top: 40px;
         display: flex;
@@ -233,18 +395,10 @@
         width: 100%;
         height: 60px;
 
-        div {
-          font-size: 14px;
-          margin-left: 20px;
-          margin-right: 20px;
-          color: #656565;
-          font-weight: bold;
-        }
-
         input {
           font-size: 14px;
-          width: 40%;
-          padding-left: 140px;
+          width: 100%;
+          padding-left: 300px;
           height: 100%;
           border: none;
           background-color: #f7f7f7;
@@ -252,8 +406,23 @@
         }
 
         input:focus {
-          outline: none;
+          outline: 2px solid #4040cc;
         }
+      }
+      .ssmmfmonth {
+        z-index: 10;
+        position: absolute;
+        font-size: 14px;
+        margin: 237px 0 0 20px;
+        color: #656565;
+        font-weight: bold;
+      }
+      .ssmmfday {
+        position: absolute;
+        font-size: 14px;
+        margin: 237px 0 0 450px;
+        color: #656565;
+        font-weight: bold;
       }
 
       .ssmmf:focus {
@@ -291,7 +460,7 @@
           }
 
           input:focus {
-            outline: none;
+            outline: 2px solid #4040cc;
           }
         }
 
@@ -321,7 +490,7 @@
           }
 
           input:focus {
-            outline: none;
+            outline: 2px solid #4040cc;
           }
         }
       }
@@ -330,6 +499,143 @@
         height: 30px;
         margin: 20px;
       }
+      .clearbtnwrap {
+        margin-top: 90px;
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        .clearbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          height: 50px;
+          background-color: $maincolor;
+          cursor: pointer;
+          border-radius: 10px;
+          border: none;
+          .clearbtnw {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .setsettlementmodalview {
+      background-color: #fff;
+      border-radius: 20px;
+      width: 490px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      //   justify-content: center;
+      //   align-items: center;
+      padding: 20px 50px 15px 45px;
+
+      .exit {
+        margin-top: 30px;
+        //cursor: pointer;
+        width: 97%;
+        display: flex;
+        justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
+      }
+
+      .scmheader {
+        margin-top: 20px;
+        font-size: 21px;
+        color: $fontcolor;
+        font-weight: bold;
+      }
+
+      .scmhf {
+        margin-top: 30px;
+        width: 100%;
+        font-size: 14px;
+        color: #656565;
+      }
+
+      .sdmmf {
+        margin-top: 20px;
+        position: relative;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        width: 94%;
+        height: 60px;
+
+        div {
+          position: absolute;
+          font-size: 14px;
+          margin-left: 20px;
+          color: #656565;
+          font-weight: bold;
+        }
+
+        input {
+          font-size: 20px;
+          width: 100%;
+          padding-left: 20px;
+          height: 100%;
+          border: none;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+        }
+        input:focus {
+          outline: 2px solid #4040cc;
+        }
+      }
+
+      .ssmmf {
+        position: relative;
+        margin-bottom: 50px;
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        width: 100%;
+        height: 60px;
+
+        input {
+          font-size: 14px;
+          width: 100%;
+          padding-left: 300px;
+          height: 100%;
+          border: none;
+          background-color: #f7f7f7;
+          border-radius: 10px;
+        }
+
+        input:focus {
+          outline: 2px solid #4040cc;
+        }
+      }
+      .ssmmfmonth {
+        z-index: 10;
+        position: absolute;
+        font-size: 14px;
+        margin: 237px 0 0 20px;
+        color: #656565;
+        font-weight: bold;
+      }
+      .ssmmfday {
+        position: absolute;
+        font-size: 14px;
+        margin: 237px 0 0 450px;
+        color: #656565;
+        font-weight: bold;
+      }
+
+      .ssmmf:focus {
+        outline: 2px solid #4040cc;
+      }
+
       .clearbtnwrap {
         margin-top: 90px;
         display: flex;
@@ -485,10 +791,12 @@
       padding: 20px 50px 15px 45px;
 
       .exit {
-        cursor: pointer;
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .samheader {
@@ -527,6 +835,10 @@
           padding: 15px 0 0 20px;
           font-size: 18px;
         }
+        .sammff:focus {
+          outline: 2px solid #4040cc;
+        }
+
         .choosebank {
           border-radius: 15px;
           margin-top: 80px;
@@ -555,6 +867,9 @@
           border: none;
           padding: 10px 0 0 20px;
           font-size: 18px;
+        }
+        .sammff:focus {
+          outline: 2px solid #4040cc;
         }
       }
 
@@ -594,10 +909,12 @@
       padding: 20px 30px 15px 35px;
 
       .exit {
-        cursor: pointer;
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .lmheader {
@@ -667,10 +984,12 @@
       padding: 20px 30px 15px 35px;
 
       .exit {
-        cursor: pointer;
         width: 97%;
         display: flex;
         justify-content: flex-end;
+        div {
+          cursor: pointer;
+        }
       }
 
       .cpmheader {
@@ -850,13 +1169,18 @@
         }
 
         .jpmmfs {
+          display: flex;
           cursor: pointer;
           font-size: 15px;
           color: #c6c6c6;
           margin-right: 15px;
+          justify-content: center;
+          align-items: center;
 
           .righticon {
             margin-left: 5px;
+            display: flex;
+            align-items: center;
           }
         }
       }
@@ -880,12 +1204,16 @@
         }
 
         .jpmmfs {
+          display: flex;
+          align-items: center;
           cursor: pointer;
           font-size: 15px;
           color: #c6c6c6;
           margin-right: 15px;
 
           .righticon {
+            display: flex;
+            align-items: center;
             margin-left: 5px;
           }
         }
@@ -938,6 +1266,42 @@
 @media screen and (max-width: 768px) {
   .page {
     .modalback {
+      .setsettlementmodalview {
+        width: 330px;
+        height: 400px;
+        padding: 10px 25px 15px 15px;
+        .scmhf {
+          font-size: 10px;
+        }
+
+        .ssmmf {
+          margin: 20px 0 0 0;
+          input {
+            padding: 1px 2px 1px 120px;
+          }
+          input:focus {
+            outline: 2px solid #4040cc;
+          }
+          div {
+            margin: 0 10px;
+          }
+        }
+        .ssmmfmonth {
+          z-index: 10;
+          position: absolute;
+          font-size: 14px;
+          margin: 207px 0 0 20px;
+          color: #656565;
+          font-weight: bold;
+        }
+        .ssmmfday {
+          position: absolute;
+          font-size: 14px;
+          margin: 207px 0 0 300px;
+          color: #656565;
+          font-weight: bold;
+        }
+      }
       .selectprofilemodalview {
         width: 330px;
         padding: 10px 25px 15px 15px;
@@ -948,15 +1312,22 @@
       }
 
       .loginmodalview {
-        width: 330px;
-        padding: 20px 25px 15px 25px;
+        width: 320px;
+        height: 480px;
+        padding: 20px 20px 15px 20px;
         .lmheader {
           .lmhfirst {
-            font-size: 23px;
+            font-size: 17px;
           }
           .lmhsecond {
-            font-size: 23px;
+            font-size: 17px;
           }
+        }
+        .lmmiddle {
+          margin-top: 50px;
+        }
+        .forgotlogin {
+          margin-top: 40px;
         }
       }
 
@@ -999,9 +1370,27 @@
           input {
             padding: 1px 2px 1px 120px;
           }
+          input:focus {
+            outline: 2px solid #4040cc;
+          }
           div {
             margin: 0 10px;
           }
+        }
+        .ssmmfmonth {
+          z-index: 10;
+          position: absolute;
+          font-size: 14px;
+          margin: 227px 0 0 20px;
+          color: #656565;
+          font-weight: bold;
+        }
+        .ssmmfday {
+          position: absolute;
+          font-size: 14px;
+          margin: 227px 0 0 300px;
+          color: #656565;
+          font-weight: bold;
         }
         .sdmms {
           .sdmmsf {

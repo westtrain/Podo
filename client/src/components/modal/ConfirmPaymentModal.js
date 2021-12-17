@@ -11,8 +11,8 @@ import { getUsersPaymentInfo } from "../../redux/API/paymentAPI";
 import { joinParty } from "../../redux/API/partyAPI";
 import Swal from "sweetalert2";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
-import right from "../../image/right.png";
+import { BsXLg } from "react-icons/bs";
+import { AiOutlineRight } from "react-icons/ai";
 
 function ConfirmPaymentModal(props) {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ function ConfirmPaymentModal(props) {
           <div className="modalview">
             <div className="exit">
               <div onClick={() => dispatch(showConfirmPaymentModal(false))}>
-                <img src={exit}></img>
+                <BsXLg />
               </div>
             </div>
             <div className="jpmheader">
@@ -83,7 +83,10 @@ function ConfirmPaymentModal(props) {
                 onClick={() => dispatch(showCardModal(true))}
               >
                 {paymentState.card_name ? "변경하기" : "등록하기"}
-                <img src={right} className="righticon"></img>
+
+                <div className="righticon">
+                  <AiOutlineRight />
+                </div>
               </div>
             </div>
             <div className="jpmms">
@@ -97,7 +100,9 @@ function ConfirmPaymentModal(props) {
                 onClick={() => dispatch(showSettlementModal(true))}
               >
                 {paymentState.settlement_date ? "변경하기" : "등록하기"}
-                <img src={right}></img>
+                <div className="righticon">
+                  <AiOutlineRight />
+                </div>
               </div>
             </div>
 

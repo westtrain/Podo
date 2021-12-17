@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle as checkedIcon } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle as uncheckedIcon } from "@fortawesome/free-regular-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function LeaderGuide(props) {
   const navigate = useNavigate();
@@ -78,7 +79,10 @@ function LeaderGuide(props) {
         <div className="guidefooter">
           <Link to={"/create"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
 

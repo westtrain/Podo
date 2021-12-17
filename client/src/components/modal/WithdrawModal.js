@@ -7,7 +7,7 @@ import {
 import { bankList } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 import PodoMoney from "../../image/PodoMoney.svg";
 
 function WithdrawModal(props) {
@@ -25,7 +25,7 @@ function WithdrawModal(props) {
             <div className="withdrawalmodalview">
               <div className="exit">
                 <div onClick={() => dispatch(showWithdrawModal(false))}>
-                  <img src={exit} alt="exit"></img>
+                  <BsXLg />
                 </div>
               </div>
               <div className="wdmheader">인출하기</div>

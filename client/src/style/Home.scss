@@ -1,5 +1,12 @@
 @import "./App.scss";
 
+body {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 .banner {
   position: absolute;
   width: 100%;
@@ -93,7 +100,7 @@
     align-items: center;
 
     width: 90%;
-    height: 880px;
+    height: 700px;
     // 이미지 초기값
     .landingexpimg {
       position: relative;
@@ -104,7 +111,7 @@
 
     .fade-in {
       transition: cubic-bezier(0.4, 0, 0.2, 1), opacity 1s linear;
-      left: 0px;
+      left: 0;
       opacity: 1;
     }
 

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { showLoginModal } from "../../redux/reducers/modalSlice";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 import google from "../../image/google.png";
 import naver from "../../image/naver.png";
 import kakao from "../../image/kakao.png";
@@ -31,7 +31,7 @@ function LoginModal(props) {
             <div className="loginmodalview">
               <div className="exit">
                 <div onClick={() => dispatch(showLoginModal(false))}>
-                  <img src={exit}></img>
+                  <BsXLg />
                 </div>
               </div>
               <div className="lmheader">

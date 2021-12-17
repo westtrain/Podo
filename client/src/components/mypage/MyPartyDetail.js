@@ -73,7 +73,7 @@ function MyPartyDetail(props) {
             <div className="membersbox">
               <div className="member">
                 <img src={member_icon} alt="copy" className="copyicon" />
-                <div className="membername">신난보라돌이</div>
+                <div className="membername">신난 보라돌이</div>
               </div>
               <div className="member">
                 <img src={member_icon} alt="copy" className="copyicon" />

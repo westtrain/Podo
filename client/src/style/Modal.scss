@@ -842,19 +842,39 @@ body {
         .choosebank {
           border-radius: 15px;
           margin-top: 80px;
+          height: 300px;
+          overflow: auto;
           background-color: #fff;
           position: absolute;
           display: grid;
-          grid-template-columns: repeat(4, 110px);
-          width: 450px;
+          grid-template-columns: repeat(3, 150px);
+          width: 480px;
           padding: 10px;
           box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.25);
+
           div {
             font-weight: 500;
             cursor: pointer;
-            margin: 3px 0 5px 15px;
+            margin: 3px 0 5px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img {
+              width: 30px;
+            }
           }
         }
+        // .choosebank::-webkit-scrollbar {
+        //   width: 5px;
+        //   display: block;
+        // }
+        // .choosebank::-webkit-scrollbar-thumb {
+        //   background-color: #dad6d6;
+        //   border-radius: 1px;
+        // }
+        // .choosebank::-webkit-scrollbar-track {
+        //   background-color: transparent;
+        // }
       }
 
       .samms {

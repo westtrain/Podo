@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAccount } from "../../redux/API/paymentAPI";
 import { showAccountModal } from "../../redux/reducers/modalSlice";
-import { onlyNumber, bankList } from "../../utils/dateFunction";
+import { onlyNumber, bankList, bankImage } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import Swal from "sweetalert2";
 import { BsXLg } from "react-icons/bs";
+import woori from "../../image/woori.svg";
 
 function SetAccountModal(props) {
   const dispatch = useDispatch();
@@ -49,18 +50,19 @@ function SetAccountModal(props) {
 
   const bankElements = () => {
     const result = [];
-    Object.keys(bankList).map((bankCode, i) => {
+    Object.keys(bankList, bankImage).map((bankCode, i) => {
       result.push(
         <div
-          key={i}
-          className="bank"
           onClick={() => {
             setShowDropdown(!showDropdown);
             setSelectBank(bankList[bankCode]);
             setBankCode(bankCode);
           }}
         >
-          {bankList[bankCode]}
+          <img src={bankImage[bankCode]} alt="bank"></img>
+          <div key={i} className="bank">
+            {bankList[bankCode]}
+          </div>
         </div>
       );
     });

@@ -310,6 +310,7 @@ body {
             border-radius: 15px;
             background-color: #fff;
             min-height: 280px;
+            height: fit-content;
             margin-bottom: 20px;
             .wrapper {
               padding: 32px 45px;
@@ -385,6 +386,9 @@ body {
                 line-height: 16px;
 
                 color: #656565;
+                div {
+                  margin-top: 2px;
+                }
               }
               .statementbox {
                 display: flex;

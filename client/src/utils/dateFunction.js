@@ -93,6 +93,30 @@ export const bankList = {
   "092": "토스뱅크은행",
 };
 
+export const bankImage = {
+  "020": "/woori.svg",
+  "088": "/shinhan.svg",
+  "003": "/ibk.svg",
+  "081": "/hana.svg",
+  "004": "/kb.svg",
+  "007": "/citi.svg",
+  "045": "/ic.svg",
+  "011": "/nh.svg",
+  "007": "/sh.svg",
+  "090": "/kakaobank.png",
+  "032": "/busan.svg",
+  "039": "/gyeongnam.svg",
+  "023": "/sc.png",
+  "002": "/kdb.png",
+  "071": "/post.png",
+  "048": "/shin.svg",
+  "037": "/jb.png",
+  "034": "/gj.png",
+  "089": "/kbank.png",
+  "031": "/dgb.png",
+  "092": "/toss.png",
+};
+
 export const ottList = {
   netflix: 1,
   watcha: 2,

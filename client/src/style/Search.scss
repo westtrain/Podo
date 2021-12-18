@@ -2,12 +2,12 @@ $maincolor: #a5a9f8;
 $fontcolor: #222222;
 $mypagecolor: #eeefff;
 
-body {
-  -ms-overflow-style: none;
-}
-::-webkit-scrollbar {
-  display: none;
-}
+// body {
+//   -ms-overflow-style: none;
+// }
+// .search::-webkit-scrollbar {
+//   display: none;
+// }
 
 .search {
   animation: fadein 0.5s;
@@ -238,11 +238,12 @@ body {
         flex-direction: column;
         height: 45em;
         margin-top: 20px;
+        overflow: scroll;
 
         .partyexp {
           cursor: pointer;
           width: 580px;
-          height: 127px;
+          height: fit-content;
           background-color: #fff;
           border-radius: 15px;
           margin-bottom: 20px;
@@ -250,6 +251,7 @@ body {
           flex-direction: column;
           align-items: center;
           justify-content: center;
+          padding: 30px 0 30px 0;
 
           .partyexpup {
             display: flex;
@@ -291,6 +293,15 @@ body {
             color: #656565;
           }
         }
+      }
+      .searchparty::-webkit-scrollbar {
+        width: 4px;
+      }
+      .searchparty::-webkit-slider-thumb {
+        background-color: #656565;
+      }
+      .searchparty::-webkit-scrollbar-track {
+        background-color: transparent;
       }
     }
   }

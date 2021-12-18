@@ -1,5 +1,5 @@
 const db = require("../models");
-const { Party } = require("../models");
+const { User, Party } = require("../models");
 const dayjs = require("dayjs");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
@@ -9,20 +9,35 @@ module.exports = {
     const user_id = req.userId;
     const usersParties = [];
     try {
+      // 유저가 가입한 파티아이디 배열
       const allUsersPartiesId = await db.sequelize.models.User_party.findAll({
         attributes: ["party_id"],
         where: { user_id },
         raw: true,
       });
-      console.log(allUsersPartiesId);
+
+      // 각각의 파티 아이디에 해당하는 파티 정보 및 멤버 이름 가져오기
       for (let i = 0; i < allUsersPartiesId.length; i++) {
+        const memberNameArr = [];
+        //파티 정보 가져오기
         const usersParty = await Party.findOne({
-          where: {
-            id: allUsersPartiesId[i].party_id,
-          },
+          where: { id: allUsersPartiesId[i].party_id },
           raw: true,
         });
-        console.log(usersParty);
+
+        //파티원 네임 가져오기
+        const memberId = usersParty.members.split(",");
+        for (let j = 0; j < memberId.length; j++) {
+          const memberName = await User.findOne({
+            attributes: ["name"],
+            where: { id: memberId[j] },
+          });
+          memberNameArr[j] = memberName.name;
+        }
+
+        //파티 정보 객체에 'memberName: 파티원 네임 배열' 추가
+        usersParty.memberName = memberNameArr;
+
         usersParties[i] = usersParty;
       }
 
@@ -138,10 +153,10 @@ module.exports = {
           );
           alreadyJoinedArr = alreadyJoinedArr.flat();
 
-          //해당 유저가 있다면 422 에러
+          //해당 유저가 있다면 412 에러
           if (alreadyJoinedArr.length !== 0) {
             return res
-              .status(422)
+              .status(412)
               .json({ message: "You have already created or joined the same party" });
           }
         }
@@ -241,7 +256,7 @@ module.exports = {
       }); //where 빠졌었음. await 넣어야 promise형태가 아닌 배열 형태의 결과값 나옴
       if (isMember.length !== 0) {
         //배열 형태에서 비어있음을 표현하기 위해서는 length 사용해야 함.
-        return res.status(422).json({ message: "You already created or joined this party" });
+        return res.status(412).json({ message: "You have already created or joined this party" });
       }
 
       // Edge Case: 같은 ott종류의 이미 create나 join한 파티가 있다면 create 방지. ex) 넷플 파티에 이미 create/join 했는데 또 넷플 파티 만들려고 하는 경우
@@ -267,7 +282,7 @@ module.exports = {
 
         //해당 유저가 있다면 422 에러
         if (alreadyJoinedArr.length !== 0) {
-          return res.status(422).json({
+          return res.status(412).json({
             message:
               "You have already created or joined the party that shares the same kind of OTT",
           });

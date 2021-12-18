@@ -1,17 +1,11 @@
-const { Payment, Party, OTT, User, Statement } = require("../models");
+const { Payment } = require("../models");
 const { generateImportToken, checkAccountName } = require("./importFunction/account");
-const { createSubscription, createSchedule } = require("./importFunction/subscription");
-const dayjs = require("dayjs");
-const date = dayjs().format("YYYY-MM-DD");
-const sequelize = require("sequelize");
-const user = require("./user");
-const party = require("./party");
-const { patch } = require("../router/auth");
-const Op = sequelize.Op;
+const { createSubscription } = require("./importFunction/subscription");
 
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {
     const user_id = req.userId;
+
     try {
       const paymentInfo = await Payment.findAll({
         where: { user_id },

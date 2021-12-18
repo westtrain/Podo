@@ -33,20 +33,18 @@ import profile8 from "../../image/profile8.svg";
 import profile9 from "../../image/profile9.svg";
 import profile10 from "../../image/profile10.svg";
 import profile11 from "../../image/profile11.svg";
+import profile13 from "../../image/profile13.svg";
 function MyPartyDetail(props) {
   const partyId = Number(props.id);
   const userState = useSelector((state) => state.user);
   const usersPartyState = useSelector((state) => state.party.usersParty);
   const thisParty = usersPartyState.filter((party) => party.id === partyId)[0];
   const [isBlind, setIsBlind] = useState(true);
-  const members = thisParty.memberName;
-  members.filter((memberName) => memberName !== userState.name); // 유저 본인 외의 멤버 이름만 사용
+  const membersName = thisParty.memberName.filter(
+    (name) => name !== userState.name
+  ); // 유저 본인 외의 멤버 이름만 사용
+  console.log(membersName);
 
-  //위의 thisParty로 아래 JSX에서 데이터 알맞게 넣어주시면 됩니다!
-  //copy버튼은import { CopyToClipboard } from "react-copy-to-clipboard";
-  //이 라이브러리 설치하고 import해서 사용해서 구현하시면 되구요
-  //사용법은 Colorbortion의 PalettePage 컴포넌트 보시면 됩니다!
-  //그리고 비밀번호에 있는 눈 모양! 구현해주세요~ 보이고 안보이고 버튼은 바뀌는 기능!
   const ottLogoList = [
     netflix,
     watcha,
@@ -76,18 +74,28 @@ function MyPartyDetail(props) {
 
   const getRenderMembers = () => {
     const result = [];
-    members.map(() => {
-      result.push(
-        <div className="member">
-          <img
-            src={profileImgList[Math.floor(Math.random() * 10) + 2]}
-            alt="copy"
-            className="copyicon"
-          />
-          <div className="membername">{members[2]}</div>
-        </div>
-      );
-    });
+    for (let i = 0; i < thisParty.members_num - 1; i++) {
+      if (i <= membersName.length - 1) {
+        result.push(
+          <div className="member">
+            <img
+              src={profileImgList[Math.floor(Math.random() * 10) + 2]}
+              alt="copy"
+              className="copyicon"
+            />
+            <div className="membername">{membersName[i]}</div>
+          </div>
+        );
+      } else {
+        // 멤버가 파티 정원만큼 차지 않은 상태
+        result.push(
+          <div className="member">
+            <img src={profile13} alt="copy" className="copyicon" />
+            <div className="membername">모집중</div>
+          </div>
+        );
+      }
+    }
     return result;
   };
   return (
@@ -101,7 +109,7 @@ function MyPartyDetail(props) {
             className="user"
           ></img>
           <div className="username">
-            {userState.name}
+            {userState.name}의
             <br />
             {getOttKoreanNameById(thisParty.ott_id)} 파티
           </div>

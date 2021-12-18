@@ -414,7 +414,7 @@ a {
 }
 /* 스크롤바 설정*/
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 100px;
 }
 /* 스크롤바 뒷 배경 설정*/
 ::-webkit-scrollbar-track {
@@ -423,7 +423,7 @@ a {
 /* 스크롤바 막대 설정*/
 ::-webkit-scrollbar-thumb {
   height: 17%;
-  background-color: rgb(172, 140, 245);
+  background-color: rgb(137, 118, 241);
   /* 스크롤바 둥글게 설정    */
   border-radius: 10px;
 }

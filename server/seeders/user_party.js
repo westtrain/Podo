@@ -7,7 +7,7 @@ module.exports = {
     const worksheet = workbook.Sheets["User_party"];
 
     const data = [];
-    for (let i = 1; i <= 338; i++) {
+    for (let i = 1; i <= 321; i++) {
       const obj = {
         party_id: `${worksheet["A" + i].w}`,
         user_id: `${worksheet["B" + i].w}`,

@@ -40,9 +40,7 @@ function MyPartyDetail(props) {
   const thisParty = usersPartyState.filter((party) => party.id === partyId)[0];
   const [isBlind, setIsBlind] = useState(true);
   const members = thisParty.memberName;
-  members.filter((memberName) => {
-    memberName !== userState.name;
-  }); // 유저 본인 외의 멤버 이름만 사용
+  members.filter((memberName) => memberName !== userState.name); // 유저 본인 외의 멤버 이름만 사용
 
   //위의 thisParty로 아래 JSX에서 데이터 알맞게 넣어주시면 됩니다!
   //copy버튼은import { CopyToClipboard } from "react-copy-to-clipboard";

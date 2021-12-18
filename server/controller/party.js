@@ -15,6 +15,9 @@ module.exports = {
         where: { user_id },
         raw: true,
       });
+      if (allUsersPartiesId.length === 0) {
+        return res.status(404).json({ message: "You did not join any party." });
+      }
 
       // 각각의 파티 아이디에 해당하는 파티 정보 및 멤버 이름 가져오기
       for (let i = 0; i < allUsersPartiesId.length; i++) {
@@ -40,10 +43,6 @@ module.exports = {
 
         usersParties[i] = usersParty;
       }
-
-      if (!usersParties) {
-        return res.status(404).json({ message: "failed" });
-      }
       return res.status(200).json({ data: usersParties });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
@@ -58,7 +57,7 @@ module.exports = {
         raw: true,
       });
       if (!partyInfo) {
-        return res.status(404).json({ message: "failed" });
+        return res.status(404).json({ message: "We cannot find what you asked." });
       }
       return res.status(200).json({ data: partyInfo });
     } catch (err) {
@@ -195,18 +194,9 @@ module.exports = {
     const { party_id, ott_login_id, ott_login_password } = req.body;
     try {
       // 2. partyId, userId로 조회해서 OTT 로그인 정보를 업데이트 시켜준다
-      console.log(userId);
       const newOttLoginInfo = await Party.update(
-        {
-          ott_login_id,
-          ott_login_password,
-        },
-        {
-          where: {
-            id: party_id,
-            leader: userId,
-          },
-        }
+        { ott_login_id, ott_login_password },
+        { where: { id: party_id, leader: userId } }
       );
       // console.log(newOttLoginInfo);
       if (!newOttLoginInfo) {

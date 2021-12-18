@@ -77,6 +77,7 @@ export const getFilterParties = (parties, period, numOfMember) => {
 export const joinParty = createAsyncThunk(
   "party/joinParty",
   async ({ partyId }, { dispatch, rejectWithValue }) => {
+    dispatch(isNotError());
     try {
       const parties = await api.patch(`/join`, { party_id: partyId });
       await Promise.all([dispatch(isNotError())]);

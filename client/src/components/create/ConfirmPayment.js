@@ -57,8 +57,8 @@ function ConfirmPayment(props) {
       }
     }
   };
-  useEffect(() => {
-    dispatch(getUsersPaymentInfo());
+  useEffect(async () => {
+    await dispatch(getUsersPaymentInfo());
     dispatch(getUser());
     if (errorState) {
       Swal.fire(
@@ -115,7 +115,7 @@ function ConfirmPayment(props) {
           <div className="infoperiod">
             - 결제 카드는 파티장의 귀책 사유 발생 시 위약금을 부과하기 위해
             필요해요. 파티가 잘 진행된다면 위약금이 발생할 일은 절대 없으니
-            안심하세요.
+            안심하세요.🙂
           </div>
         </div>
         <div className="guidefooter">

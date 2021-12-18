@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllOtt } from "../../redux/API/ottAPI";
 import { getOttKoreanNameById, getSavePrice } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
@@ -21,6 +22,9 @@ function SelectPlanModal() {
     dispatch(showSelectPlanModal(false));
     navigate("/create/1");
   };
+  useEffect(() => {
+    dispatch(getAllOtt);
+  }, []);
   return (
     <>
       <div className="page">
@@ -44,12 +48,11 @@ function SelectPlanModal() {
                   <div className="srmmuexp">{getOttKoreanNameById(ottId)}</div>
                 </div>
                 <div className="srmmdown">
-
                   <div>
                     <BsDot /> 파티원은 최대 3명 모집할 수 있어요
                   </div>
                   <div>
-                    <BsDot /> 최대 인원 모집 시 매달  {priceOfParty}원 세이브!
+                    <BsDot /> 최대 인원 모집 시 매달 {priceOfParty}원 세이브!
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getDday, getOttKoreanNameById } from "../../utils/dateFunction";
 import { AiFillCrown } from "react-icons/ai";
 import netflix from "../../image/netflix.png";
@@ -15,6 +15,7 @@ import nintendo from "../../image/nintendo.png";
 
 function PartyCard(props) {
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
   const party = props.party;
   const ottName = getOttKoreanNameById(party.ott_id);
   const d_day = getDday(party.start_date);
@@ -35,8 +36,10 @@ function PartyCard(props) {
   return (
     <>
       <div className="ott">
-        <div>
-          <AiFillCrown style={{ color: "#FFD159" }} size="22px" />
+        <div className="crown">
+          {party.leader === userState.id ? (
+            <AiFillCrown style={{ color: "#FFD159" }} size="22px" />
+          ) : null}
         </div>
         <div className="ottbtn">
           <img

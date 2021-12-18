@@ -44,16 +44,22 @@ export const getAllParties = createAsyncThunk(
 
 export const getFilteredParties = createAsyncThunk(
   "party/getFilteredParties",
-  async ({ id, date }, { dispatch, rejectWithValue }) => {
+  async ({ id, date, period, members_num }, { dispatch, rejectWithValue }) => {
     dispatch(isLoading());
     try {
-      const parties = await api.get(`/filtered/${id}?start_date=${date}`);
+      let parties = await (
+        await api.get(`/filtered/${id}?start_date=${date}`)
+      ).data.data;
+      console.log(typeof period, typeof members_num);
+      if (period || members_num) {
+        parties = await getFilterParties(parties, period, members_num);
+      }
       await Promise.all([
         dispatch(isNotLoading()),
         dispatch(isNotError()),
         dispatch(getAllOtt()),
       ]);
-      return parties.data.data;
+      return parties;
     } catch (err) {
       await Promise.all([
         dispatch(isNotLoading()),
@@ -64,17 +70,17 @@ export const getFilteredParties = createAsyncThunk(
   }
 );
 
-export const getFilterParties = (parties, period, numOfMember) => {
+export const getFilterParties = (parties, period, members_num) => {
   let filteredParties = parties;
-  console.log(filteredParties, period, numOfMember);
+  console.log(filteredParties, period, members_num);
   if (period) {
     filteredParties = filteredParties.filter(
       (party) => party.period === period
     );
   }
-  if (numOfMember) {
+  if (members_num) {
     filteredParties = filteredParties.filter(
-      (party) => party.members_num === numOfMember
+      (party) => party.members_num === members_num
     );
   }
   return filteredParties;

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilteredParties } from "../redux/reducers/partySlice";
 import {
-  getAllParties,
-  getFilteredParties,
-  getFilterParties,
-} from "../redux/API/partyAPI";
-import { dateToStringDash } from "../utils/dateFunction";
+  setPeriodForFilter,
+  setMembersNumForFilter,
+} from "../redux/reducers/partySlice";
+import { getAllParties, getFilteredParties } from "../redux/API/partyAPI";
+import { dateToStringDash, getOttKoreanNameById } from "../utils/dateFunction";
 import Header from "../components/public/Header";
 import Party from "../components/search/Party";
 import Warning from "../components/search/Warning";
@@ -31,19 +30,24 @@ import laftel from "../image/LaftelName.svg";
 import apple from "../image/AppleName.svg";
 import office from "../image/Office365Name.png";
 import nintendo from "../image/NintendoName.png";
+import { getAllOtt } from "../redux/API/ottAPI";
 
 function Search(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOtt, setSelectedOtt] = useState(netflix);
   const [selectedParty, setSelectedParty] = useState(null);
   const [ottId, setOttId] = useState(1);
-  const [period, setPeriod] = useState(0);
-  const [numOfMember, setNumOfMember] = useState(0);
   const [startDate, setStartDate] = useState(
     dateToStringDash(new Date().setDate(new Date().getDate() + 1))
   );
   const dispatch = useDispatch();
-  const partiesState = useSelector((state) => state.party.parties);
+  const partiesState = useSelector(
+    (state) => state.party.parties.filteredParty
+  );
+  const periodState = useSelector((state) => state.party.parties.period);
+  const membersNumState = useSelector(
+    (state) => state.party.parties.members_num
+  );
   const loadingState = useSelector((state) => state.loading);
   const joinPartyModalState = useSelector(
     (state) => state.modal.joinPartyModal
@@ -64,7 +68,7 @@ function Search(props) {
     nintendo,
   ];
 
-  const getOttReaderList = () => {
+  const getOttRenderList = () => {
     const result = [];
     ottLogoList.map((ott, i) => {
       result.push(
@@ -83,26 +87,25 @@ function Search(props) {
     });
     return result;
   };
+  const getParty = () => {
+    if (periodState || membersNumState) {
+      // 파티 기간 또는 인원이 선택됐다면
+      dispatch(
+        getFilteredParties({
+          id: ottId,
+          date: startDate,
+          period: periodState,
+          members_num: membersNumState,
+        })
+      );
+    } else {
+      dispatch(getFilteredParties({ id: ottId, date: startDate }));
+    }
+  };
 
   useEffect(() => {
-    async function asyncFunc() {
-      if (startDate !== "") {
-        console.log(startDate, ottId);
-        await dispatch(getFilteredParties({ id: ottId, date: startDate }));
-      } else {
-        await dispatch(getAllParties({ id: ottId }));
-      }
-      if (period || numOfMember) {
-        const filteredPaties = getFilterParties(
-          partiesState,
-          period,
-          numOfMember
-        );
-        dispatch(setFilteredParties(filteredPaties));
-      }
-    }
-    asyncFunc();
-  }, [period, selectedOtt, numOfMember, startDate]);
+    getParty();
+  }, [periodState, selectedOtt, membersNumState, startDate]);
   return (
     <>
       <Header />
@@ -128,7 +131,7 @@ function Search(props) {
                   className="filterWindow dropdown"
                   onClick={() => setShowDropdown(!showDropdown)}
                 >
-                  <ul>{getOttReaderList()}</ul>
+                  <ul>{getOttRenderList()}</ul>
                 </div>
               </div>
             ) : null}
@@ -183,9 +186,9 @@ function Search(props) {
               <div className="srhleft">
                 <select
                   className="period"
-                  value={period}
+                  value={periodState}
                   onChange={(e) => {
-                    setPeriod(Number(e.target.value));
+                    dispatch(setPeriodForFilter(Number(e.target.value)));
                   }}
                 >
                   <option value="0">파티 기간</option>
@@ -203,8 +206,9 @@ function Search(props) {
                 </select>
                 <select
                   className="people"
+                  value={membersNumState}
                   onChange={(e) => {
-                    setNumOfMember(Number(e.target.value));
+                    dispatch(setMembersNumForFilter(Number(e.target.value)));
                   }}
                 >
                   <option value="0">파티 인원</option>
@@ -216,11 +220,12 @@ function Search(props) {
               <div
                 className="srhright"
                 onClick={() => {
-                  setPeriod(0);
-                  setNumOfMember(0);
+                  setPeriodForFilter(0);
+                  setMembersNumForFilter(0);
+                  dispatch(getAllParties({ id: ottId }));
                 }}
               >
-                전체파티 조회
+                {getOttKoreanNameById(ottId)} 전체파티 조회
               </div>
             </div>
             <div className="searchparty">

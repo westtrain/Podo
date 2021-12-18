@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setPeriodForFilter,
+  setMembersNumForFilter,
+} from "../../redux/reducers/partySlice";
 import { dateToStringDash } from "../../utils/dateFunction";
 import DatePicker, { registerLocale } from "react-datepicker";
 import getYear from "date-fns/getYear";
@@ -8,6 +13,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 function Calendar(props) {
+  const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(
     new Date().setDate(new Date().getDate() + 1)
   );
@@ -21,6 +27,8 @@ function Calendar(props) {
   const onClickDate = async (date) => {
     setStartDate(date);
     props.setStartDate(dateToStringDash(date));
+    dispatch(setPeriodForFilter(0));
+    dispatch(setMembersNumForFilter(0));
   };
   return (
     <>

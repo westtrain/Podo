@@ -46,6 +46,13 @@ function Period(props) {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 300,
+      behavior: "smooth",
+    });
+  }, [period]);
+
   return (
     <>
       <div className="partyguidestep4">

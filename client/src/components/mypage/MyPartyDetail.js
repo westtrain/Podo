@@ -39,6 +39,10 @@ function MyPartyDetail(props) {
   const usersPartyState = useSelector((state) => state.party.usersParty);
   const thisParty = usersPartyState.filter((party) => party.id === partyId)[0];
   const [isBlind, setIsBlind] = useState(true);
+  const members = thisParty.memberName;
+  members.filter((memberName) => {
+    memberName !== userState.name;
+  }); // 유저 본인 외의 멤버 이름만 사용
 
   //위의 thisParty로 아래 JSX에서 데이터 알맞게 넣어주시면 됩니다!
   //copy버튼은import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -71,6 +75,23 @@ function MyPartyDetail(props) {
     profile10,
     profile11,
   ];
+
+  const getRenderMembers = () => {
+    const result = [];
+    members.map(() => {
+      result.push(
+        <div className="member">
+          <img
+            src={profileImgList[Math.floor(Math.random() * 10) + 2]}
+            alt="copy"
+            className="copyicon"
+          />
+          <div className="membername">{members[2]}</div>
+        </div>
+      );
+    });
+    return result;
+  };
   return (
     <>
       <div className="middlemain">
@@ -144,18 +165,7 @@ function MyPartyDetail(props) {
                 />
                 <div className="membername">{userState.name}</div>
               </div>
-              <div className="member">
-                <img src={profile8} alt="copy" className="copyicon" />
-                <div className="membername">춤추는뚜비</div>
-              </div>
-              <div className="member">
-                <img src={profile4} alt="copy" className="copyicon" />
-                <div className="membername">배고픈나나</div>
-              </div>
-              <div className="member">
-                <img src={profile6} alt="copy" className="copyicon" />
-                <div className="membername">행복한뽀</div>
-              </div>
+              {getRenderMembers()}
             </div>
           </div>
         </div>

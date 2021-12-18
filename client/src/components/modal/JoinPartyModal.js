@@ -12,6 +12,7 @@ import {
   showConfirmPaymentModal,
   showLoginModal,
 } from "../../redux/reducers/modalSlice";
+import { setLoginCallbackURI } from "../../redux/reducers/loginURISlice";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import { BsXLg } from "react-icons/bs";
@@ -23,7 +24,7 @@ function JoinPartyModal(props) {
   const ottName = getOttKoreanNameById(party.ott_id);
   const userState = useSelector((state) => state.user);
   const priceOfParty = refinePrice(
-    ottState.filter((p) => p.id === party.ott_id)[0].price,
+    ottState[party.ott_id - 1].price,
     party.members_num
   );
 
@@ -79,11 +80,13 @@ function JoinPartyModal(props) {
                 onClick={() => {
                   if (userState === null) {
                     // isLogin === false
-                    dispatch(showJoinPartyModal(false));
+                    dispatch(setLoginCallbackURI("/search"));
                     dispatch(showLoginModal(true));
+                    dispatch(showJoinPartyModal(false));
+                  } else {
+                    dispatch(showJoinPartyModal(false));
+                    dispatch(showConfirmPaymentModal(true));
                   }
-                  dispatch(showJoinPartyModal(false));
-                  dispatch(showConfirmPaymentModal(true));
                 }}
               >
                 <div className="partysignbtnw">파티 가입하기</div>

@@ -1,15 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginCallbackURI } from "../../redux/reducers/loginURISlice";
+import { showCardModal, showLoginModal } from "../../redux/reducers/modalSlice";
 import { dateToStringPoint } from "../../utils/dateFunction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { AiOutlineLeft } from "react-icons/ai";
 
 function ConfirmRule(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const startDate = useSelector((state) => state.party.ceateParty.start_date);
   const endDate = useSelector((state) => state.party.ceateParty.end_date);
   const period = useSelector((state) => state.party.ceateParty.period);
+  const userState = useSelector((state) => state.user);
 
   return (
     <>
@@ -76,11 +81,19 @@ function ConfirmRule(props) {
               뒤로가기
             </div>
           </Link>
-          <Link to={"/create/6"}>
-            <div className="guidefooterbtn">
-              <div className="nextbtn">다음</div>
-            </div>
-          </Link>
+          <div
+            className="guidefooterbtn"
+            onClick={() => {
+              if (userState) {
+                navigate("/create/6");
+              } else {
+                dispatch(setLoginCallbackURI("/create/5"));
+                dispatch(showLoginModal(true));
+              }
+            }}
+          >
+            <div className="nextbtn">다음</div>
+          </div>
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ import paymentReducer from "./paymentSlice";
 import statementReducer from "./statementSlice";
 import partyReducer from "./partySlice";
 import modalReducer from "./modalSlice";
+import loginURIReducer from "./loginURISlice";
 import loadingReducer from "./loadingSlice";
 import errorReducer from "./errorSlice";
 
@@ -17,7 +18,7 @@ import errorReducer from "./errorSlice";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["payment", "party", "modal", "loading", "error"],
+  blacklist: ["payment", "modal", "loading", "error"],
 };
 
 export const persistedReducer = persistReducer(
@@ -29,6 +30,7 @@ export const persistedReducer = persistReducer(
     party: partyReducer,
     modal: modalReducer,
     ott: ottReducer,
+    loginURI: loginURIReducer,
     loading: loadingReducer,
     error: errorReducer,
   })

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   showCardModal,
@@ -15,6 +15,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 
 function ConfirmPayment(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cardModalState = useSelector((state) => state.modal.cardModal);
   const settlementModalState = useSelector(
     (state) => state.modal.settlementModal
@@ -54,6 +55,7 @@ function ConfirmPayment(props) {
       );
       if (errorState === null) {
         Swal.fire("Success!", "파티가 만들어졌어요!", "success");
+        navigate("/mypage");
       }
     }
   };

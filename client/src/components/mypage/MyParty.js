@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/API/userAPI";
+import { getAllOtt } from "../../redux/API/ottAPI";
 import { showSelectProfileImageModal } from "../../redux/reducers/modalSlice";
 import SelectProfileImage from "../../components/modal/SelectProfileImage";
 import PartyCard from "./PartyCard";
@@ -53,6 +54,7 @@ function MyParty(props) {
 
   useEffect(() => {
     dispatch(getUser());
+    dispatch(getAllOtt());
     getUserImage(userState.image);
   }, [profileImg, userState.image, selectProfileModalState]);
 

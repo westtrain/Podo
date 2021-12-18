@@ -14,10 +14,9 @@ function SelectPlanModal() {
   const navigate = useNavigate();
   const ottState = useSelector((state) => state.ott);
   const ottId = useSelector((state) => state.party.ceateParty.ott_id);
-  const priceOfParty = getSavePrice(
-    ottState.filter((p) => p.id === ottId)[0].price,
-    4
-  );
+  const maxNumOfParty = ottState[ottId - 1].max_num;
+  const priceOfParty = getSavePrice(ottState[ottId - 1].price, maxNumOfParty);
+  const planOfParty = ottState[ottId - 1].plan;
   const onClickNext = () => {
     dispatch(showSelectPlanModal(false));
     navigate("/create/1");
@@ -45,11 +44,13 @@ function SelectPlanModal() {
                   <div className="srmmuimg">
                     <AiOutlineCheck style={{ color: "#4040cc" }} size="20px" />
                   </div>
-                  <div className="srmmuexp">{getOttKoreanNameById(ottId)}</div>
+                  <div className="srmmuexp">
+                    {getOttKoreanNameById(ottId) + " " + planOfParty}
+                  </div>
                 </div>
                 <div className="srmmdown">
                   <div>
-                    <BsDot /> 파티원은 최대 3명 모집할 수 있어요
+                    <BsDot /> 파티원은 최대 {maxNumOfParty}명 모집할 수 있어요
                   </div>
                   <div>
                     <BsDot /> 최대 인원 모집 시 매달 {priceOfParty}원 세이브!

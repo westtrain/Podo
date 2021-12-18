@@ -10,6 +10,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 
 function LeaderGuide(props) {
   const navigate = useNavigate();
+  const ottState = useSelector((state) => state.ott);
   const ottId = useSelector((state) => state.party.ceateParty.ott_id);
   const [checked, setChecked] = useState(false);
   const onclickCkeck = () => {
@@ -36,9 +37,11 @@ function LeaderGuide(props) {
           <div className="guideheadername_step1">
             파티장 가이드를
             <br />
-            확인하세요
+            확인 후 체크하세요
           </div>
-          <div className="guideottname">{getOttKoreanNameById(ottId)}</div>
+          <div className="guideottname">
+            {getOttKoreanNameById(ottId) + " " + ottState[ottId - 1].plan}
+          </div>
         </div>
         <div className="guidemiddle">
           <div className="guidemiddleheader">

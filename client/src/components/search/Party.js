@@ -11,7 +11,7 @@ function Party(props) {
   const party = props.party;
 
   const priceOfParty = refinePrice(
-    ottState.filter((p) => p.id === party.ott_id)[0].price,
+    ottState[party.ott_id - 1].price,
     party.members_num
   );
 

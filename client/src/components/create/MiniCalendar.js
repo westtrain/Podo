@@ -12,7 +12,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 function MiniCalendar(props) {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(
-    new Date().setDate(new Date.getDate() + 1)
+    new Date().setDate(new Date().getDate() + 1)
   );
   const [today, setToday] = useState(new Date());
   const [month, setMonth] = useState(new Date().getMonth());

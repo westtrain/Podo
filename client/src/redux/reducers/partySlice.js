@@ -56,6 +56,10 @@ const partySlice = createSlice({
       state.parties = action.payload;
       return state;
     },
+    logOutParty: (state) => {
+      state = initialState;
+      return state;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createParty.fulfilled, (action) => {
@@ -104,5 +108,6 @@ export const {
   setEndDate,
   setPeriod,
   setFilteredParties,
+  logOutParty,
 } = partySlice.actions;
 export default partySlice.reducer;

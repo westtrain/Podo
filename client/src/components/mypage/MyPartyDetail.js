@@ -11,7 +11,6 @@ import "../../style/MyPage.scss";
 import { AiOutlineCopy } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { AiOutlineCopy } from "react-icons/ai";
 import netflix from "../../image/netflix.png";
 import watcha from "../../image/watcha.png";
 import wavve from "../../image/wavve.png";

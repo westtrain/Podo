@@ -1,5 +1,6 @@
 const schedule = require("node-schedule");
 const { settlePodoMoney } = require("./settlePodoMoney");
+const { requestPaymentByStartDate } = require("./requestPayment");
 
 module.exports = {
   settleMonthly: (s) => {
@@ -12,6 +13,7 @@ module.exports = {
       try {
         console.log("예약된 작업 실행!");
         settlePodoMoney();
+        requestPaymentByStartDate();
       } catch (err) {
         console.error(err);
       }

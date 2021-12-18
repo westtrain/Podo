@@ -1,10 +1,12 @@
-const { Payment, Party, OTT } = require("../models");
+const { Payment, Party, OTT, User, Statement } = require("../models");
 const { generateImportToken, checkAccountName } = require("./importFunction/account");
-const { createSubscription } = require("./importFunction/subscription");
-const moment = require("moment");
-const date = moment().format("YYYY-MM-DD");
+const { createSubscription, createSchedule } = require("./importFunction/subscription");
+const dayjs = require("dayjs");
+const date = dayjs().format("YYYY-MM-DD");
 const sequelize = require("sequelize");
 const user = require("./user");
+const party = require("./party");
+const { patch } = require("../router/auth");
 const Op = sequelize.Op;
 
 module.exports = {
@@ -15,6 +17,7 @@ module.exports = {
         where: { user_id },
         raw: true,
       });
+
       if (paymentInfo) {
         return res.status(200).json({ data: paymentInfo });
       }
@@ -38,7 +41,7 @@ module.exports = {
     } = req.body;
 
     const data = {
-      customer_uid: `customer_` + Date.now() + `${user_id}`,
+      customer_uid: `customer_` + dayjs().valueOf() + `${user_id}`,
       card_number: credit_num,
       expiry: `20${credit_expire_year}-${credit_expire_month}`,
       birth: credit_birth,
@@ -60,7 +63,7 @@ module.exports = {
             where: { user_id },
             raw: true,
           }).then((paymentInfo) => {
-            console.log(paymentInfo);
+            // console.log(paymentInfo);
 
             //등록한 적이 없다면 create
             if (!paymentInfo) {
@@ -75,7 +78,7 @@ module.exports = {
               });
             } else {
               //등록한 적이 있다면 update
-              console.log("update card info");
+              // console.log("update card info");
               Payment.update(
                 {
                   credit_num: result.data.response.card_number,

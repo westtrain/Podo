@@ -4,7 +4,7 @@ const axios = require("axios");
 dotenv.config();
 
 const { generateAccessToken, sendAccessToken } = require("./tokenFunction");
-const { generateName, getRandomNumber, nameArray, validate } = require("./nameFunction/index");
+const { generateName, nameArray, validate } = require("./nameFunction/index");
 
 module.exports = {
   naverLogin: async (req, res) => {
@@ -19,7 +19,6 @@ module.exports = {
     const code = req.query.code; //get Authorization Code
 
     try {
-      console.log(code);
       const result = await axios.post(
         // authorization code를 이용해서 서버가 Naver에 access token, refresh token 요청
         `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${process.env.NAVER_CLIENT_ID}&client_secret=${process.env.NAVER_CLIENT_SECRET}&redirect_uri=${process.env.NAVER_REDIRECT_URI}&code=${code}&state=naver`

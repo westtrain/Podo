@@ -150,7 +150,7 @@ module.exports = {
         await Party.create({
           ott_id,
           ott_login_id,
-          ott_login_password: encryptedPW,
+          ott_login_password,
           members: `${user_id}`,
           members_num,
           leader: user_id,

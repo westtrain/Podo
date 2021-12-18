@@ -52,7 +52,7 @@ function WithdrawModal(props) {
                   <>
                     <div className="wdmmff">+ 계좌 등록하기</div>
                     <div className="wdmmfs">
-                      본인 명의의 계좌만 등록할 수 있어요.
+                      본인 명의의 계좌를 등록해주세요.
                     </div>
                   </>
                 )}

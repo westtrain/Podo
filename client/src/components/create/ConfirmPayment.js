@@ -53,7 +53,22 @@ function ConfirmPayment(props) {
           }),
         })
       );
-      if (errorState === null) {
+      if (errorState) {
+        if (errorState.status === 412) {
+          Swal.fire(
+            "Unsuccess!",
+            "이미 사용 중인 OTT의 파티는 생성이 불가해요! ",
+            "error"
+          );
+        } else {
+          Swal.fire(
+            "Unsuccess!",
+            "파티 생성에 실패했어요. 다시 시도해주세요.🥺",
+            "error"
+          );
+        }
+      } else {
+        // 파티 생성 성공
         Swal.fire("Success!", "파티가 만들어졌어요!", "success");
         navigate("/mypage");
       }
@@ -62,14 +77,7 @@ function ConfirmPayment(props) {
   useEffect(async () => {
     await dispatch(getUsersPaymentInfo());
     dispatch(getUser());
-    if (errorState) {
-      Swal.fire(
-        "Unsuccess!",
-        "이미 사용 중인 OTT의 파티는 생성이 불가해요! ",
-        "error"
-      );
-    }
-  }, [errorState]);
+  }, []);
   return (
     <>
       <div className="partyguide">

@@ -18,7 +18,7 @@ export const getPaymentPointWithdrawal = createAsyncThunk(
       await Promise.all([dispatch(isNotError())]);
       return statements.data.data;
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
       return rejectWithValue(err);
     }
   }

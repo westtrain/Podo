@@ -15,7 +15,7 @@ export const getAllOtt = createAsyncThunk(
       await Promise.all([dispatch(isNotError())]);
       return ott.data.data;
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
       return rejectWithValue(err);
     }
   }

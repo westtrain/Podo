@@ -18,7 +18,7 @@ export const createParty = createAsyncThunk(
       await api.post(`/`, createPartyState);
       await Promise.all([dispatch(isNotLoading()), dispatch(isNotError())]);
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
       return rejectWithValue(err);
     }
   }
@@ -33,7 +33,10 @@ export const getAllParties = createAsyncThunk(
       await Promise.all([dispatch(isNotLoading()), dispatch(isNotError())]);
       return parties.data.data;
     } catch (err) {
-      await Promise.all([dispatch(isNotLoading()), dispatch(isError(err))]);
+      await Promise.all([
+        dispatch(isNotLoading()),
+        dispatch(isError(err.toJSON())),
+      ]);
       return rejectWithValue(err);
     }
   }
@@ -52,7 +55,10 @@ export const getFilteredParties = createAsyncThunk(
       ]);
       return parties.data.data;
     } catch (err) {
-      await Promise.all([dispatch(isNotLoading()), dispatch(isError(err))]);
+      await Promise.all([
+        dispatch(isNotLoading()),
+        dispatch(isError(err.toJSON())),
+      ]);
       return rejectWithValue(err);
     }
   }
@@ -82,7 +88,7 @@ export const joinParty = createAsyncThunk(
       const parties = await api.patch(`/join`, { party_id: partyId });
       await Promise.all([dispatch(isNotError())]);
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
       return rejectWithValue(err);
     }
   }
@@ -97,7 +103,10 @@ export const getUsersParty = createAsyncThunk(
       await Promise.all([dispatch(isNotLoading()), dispatch(isNotError())]);
       return parties.data.data;
     } catch (err) {
-      await Promise.all([dispatch(isNotLoading()), dispatch(isError(err))]);
+      await Promise.all([
+        dispatch(isNotLoading()),
+        dispatch(isError(err.toJSON())),
+      ]);
       return rejectWithValue(err);
     }
   }

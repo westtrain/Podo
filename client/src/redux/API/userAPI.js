@@ -16,9 +16,7 @@ export const getUser = createAsyncThunk(
   async (_, { dispatch, rejectWithValue }) => {
     await Promise.all([dispatch(dispatch(isLoading()), isNotError())]);
     try {
-      const user = await api.get(`/`, {
-        withCredentials: true,
-      });
+      const user = await api.get(`/`);
       await Promise.all([
         dispatch(isNotLoading()),
         dispatch(isNotError()),
@@ -28,7 +26,10 @@ export const getUser = createAsyncThunk(
       ]);
       return user.data.data;
     } catch (err) {
-      await Promise.all([dispatch(isNotLoading()), , dispatch(isError(err))]);
+      await Promise.all([
+        dispatch(isNotLoading()),
+        dispatch(isError(err.toJSON())),
+      ]);
       return rejectWithValue(err);
     }
   }
@@ -47,13 +48,30 @@ export const updateProfileImage = async (id) => {
     });
 };
 
-export const deleteUser = async () => {
-  api
-    .delete(`/`, { withCredentials: true })
-    .then((res) => {
-      console.log("RESPONSE");
-    })
-    .catch((err) => {
-      console.log("ERROR");
-    });
-};
+// export const deleteUser = async () => {
+//   api
+//     .delete(`/`, { withCredentials: true })
+//     .then((res) => {
+//       console.log("RESPONSE");
+//     })
+//     .catch((err) => {
+//       console.log("ERROR");
+//     });
+// };
+
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (_, { dispatch, rejectWithValue }) => {
+    await Promise.all([dispatch(dispatch(isLoading()), isNotError())]);
+    try {
+      await api.delete(`/`);
+      await Promise.all([dispatch(isNotLoading()), dispatch(isNotError())]);
+    } catch (err) {
+      await Promise.all([
+        dispatch(isNotLoading()),
+        dispatch(isError(err.toJSON())),
+      ]);
+      return rejectWithValue(err);
+    }
+  }
+);

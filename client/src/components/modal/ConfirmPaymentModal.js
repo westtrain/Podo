@@ -40,11 +40,11 @@ function ConfirmPaymentModal(props) {
       );
       if (errorState === null) {
         Swal.fire("Success!", "파티 가입이 완료되었어요!", "success");
+        dispatch(showConfirmPaymentModal(false));
       }
     }
   };
   useEffect(() => {
-    dispatch(getUsersPaymentInfo());
     if (errorState) {
       Swal.fire("Unsuccess!", "파티 가입을 실패했습니다. ", "error");
     }

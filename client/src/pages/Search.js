@@ -13,6 +13,8 @@ import Party from "../components/search/Party";
 import Warning from "../components/search/Warning";
 import Calendar from "../components/search/Calendar";
 import Loading from "../components/public/Loading";
+import JoinPartyModal from "../components/modal/JoinPartyModal";
+import ConfirmPaymentModal from "../components/modal/ConfirmPaymentModal";
 import "../style/Search.scss";
 import "../style/datepicker.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,6 +35,7 @@ import nintendo from "../image/NintendoName.png";
 function Search(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOtt, setSelectedOtt] = useState(netflix);
+  const [selectedParty, setSelectedParty] = useState(null);
   const [ottId, setOttId] = useState(1);
   const [period, setPeriod] = useState(0);
   const [numOfMember, setNumOfMember] = useState(0);
@@ -42,6 +45,12 @@ function Search(props) {
   const dispatch = useDispatch();
   const partiesState = useSelector((state) => state.party.parties);
   const loadingState = useSelector((state) => state.loading);
+  const joinPartyModalState = useSelector(
+    (state) => state.modal.joinPartyModal
+  );
+  const confirmPaymentModalState = useSelector(
+    (state) => state.modal.confirmPaymentModal
+  );
   const ottLogoList = [
     netflix,
     watcha,
@@ -218,13 +227,22 @@ function Search(props) {
               {partiesState.length === 0 ? (
                 <Warning />
               ) : (
-                partiesState.map((party, i) => <Party key={i} party={party} />)
+                partiesState.map((party, i) => (
+                  <Party
+                    key={i}
+                    party={party}
+                    setSelectedParty={setSelectedParty}
+                  />
+                ))
               )}
             </div>
           </div>
         </div>
       </div>
-      ;
+      {joinPartyModalState ? <JoinPartyModal party={selectedParty} /> : null}
+      {confirmPaymentModalState ? (
+        <ConfirmPaymentModal party={selectedParty} />
+      ) : null}
     </>
   );
 }

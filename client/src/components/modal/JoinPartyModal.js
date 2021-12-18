@@ -1,6 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { dateToStringPoint, getMonthString } from "../../utils/dateFunction";
+import {
+  dateToStringPoint,
+  getMonthString,
+  refinePrice,
+  getOttKoreanNameById,
+} from "../../utils/dateFunction";
 
 import {
   showJoinPartyModal,
@@ -14,8 +19,13 @@ import { BsXLg } from "react-icons/bs";
 function JoinPartyModal(props) {
   const dispatch = useDispatch();
   const party = props.party;
-  const ottName = useSelector((state) => state.ott)[party.ott_id - 1].name;
+  const ottState = useSelector((state) => state.ott);
+  const ottName = getOttKoreanNameById(party.ott_id);
   const userState = useSelector((state) => state.user);
+  const priceOfParty = refinePrice(
+    ottState.filter((p) => p.id === party.ott_id)[0].price,
+    party.members_num
+  );
 
   return (
     <>
@@ -61,7 +71,7 @@ function JoinPartyModal(props) {
                   <div className="cpmpayfhf">파티 요금 결제</div>
                   <div className="cpmpayfhs">(월, VAT포함)</div>
                 </div>
-                <div className="cpmpayff">{props.priceOfParty}원</div>
+                <div className="cpmpayff">{priceOfParty}원</div>
               </div>
 
               <button
@@ -69,6 +79,7 @@ function JoinPartyModal(props) {
                 onClick={() => {
                   if (userState === null) {
                     // isLogin === false
+                    dispatch(showJoinPartyModal(false));
                     dispatch(showLoginModal(true));
                   }
                   dispatch(showJoinPartyModal(false));

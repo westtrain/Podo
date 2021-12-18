@@ -15,7 +15,9 @@ import { AiOutlineLeft } from "react-icons/ai";
 function Period(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    new Date().setDate(new Date.getDate() + 1)
+  );
   const [startDateToString, setStartDateToString] = useState("");
   const [isSetperiod, setIsSetPeriod] = useState(false);
   const [period, setPeriod] = useState(2);

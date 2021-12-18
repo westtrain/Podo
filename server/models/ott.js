@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       plan: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       max_num: {
         type: DataTypes.INTEGER,

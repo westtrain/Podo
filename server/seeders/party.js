@@ -7,7 +7,8 @@ module.exports = {
     const worksheet = workbook.Sheets["Parties"];
 
     const data = [];
-    for (let i = 1; i <= 338; i++) {
+    // 행의갯수만큼 반복 , 열의갯수만큼 알파벳추가
+    for (let i = 1; i <= 321; i++) {
       const obj = {
         ott_id: `${worksheet["A" + i].w}`,
         ott_login_id: `${worksheet["B" + i].w}`,

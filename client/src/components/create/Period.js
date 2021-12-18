@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   setEndDate,
   setPeriod as setPeriodState,
 } from "../../redux/reducers/partySlice";
-import { dateToString, dateToStringDash } from "../../utils/dateFunction";
+import { dateToStringDash } from "../../utils/dateFunction";
 import MiniCalendar from "./MiniCalendar";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

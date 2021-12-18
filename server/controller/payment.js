@@ -32,7 +32,7 @@ module.exports = {
       account_bank,
       account_number,
     } = req.body;
-
+    console.log(req.body);
     const data = {
       customer_uid: `customer_` + Date.now() + `${user_id}`,
       card_number: credit_num,

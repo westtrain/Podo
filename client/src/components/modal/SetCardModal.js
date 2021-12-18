@@ -19,7 +19,7 @@ function SetCardModal(props) {
   const [creditPassword, setCreditPassword] = useState("");
   const [warning, setWarning] = useState("");
 
-  const onClickSubmit = () => {
+  const onClickSubmit = async () => {
     if (
       creditNumber === "" ||
       expireMM === "" ||
@@ -40,8 +40,19 @@ function SetCardModal(props) {
         account_number: null,
       };
       creditInfo = Object.assign({}, paymentState, creditInfo);
-      dispatch(updateCard({ state: creditInfo }));
-      if (warning === "") {
+      await dispatch(updateCard({ state: creditInfo }));
+      if (errorState) {
+        if (errorState.status === 422)
+          setWarning("유효하지 않은 카드 정보입니다.");
+        else {
+          Swal.fire(
+            "Unsuccess!",
+            "결제 카드 등록에 실패했습니다. 다시 시도해주세요.🥺",
+            "success"
+          );
+        }
+      } else {
+        setWarning("");
         Swal.fire(
           "Success!",
           "결제 카드가 정상적으로 등록되었습니다.",
@@ -50,13 +61,7 @@ function SetCardModal(props) {
       }
     }
   };
-  useEffect(() => {
-    if (errorState) {
-      setWarning("유효하지 않은 카드 정보입니다.");
-    } else if (errorState === null) {
-      setWarning("");
-    }
-  }, [errorState]);
+  useEffect(() => {}, [errorState]);
   return (
     <>
       <div className="page">

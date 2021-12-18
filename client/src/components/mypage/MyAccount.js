@@ -22,7 +22,7 @@ function MyAccount(props) {
                 {paymentState.account_bank
                   ? `${bankList[paymentState.account_bank]} ${
                       paymentState.account_number
-                    }`
+                    } (계좌주: )`
                   : "인출 계좌를 등록해 주세요."}
               </div>
               <div

@@ -33,7 +33,7 @@ export const updateSettlement = createAsyncThunk(
         dispatch(getUsersPaymentInfo()),
       ]);
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
       return rejectWithValue(err);
     }
   }
@@ -49,7 +49,7 @@ export const updateCard = createAsyncThunk(
         dispatch(getUsersPaymentInfo()),
       ]);
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
 
       return rejectWithValue(err);
     }
@@ -67,7 +67,7 @@ export const updateAccount = createAsyncThunk(
         dispatch(showAccountModal(false)),
       ]);
     } catch (err) {
-      await Promise.all([dispatch(isError(err))]);
+      await Promise.all([dispatch(isError(err.toJSON()))]);
 
       return rejectWithValue(err);
     }

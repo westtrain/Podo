@@ -6,15 +6,6 @@ const date = dayjs().format("YYYY-MM-DD");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 
-// const {
-//   fundingStart,
-//   fundingSuccess,
-//   fundingCanceled,
-//   fundingSuccessToSponsor,
-//   fundingCanceledToSponsor
-// } = require('../email/email-content');
-// const emailSend = require('../email/email-send');
-
 module.exports = {
   requestPaymentByStartDate: async () => {
     const user_id = req.userId;
@@ -231,18 +222,82 @@ module.exports = {
                   requestPayment(userInfo);
                 }
               } else {
-                const userInfo = data[0];
-                requestPayment(userInfo);
+                // const userInfo = data[0];
+                requestPayment(data[0]);
               }
             });
         }
       }
+      return res.status(200).json({ message: "Requested payment" });
     } catch (err) {
       return res.status(500).json({ message: "Server Error" });
     }
   },
 
+  usePointMoney: async () => {
+    // 결제 가격 계산과 포도머니 우선 결제 함수
+    const calculatePointMoney = (userId, totalPrice, members, pointMoney, usePoint) => {
+      let result = "";
+      if (pointMoney >= Math.ceil(totalPrice / members / 10) * 10 && usePoint) {
+        const reminds = pointMoney - Math.ceil(totalPrice / members / 10) * 10;
+        // 결제에 필요한 금액을 뺸 나머지를 업데이트 해줌
+        User.update(
+          {
+            money: reminds,
+          },
+          {
+            where: { id: userId },
+          }
+        );
+        result = Math.ceil(totalPrice / members / 10) * 10 * -1;
+      } else {
+        result = Math.ceil(totalPrice / members / 10) * 10;
+      }
+      return result;
+    };
+
+    try {
+      const todaysParty = await Payment.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ["id", "money"],
+          },
+        ],
+        where: { settlement_date: { [Op.eq]: dayjs().date() } },
+        attributes: ["customer_uid", "use_podo"],
+        raw: true,
+      });
+
+      // 이 함수의 시나리오
+      // 만약 포인트 머니가 오늘 결제 예정인 총금액보다 많거나 같고 먼저 사용하겠다고 설정한 상태이면,
+      // 결제를 취소하고 포인트머니를 사용하게 해준다.
+      // 그리고 다음달 결제를 요청한다
+      // 조건에 맞지 않으면, 예약된 결제가 진행되도록 나둔다.
+
+      // 필요한 데이타
+      // 유저의 아이디 (id)
+      // 새로운 결제 요청에 필요한 정보들 (customer_uid, )
+      // 당일이 정산일인 유저의 포인트 머니 (momey)
+      // 포인트 머니 우선 사용 설정 상태 (use_podo)
+      // 각 유저의 오늘 결제 예정인 merchant_uid (merchant_uid, schedule_at)
+      // 각 유저의 오늘 결제 예정인 총 금액 (amount)
+
+      // 1. 정산일이 오늘인 유저를 찾고 그 유저의 id, money, customer_uid, use_podo를 가져온다.
+      // 2. 가져온 데이터에서 유저 id를 사용해서 pending 상태의 유저 merchant_uid를 모두 가져온다.
+      // 3. 가져온 merchant_uid로 아임포트에 예약 결제 내역을 요청함
+      // 4. 예약 결제 내역 가운데서 오늘 날짜인 것들의 amount를 모두 합한다.
+      // 5. 앞서 가져온 use_podo가 참이고 총 amount와 money와 비교해서 money가 더 많거나 같을때,
+      //    결제 예약을 취소한다.
+      // 6. 포인트를 사용하고 유저의 money와 Statement내역을 업데이트 시켜준다.
+      // 7. 다음달 예약 결제를 요청한다.
+
+      // console.log(todaysParty);
+      // 오늘 날짜에 시작하는 파티가 없는 경우,
+    } catch (err) {
+      return res.status(500).json({ message: "Server Error" });
+    }
+  },
   // 추후 구현이 필요한 부분들
-  // schedualPayemnt: async () => {},
   // cancelPayment: async () => {},
 };

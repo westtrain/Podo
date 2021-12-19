@@ -1,12 +1,12 @@
 $maincolor: #a5a9f8;
 $fontcolor: #222222;
 
-body {
-  -ms-overflow-style: none;
-}
-::-webkit-scrollbar {
-  display: none;
-}
+// body {
+//   -ms-overflow-style: none;
+// }
+// ::-webkit-scrollbar {
+//   display: none;
+// }
 
 body {
   margin: 0;
@@ -414,7 +414,7 @@ a {
 }
 /* 스크롤바 설정*/
 ::-webkit-scrollbar {
-  width: 100px;
+  width: 5px;
 }
 /* 스크롤바 뒷 배경 설정*/
 ::-webkit-scrollbar-track {
@@ -422,8 +422,8 @@ a {
 }
 /* 스크롤바 막대 설정*/
 ::-webkit-scrollbar-thumb {
-  height: 17%;
-  background-color: rgb(137, 118, 241);
+  height: 15%;
+  background-color: rgb(193, 183, 250);
   /* 스크롤바 둥글게 설정    */
-  border-radius: 10px;
+  border-radius: 50px;
 }

@@ -1,6 +1,6 @@
 const { Payment, Party, OTT, User, Statement } = require("../models");
-const { generateImportToken } = require("./importFunction/account");
-const { createSchedule } = require("./importFunction/subscription");
+const { generateImportToken } = require("../controller/importFunction/account");
+const { createSchedule } = require("../controller/importFunction/subscription");
 const dayjs = require("dayjs");
 const date = dayjs().format("YYYY-MM-DD");
 const sequelize = require("sequelize");

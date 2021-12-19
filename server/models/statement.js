@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      merchant_uid: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       ott: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -41,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      account_holder: {
+        type: DataTypes.STRING,
+        defaultValue: "",
+        allowNull: true,
+      },
       use_podo: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

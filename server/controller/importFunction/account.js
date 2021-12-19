@@ -13,10 +13,6 @@ const generateImportToken = async () => {
         imp_secret: process.env.IMP_SECRET,
       },
     });
-    console.log(
-      "===============Token Info================",
-      result.data.response
-    );
     const token = result.data.response.access_token;
     return result.status === 200 ? token : "error";
   } catch (error) {
@@ -32,12 +28,7 @@ const checkAccountName = async (bank_code, bank_num, token) => {
       `https://api.iamport.kr/vbanks/holder?bank_code=${bank_code}&bank_num=${bank_num}&_token=${token}`
     );
 
-    console.log(
-      "===============Account Name================",
-      name.data.response
-    );
-    const bank_holder = name.data.response;
-    return bank_holder;
+    return name.data.response;
   } catch (error) {
     console.log("checkAccount error");
     return -1;

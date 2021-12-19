@@ -117,6 +117,32 @@ export const bankImage = {
   "092": "/toss.png",
 };
 
+export const ottImage = {
+  netflix: "/netflix.png",
+  watcha: "/watcha.png",
+  wavve: "/wavve.png",
+  tving: "/tving.png",
+  disney: "/disney.png",
+  prime: "/amazon.png",
+  laftel: "/laftel.png",
+  apple: "/apple.png",
+  office: "/office.png",
+  nintendo: "/nintendo.png",
+};
+
+export const ottImageClass = {
+  netflix: "panel__img pos-1",
+  watcha: "panel__img pos-2",
+  wavve: "panel__img pos-3",
+  tving: "panel__img pos-4",
+  disney: "panel__img pos-5",
+  prime: "panel__img pos-6",
+  laftel: "panel__img pos-7",
+  apple: "panel__img pos-8",
+  office: "panel__img pos-9",
+  nintendo: "panel__img pos-10",
+};
+
 export const ottList = {
   netflix: 1,
   watcha: 2,

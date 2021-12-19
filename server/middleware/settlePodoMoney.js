@@ -1,9 +1,9 @@
 const db = require("../models");
 const { User, Party, Payment, Statement, OTT } = require("../models");
-const moment = require("moment");
+const dayjs = require("dayjs");
 
 const settlePodoMoney = async () => {
-  const settlement_date = moment().format("DD");
+  const settlement_date = dayjs().format("DD");
   // 1. 정산되어야 하는 파티 조회
   //settlement_date가 오늘인 유저 아이디 조회 위해 Payment의 settlement_date가 당일인 Payment 조회
   const settledPayment = await Payment.findAll(

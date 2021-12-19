@@ -1,5 +1,5 @@
 const db = require("../models");
-const { Party } = require("../models");
+const { User, Party } = require("../models");
 const dayjs = require("dayjs");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
@@ -9,25 +9,39 @@ module.exports = {
     const user_id = req.userId;
     const usersParties = [];
     try {
+      // 유저가 가입한 파티아이디 배열
       const allUsersPartiesId = await db.sequelize.models.User_party.findAll({
         attributes: ["party_id"],
         where: { user_id },
         raw: true,
       });
-      console.log(allUsersPartiesId);
-      for (let i = 0; i < allUsersPartiesId.length; i++) {
-        const usersParty = await Party.findOne({
-          where: {
-            id: allUsersPartiesId[i].party_id,
-          },
-          raw: true,
-        });
-        console.log(usersParty);
-        usersParties[i] = usersParty;
+      if (allUsersPartiesId.length === 0) {
+        return res.status(404).json({ message: "You did not join any party." });
       }
 
-      if (!usersParties) {
-        return res.status(404).json({ message: "failed" });
+      // 각각의 파티 아이디에 해당하는 파티 정보 및 멤버 이름 가져오기
+      for (let i = 0; i < allUsersPartiesId.length; i++) {
+        const memberNameArr = [];
+        //파티 정보 가져오기
+        const usersParty = await Party.findOne({
+          where: { id: allUsersPartiesId[i].party_id },
+          raw: true,
+        });
+
+        //파티원 네임 가져오기
+        const memberId = usersParty.members.split(",");
+        for (let j = 0; j < memberId.length; j++) {
+          const memberName = await User.findOne({
+            attributes: ["name"],
+            where: { id: memberId[j] },
+          });
+          memberNameArr[j] = memberName.name;
+        }
+
+        //파티 정보 객체에 'memberName: 파티원 네임 배열' 추가
+        usersParty.memberName = memberNameArr;
+
+        usersParties[i] = usersParty;
       }
       return res.status(200).json({ data: usersParties });
     } catch (err) {
@@ -43,7 +57,7 @@ module.exports = {
         raw: true,
       });
       if (!partyInfo) {
-        return res.status(404).json({ message: "failed" });
+        return res.status(404).json({ message: "We cannot find what you asked." });
       }
       return res.status(200).json({ data: partyInfo });
     } catch (err) {
@@ -108,16 +122,8 @@ module.exports = {
     // 0. 쿠키를 통해 받아온 토큰으로 유저 아이디를 만든다.
     const user_id = req.userId;
     // 1. 바디에서 받은 정보를 구조분해할당으로 각 변수에 담는다.
-    const {
-      ott_id,
-      ott_login_id,
-      ott_login_password,
-      members,
-      period,
-      members_num,
-      start_date,
-      end_date,
-    } = req.body;
+    const { ott_id, ott_login_id, ott_login_password, period, members_num, start_date, end_date } =
+      req.body;
     try {
       if (
         ott_id &&
@@ -128,14 +134,14 @@ module.exports = {
         start_date &&
         end_date
       ) {
-        // 같은 ott종류의 이미 create나 join한 파티가 있다면 create 방지. ex) 넷플 파티에 이미 create/join 했는데 또 넷플 파티 만들려고 하는 경우
+        /* Edge Case: 같은 ott종류의 이미 create나 join한 파티가 있다면 create 방지. 
+        ex) 넷플 파티에 이미 create/join 했는데 또 넷플 파티 만들려고 하는 경우 */
 
         // 1차 필터링: Party 테이블에서 create하려는 ott를 공유하고 있는 파티 조회
         const ottParty = await Party.findAll({ where: { ott_id } });
         console.log(ottParty);
         // 2차 필터링: 1개 이상 있다면 map을 사용하여 각 파티에 '현재 create하려는 유저'가 있는지 확인
         if (ottParty.length !== 0) {
-          //alreadyJoined는 실행되지 않은 Promise로 Promise.all을 사용하지 않으면 alreadyJoinedArr는 Promise 배열이 나오게 됨.
           let alreadyJoinedArr = await Promise.all(
             ottParty.map((party) => {
               const alreadyJoined = db.sequelize.models.User_party.findAll({
@@ -144,14 +150,12 @@ module.exports = {
               return alreadyJoined;
             })
           );
-          // map과 Promise.all 사용으로 인해 비어있어도 2차원배열('[[]]')로 나오기 때문에 flat 사용
           alreadyJoinedArr = alreadyJoinedArr.flat();
-          console.log(alreadyJoinedArr);
 
-          //해당 유저가 있다면 422 에러
+          //해당 유저가 있다면 412 에러
           if (alreadyJoinedArr.length !== 0) {
             return res
-              .status(422)
+              .status(412)
               .json({ message: "You have already created or joined the same party" });
           }
         }
@@ -190,18 +194,9 @@ module.exports = {
     const { party_id, ott_login_id, ott_login_password } = req.body;
     try {
       // 2. partyId, userId로 조회해서 OTT 로그인 정보를 업데이트 시켜준다
-      console.log(userId);
       const newOttLoginInfo = await Party.update(
-        {
-          ott_login_id,
-          ott_login_password,
-        },
-        {
-          where: {
-            id: party_id,
-            leader: userId,
-          },
-        }
+        { ott_login_id, ott_login_password },
+        { where: { id: party_id, leader: userId } }
       );
       // console.log(newOttLoginInfo);
       if (!newOttLoginInfo) {
@@ -251,7 +246,7 @@ module.exports = {
       }); //where 빠졌었음. await 넣어야 promise형태가 아닌 배열 형태의 결과값 나옴
       if (isMember.length !== 0) {
         //배열 형태에서 비어있음을 표현하기 위해서는 length 사용해야 함.
-        return res.status(422).json({ message: "You already created or joined this party" });
+        return res.status(412).json({ message: "You have already created or joined this party" });
       }
 
       // Edge Case: 같은 ott종류의 이미 create나 join한 파티가 있다면 create 방지. ex) 넷플 파티에 이미 create/join 했는데 또 넷플 파티 만들려고 하는 경우
@@ -264,7 +259,6 @@ module.exports = {
 
       // 2차 필터링: 1개 이상 있다면 map을 사용하여 각 파티에 '현재 create하려는 유저'가 있는지 확인
       if (ottParty.length !== 0) {
-        //alreadyJoined는 실행되지 않은 Promise로 Promise.all을 사용하지 않으면 alreadyJoinedArr는 Promise 배열이 나오게 됨.
         let alreadyJoinedArr = await Promise.all(
           ottParty.map((party) => {
             const alreadyJoined = db.sequelize.models.User_party.findAll({
@@ -273,13 +267,12 @@ module.exports = {
             return alreadyJoined;
           })
         );
-        // map과 Promise.all 사용으로 인해 비어있어도 2차원배열('[[]]')로 나오기 때문에 flat 사용
         alreadyJoinedArr = alreadyJoinedArr.flat();
         console.log(alreadyJoinedArr);
 
         //해당 유저가 있다면 422 에러
         if (alreadyJoinedArr.length !== 0) {
-          return res.status(422).json({
+          return res.status(412).json({
             message:
               "You have already created or joined the party that shares the same kind of OTT",
           });

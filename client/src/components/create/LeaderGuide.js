@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getOttKoreanNameById } from "../../utils/dateFunction";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle as checkedIcon } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle as uncheckedIcon } from "@fortawesome/free-regular-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function LeaderGuide(props) {
   const navigate = useNavigate();
+  const ottState = useSelector((state) => state.ott);
+  const ottId = useSelector((state) => state.party.ceateParty.ott_id);
   const [checked, setChecked] = useState(false);
   const onclickCkeck = () => {
     setChecked(!checked);
@@ -32,23 +37,26 @@ function LeaderGuide(props) {
           <div className="guideheadername_step1">
             파티장 가이드를
             <br />
-            확인하세요
+            확인 후 체크하세요
           </div>
-          <div className="guideottname">넷플릭스 프리미엄</div>
+          <div className="guideottname">
+            {getOttKoreanNameById(ottId) + " " + ottState[ottId - 1].plan}
+          </div>
         </div>
         <div className="guidemiddle">
           <div className="guidemiddleheader">
             파티장의 로그인 정보는 파티원과 공유됩니다.
           </div>
           <div className="guidemiddlebody">
-            공유 가능한 안전한 비밀번호를 사용해 주세요
+            🔐 공유 가능한 안전한 비밀번호를 사용해 주세요
           </div>
 
           <div className="guidemiddleheader">
             성인 인증이 완료된 계정만 공유할 수 있어요.
           </div>
           <div className="guidemiddlebody">
-            성인 인증이 완료되지 않은 계정을 사용할 경우, 파티원의 서비스 <br />
+            🔞 성인 인증이 완료되지 않은 계정을 사용할 경우, 파티원의 서비스{" "}
+            <br />
             이용에 불편을 끼칠 수 있어요.
           </div>
           <div className="checkguide">
@@ -72,18 +80,18 @@ function LeaderGuide(props) {
           </div>
         </div>
         <div className="guidefooter">
-
           <Link to={"/create"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
-         
 
           <div className="guidefooterbtn" onClick={onClickNext}>
             <div className="nextbtn">다음</div>
           </div>
-
         </div>
       </div>
     </>

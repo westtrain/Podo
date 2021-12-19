@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../redux/API/userAPI";
+import { getAllOtt } from "../../redux/API/ottAPI";
 import { showSelectProfileImageModal } from "../../redux/reducers/modalSlice";
 import SelectProfileImage from "../../components/modal/SelectProfileImage";
 import PartyCard from "./PartyCard";
 import "../../style/MyPage.scss";
+import { IoSettingsOutline } from "react-icons/io5";
+import { AiOutlineSetting } from "react-icons/ai";
+
 import PodoMoney from "../../image/PodoMoney.svg";
 import profile0 from "../../image/profile0.svg";
 import profile1 from "../../image/profile1.svg";
@@ -30,24 +34,28 @@ function MyParty(props) {
   const selectProfileModalState = useSelector(
     (state) => state.modal.selectProfileImageModal
   );
-  const getUserImage = async () => {
-    if (userState.image === 0) setProfileImg(profile0);
-    if (userState.image === 1) setProfileImg(profile1);
-    if (userState.image === 2) setProfileImg(profile2);
-    if (userState.image === 3) setProfileImg(profile3);
-    if (userState.image === 4) setProfileImg(profile4);
-    if (userState.image === 5) setProfileImg(profile5);
-    if (userState.image === 6) setProfileImg(profile6);
-    if (userState.image === 7) setProfileImg(profile7);
-    if (userState.image === 8) setProfileImg(profile8);
-    if (userState.image === 9) setProfileImg(profile9);
-    if (userState.image === 10) setProfileImg(profile10);
-    if (userState.image === 11) setProfileImg(profile11);
+  const profileImgList = [
+    profile0,
+    profile1,
+    profile2,
+    profile3,
+    profile4,
+    profile5,
+    profile6,
+    profile7,
+    profile8,
+    profile9,
+    profile10,
+    profile11,
+  ];
+  const getUserImage = (imgID) => {
+    setProfileImg(profileImgList[imgID]);
   };
 
-  useEffect(async () => {
-    await dispatch(getUser());
-    await getUserImage();
+  useEffect(() => {
+    dispatch(getUser());
+    dispatch(getAllOtt());
+    getUserImage(userState.image);
   }, [profileImg, userState.image, selectProfileModalState]);
 
   return (
@@ -63,6 +71,14 @@ function MyParty(props) {
             dispatch(showSelectProfileImageModal(true));
           }}
         ></img>
+        <div
+          className="settingprofile"
+          onClick={() => {
+            dispatch(showSelectProfileImageModal(true));
+          }}
+        >
+          <IoSettingsOutline style={{ color: "#222222" }} />
+        </div>
         <div className="username">{userState.name}</div>
       </div>
       <div className="mobilemoney">
@@ -77,7 +93,7 @@ function MyParty(props) {
       </div>
       <div className="party">
         {userPartyState.map((party, i) => (
-          <Link to={`/mypage/party/${party.id}`}>
+          <Link key={i} to={`/mypage/party/${party.id}`}>
             <PartyCard key={i} party={party} />
           </Link>
         ))}

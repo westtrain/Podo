@@ -1,8 +1,8 @@
 const { Party } = require("../models");
-const moment = require("moment");
+const dayjs = require("dayjs");
 
 const cancelParty = async () => {
-  const start_date = moment().format("YYYY-MM-DD");
+  const start_date = dayjs().format("YYYY-MM-DD");
 
   // 시작일이 당일인 파티 조회
   let unfulfilledParty = await Party.findAll({

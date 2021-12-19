@@ -23,16 +23,9 @@ function Header(props) {
     (state) => state.modal.selectProfileImageModal
   );
 
-  useEffect(
-    async () => {
-      if (isLogin) {
-        await dispatch(getUser());
-        setProfileImg(profileImage[userState.image]);
-      }
-    },
-    [userState ? userState.image : null],
-    selectProfileModalState
-  );
+  useEffect(() => {
+    if (isLogin) setProfileImg(profileImage[userState.image]);
+  }, [userState ? userState.image : null, selectProfileModalState]);
 
   return (
     <>

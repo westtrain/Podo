@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAccount } from "../../redux/API/paymentAPI";
 import { showAccountModal } from "../../redux/reducers/modalSlice";
-import { onlyNumber, bankList } from "../../utils/dateFunction";
+import { onlyNumber, bankList, bankImage } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import Swal from "sweetalert2";
-import exit from "../../image/exit.png";
-import right from "../../image/right.png";
+import { BsXLg } from "react-icons/bs";
+import woori from "../../image/woori.svg";
 
 function SetAccountModal(props) {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ function SetAccountModal(props) {
   const [accountNum, setAccountNum] = useState("");
   const [warning, setWarning] = useState("");
   const paymentState = useSelector((state) => state.payment);
+  const errorState = useSelector((state) => state.error);
 
   const onChangeAccountNum = (e) => {
     setAccountNum(onlyNumber(e.target.value));
@@ -36,22 +37,32 @@ function SetAccountModal(props) {
           state: paymentInfo,
         })
       );
+      if (errorState) {
+        Swal.fire(
+          "Input!",
+          "유효한 계좌정보가 아닙니다. 다시 입력해주세요!",
+          "error"
+        );
+      }
+      Swal.fire("Success!", "계좌 정보가 등록되었습니다.", "success");
     }
   };
 
   const bankElements = () => {
     const result = [];
-    Object.keys(bankList).map((bankCode) => {
+    Object.keys(bankList, bankImage).map((bankCode, i) => {
       result.push(
         <div
-          className="bank"
           onClick={() => {
             setShowDropdown(!showDropdown);
             setSelectBank(bankList[bankCode]);
             setBankCode(bankCode);
           }}
         >
-          {bankList[bankCode]}
+          <img src={bankImage[bankCode]} alt="bank"></img>
+          <div key={i} className="bank">
+            {bankList[bankCode]}
+          </div>
         </div>
       );
     });
@@ -65,10 +76,7 @@ function SetAccountModal(props) {
           <div className="accountmodalview">
             <div className="exit">
               <div>
-                <img
-                  src={exit}
-                  onClick={() => dispatch(showAccountModal(false))}
-                ></img>
+                <BsXLg onClick={() => dispatch(showAccountModal(false))} />
               </div>
             </div>
             <div className="samheader">
@@ -89,7 +97,7 @@ function SetAccountModal(props) {
                 {selectBank}
               </div>
               {showDropdown ? (
-                <div className="selectbank">{bankElements()}</div>
+                <div className="choosebank">{bankElements()}</div>
               ) : null}
             </div>
             <div className="samms">

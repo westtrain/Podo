@@ -4,7 +4,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { getUser, updateProfileImage } from "../../redux/API/userAPI";
 import { showSelectProfileImageModal } from "../../redux/reducers/modalSlice";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 import profile0 from "../../image/profile0.svg";
 import profile1 from "../../image/profile1.svg";
 import profile2 from "../../image/profile2.svg";
@@ -40,7 +40,7 @@ function SelectProfileImage() {
                 <div
                   onClick={() => dispatch(showSelectProfileImageModal(false))}
                 >
-                  <img src={exit}></img>
+                  <BsXLg />
                 </div>
               </div>
               <div className="spimheader">

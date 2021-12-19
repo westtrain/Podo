@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "id",
         onDelete: "cascade",
       });
-      models.User.hasMany(models.Payment, {
+      models.User.hasOne(models.Payment, {
         foreignKey: "user_id",
         sourceKey: "id",
         onDelete: "cascade",

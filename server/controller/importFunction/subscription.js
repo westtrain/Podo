@@ -54,21 +54,22 @@ const createSchedule = async (data = {}, token) => {
   checking_amount: 카드정상결제여부 체크용 금액. 결제 직후 자동으로 취소됩니다. (0원으로 설정할 경우 테스트하지 않음)
   schedules: 결제예약 스케쥴
   */
-  const requiredParams = ["customer_uid", "checking_amount", "schedules"];
+  const requiredParams = ["user_id", "customer_uid", "checking_amount", "schedules"];
   /* 
   merchant_uid : 가맹점 주문번호(동일한 주문번호로 중복결제 불가)
   schedule_at : 결제요청 예약시각 UNIX timestamp
   currency : 외환부호 e.g.) KRW, USD, ...
   amount : 결제금액
   */
-  const requiredParamsSchedules = ["merchant_uid", "schedule_at", "currency", "amount"];
+  const requiredParamsSchedules = ["merchant_uid", "schedule_at", "currency", "amount", "name"];
 
   // 각 파라미터가 잘 전달됬는지 확인 후 필수 항목이 빠졌으면 -1을 반환
   if (!requiredParams.every((param) => data.hasOwnProperty(param))) {
     console.log("insufficient parameters supplied");
+    console.log(data);
     return -1;
   }
-  if (!requiredParamsSchedules.every((param) => data.schedules.hasOwnProperty(param))) {
+  if (!requiredParamsSchedules.every((param) => data.schedules[0].hasOwnProperty(param))) {
     console.log("insufficient parameters supplied of schedules");
     return -1;
   }

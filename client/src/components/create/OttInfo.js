@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setOttLoginId, setOttLoginPw } from "../../redux/reducers/partySlice";
+import { emailValidation } from "../../utils/validation";
+import { getOttKoreanNameById } from "../../utils/dateFunction";
 import Swal from "sweetalert2";
+import { FcLock } from "react-icons/fc";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function OttInfo(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isValidateEmail, setIsValidateEmail] = useState(false);
   const [isAccord, setIsAccord] = useState(false);
+  const ottId = useSelector((state) => state.party.ceateParty.ott_id);
   const ottLoginIdState = useSelector(
     (state) => state.party.ceateParty.ott_login_id
   );
@@ -24,6 +30,11 @@ function OttInfo(props) {
           e.target.value = "";
           e.target.placeholder = "아이디는 영문만 입력 가능합니다.";
         }
+        if (ottId !== 4) {
+          //티빙은 이메일 형식이 아니라 제외
+          if (emailValidation(value)) setIsValidateEmail(true);
+          else setIsValidateEmail(false);
+        } else setIsValidateEmail(true); //티빙
         dispatch(setOttLoginId(value));
         break;
       case "pw":
@@ -37,7 +48,9 @@ function OttInfo(props) {
   };
   const onClickNext = () => {
     if (ottLoginIdState === "") {
-      Swal.fire("Confirm ID!", "아이디를 입력해주세요.", "error");
+      Swal.fire("Confirm ID!", "계정을 입력해주세요.", "error");
+    } else if (!isValidateEmail) {
+      Swal.fire("Confirm ID!", "이메일 형식으로 입력해주세요.", "error");
     } else if (ottLoginPwState === "") {
       Swal.fire("Confirm Password!", "비밀번호를 입력해주세요.", "error");
     } else if (!isAccord) {
@@ -51,15 +64,24 @@ function OttInfo(props) {
   }, []);
   return (
     <>
-      <div className="partyguide">
+      <div className="step2partyguide">
         <div className="stepline">
           <div className="step2"></div>
         </div>
         <div className="guideheader">
           <div className="guideheadername">
-            넷플릭스 프리미엄의
+            {getOttKoreanNameById(ottId)}의
             <br />
             로그인 정보를 입력해 주세요.
+          </div>
+        </div>
+        <div className="guidehm">
+          <div>파티장의 로그인 정보는 파티원과 공유됩니다.</div>
+          <div>
+            <div>
+              <FcLock size="18px" />
+            </div>
+            공유 가능한 안전한 비밀번호를 사용해 주세요.
           </div>
         </div>
         <div className="guidemiddle">
@@ -98,7 +120,10 @@ function OttInfo(props) {
         <div className="guidefooter">
           <Link to={"/create/1"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
 

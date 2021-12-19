@@ -52,9 +52,19 @@ export const onlyNumber = (value) => {
   return value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
 };
 
-export const refinePrice = (price) => {
-  let refinedPrice = Math.floor(price);
+export const refinePrice = (price, members_num) => {
+  let refinedPrice = price / members_num;
+  refinedPrice = Math.floor(refinedPrice);
   refinedPrice = Math.ceil(refinedPrice / 10) * 10;
+  refinedPrice = refinedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return refinedPrice;
+};
+
+export const getSavePrice = (price, members_num) => {
+  let refinedPrice = price / members_num;
+  refinedPrice = Math.floor(refinedPrice);
+  refinedPrice = Math.ceil(refinedPrice / 10) * 10;
+  refinedPrice *= members_num - 1;
   refinedPrice = refinedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return refinedPrice;
 };
@@ -83,6 +93,30 @@ export const bankList = {
   "092": "토스뱅크은행",
 };
 
+export const bankImage = {
+  "020": "/woori.svg",
+  "088": "/shinhan.svg",
+  "003": "/ibk.svg",
+  "081": "/hana.svg",
+  "004": "/kb.svg",
+  "007": "/citi.svg",
+  "045": "/ic.svg",
+  "011": "/nh.svg",
+  "007": "/sh.svg",
+  "090": "/kakaobank.png",
+  "032": "/busan.svg",
+  "039": "/gyeongnam.svg",
+  "023": "/sc.png",
+  "002": "/kdb.png",
+  "071": "/post.png",
+  "048": "/shin.svg",
+  "037": "/jb.png",
+  "034": "/gj.png",
+  "089": "/kbank.png",
+  "031": "/dgb.png",
+  "092": "/toss.png",
+};
+
 export const ottList = {
   netflix: 1,
   watcha: 2,
@@ -96,6 +130,31 @@ export const ottList = {
   nintendo: 10,
 };
 
+export const ottKoreanList = {
+  넷플릭스: 1,
+  왓챠: 2,
+  웨이브: 3,
+  티빙: 4,
+  "디즈니 플러스": 5,
+  "프라임 비디오": 6,
+  라프텔: 7,
+  "애플 TV": 8,
+  "오피스 365": 9,
+  닌텐도: 10,
+};
+
 export const getOttNameById = (ottId) => {
   return Object.keys(ottList).find((ottName) => ottList[ottName] === ottId);
+};
+
+export const getOttKoreanNameById = (ottId) => {
+  return Object.keys(ottKoreanList).find(
+    (ottName) => ottKoreanList[ottName] === ottId
+  );
+};
+
+export const passwordToStar = (pw) => {
+  let result = "";
+  for (let i = 0; i < pw.length; i++) result += "*";
+  return result;
 };

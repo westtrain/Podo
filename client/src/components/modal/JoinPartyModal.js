@@ -1,21 +1,32 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { dateToStringPoint, getMonthString } from "../../utils/dateFunction";
+import {
+  dateToStringPoint,
+  getMonthString,
+  refinePrice,
+  getOttKoreanNameById,
+} from "../../utils/dateFunction";
 
 import {
   showJoinPartyModal,
   showConfirmPaymentModal,
   showLoginModal,
 } from "../../redux/reducers/modalSlice";
+import { setLoginCallbackURI } from "../../redux/reducers/loginURISlice";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 
 function JoinPartyModal(props) {
   const dispatch = useDispatch();
   const party = props.party;
-  const ottName = useSelector((state) => state.ott)[party.ott_id - 1].name;
+  const ottState = useSelector((state) => state.ott);
+  const ottName = getOttKoreanNameById(party.ott_id);
   const userState = useSelector((state) => state.user);
+  const priceOfParty = refinePrice(
+    ottState[party.ott_id - 1].price,
+    party.members_num
+  );
 
   return (
     <>
@@ -27,7 +38,7 @@ function JoinPartyModal(props) {
             <div className="modalview">
               <div className="exit">
                 <div onClick={() => dispatch(showJoinPartyModal(false))}>
-                  <img src={exit}></img>
+                  <BsXLg />
                 </div>
               </div>
               <div className="cpmheader">
@@ -39,7 +50,8 @@ function JoinPartyModal(props) {
                     </div>
                   </div>
                   <div className="cpmhsecond">
-                    {ottName} 서비스를 이용해 보세요.
+                    {party.members_num}명과 함께 {ottName} 서비스를 이용해
+                    보세요.
                   </div>
                 </div>
               </div>
@@ -60,7 +72,7 @@ function JoinPartyModal(props) {
                   <div className="cpmpayfhf">파티 요금 결제</div>
                   <div className="cpmpayfhs">(월, VAT포함)</div>
                 </div>
-                <div className="cpmpayff">{props.priceOfParty}원</div>
+                <div className="cpmpayff">{priceOfParty}원</div>
               </div>
 
               <button
@@ -68,10 +80,13 @@ function JoinPartyModal(props) {
                 onClick={() => {
                   if (userState === null) {
                     // isLogin === false
+                    dispatch(setLoginCallbackURI("/search"));
                     dispatch(showLoginModal(true));
+                    dispatch(showJoinPartyModal(false));
+                  } else {
+                    dispatch(showJoinPartyModal(false));
+                    dispatch(showConfirmPaymentModal(true));
                   }
-                  dispatch(showJoinPartyModal(false));
-                  dispatch(showConfirmPaymentModal(true));
                 }}
               >
                 <div className="partysignbtnw">파티 가입하기</div>

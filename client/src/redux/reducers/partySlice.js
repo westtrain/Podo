@@ -7,7 +7,14 @@ import {
   getUsersParty,
 } from "../API/partyAPI";
 const initialState = {
-  parties: [],
+  // 파티 찾기의 파티 검색을 위한 객체
+  parties: {
+    ott_id: 1,
+    period: 0,
+    members_num: 0,
+    filteredParty: [], // 시작 날짜와 셀렉트 박스로 개월, 기간까지 필터링된 검색 결과를 위한 파티 배열
+  },
+  // 파티 만들기를 위한 객제
   ceateParty: {
     ott_id: 0,
     ott_login_id: "",
@@ -17,6 +24,7 @@ const initialState = {
     end_date: "",
     period: 0,
   },
+  // 마이페이지의 유저가 사용 중인 파티를 위한 배열
   usersParty: [],
 };
 
@@ -53,7 +61,19 @@ const partySlice = createSlice({
       return state;
     },
     setFilteredParties: (state, action) => {
-      state.parties = action.payload;
+      state.parties.filteredParty = action.payload;
+      return state;
+    },
+    setPeriodForFilter: (state, action) => {
+      state.parties.period = action.payload;
+      return state;
+    },
+    setMembersNumForFilter: (state, action) => {
+      state.parties.members_num = action.payload;
+      return state;
+    },
+    logOutParty: (state) => {
+      state = initialState;
       return state;
     },
   },
@@ -61,18 +81,19 @@ const partySlice = createSlice({
     builder.addCase(createParty.fulfilled, (action) => {
       console.log("파티 생성 성공");
     });
+    builder.addCase(createParty.pending, () => {});
     builder.addCase(createParty.rejected, (action) => {
       console.log(action.payload);
     });
     builder.addCase(getAllParties.fulfilled, (state, action) => {
-      state.parties = action.payload;
+      state.parties.filteredParty = action.payload;
       return state;
     });
     builder.addCase(getAllParties.rejected, (action) => {
       console.log(action.payload);
     });
     builder.addCase(getFilteredParties.fulfilled, (state, action) => {
-      state.parties = action.payload;
+      state.parties.filteredParty = action.payload;
       return state;
     });
     builder.addCase(getFilteredParties.rejected, (action) => {
@@ -103,5 +124,8 @@ export const {
   setEndDate,
   setPeriod,
   setFilteredParties,
+  setPeriodForFilter,
+  setMembersNumForFilter,
+  logOutParty,
 } = partySlice.actions;
 export default partySlice.reducer;

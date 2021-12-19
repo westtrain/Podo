@@ -1,16 +1,17 @@
-const { Payment, Party } = require("../models");
+const { Payment } = require("../models");
 const { generateImportToken, checkAccountName } = require("./importFunction/account");
 const { createSubscription } = require("./importFunction/subscription");
 
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {
     const user_id = req.userId;
+
     try {
       const paymentInfo = await Payment.findAll({
         where: { user_id },
         raw: true,
       });
-      console.log(paymentInfo);
+
       if (paymentInfo) {
         return res.status(200).json({ data: paymentInfo });
       }
@@ -32,9 +33,9 @@ module.exports = {
       account_bank,
       account_number,
     } = req.body;
-
+    console.log(req.body);
     const data = {
-      customer_uid: `customer_` + Date.now() + `${user_id}`,
+      customer_uid: `customer_` + dayjs().valueOf() + `${user_id}`,
       card_number: credit_num,
       expiry: `20${credit_expire_year}-${credit_expire_month}`,
       birth: credit_birth,
@@ -56,7 +57,7 @@ module.exports = {
             where: { user_id },
             raw: true,
           }).then((paymentInfo) => {
-            console.log(paymentInfo);
+            // console.log(paymentInfo);
 
             //등록한 적이 없다면 create
             if (!paymentInfo) {
@@ -71,7 +72,7 @@ module.exports = {
               });
             } else {
               //등록한 적이 있다면 update
-              console.log("update card info");
+              // console.log("update card info");
               Payment.update(
                 {
                   credit_num: result.data.response.card_number,

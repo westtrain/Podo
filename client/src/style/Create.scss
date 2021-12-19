@@ -4,6 +4,13 @@ $mypagecolor: #eeefff;
 $nextbtncolor: #4040cc;
 $bordercolor: #e0e0e0;
 
+body {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 input {
   all: none;
 }
@@ -711,6 +718,8 @@ input {
           align-items: center;
           color: #c6c6c6;
           .backicon {
+            display: flex;
+            align-items: center;
             font-size: 20px;
             margin-right: 10px;
             color: #c6c6c6;
@@ -736,7 +745,7 @@ input {
       }
     }
 
-    .partyguide {
+    .step2partyguide {
       width: 626px;
       height: 800px;
       background-color: #fff;
@@ -753,29 +762,8 @@ input {
         display: flex;
         justify-content: flex-start;
 
-        .step1 {
-          width: 16.66%;
-          height: 100%;
-          background-color: #4a58cf;
-        }
         .step2 {
           width: 33.32%;
-          height: 100%;
-          background-color: #4a58cf;
-        }
-        .step3 {
-          width: 49.98%;
-          height: 100%;
-          background-color: #4a58cf;
-        }
-
-        .step5 {
-          width: 83.3%;
-          height: 100%;
-          background-color: #4a58cf;
-        }
-        .step6 {
-          width: 100%;
           height: 100%;
           background-color: #4a58cf;
         }
@@ -783,7 +771,7 @@ input {
 
       .guideheader {
         width: 75%;
-        height: 122px;
+        height: 80px;
         margin-top: 2em;
         display: flex;
         flex-direction: column;
@@ -795,27 +783,17 @@ input {
           font-weight: bold;
           align-items: center;
           color: $fontcolor;
-          margin-bottom: 50px;
+          margin-bottom: 10px;
         }
-        .guideheadername_step1 {
-          font-size: 31px;
-          line-height: 36px;
-          font-weight: bold;
-          align-items: center;
-          color: $fontcolor;
-        }
+      }
 
-        .guideottname {
-          margin-top: 10px;
-          padding-left: 10px;
-          font-size: 12px;
-          background-color: $fontcolor;
-          color: #fff;
+      .guidehm {
+        width: 75%;
+        div {
+          display: flex;
           align-items: center;
-          border-radius: 5px;
-          height: 20px;
-          width: 100px;
-          margin-bottom: 6px;
+          font-size: 15px;
+          color: #5e5b5b;
         }
       }
 
@@ -828,7 +806,7 @@ input {
         justify-content: flex-start;
 
         .guidemiddleheader {
-          font-size: 14px;
+          font-size: 16px;
           font-weight: bold;
           line-height: 16px;
           display: flex;
@@ -844,7 +822,7 @@ input {
           background-color: #f6f6f6;
           border-radius: 15px;
           padding-left: 20px;
-          font-size: 12px;
+          font-size: 14px;
           display: flex;
           align-items: center;
           color: $fontcolor;
@@ -1014,6 +992,317 @@ input {
           align-items: center;
           color: #c6c6c6;
           .backicon {
+            align-items: center;
+            font-size: 20px;
+            margin-right: 10px;
+            color: #c6c6c6;
+          }
+        }
+
+        .guidefooterbtn {
+          width: 160px;
+          height: 56px;
+          background-color: $nextbtncolor;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          .nextbtn {
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .partyguide {
+      width: 626px;
+      height: 800px;
+      background-color: #fff;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .stepline {
+        width: 75%;
+        height: 3px;
+        margin: 20px;
+        display: flex;
+        justify-content: flex-start;
+
+        .step1 {
+          width: 16.66%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+        .step2 {
+          width: 33.32%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+        .step3 {
+          width: 49.98%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+
+        .step5 {
+          width: 83.3%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+        .step6 {
+          width: 100%;
+          height: 100%;
+          background-color: #4a58cf;
+        }
+      }
+
+      .guideheader {
+        width: 75%;
+        height: 122px;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .guideheadername {
+          font-size: 31px;
+          line-height: 36px;
+          font-weight: bold;
+          align-items: center;
+          color: $fontcolor;
+          margin-bottom: 50px;
+        }
+        .guideheadername_step1 {
+          font-size: 31px;
+          line-height: 36px;
+          font-weight: bold;
+          align-items: center;
+          color: $fontcolor;
+        }
+
+        .guideottname {
+          margin-top: 10px;
+          padding: 0 10px 0 10px;
+          font-size: 12px;
+          background-color: $fontcolor;
+          color: #fff;
+          align-items: center;
+          border-radius: 5px;
+          height: 20px;
+          width: fit-content;
+          margin-bottom: 6px;
+          line-height: 22px;
+        }
+      }
+
+      .guidemiddle {
+        width: 75%;
+        height: 400px;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .guidemiddleheader {
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 16px;
+          display: flex;
+          align-items: center;
+          color: $fontcolor;
+          margin-bottom: 20px;
+        }
+
+        .guidemiddlebody {
+          margin-bottom: 50px;
+          width: 100%;
+          height: 53px;
+          background-color: #f6f6f6;
+          border-radius: 15px;
+          padding-left: 20px;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          color: $fontcolor;
+        }
+
+        .checkguide {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          margin-top: 30px;
+
+          span {
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 14px;
+          }
+        }
+        .guideinput {
+          width: 100%;
+          height: 60px;
+          border: 3px solid $bordercolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 34px;
+          padding-left: 20px;
+          font-size: 16px;
+        }
+        .guideinput:focus {
+          width: 100%;
+          height: 60px;
+          border: 3px solid $nextbtncolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 34px;
+          padding-left: 20px;
+          outline: none;
+        }
+        .guideinputred {
+          width: 100%;
+          height: 60px;
+          border: 3px solid $bordercolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 34px;
+          padding-left: 20px;
+          font-size: 16px;
+        }
+        .guideinputred:focus {
+          width: 100%;
+          height: 60px;
+          border: 3px solid #ff7474;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 34px;
+          padding-left: 20px;
+          outline: none;
+        }
+        .memberbox {
+          width: 100%;
+          height: 85px;
+          border: 3px solid $bordercolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 40px;
+          font-size: 16px;
+          padding: 0px 26px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .membermiddle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 19px;
+            .payinfo {
+              height: 24px;
+              padding: 0px 15px;
+              background: #f0f0ff;
+              border-radius: 20px;
+              font-family: Roboto;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #7e7fdf;
+            }
+          }
+          .updown {
+            cursor: pointer;
+          }
+        }
+        .infomember {
+          margin-bottom: 150px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 18px;
+          color: #aaaaaa;
+        }
+        .infoperiod {
+          font-size: 15px;
+          margin-top: 2px;
+          color: #aaaaaa;
+        }
+        select {
+          all: none;
+        }
+
+        .rulebox {
+          width: 100%;
+          height: 75px;
+          border: 3px solid $bordercolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 14px;
+          padding-left: 2px;
+          padding-right: 0px;
+          font-size: 16px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          .check {
+            margin: 0 15px 0 15px;
+          }
+          .paymentleft {
+            padding-left: 20px;
+          }
+        }
+        .paymentbox {
+          width: 100%;
+          height: 75px;
+          border: 3px solid $bordercolor;
+          box-sizing: border-box;
+          border-radius: 10px;
+          margin-bottom: 14px;
+          padding-left: 20px;
+          padding-right: 20px;
+          font-size: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .paymentright {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            color: #c6c6c6;
+            cursor: pointer;
+            .arrow {
+              margin-left: 10px;
+              font-weight: bold;
+              font-size: 21px;
+            }
+          }
+        }
+      }
+
+      .guidefooter {
+        width: 75%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .backbtn {
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #c6c6c6;
+          .backicon {
+            align-items: center;
             font-size: 20px;
             margin-right: 10px;
             color: #c6c6c6;
@@ -1523,6 +1812,37 @@ input {
             padding-left: 10px;
             margin-bottom: 25px;
             font-size: 10px;
+          }
+
+          .checkguide {
+            margin-top: 0;
+          }
+        }
+      }
+
+      .step2partyguide {
+        width: 370px;
+        height: fit-content;
+        padding: 10px 0 10px 0;
+
+        .guideheader {
+          height: 80px;
+
+          .guideheadername {
+            font-size: 22px;
+            margin-bottom: 5px;
+          }
+        }
+
+        .guidehm {
+          div {
+            font-size: 12px;
+          }
+        }
+        .guidemiddle {
+          height: 300px;
+          .guideinput {
+            margin-bottom: 20px;
           }
 
           .checkguide {

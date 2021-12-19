@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   showConfirmPaymentModal,
@@ -7,15 +8,15 @@ import {
 } from "../../redux/reducers/modalSlice";
 import SetCardModal from "./SetCardModal";
 import SetSettlementModal from "./SetSettlementModal";
-import { getUsersPaymentInfo } from "../../redux/API/paymentAPI";
 import { joinParty } from "../../redux/API/partyAPI";
 import Swal from "sweetalert2";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
-import right from "../../image/right.png";
+import { BsXLg } from "react-icons/bs";
+import { AiOutlineRight } from "react-icons/ai";
 
 function ConfirmPaymentModal(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userState = useSelector((state) => state.user);
   const paymentState = useSelector((state) => state.payment);
   const errorState = useSelector((state) => state.error);
@@ -38,17 +39,28 @@ function ConfirmPaymentModal(props) {
           partyId: party.id,
         })
       );
-      if (errorState === null) {
+      if (errorState) {
+        if (errorState.status === 412) {
+          Swal.fire(
+            "Unsuccess!",
+            "이미 사용 중인 OTT의 파티는 가입이 불가해요.",
+            "error"
+          );
+        } else {
+          Swal.fire(
+            "Unsuccess!",
+            "파티 가입을 실패했습니다. 다시 시도해주세요.🥺",
+            "error"
+          );
+        }
+      } else {
         Swal.fire("Success!", "파티 가입이 완료되었어요!", "success");
+        dispatch(showConfirmPaymentModal(false));
+        navigate("/mypage");
       }
     }
   };
-  useEffect(() => {
-    dispatch(getUsersPaymentInfo());
-    if (errorState) {
-      Swal.fire("Unsuccess!", "파티 가입을 실패했습니다. ", "error");
-    }
-  }, [errorState]);
+  useEffect(() => {}, [errorState]);
 
   return (
     <>
@@ -57,7 +69,7 @@ function ConfirmPaymentModal(props) {
           <div className="modalview">
             <div className="exit">
               <div onClick={() => dispatch(showConfirmPaymentModal(false))}>
-                <img src={exit}></img>
+                <BsXLg />
               </div>
             </div>
             <div className="jpmheader">
@@ -83,7 +95,10 @@ function ConfirmPaymentModal(props) {
                 onClick={() => dispatch(showCardModal(true))}
               >
                 {paymentState.card_name ? "변경하기" : "등록하기"}
-                <img src={right} className="righticon"></img>
+
+                <div className="righticon">
+                  <AiOutlineRight />
+                </div>
               </div>
             </div>
             <div className="jpmms">
@@ -97,7 +112,9 @@ function ConfirmPaymentModal(props) {
                 onClick={() => dispatch(showSettlementModal(true))}
               >
                 {paymentState.settlement_date ? "변경하기" : "등록하기"}
-                <img src={right}></img>
+                <div className="righticon">
+                  <AiOutlineRight />
+                </div>
               </div>
             </div>
 

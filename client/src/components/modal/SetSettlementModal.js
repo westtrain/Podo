@@ -7,7 +7,8 @@ import { onlyNumber } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import Swal from "sweetalert2";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
+
 function SetSettlementModal(props) {
   const dispatch = useDispatch();
   const paymentState = useSelector((state) => state.payment);
@@ -32,13 +33,10 @@ function SetSettlementModal(props) {
           <OutsideClickHandler
             onOutsideClick={() => dispatch(showSettlementModal(false))}
           >
-            <div className="setcardmodalview">
+            <div className="setsettlementmodalview">
               <div className="exit">
                 <div>
-                  <img
-                    src={exit}
-                    onClick={() => dispatch(showSettlementModal(false))}
-                  ></img>
+                  <BsXLg onClick={() => dispatch(showSettlementModal(false))} />
                 </div>
               </div>
               <div className="scmheader">포도머니 정산일을 설정해 주세요.</div>
@@ -48,17 +46,15 @@ function SetSettlementModal(props) {
                 <br></br>파티가 시작된 이후, 정산일 변경이 불가능하니 신중히
                 설정해주세요.
               </div>
-
+              <div className="ssmmfmonth">매월</div>
               <div className="ssmmf">
-                <div>매월</div>
                 <input
                   placeholder="1 ~ 28일 중 입력하세요"
                   onChange={onChangeInput}
                   maxLength="2"
                 />
-                <div>일</div>
               </div>
-
+              <div className="ssmmfday">일</div>
               <div className="clearbtnwrap">
                 <button className="clearbtn" onClick={() => onClickSubmit()}>
                   <div className="clearbtnw">완료</div>

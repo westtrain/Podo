@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../redux/API/userAPI";
 import { showWithdrawModal } from "../redux/reducers/modalSlice";
 import WithdrawModal from "../components/modal/WithdrawModal";
+import SetAccountModal from "../components/modal/SetAccountModal";
 import Header from "../components/public/Header";
 import MyParty from "../components/mypage/MyParty";
 import MyPartyDetail from "../components/mypage/MyPartyDetail";
@@ -11,13 +12,16 @@ import MyLogin from "../components/mypage/MyLogin";
 import MyPayment from "../components/mypage/MyPayment";
 import MyAccount from "../components/mypage/MyAccount";
 import MySettlement from "../components/mypage/MySettlement";
-import MyStateMent from "../components/mypage/MyStateMent";
+import MyStatement from "../components/mypage/MyStatement";
 import "../style/MyPage.scss";
 import PodoMoney from "../image/PodoMoney.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineDown } from "react-icons/ai";
 
 function MyPage(props) {
   const dispatch = useDispatch();
   const withdrawModalstate = useSelector((state) => state.modal.withdrawModal);
+  const accountModalState = useSelector((state) => state.modal.accountModal);
   const userState = useSelector((state) => state.user);
   const { menu, id } = useParams(); // URL params로 받은 메뉴 이름 예) podo/mypage/mylogin -> menu는 mylogin이 된다!
   const [showMenu, setShowMenu] = useState(false);
@@ -33,13 +37,21 @@ function MyPage(props) {
         <div className="body">
           <div className="main">
             <div className="mobilemenu">
+              <div className="menuicon">
+                <GiHamburgerMenu size="20px" />
+              </div>
               <div
                 className="mobilemypage"
                 onClick={() => {
                   setShowMenu(!showMenu);
                 }}
               >
-                마이페이지
+                <div className="mypagehicon">
+                  마이페이지
+                  <div className="downicon">
+                    <AiOutlineDown />
+                  </div>
+                </div>
               </div>
             </div>
             {showMenu ? (
@@ -143,7 +155,7 @@ function MyPage(props) {
               {menu === "payment" ? <MyPayment /> : null}
               {menu === "account" ? <MyAccount /> : null}
               {menu === "settlement" ? <MySettlement /> : null}
-              {menu === "statement" ? <MyStateMent /> : null}
+              {menu === "statement" ? <MyStatement /> : null}
             </div>
             <div className="right">
               <div className="up">
@@ -161,6 +173,7 @@ function MyPage(props) {
                   인출하기
                 </div>
                 {withdrawModalstate ? <WithdrawModal /> : null}
+                {accountModalState ? <SetAccountModal /> : null}
               </div>
               <div className="down">Podo 정산일 미리보기</div>
             </div>

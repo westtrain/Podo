@@ -1,19 +1,10 @@
 const { Payment, Party, OTT, User, Statement } = require("../models");
-const { generateImportToken } = require("./importFunction/account");
-const { createSchedule } = require("./importFunction/subscription");
+const { generateImportToken } = require("../controller/importFunction/account");
+const { createSchedule } = require("../controller/importFunction/subscription");
 const dayjs = require("dayjs");
 const date = dayjs().format("YYYY-MM-DD");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
-
-// const {
-//   fundingStart,
-//   fundingSuccess,
-//   fundingCanceled,
-//   fundingSuccessToSponsor,
-//   fundingCanceledToSponsor
-// } = require('../email/email-content');
-// const emailSend = require('../email/email-send');
 
 module.exports = {
   requestPaymentByStartDate: async () => {

@@ -5,6 +5,7 @@ import { setMembersNum } from "../../redux/reducers/partySlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function NumOfMembers(props) {
   const dispatch = useDispatch();
@@ -48,13 +49,17 @@ function NumOfMembers(props) {
             </div>
           </div>
           <div className="infomember">
-            - 파티 운영을 위해서는 최소 1명 이상의 파티원이 필요해요.
+            <div>- 파티 운영을 위해서는 최소 1명 이상의 파티원이 필요해요.</div>
+            <div>- 파티장 본인을 제외한 파티원 인원을 선택해주세요!</div>
           </div>
         </div>
         <div className="guidefooter">
           <Link to={"/create/2"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
           <Link to={"/create/4"}>

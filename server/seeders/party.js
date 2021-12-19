@@ -1,49 +1,30 @@
 "use strict";
+const XLSX = require("xlsx");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert(
-      "Parties",
-      [
-        {
-          ott_id: 1,
-          ott_login_id: "abc@gmail.com",
-          ott_login_password: "google",
-          members: "1,2,3",
-          members_num: 3,
-          leader: 1,
-          start_date: "2021-12-17",
-          end_date: "2022-01-09",
-          createdAt: "2021-12-17",
-          updatedAt: "2021-01-09",
-        },
-        {
-          ott_id: 2,
-          ott_login_id: "muyaho@naver.com",
-          ott_login_password: "naver",
-          members: "2,1",
-          members_num: 4,
-          leader: 2,
-          start_date: "2021-12-17",
-          end_date: "2022-01-09",
-          createdAt: "2021-12-17",
-          updatedAt: "2021-01-09",
-        },
-        {
-          ott_id: 3,
-          ott_login_id: "muyaho@naver.com",
-          ott_login_password: "naver",
-          members: "2",
-          members_num: 4,
-          leader: 2,
-          start_date: "2021-12-17",
-          end_date: "2022-01-09",
-          createdAt: "2021-12-17",
-          updatedAt: "2021-01-09",
-        },
-      ],
-      {}
-    );
+    const workbook = XLSX.readFile(__dirname + "/../public/podo.xlsx");
+    const worksheet = workbook.Sheets["Parties"];
+
+    const data = [];
+    // 행의갯수만큼 반복 , 열의갯수만큼 알파벳추가
+    for (let i = 1; i <= 321; i++) {
+      const obj = {
+        ott_id: `${worksheet["A" + i].w}`,
+        ott_login_id: `${worksheet["B" + i].w}`,
+        ott_login_password: `${worksheet["C" + i].w}`,
+        members: `${worksheet["D" + i].w}`,
+        members_num: `${worksheet["E" + i].w}`,
+        leader: `${worksheet["F" + i].w}`,
+        period: `${worksheet["G" + i].w}`,
+        start_date: `${worksheet["H" + i].w}`,
+        end_date: `${worksheet["I" + i].w}`,
+        createdAt: new Date().toISOString().replace(/T/, " ").replace(/\..+/, ""),
+        updatedAt: new Date().toISOString().replace(/T/, " ").replace(/\..+/, ""),
+      };
+      data.push(obj);
+    }
+    return queryInterface.bulkInsert("Parties", data, {});
   },
 
   down: async (queryInterface, Sequelize) => {

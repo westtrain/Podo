@@ -18,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/:menu" element={<MyPage />} />
+          <Route path="/mypage/:menu/:id" element={<MyPage />} />
           <Route path="/create" element={<Create />} />
           <Route path="/create/:step" element={<Create />} />
           <Route path="/search" element={<Search />} />

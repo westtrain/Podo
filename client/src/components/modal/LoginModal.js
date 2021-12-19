@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { showLoginModal } from "../../redux/reducers/modalSlice";
 import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
+import { BsXLg } from "react-icons/bs";
 import google from "../../image/google.png";
 import naver from "../../image/naver.png";
 import kakao from "../../image/kakao.png";
+import guest from "../../image/guest.svg";
 
 function LoginModal(props) {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function LoginModal(props) {
             <div className="loginmodalview">
               <div className="exit">
                 <div onClick={() => dispatch(showLoginModal(false))}>
-                  <img src={exit}></img>
+                  <BsXLg />
                 </div>
               </div>
               <div className="lmheader">
@@ -44,21 +45,25 @@ function LoginModal(props) {
               </div>
               <div className="lmmiddle">
                 <button className="socialloginBtn" onClick={onClickGoogle}>
-                  <img className="googolelogo" src={google} alt="google"></img>
+                  <img className="sociallogo" src={google} alt="google" />
                   <div>Google로 시작하기</div>
                 </button>
                 <button className="socialloginBtn" onClick={onClickNaver}>
-                  <img className="naverlogo" src={naver} alt="naver"></img>
+                  <img className="sociallogo" src={naver} alt="naver" />
                   <div>네이버로 시작하기</div>
                 </button>
                 <button className="socialloginBtn" onClick={onClickKakao}>
-                  <img className="kakaolelogo" src={kakao} alt="kakao"></img>
+                  <img className="sociallogo" src={kakao} alt="kakao" />
                   <div>카카오로 시작하기</div>
+                </button>
+                <button className="socialloginBtn" onClick={onClickKakao}>
+                  <img className="guestlogo" src={guest} alt="guest" />
+                  <div>게스트로 둘러보기</div>
                 </button>
               </div>
 
               <div className="forgotlogin">
-                <div className="forgotloginw">로그인 정보를 잊으셨나요?</div>
+                <div className="forgotloginw"></div>
               </div>
             </div>
           </OutsideClickHandler>

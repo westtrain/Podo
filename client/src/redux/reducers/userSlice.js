@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { getUser } from "../API/userAPI";
+import { getUser, deleteUser } from "../API/userAPI";
 
 const initialState = null;
 
@@ -33,35 +33,10 @@ const userSlice = createSlice({
       state = action.payload;
       return state;
     });
-    // .addCase(signUp.fulfilled, () => {})
-    // .addCase(logIn.fulfilled, (state, action) => {
-    //   state = action.payload;
-    //   return state;
-    // })
-
-    // .addCase(fakeLogIn.fulfilled, (state, action) => {
-    //   state = action.payload;
-    //   return state;
-    // })
-    // .addCase(socialLogIn.fulfilled, (state, action) => {
-    //   state = action.payload;
-    //   return state;
-    // })
-    // .addCase(logOut.fulfilled, (state) => {
-    //   state = null;
-    //   return state;
-    // })
-    // .addCase(updateUserInfo.fulfilled, (state, action) => {
-    //   state = action.payload;
-    //   return state;
-    // })
-    // .addCase(deleteUser.fulfilled, (state) => {
-    //   state = null;
-    //   return state;
-    // })
-    // .addDefaultCase((state) => {
-    //   return state;
-    // });
+    builder.addCase(deleteUser.fulfilled, (state) => {
+      state = null;
+      return state;
+    });
   },
 });
 

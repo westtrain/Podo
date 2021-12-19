@@ -5,8 +5,14 @@ $mypagecolor: #eeefff;
 // body {
 //   -ms-overflow-style: none;
 // }
-// .search::-webkit-scrollbar {
-//   display: none;
+// ::-webkit-scrollbar {
+//   width: 4px;
+// }
+// ::-webkit-scrollbar-thumb {
+//   background-color: #656565;
+// }
+// ::-webkit-scrollbar-track {
+//   background-color: transparent;
 // }
 
 .search {
@@ -238,7 +244,7 @@ $mypagecolor: #eeefff;
         flex-direction: column;
         height: 45em;
         margin-top: 20px;
-        overflow: scroll;
+        overflow: auto;
 
         .partyexp {
           cursor: pointer;
@@ -251,7 +257,7 @@ $mypagecolor: #eeefff;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 30px 0 30px 0;
+          padding: 25px 0 25px 0;
 
           .partyexpup {
             display: flex;
@@ -293,15 +299,6 @@ $mypagecolor: #eeefff;
             color: #656565;
           }
         }
-      }
-      .searchparty::-webkit-scrollbar {
-        width: 4px;
-      }
-      .searchparty::-webkit-slider-thumb {
-        background-color: #656565;
-      }
-      .searchparty::-webkit-scrollbar-track {
-        background-color: transparent;
       }
     }
   }
@@ -358,10 +355,10 @@ $mypagecolor: #eeefff;
       }
       .searchright {
         .searchrightheader {
-          width: 20em;
+          width: 24em;
           position: absolute;
           top: 0;
-          margin: 165px 0 0 240px;
+          margin: 165px 0 0 200px;
         }
 
         .searchparty {
@@ -407,7 +404,19 @@ $mypagecolor: #eeefff;
           width: 21em;
           position: absolute;
           top: 0;
-          margin: 210px 0 0 10px;
+          margin: 210px 0 0 5px;
+
+          .period {
+            width: 80px;
+            margin-right: 15px;
+          }
+          .people {
+            width: 80px;
+          }
+
+          .srhright {
+            font-size: 13px;
+          }
         }
 
         .noparty {

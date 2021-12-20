@@ -8,7 +8,6 @@ const Op = sequelize.Op;
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {
     const user_id = req.userId;
-
     try {
       const paymentInfo = await Payment.findAll({
         where: { user_id },

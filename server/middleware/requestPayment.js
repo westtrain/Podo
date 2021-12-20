@@ -18,7 +18,7 @@ module.exports = {
             attributes: ["name", "price"],
           },
         ],
-        where: { start_date: { [Op.eq]: date } },
+        where: { start_date: { [Op.eq]: "2021-12-20" } },
         raw: true,
       });
       // console.log(paymentInfos);
@@ -119,15 +119,15 @@ module.exports = {
               // console.log(userPaymentInfo[0].schedules);
               return userPaymentInfo;
             })
-            .then((data) => {
+            .then(async (data) => {
               // 3. 정기 결제 요청을 subscritpion을 통해 한다.
               if (data.length > 1) {
                 for (let userInfo of data) {
-                  requestPayment(userInfo);
+                  await requestPayment(userInfo);
                 }
               } else {
                 const userInfo = data[0];
-                requestPayment(userInfo);
+                await requestPayment(userInfo);
               }
             });
         }
@@ -141,7 +141,6 @@ module.exports = {
 
   usePointMoney: async () => {
     const todayDate = dayjs().date();
-
     try {
       // 1. 정산일이 오늘인 유저를 찾고 그 유저의 id, money, customer_uid, use_podo를 가져온다.
       await Payment.findAll({
@@ -193,7 +192,7 @@ module.exports = {
         }
       });
     } catch (err) {
-      console.lof(err);
+      console.log(err);
       return -1;
     }
     // 이 함수의 시나리오

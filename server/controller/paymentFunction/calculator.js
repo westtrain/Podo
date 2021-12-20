@@ -15,7 +15,7 @@ module.exports = {
     }
 
     await generateImportToken().then((token) => {
-      searchScheduleByCustomersUid(data, token).then((list) => {
+      searchScheduleByCustomersUid(data, token).then(async (list) => {
         // 예약된 결제 내역이 있으면 예약을 하나씩 포인트로 결제하고 취소한다.
         let point = points;
 
@@ -35,8 +35,8 @@ module.exports = {
                 },
                 { where: { merchant_uid: state.merchant_uid } }
               );
-              generateImportToken().then((token) => {
-                unschedule(uids, token);
+              await generateImportToken().then(async (token) => {
+                await unschedule(uids, token);
               });
               // 결제 비용으로 사용하고 남은 포인트를 업데이트 해준다.
               User.update(
@@ -56,13 +56,17 @@ module.exports = {
                 },
                 { where: { merchant_uid: state.merchant_uid } }
               );
-              generateImportToken().then((token) => {
-                unschedule(dataset, token);
+              let uids = {
+                customer_uid: state.customer_uid,
+                merchant_uid: state.merchant_uid,
+              };
+              await generateImportToken().then(async (token) => {
+                await unschedule(uids, token);
               });
               remain = state.amount - point;
               // 포인트를 사용하고 남은 금액을 다시 당일 예약 결제 요청을 한다.
               const dataset = makeDataSet(uid, state.customer_uid, todayDate, state.name, remain);
-              requestPayment(dataset);
+              await requestPayment(dataset);
               point = 0;
               User.update(
                 {
@@ -74,13 +78,13 @@ module.exports = {
               );
             } else {
               console.log("Point is empty");
-              return -1;
+              //   return -1;
             }
           }
         } else {
           // 예약 결제 내역이 없는 경우
           console.log("No schedualed");
-          return -1;
+          //   return -1;
         }
       });
     });

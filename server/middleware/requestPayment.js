@@ -1,116 +1,17 @@
-const { Payment, Party, OTT, User, Statement } = require("../models");
-const { generateImportToken } = require("../controller/importFunction/account");
-const { createSchedule } = require("../controller/importFunction/subscription");
+const { Payment, Party, OTT, User } = require("../models");
+const { usePoint } = require("../controller/paymentFunction/calculator");
 const dayjs = require("dayjs");
 const date = dayjs().format("YYYY-MM-DD");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 
+const { makeDataSet, requestPayment } = require("../controller/paymentFunction/setPayment");
+
 module.exports = {
   requestPaymentByStartDate: async () => {
-    const user_id = req.userId;
     // 파티 시작일보다 정산일이 빠른 경우, 다음달로 정기 결제 요청하기 위해 월 변경 함수
-    const checkDate = (settlement_date) => {
-      let date = "";
-      if (Number(settlement_date) < Number(dayjs().date())) {
-        date =
-          new Date(
-            `${dayjs().year()}-${dayjs().add(1, "month").month() + 1}-${settlement_date}T01:03:00`
-          ) / 1000;
-      } else {
-        date =
-          new Date(`${dayjs().year()}-${dayjs().month() + 1}-${settlement_date}T01:03:00`) / 1000;
-      }
-      return date;
-    };
-
-    // 포도머니 사용 관련 시나리오
-    // 1. 포도머니 우선 사용하고 결제 금액보다 많으면 자동 결제 요청을 하지 않는다
-    // 2 .데이타 베이스에서 사용 포인트를 제외한 남은 포인트로 업데이트 해준다
-    // 3. 문제는 다음 결제를 어떻게 예약 하는가이다...
-
-    // 결제 가격 계산과 포도머니 우선 결제 함수
-    const calculatePointMoney = (userId, totalPrice, members, pointMoney, usePoint) => {
-      let result = "";
-      if (pointMoney >= Math.ceil(totalPrice / members / 10) * 10 && usePoint) {
-        const reminds = pointMoney - Math.ceil(totalPrice / members / 10) * 10;
-        // 결제에 필요한 금액을 뺸 나머지를 업데이트 해줌
-        User.update(
-          {
-            money: reminds,
-          },
-          {
-            where: { id: userId },
-          }
-        );
-        result = Math.ceil(totalPrice / members / 10) * 10 * -1;
-      } else {
-        result = Math.ceil(totalPrice / members / 10) * 10;
-      }
-      return result;
-    };
-
-    // 아임포트가 요구하는 결제에 필요한 데이터를 요구 형태로 만들어주는 함수
-    const makeDataSet = (
-      userId,
-      customerId,
-      settlementDate,
-      totalPrice,
-      members,
-      point,
-      ottName,
-      usePoint
-    ) => {
-      return {
-        user_id: userId,
-        customer_uid: customerId,
-        checking_amount: "10",
-        schedules: [
-          {
-            merchant_uid: `merchant_${dayjs().valueOf()}${userId}`,
-            schedule_at: checkDate(settlementDate),
-            currency: "KRW",
-            amount: calculatePointMoney(userId, totalPrice, members, point, usePoint),
-            name: ottName,
-          },
-        ],
-      };
-    };
-
-    // 아임포트에 결제 예약 요청 후 결제 내역 데이타 베이스에 저장하는 함수
-    const requestPayment = (data = {}) => {
-      // 결제 금액이 포도 머니로 대체 결제 되었다면 결제 예약 진행하지 않는다.
-      if (data.schedules[0].amount > 0) {
-        generateImportToken() // 아임포트 토큰 발행
-          .then((token) => createSchedule(data, token)) // 정기 결제 요청
-          .then((result) => {
-            // 전달 데이터에 문제가 있는 경우
-            if (result.data.code === -1) {
-              console.log(result.data.message);
-              return res.status(422).json({ message: result.data.message });
-            }
-            // console.log(result.data.response, "payment info2"); //결제 정보
-            Statement.create({
-              user_id: data.user_id,
-              merchant_uid: data.schedules[0].merchant_uid,
-              ott: data.schedules[0].name,
-              type: "pending",
-              amount: data.schedules[0].amount,
-            });
-          });
-      } else {
-        Statement.create({
-          user_id: data.user_id,
-          merchant_uid: data.schedules[0].merchant_uid,
-          ott: data.schedules[0].name,
-          type: "usePoint",
-          amount: data.schedules[0].amount * -1,
-        });
-      }
-    };
-
     try {
-      const todaysParty = await Party.findAll({
+      const paymentInfos = await Party.findAll({
         include: [
           {
             model: OTT,
@@ -120,10 +21,11 @@ module.exports = {
         where: { start_date: { [Op.eq]: date } },
         raw: true,
       });
-      // console.log(todaysParty);
+      // console.log(paymentInfos);
       // 오늘 날짜에 시작하는 파티가 없는 경우,
-      if (todaysParty.length < 1) {
-        return res.status(422).json({ message: "No today's party" });
+      if (paymentInfos.length < 1) {
+        console.log("No today's party");
+        return -1;
       }
 
       // 결제에 필요한 데이터
@@ -132,7 +34,7 @@ module.exports = {
       // 3. 결제하고자 하는 ott 이름과 가격 => ott_id
 
       //멤버 2명이상인 파티만  -> 배열이니 map 사용
-      const fulfilledParty = todaysParty.map((party) => {
+      const fulfilledParty = paymentInfos.map((party) => {
         if (party.members.length > 2) {
           const payList = {
             party_id: party.id,
@@ -149,7 +51,8 @@ module.exports = {
 
       // 오늘 날짜에 시작하는 파티는 있지만 맴버가 2명 이상이 아닌 경우,
       if (fulfilledParty.length < 1) {
-        return res.status(422).json({ message: "Party members aren't enough" });
+        console.log("Party members aren't enough");
+        return -1;
       }
 
       // 아임포트 결제에 맞게 데이터 정리 후 정기 결제 요청 과정
@@ -183,35 +86,36 @@ module.exports = {
 
               if (fulfilledParty[i].userPayInfo.length > 1) {
                 for (let uid of fulfilledParty[i].userPayInfo) {
+                  // 맴버수에 맞추어 가격은 나누어준다
+                  const totalPrice = fulfilledParty[i].ott_price;
+                  const members = fulfilledParty[i].divide;
+                  const amount = Math.ceil(totalPrice / members / 10) * 10;
                   userPaymentInfo.push(
                     makeDataSet(
                       uid["Payments.user_id"],
                       uid["Payments.customer_uid"],
                       uid["Payments.settlement_date"],
-                      fulfilledParty[i].ott_price,
-                      fulfilledParty[i].divide,
-                      uid.money,
                       fulfilledParty[i].ott_name,
-                      uid["Payments.use_podo"]
+                      amount
                     )
                   );
                 }
               } else {
                 const uid = fulfilledParty[i].userPayInfo[0];
+                // 맴버수에 맞추어 가격은 나누어준다
+                const totalPrice = fulfilledParty[i].ott_price;
+                const members = fulfilledParty[i].divide;
+                const amount = Math.ceil(totalPrice / members / 10) * 10;
                 userPaymentInfo.push(
                   makeDataSet(
                     uid["Payments.user_id"],
                     uid["Payments.customer_uid"],
                     uid["Payments.settlement_date"],
-                    fulfilledParty[i].ott_price,
-                    fulfilledParty[i].divide,
-                    uid.money,
                     fulfilledParty[i].ott_name,
-                    uid["Payments.use_podo"]
+                    amount
                   )
                 );
               }
-
               // console.log(userPaymentInfo[0].schedules);
               return userPaymentInfo;
             })
@@ -222,81 +126,89 @@ module.exports = {
                   requestPayment(userInfo);
                 }
               } else {
-                // const userInfo = data[0];
-                requestPayment(data[0]);
+                const userInfo = data[0];
+                requestPayment(userInfo);
               }
             });
         }
       }
-      return res.status(200).json({ message: "Requested payment" });
+      console.log("Requested payment");
     } catch (err) {
-      return res.status(500).json({ message: "Server Error" });
+      console.lof(err);
+      return -1;
     }
   },
 
   usePointMoney: async () => {
-    // 결제 가격 계산과 포도머니 우선 결제 함수
-    const calculatePointMoney = (userId, totalPrice, members, pointMoney, usePoint) => {
-      let result = "";
-      if (pointMoney >= Math.ceil(totalPrice / members / 10) * 10 && usePoint) {
-        const reminds = pointMoney - Math.ceil(totalPrice / members / 10) * 10;
-        // 결제에 필요한 금액을 뺸 나머지를 업데이트 해줌
-        User.update(
-          {
-            money: reminds,
-          },
-          {
-            where: { id: userId },
-          }
-        );
-        result = Math.ceil(totalPrice / members / 10) * 10 * -1;
-      } else {
-        result = Math.ceil(totalPrice / members / 10) * 10;
-      }
-      return result;
-    };
+    const todayDate = dayjs().date();
 
     try {
-      const todaysParty = await Payment.findAll({
+      // 1. 정산일이 오늘인 유저를 찾고 그 유저의 id, money, customer_uid, use_podo를 가져온다.
+      await Payment.findAll({
         include: [
           {
             model: User,
             attributes: ["id", "money"],
           },
         ],
-        where: { settlement_date: { [Op.eq]: dayjs().date() } },
+        where: { settlement_date: { [Op.eq]: "29" } },
         attributes: ["customer_uid", "use_podo"],
         raw: true,
+      }).then(async (data) => {
+        // 포인트 선결제 허용한 유저만 필터링
+        const removeUnusePointUser = data.map((user) => {
+          if (user.use_podo === 1) {
+            return user;
+          }
+        });
+        const usePointUser = removeUnusePointUser.filter((item) => {
+          return typeof item === "object";
+        });
+
+        // 에약되어 있는 결제 내역을 찾을 시간 범위 설정
+        const searchData = {
+          customer_uid: "",
+          from: new Date(`${dayjs().year()}-${dayjs().month() + 1}-${todayDate}T01:00:00`) / 1000,
+          to: new Date(`${dayjs().year()}-${dayjs().month() + 1}-${todayDate}T02:00:00`) / 1000,
+          status: "scheduled",
+        };
+        // console.log(usePointUser);
+        // return -1;
+        if (usePointUser.length > 1) {
+          for (let uid of usePointUser) {
+            // console.log(uid);
+            let point = uid["User.money"];
+            const userId = uid["User.id"];
+
+            searchData.customer_uid = uid.customer_uid;
+            // 2. customer_uid로 아임포트에 예약 결제 내역을 요청하고 내역이 있으면 취소하고 포인트로 결제 진행
+            await usePoint(userId, point, searchData);
+          }
+        } else {
+          let point = usePointUser[0]["User.money"];
+          const userId = usePointUser[0]["User.id"];
+          searchData.customer_uid = usePointUser[0].customer_uid;
+          // 2. customer_uid로 아임포트에 예약 결제 내역을 요청하고 내역이 있으면 취소하고 포인트로 결제 진행
+          usePoint(userId, point, searchData);
+        }
       });
-
-      // 이 함수의 시나리오
-      // 만약 포인트 머니가 오늘 결제 예정인 총금액보다 많거나 같고 먼저 사용하겠다고 설정한 상태이면,
-      // 결제를 취소하고 포인트머니를 사용하게 해준다.
-      // 그리고 다음달 결제를 요청한다
-      // 조건에 맞지 않으면, 예약된 결제가 진행되도록 나둔다.
-
-      // 필요한 데이타
-      // 유저의 아이디 (id)
-      // 새로운 결제 요청에 필요한 정보들 (customer_uid, )
-      // 당일이 정산일인 유저의 포인트 머니 (momey)
-      // 포인트 머니 우선 사용 설정 상태 (use_podo)
-      // 각 유저의 오늘 결제 예정인 merchant_uid (merchant_uid, schedule_at)
-      // 각 유저의 오늘 결제 예정인 총 금액 (amount)
-
-      // 1. 정산일이 오늘인 유저를 찾고 그 유저의 id, money, customer_uid, use_podo를 가져온다.
-      // 2. 가져온 데이터에서 유저 id를 사용해서 pending 상태의 유저 merchant_uid를 모두 가져온다.
-      // 3. 가져온 merchant_uid로 아임포트에 예약 결제 내역을 요청함
-      // 4. 예약 결제 내역 가운데서 오늘 날짜인 것들의 amount를 모두 합한다.
-      // 5. 앞서 가져온 use_podo가 참이고 총 amount와 money와 비교해서 money가 더 많거나 같을때,
-      //    결제 예약을 취소한다.
-      // 6. 포인트를 사용하고 유저의 money와 Statement내역을 업데이트 시켜준다.
-      // 7. 다음달 예약 결제를 요청한다.
-
-      // console.log(todaysParty);
-      // 오늘 날짜에 시작하는 파티가 없는 경우,
     } catch (err) {
-      return res.status(500).json({ message: "Server Error" });
+      console.lof(err);
+      return -1;
     }
+    // 이 함수의 시나리오
+    // 만약 포인트 머니가 오늘 결제 예정인 총금액보다 많거나 같고 먼저 사용하겠다고 설정한 상태이면,
+    // 결제를 취소하고 포인트머니를 사용하게 해준다.
+    // 그리고 다음달 결제를 요청한다
+    // 조건에 맞지 않으면, 예약된 결제가 진행되도록 나둔다.
+
+    // 필요한 데이타
+    // 유저의 아이디 (id)
+    // 새로운 결제 요청에 필요한 정보들 (customer_uid, Statement테이블의 모든 데이터)
+    // 당일이 정산일인 유저의 포인트 머니 (momey)
+    // 포인트 머니 우선 사용 설정 상태 (use_podo)
+    // 각 유저의 오늘 결제 예정인 merchant_uid (merchant_uid, schedule_at)
+    // 각 유저의 오늘 결제 예정인 총 금액 (amount)
   },
   // 추후 구현이 필요한 부분들
   // cancelPayment: async () => {},

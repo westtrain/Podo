@@ -2,12 +2,10 @@ const { Payment } = require("../models");
 const { generateImportToken, checkAccountName } = require("./importFunction/account");
 const { createSubscription } = require("./importFunction/subscription");
 
-const sequelize = require("sequelize");
-const Op = sequelize.Op;
-
 module.exports = {
   getUsersPaymentInfo: async (req, res) => {
     const user_id = req.userId;
+
     try {
       const paymentInfo = await Payment.findAll({
         where: { user_id },

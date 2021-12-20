@@ -18,7 +18,7 @@ module.exports = {
             attributes: ["name", "price"],
           },
         ],
-        where: { start_date: { [Op.eq]: "2021-12-20" } },
+        where: { start_date: { [Op.eq]: date } },
         raw: true,
       });
       // console.log(paymentInfos);

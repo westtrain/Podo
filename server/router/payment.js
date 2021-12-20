@@ -7,6 +7,6 @@ router.get("/", isAuth, paymentController.getUsersPaymentInfo); // user 결제 �
 router.post("/credit", isAuth, paymentController.updateCard); // 카드 정보 등록
 router.post("/account", isAuth, paymentController.updateAccount); // 인출 계좌 등록
 router.post("/settlement", isAuth, paymentController.updateSettlement); // 정산일 등록
-router.post("/using-podo/:id", isAuth, paymentController.updateUsingPodo); // 정산일 등록
+router.post("/using-podo/:id", isAuth, paymentController.updateUsingPodo); // 포도머니 우선 결제 허용 여부
 
 module.exports = router;

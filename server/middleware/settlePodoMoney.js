@@ -1,5 +1,5 @@
 const db = require("../models");
-const { User, Party, Payment, Statement, OTT } = require("../models");
+const { User, Party, Payment, Statement, OTT, Capital } = require("../models");
 const dayjs = require("dayjs");
 
 const settlePodoMoney = async () => {
@@ -37,39 +37,44 @@ const settlePodoMoney = async () => {
   });
   console.log("settledParty========", settledParty);
 
-  // 2. 각 파티의 리더에게 ott price * (n-1/n)만큼 포도머니 채워주기
-  Promise.all(
-    settledParty.map((party_id) => {
-      Party.findOne({ where: { id: party_id } }).then((party) => {
-        const leader = party.leader;
-
-        OTT.findOne({ attributes: ["name", "price"], where: { id: party.ott_id } }).then((data) => {
-          const name = data.name;
-          const price = data.price;
-          const joinedMemberNum = party.members.split(",").length;
-          const collect = parseInt((price * (joinedMemberNum - 1)) / joinedMemberNum); // 적립될 포도머니 금액
-          console.log("money=======", collect);
-
-          User.findOne({ attributes: ["money"], where: { id: leader } }).then((data) => {
-            const money = data.money + collect;
-
-            //유저의 기존 포도머니에 collect 더해서 업데이트
-            User.update({ money }, { where: { id: leader } });
-            // Statement 적립 내역 업데이트
-            Statement.create(
-              {
-                user_id: leader,
-                ott: name,
-                type: "point",
-                amount: collect,
-              },
-              { where: { user_id: leader } }
-            );
-          });
-        });
+  // 2. Capital 업데이트
+  for (let i = 0; i < settledParty.length; i++) {
+    const id = settledParty[i];
+    await Party.findOne({ where: { id } }).then(async (party) => {
+      const leader = party.leader;
+      const OTTinfo = await OTT.findOne({
+        attributes: ["name", "price"],
+        where: { id: party.ott_id },
       });
-    })
-  );
+      const name = OTTinfo.name;
+      const price = OTTinfo.price;
+      const joinedMemberNum = party.members.split(",").length;
+      let collect = (price * (joinedMemberNum - 1)) / joinedMemberNum; // 적립될 포도머니 금액
+      collect = Math.ceil(collect / 10) * 10;
+
+      const capitalNum = await Capital.count();
+      const capitalInfo = await Capital.findOne({ where: { id: capitalNum } });
+      const total_amount = (await capitalInfo.total_amount) - collect;
+      await Capital.create({ money: collect, total_amount, state: "출금" });
+
+      // 3. 각 파티의 리더에게 ott price * (n-1/n)만큼 포도머니 채워주기
+      const user = await User.findOne({ attributes: ["money"], where: { id: leader } });
+      const money = user.money + collect;
+
+      //유저의 기존 포도머니에 collect 더해서 업데이트
+      User.update({ money }, { where: { id: leader } });
+      // Statement 적립 내역 업데이트
+      Statement.create(
+        {
+          user_id: leader,
+          ott: name,
+          type: "point",
+          amount: collect,
+        },
+        { where: { user_id: leader } }
+      );
+    });
+  }
 };
 
 module.exports = { settlePodoMoney };

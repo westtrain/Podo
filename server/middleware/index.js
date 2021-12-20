@@ -16,9 +16,9 @@ module.exports = {
       try {
         console.log("예약된 작업 실행!");
         settlePodoMoney();
+        cancelParty();
         requestPaymentByStartDate();
         usePointMoney();
-        cancelParty();
       } catch (err) {
         console.error(err);
       }

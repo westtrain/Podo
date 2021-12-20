@@ -7,7 +7,15 @@ module.exports = (sequelize, DataTypes) => {
     {
       money: {
         type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      total_amount: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {

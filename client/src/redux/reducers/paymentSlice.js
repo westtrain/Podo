@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { getUsersPaymentInfo, updateSettlement } from "../API/paymentAPI";
+import {
+  getUsersPaymentInfo,
+  updateSettlement,
+  updateCard,
+  updateAccount,
+} from "../API/paymentAPI";
+import { isNotError } from "./errorSlice";
 
 const initialState = {
   credit_num: null,
@@ -31,7 +37,13 @@ const paymentSlice = createSlice({
       state = action.payload;
       return state;
     });
-    builder.addCase(updateSettlement.fulfilled, () => {});
+    builder.addCase(updateSettlement.rejected, (action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(updateCard.fulfilled, () => {});
+    builder.addCase(updateCard.rejected, (action) => {});
+    builder.addCase(updateAccount.fulfilled, () => {});
+    builder.addCase(updateAccount.rejected, (action) => {});
     // .addCase(signUp.fulfilled, () => {})
     // .addCase(logIn.fulfilled, (state, action) => {
     //   state = action.payload;

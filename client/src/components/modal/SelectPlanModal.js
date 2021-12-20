@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOtt } from "../../redux/API/ottAPI";
+import { getOttKoreanNameById, getSavePrice } from "../../utils/dateFunction";
 import OutsideClickHandler from "react-outside-click-handler";
 import { showSelectPlanModal } from "../../redux/reducers/modalSlice";
 import "../../style/Modal.scss";
-import exit from "../../image/exit.png";
-import check_icon from "../../image/check_icon.png";
+import { BsXLg, BsDot } from "react-icons/bs";
+import { AiOutlineCheck } from "react-icons/ai";
 
 function SelectPlanModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const ottState = useSelector((state) => state.ott);
+  const ottId = useSelector((state) => state.party.ceateParty.ott_id);
+  const maxNumOfParty = ottState[ottId - 1].max_num;
+  const priceOfParty = getSavePrice(ottState[ottId - 1].price, maxNumOfParty);
+  const planOfParty = ottState[ottId - 1].plan;
   const onClickNext = () => {
     dispatch(showSelectPlanModal(false));
     navigate("/create/1");
   };
+  useEffect(() => {
+    dispatch(getAllOtt);
+  }, []);
   return (
     <>
       <div className="page">
@@ -24,24 +34,27 @@ function SelectPlanModal() {
             <div className="selectratemodalview">
               <div className="exit">
                 <div>
-                  <img
-                    src={exit}
-                    onClick={() => dispatch(showSelectPlanModal(false))}
-                  ></img>
+                  <BsXLg onClick={() => dispatch(showSelectPlanModal(false))} />
                 </div>
               </div>
-              <div className="srmheader">요금제 선택</div>
-              <div className="srmhexp">공유할 요금제를 선택해 주세요.</div>
+              <div className="srmheader">요금제 확인</div>
+              <div className="srmhexp">공유할 요금제를 확인해 주세요.</div>
               <div className="srmmiddle">
                 <div className="srmmup">
                   <div className="srmmuimg">
-                    <img src={check_icon} alt="check"></img>
+                    <AiOutlineCheck style={{ color: "#4040cc" }} size="20px" />
                   </div>
-                  <div className="srmmuexp">넷플릭스 프리미엄</div>
+                  <div className="srmmuexp">
+                    {getOttKoreanNameById(ottId) + " " + planOfParty}
+                  </div>
                 </div>
                 <div className="srmmdown">
-                  <div>&middot; 파티원은 최대 3명 모집할 수 있어요</div>
-                  <div>&middot; 최대 인원 모집 시 매달 11,425원 세이브!</div>
+                  <div>
+                    <BsDot /> 파티원은 최대 {maxNumOfParty}명 모집할 수 있어요
+                  </div>
+                  <div>
+                    <BsDot /> 최대 인원 모집 시 매달 {priceOfParty}원 세이브!
+                  </div>
                 </div>
               </div>
 

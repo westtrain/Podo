@@ -1,15 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoginCallbackURI } from "../../redux/reducers/loginURISlice";
+import { showCardModal, showLoginModal } from "../../redux/reducers/modalSlice";
 import { dateToStringPoint } from "../../utils/dateFunction";
-import check from "../../image/check.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function ConfirmRule(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const startDate = useSelector((state) => state.party.ceateParty.start_date);
   const endDate = useSelector((state) => state.party.ceateParty.end_date);
-  const period = useSelector((state) => state.party.period);
+  const period = useSelector((state) => state.party.ceateParty.period);
+  const userState = useSelector((state) => state.user);
 
   return (
     <>
@@ -64,20 +69,31 @@ function ConfirmRule(props) {
                 style={{ color: "#4040cc" }}
               />
             </div>
-            파티장 귀책시, 최대 20,790원의 위약금이 부과될 수 있습니다.
+            파티장 귀책시, 위약금이 부과될 수 있습니다.
           </div>
         </div>
         <div className="guidefooter">
           <Link to={"/create/4"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
-          <Link to={"/create/6"}>
-            <div className="guidefooterbtn">
-              <div className="nextbtn">다음</div>
-            </div>
-          </Link>
+          <div
+            className="guidefooterbtn"
+            onClick={() => {
+              if (userState) {
+                navigate("/create/6");
+              } else {
+                dispatch(setLoginCallbackURI("/create/5"));
+                dispatch(showLoginModal(true));
+              }
+            }}
+          >
+            <div className="nextbtn">다음</div>
+          </div>
         </div>
       </div>
     </>

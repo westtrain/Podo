@@ -8,9 +8,7 @@ function MySettlement(props) {
   const settlementModalState = useSelector(
     (state) => state.modal.settlementModal
   );
-  const settlementDateState = useSelector(
-    (state) => state.payment.settlement_date
-  );
+  const paymentState = useSelector((state) => state.payment);
   return (
     <>
       <div className="middlemain">
@@ -21,13 +19,13 @@ function MySettlement(props) {
             <div className="logininfo">
               <div className="settlementbox">
                 매월
-                <div>{settlementDateState} 일</div>
+                <div>{paymentState.settlement_date} 일</div>
               </div>
               <div
                 className="logoutbtn"
                 onClick={() => dispatch(showSettlementModal(true))}
               >
-                변경하기
+                {paymentState.settlement_date ? "변경하기" : "등록하기"}
               </div>
               {settlementModalState ? <SetSettlementModal /> : null}
             </div>

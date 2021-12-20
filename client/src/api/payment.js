@@ -22,23 +22,13 @@ const payment = (props) => {
     api
       .post(
         `/credit`,
-        {
-          credit_num: "4005694163009050",
-          credit_expire_month: "09",
-          credit_expire_year: "25",
-          credit_birth: "850109",
-          credit_password: "29",
-          settlement_date: null,
-          account_bank: null,
-          account_number: null,
-        },
         { withCredentials: true }
       )
       .then((res) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 
@@ -62,7 +52,7 @@ const payment = (props) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 
@@ -84,7 +74,7 @@ const payment = (props) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 

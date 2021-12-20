@@ -1,3 +1,10 @@
+body {
+  -ms-overflow-style: none;
+}
+.guidepage::-webkit-scrollbar {
+  display: none;
+}
+
 .guidepage {
   display: block;
   max-width: 100vw;

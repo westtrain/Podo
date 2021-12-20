@@ -32,12 +32,12 @@ const party = (props) => {
 
   const getAllParties = async () => {
     api
-      .get(`/all/7`, { withCredentials: true })
+      .get(`/all/1`, { withCredentials: true })
       .then((res) => {
         console.log("RESPONSE", JSON.stringify(res.data));
       })
       .catch((err) => {
-        console.log("ERROR", JSON.stringify(err.response.data.message));
+        console.log("ERROR", JSON.stringify(err.response));
       });
   };
 
@@ -59,14 +59,15 @@ const party = (props) => {
       .post(
         `/`,
         {
-          ott_id: 8,
+          ott_id: 3,
           ott_login_id: "dnfjk123!@$",
           ott_login_password: "1283njskd@#$%",
-          members: "1",
+          members: "4",
           members_num: 4,
-          leader: 1,
-          start_date: "2021-12-16",
-          end_date: "2022-12-19",
+          leader: 3,
+          period: 3,
+          start_date: "2021-12-17",
+          end_date: "2022-10-16",
         },
         { withCredentials: true }
       )

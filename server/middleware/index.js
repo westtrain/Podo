@@ -1,6 +1,9 @@
 const schedule = require("node-schedule");
 const { settlePodoMoney } = require("./settlePodoMoney");
+
 const { requestPaymentByStartDate, usePointMoney } = require("./requestPayment");
+const { cancelParty } = require("./cancelParty");
+
 
 module.exports = {
   settleMonthly: (s) => {
@@ -15,6 +18,7 @@ module.exports = {
         settlePodoMoney();
         requestPaymentByStartDate();
         usePointMoney();
+        cancelParty();
       } catch (err) {
         console.error(err);
       }

@@ -4,11 +4,13 @@ import { getUser } from "../API/userAPI";
 const initialState = {
   loginModal: false,
   joinPartyModal: false,
+  confirmPaymentModal: false,
   accountModal: false,
   cardModal: false,
   settlementModal: false,
   withdrawModal: false,
   selectPlanModal: false,
+  selectProfileImageModal: false,
 };
 
 const modalSlice = createSlice({
@@ -21,6 +23,10 @@ const modalSlice = createSlice({
     },
     showJoinPartyModal: (state, action) => {
       state.joinPartyModal = action.payload;
+      return state;
+    },
+    showConfirmPaymentModal: (state, action) => {
+      state.confirmPaymentModal = action.payload;
       return state;
     },
     showAccountModal: (state, action) => {
@@ -43,6 +49,10 @@ const modalSlice = createSlice({
       state.selectPlanModal = action.payload;
       return state;
     },
+    showSelectProfileImageModal: (state, action) => {
+      state.selectProfileImageModal = action.payload;
+      return state;
+    },
   },
 });
 
@@ -50,10 +60,12 @@ const { actions, reducer } = modalSlice;
 export const {
   showLoginModal,
   showJoinPartyModal,
+  showConfirmPaymentModal,
   showAccountModal,
   showCardModal,
   showSettlementModal,
   showWithdrawModal,
   showSelectPlanModal,
+  showSelectProfileImageModal,
 } = actions;
 export default reducer;

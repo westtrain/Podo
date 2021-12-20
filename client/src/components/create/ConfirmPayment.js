@@ -1,23 +1,82 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   showCardModal,
   showSettlementModal,
 } from "../../redux/reducers/modalSlice";
+import { getUsersPaymentInfo } from "../../redux/API/paymentAPI";
+import { createParty } from "../../redux/API/partyAPI";
+import { getUser } from "../../redux/API/userAPI";
 import SetCardModal from "../modal/SetCardModal";
 import SetSettlementModal from "../modal/SetSettlementModal";
+import Swal from "sweetalert2";
+import { AiOutlineLeft } from "react-icons/ai";
 
 function ConfirmPayment(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cardModalState = useSelector((state) => state.modal.cardModal);
   const settlementModalState = useSelector(
     (state) => state.modal.settlementModal
   );
   const paymentState = useSelector((state) => state.payment);
+  const createPartyState = useSelector((state) => state.party.ceateParty);
+  const userState = useSelector((state) => state.user);
+  const errorState = useSelector((state) => state.error);
 
-  useEffect(() => {
-    console.log(paymentState);
+  const onClickCreate = () => {
+    if (!paymentState.card_name || paymentState.settlement_date == "") {
+      Swal.fire(
+        "Unsuccess!",
+        "결제 카드와 정산일을 모두 등록해주세요.",
+        "error"
+      );
+    } else if (
+      createPartyState.ott_id === 0 ||
+      createPartyState.ott_login_id === "" ||
+      createPartyState.ott_login_id === "" ||
+      (createPartyState.start_date === "") | (createPartyState.end_date === "")
+    ) {
+      Swal.fire(
+        "Unsuccess!",
+        `파티 정보가 누락되었습니다.
+        파티 만들기를 다시 진행하세요.`,
+        "error"
+      );
+    } else {
+      dispatch(
+        createParty({
+          createPartyState: Object.assign({}, createPartyState, {
+            // 파티장 + 파티인원
+            members_num: createPartyState.members_num + 1,
+          }),
+        })
+      );
+      if (errorState) {
+        if (errorState.status === 412) {
+          Swal.fire(
+            "Unsuccess!",
+            "이미 사용 중인 OTT의 파티는 생성이 불가해요! ",
+            "error"
+          );
+        } else {
+          Swal.fire(
+            "Unsuccess!",
+            "파티 생성에 실패했어요. 다시 시도해주세요.🥺",
+            "error"
+          );
+        }
+      } else {
+        // 파티 생성 성공
+        Swal.fire("Success!", "파티가 만들어졌어요!", "success");
+        navigate("/mypage");
+      }
+    }
+  };
+  useEffect(async () => {
+    await dispatch(getUsersPaymentInfo());
+    dispatch(getUser());
   }, []);
   return (
     <>
@@ -34,23 +93,31 @@ function ConfirmPayment(props) {
         </div>
         <div className="guidemiddle">
           <div className="paymentbox">
-            국민KB카드 ****8888
+            {paymentState.card_name
+              ? `${paymentState.card_name} ${paymentState.credit_num.slice(
+                  0,
+                  4
+                )}************`
+              : "결제 카드를 등록해 주세요."}
             <div
               className="paymentright"
               onClick={() => dispatch(showCardModal(true))}
             >
-              변경하기
+              {paymentState.card_name ? "변경하기" : "등록하기"}
               <div className="arrow"> &#62;</div>
             </div>
           </div>
           {cardModalState ? <SetCardModal /> : null}
           <div className="paymentbox">
-            신난보라돌이님의 정산일 : 매달 3일
+            {paymentState.settlement_date
+              ? `${userState.name}님의 정산일 : 매달 ${paymentState.settlement_date}일`
+              : "정산일을 등록해주세요."}
+
             <div
               className="paymentright"
               onClick={() => dispatch(showSettlementModal(true))}
             >
-              변경하기
+              {paymentState.settlement_date ? "변경하기" : "등록하기"}
               <div className="arrow"> &#62;</div>
             </div>
             {settlementModalState ? <SetSettlementModal /> : null}
@@ -58,20 +125,21 @@ function ConfirmPayment(props) {
           <div className="infoperiod">
             - 결제 카드는 파티장의 귀책 사유 발생 시 위약금을 부과하기 위해
             필요해요. 파티가 잘 진행된다면 위약금이 발생할 일은 절대 없으니
-            안심하세요.
+            안심하세요.🙂
           </div>
         </div>
         <div className="guidefooter">
           <Link to={"/create/5"}>
             <div className="backbtn">
-              <div className="backicon">&#60;</div> 뒤로가기
+              <div className="backicon">
+                <AiOutlineLeft />
+              </div>{" "}
+              뒤로가기
             </div>
           </Link>
-          <Link to={"/create/6"}>
-            <div className="guidefooterbtn">
-              <div className="nextbtn">다음</div>
-            </div>
-          </Link>
+          <div className="guidefooterbtn" onClick={() => onClickCreate()}>
+            <div className="nextbtn">파티 생성</div>
+          </div>
         </div>
       </div>
     </>

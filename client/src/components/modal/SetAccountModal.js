@@ -7,7 +7,6 @@ import OutsideClickHandler from "react-outside-click-handler";
 import "../../style/Modal.scss";
 import Swal from "sweetalert2";
 import { BsXLg } from "react-icons/bs";
-import woori from "../../image/woori.svg";
 
 function SetAccountModal(props) {
   const dispatch = useDispatch();

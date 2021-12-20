@@ -16,7 +16,7 @@ const createSubscription = async (data = {}, token) => {
       url: `https://api.iamport.kr/subscribe/customers/${data.customer_uid}?_token=${token}`,
       data: data,
     });
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log("create subscription error");
@@ -80,7 +80,7 @@ const createSchedule = async (data = {}, token) => {
       url: `https://api.iamport.kr/subscribe/payments/schedule?_token=${token}`,
       data: data,
     });
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error) {
     console.log("create subscription error");
@@ -91,7 +91,7 @@ const createSchedule = async (data = {}, token) => {
 // 예약된 결제 요청 삭제
 const unschedule = async (data = {}, token) => {
   const requiredParams = ["customer_uid", "merchant_uid"];
-
+  console.log(data);
   if (!requiredParams.every((param) => data.hasOwnProperty(param))) {
     console.log("insufficient parameters supplied");
     return -1;
@@ -105,7 +105,31 @@ const unschedule = async (data = {}, token) => {
     console.log(result);
     return result;
   } catch (error) {
-    console.log("create subscription error");
+    console.log(error);
+    console.log("unsubscription error");
+    // return -1;
+  }
+};
+
+const searchScheduleByCustomersUid = async (data = {}, token) => {
+  console.log(data);
+  const requiredParams = ["customer_uid", "from", "to"];
+
+  if (!requiredParams.every((param) => data.hasOwnProperty(param))) {
+    console.log("insufficient parameters supplied");
+    return -1;
+  }
+  const { customer_uid, from, to, status } = data;
+  try {
+    const result = await axios({
+      method: "GET",
+      url: `https://api.iamport.kr/subscribe/payments/schedule/customers/${customer_uid}?from=${from}&to=${to}&schedule-status=${status}&_token=${token}`,
+    });
+    // console.log(result.data.response.list);
+    return result.data.response.list;
+  } catch (error) {
+    console.log(error);
+    console.log("Search schedule by customers_uid error");
     return -1;
   }
 };
@@ -116,4 +140,5 @@ module.exports = {
   deleteSubscription,
   createSchedule,
   unschedule,
+  searchScheduleByCustomersUid,
 };

@@ -111,4 +111,17 @@ module.exports = {
       return res.status(500).json({ message: "Server Error" });
     }
   },
+
+  updateUsingPodo: async (req, res) => {
+    const user_id = req.userId;
+    const use_podo = req.params.id;
+
+    try {
+      Payment.update({ use_podo }, { where: { user_id } });
+
+      return res.status(200).json({ message: "Success" });
+    } catch (error) {
+      return res.status(500).json({ message: "Server Error" });
+    }
+  },
 };

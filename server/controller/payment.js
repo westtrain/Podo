@@ -28,7 +28,7 @@ module.exports = {
       birth: credit_birth,
       pwd_2digit: credit_password,
     };
-
+    console.log(data);
     await generateImportToken() // 아임포트 토큰 발행
       .then(async (token) => await createSubscription(data, token)) // 빌링키 생성
       .then((result) => {

@@ -29,9 +29,11 @@ module.exports = {
       pwd_2digit: credit_password,
     };
 
-    generateImportToken() // 아임포트 토큰 발행
-      .then((token) => createSubscription(data, token)) // 빌링키 생성
+    await generateImportToken() // 아임포트 토큰 발행
+      .then(async (token) => await createSubscription(data, token)) // 빌링키 생성
       .then((result) => {
+        console.log(result);
+        return res.status(422).json({ message: result });
         // 카드정보 오류인 경우
         // if (result.data.code === -1) {
         //   return res.status(422).json({ message: result.data.message });

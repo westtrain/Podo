@@ -33,9 +33,9 @@ module.exports = {
       .then((token) => createSubscription(data, token)) // 빌링키 생성
       .then((result) => {
         // 카드정보 오류인 경우
-        if (result.data.code === -1) {
-          return res.status(422).json({ message: result.data.message });
-        }
+        // if (result.data.code === -1) {
+        //   return res.status(422).json({ message: result.data.message });
+        // }
         const { card_number, customer_uid, card_name } = result.data.response;
 
         try {
